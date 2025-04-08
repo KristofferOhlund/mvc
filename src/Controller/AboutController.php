@@ -18,26 +18,3 @@ class AboutController extends AbstractController {
         return $this->render("about.html.twig");
     }
 }
-
-
-// class LuckyController
-// {
-//     #[Route('/lucky/number')]
-//     public function number(): Response
-//     {
-//         $number = random_int(0, 100);
-
-//         return new Response(
-//             '<html><body>Lucky MEGA number: '.$number.'</body></html>'
-//         );
-//     }
-
-//     #[Route("/lucky/hi")]
-//     public function hi(): Response{
-//         return new Response(
-//             "<html><body>Hi to you!</body></html>"
-//         );
-//     }
-// }
-
-
