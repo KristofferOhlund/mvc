@@ -3,6 +3,7 @@ article {
   border: 1px solid #A08C6E;
   border-radius: 5px;
   box-shadow: 2px 2px 2px var(--light-accent);
+  margin-bottom: 2rem;
 }
 
 .dynamic {

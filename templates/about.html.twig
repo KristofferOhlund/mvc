@@ -4,26 +4,42 @@
 
 {% block main %}
 <article>
-    <div class="container">
+<div class="about-container">
+    <div class="box1">
         <h1>Kursen mvc</h1>
-            <aside class="right">
-                <h2>Github</h2>
-                <ul>
-                    <li><a href="https://github.com/dbwebb-se/mvc">Länk till kursens repo</a></li>
-                    <li><a href="https://github.com/KristofferOhlund/mvc">Länk till mitt repo</a></li>
-                </ul>
-            </aside>
-        <p>Syftet med kursen är att arbeta med objektorienterade webbteknologier</p>
-        <p>Till detta testar vi även på ett ramverk vilket i det här fallet är ramverket <a
-                href="https://symfony.com/">Symfony</a>. Symfony låter oss även arbeta med ett ORM - Object Relational Mapper,
-            som vad jag såhär långt förstår mappar objekt till en databas.</p>
-        <p>Förkortningen för kursen är mvc vilket står för &quot;model-view-controller&quot; vilket är ett designmönster för att
-            implementera ett flöde av användargränssnitt, data och logik,</p>
-        <a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC"><img src="{{ asset('build/images/mvc.png') }}"
-                alt="ACME logo">
-            <figcaption>Källa:https://developer.mozilla.org/en-US/docs/Glossary/MVC </figcaption>
-        </a>    
+        <p>Syftet med kursen är att arbeta med objektorienterade webbteknologier och kursen omfattar följande områden:</p>
+        <ul>
+            <li>Programmering i webbmiljö, syntax, semantik, koppling mot databaser, datastrukturer och inbyggda funktioner.
+            </li>
+            <li>Objektorienterad programmering i PHP med språkkonstruktioner och begrepp. Objektorientering som sätt att
+                strukturera och
+                återanvända kod. Enkla designmönster.</li>
+            <li>SQL med en databas tillsammans med PHP Data Objects.</li>
+            <li>Utveckling av webbapplikationer i ett ramverk där tekniker såsom webbserver (Apache), PHP, HTML, CSS, och SQL
+                integreras
+                tillsammans med ett webbaserat ramverk.</li>
+            <li>Användning av verktyg och tekniker som lämpar sig för utveckling av webbapplikationer, tex UNIX/Linux,
+                installation på
+                extern webbserver, ssh, ftp/sftp, databasklienter såsom PHPMyAdmin, MySQL Workbench och kommandoklienter.</li>
+        </ul>
+        <p>Utöver detta testar vi även på ett ramverk vilket i det här fallet är ramverket <a
+        href="https://symfony.com/">Symfony</a>. Symfony låter oss även arbeta med ett ORM - Object Relational Mapper,
+        som vad jag såhär långt förstår mappar objekt till en databas.</p>
+        <p>Förkortningen för kursen är mvc vilket står för &quot;model-view-controller&quot; vilket är ett designmönster för att implementera ett flöde av användargränssnitt, data och logik,</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">
+        <img src="{{ asset('build/images/mvc.png') }}"
+            alt="ACME logo">
+        <figcaption>Källa:https://developer.mozilla.org/en-US/docs/Glossary/MVC </figcaption>
+        </a>
     </div>
+    <div class=box2>
+        <h2>Github</h2>
+        <ul>
+            <li><a href="https://github.com/dbwebb-se/mvc">Länk till kursens repo</a></li>
+            <li><a href="https://github.com/KristofferOhlund/mvc">Länk till mitt repo</a></li>
+        </ul>
+    </div>
+</div>
 </article>
 
 {% endblock %}

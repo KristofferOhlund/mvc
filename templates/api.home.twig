@@ -1,8 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
+<article>
 <h1>Tillgängliga JsonRoutes:</h1>
-<ul>
-    <li><a href="{{ path('quote') }}">Quote</a></li>
-</ul>
+    <ul>
+        <li><a href="{{ path('quote') }}">Quote</a></li>
+    </ul>
+</article>
 {% endblock %}
