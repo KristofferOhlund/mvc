@@ -1,0 +1,19 @@
+.report-container .right {
+  float: right;
+  clear: both;
+  padding: 2rem;
+  border-left: 1px solid #ccc;
+}
+
+.container .right {
+  float: right;
+  clear: both;
+  padding: 0rem 1rem;
+  border-left: 1px solid var(--dark-accent);
+  height: 500px;
+  overflow: hidden;
+}
+
+.right ul {
+  list-style-type: none;
+}

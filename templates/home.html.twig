@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Me {% endblock %}
+
+{% block main %}
+    <article>
+    <div class="presentation">
+        <div>
+            <h1>Hej!</h1>
+            <p class="strong">Det är jag som är <span class="highlight">Kristoffer</span></p>
+            <p>Jag jobbar för tillfället som BIM &amp; Datasamordnare på Sweco i Uppsala.
+            I kombination med utbildningen jobbar jag 25%, jag har även 2 barn, med ett tredje beräknat
+            till 15maj. Detta gör att jag minst sagt har fullt upp.</p>
+            
+        </div>
+        <img class="jag" src="{{ asset('build/images/jag.jpeg')}}" alt="En bild på mig">
+    </div>
+    </article>  
+    
+    
+{% endblock %}

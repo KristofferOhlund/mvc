@@ -1,0 +1,10 @@
+.dice-container {
+  display: flex;
+  flex-direction: row;
+  row-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dice {
+  width: 100px;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {# {{ encore_entry_script_tags('app') }} #}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="site-header">
+            <span class="site-title">MVC 2025</span>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{{ path('home') }}" class="{{ (app.request.pathinfo == path('home')) ? 'active' : '' }}">Me</a></li> |
+                    <li><a href="{{ path('about') }}" class="{{ (app.request.pathinfo == path('about')) ? 'active' : '' }}">About</a></li> |
+                    <li><a href="{{ path('report') }}" class="{{ (app.request.pathinfo == path('report')) ? 'active' : '' }}">Report</a></li> |
+                    <li><a href="{{ path('lucky') }}" class="{{ (app.request.pathinfo == path('lucky')) ? 'active' : '' }}">Lucky</a></li> |
+                    <li><a href="{{ path('jsonRoutes') }}" class="{{ (app.request.pathinfo == path('jsonRoutes')) ? 'active' : '' }}">Api</a></li> 
+                    
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+        <footer>
+            Copyright av mig &copy;
+        </footer>
+    </body>
+    
+</html>

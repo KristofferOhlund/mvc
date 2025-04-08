@@ -1,0 +1,17 @@
+.reroll {
+  height: 40px;
+  box-shadow: 2px 2px 2px darkslategrey;
+  width: 80px;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: 2px;
+  color: #fff;
+  font-family: var(--font-family-header);
+  letter-spacing: 1px;
+  /* padding: 2rem; */
+}
+
+.reroll:hover {
+  background-color: var(--dark-accent);
+  border: var(--dark-accent);
+}

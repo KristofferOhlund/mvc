@@ -1,0 +1,10 @@
+:root {
+  --font-family-text: 'Merriweather';
+  --font-family-header: 'Source Sans 3',
+    sans-serif;
+  --primary-color: #E95849;
+  --light-shades: #F4F6F1;
+  --light-accent: #ACA3A2;
+  --dark-accent: #A08C6E;
+  --dark-shades: #2D383F;
+}

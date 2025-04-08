@@ -1,0 +1,20 @@
+.jag {
+  margin-right: 1rem;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.presentation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.strong {
+  font-size: 2rem;
+}
+
+.container img {
+  max-width: 500px;
+}

@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block main %}
+<article class="dynamic">
+<h1>Let's go dynamic!</h1>
+<p>Refresh or press button below to reroll the dices</p>
+<div class="dice-container">
+    {% for image in images %}
+        <div class="dice">
+            <img src="{{ asset('build/images/' ~ image)}}" alt="{{image}}">
+        </div>
+    {% endfor %}
+</div>
+<a href="/lucky"><button class="reroll">Reroll</button></a>
+</article>
+{% endblock %}
