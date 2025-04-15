@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Modelclass - the M in MVC
  * Also called applicationclass, as it is one of many classes

@@ -11,7 +11,6 @@ use App\Dice\DiceGraphic; // vårat namespace i src
 use App\Dice\DiceHand; // vårat namespace i src
 use App\Dice\Dice; // vårat namespace i src
 
-
 class DiceGameController extends AbstractController
 {
     #[Route("/game/pig", name: "pig_start")]
@@ -35,18 +34,18 @@ class DiceGameController extends AbstractController
 
     #[Route("/game/pig/test/roll/{num_dices<\d+>}", name: "test_roll_dices")]
     public function testRollDices(int $num_dices): Response
-    {   
+    {
         if ($num_dices > 99) {
             throw new \Exception("Can not roll more than 99 dices!");
         }
 
         $dice_strings = [];
-        for ($i = 0; $i < $num_dices; $i++){
+        for ($i = 0; $i < $num_dices; $i++) {
             $dice = new DiceGraphic();
             $dice->roll();
-            $dice_strings[] = $dice->getAsString(); 
-        }   
-        
+            $dice_strings[] = $dice->getAsString();
+        }
+
         $data = [
             "dices" => $num_dices,
             "diceStrings" => $dice_strings,
@@ -91,7 +90,7 @@ class DiceGameController extends AbstractController
 
     #[Route("/game/pig/init", name: "pig_init_post", methods: ['POST'])]
     public function initCallBack(Request $request, SessionInterface $session): Response
-    {   
+    {
         $numDice = $request->request->get('num_dices');
 
         $hand = new DiceHand();
@@ -113,8 +112,7 @@ class DiceGameController extends AbstractController
     #[Route("/game/pig/play", name: "pig_play", methods: ['GET'])]
     public function play(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $dicehand = $session->get("pig_dicehand");
 
         $data = [
