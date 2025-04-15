@@ -1,3 +1,9 @@
+# ignore tools
+/tools/**/vendor/
+/tools/**/composer.lock
+.php-cs-fixer.cache
+
+
 .DS_Store
 ###> symfony/framework-bundle ###
 /.env.local
