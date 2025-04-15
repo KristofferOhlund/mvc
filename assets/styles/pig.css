@@ -1,0 +1,49 @@
+.pig-container {
+  margin: 0 auto;
+  max-width: 800px;
+  background-color: #eee;
+  font-size: 2em;
+  min-height: 100vh;
+}
+
+.pig-container h1{
+  padding-left: 1rem;
+}
+
+input {
+  font-size: 1em;
+}
+
+.pig-h1 {
+  border-bottom: 4px double green;
+  width: 100%;
+  font-size: 3rem;
+}
+
+.die {
+  font-size: 2em;
+  padding-left: 1rem;
+  margin: 0;
+}
+
+.flash-notice {
+  padding: 0.5em;
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+}
+
+.flash-notice:before {
+  content: "ⓘ";
+}
+
+.flash-warning {
+  padding: 0.5em;
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.flash-warning:before {
+  content: "⚠";
+}

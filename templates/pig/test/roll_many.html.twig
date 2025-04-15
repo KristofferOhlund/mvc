@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}Kasta tärning{% endblock %}
+{% block main %}
+<div class="pig-container">
+    <h1 class="pig-h1">Roll many dices</h1>
+
+    <h2>You rolled {{ dices }} dices.</h2>
+
+    <p>Here is the value of the dices.</p>
+
+    <ul>
+        {% for string in diceStrings %}
+            <li class="die">{{ string }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Try to roll <a href="{{ path('test_roll_dices', {num_dices:5}) }}">5</a> dices</p> 
+    <p>Try to roll <a href="{{ path('test_roll_dices', {num_dices:10}) }}">10</a> dices</p>
+
+</div>
+{% endblock %}
