@@ -7,16 +7,18 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiJsonController extends AbstractController 
+class ApiJsonController extends AbstractController
 {
     #[Route("/api", name:"jsonRoutes")]
-    public function apiRoute(): Response {
+    public function apiRoute(): Response
+    {
         $apiRoutes = array();
         return $this->render("api.home.twig", $apiRoutes);
     }
 
     #[Route("/api/quote", name:"quote")]
-    public function quote(): Response {
+    public function quote(): Response
+    {
         $quotes = array(
             "quote1" => array(
                 "citat" => "Den längsta resan för var och en är den inre resan.",
@@ -40,7 +42,7 @@ class ApiJsonController extends AbstractController
             ),
         );
 
-        $randomQuote = array_values($quotes)[random_int(0, count($quotes) -1)];
+        $randomQuote = array_values($quotes)[random_int(0, count($quotes) - 1)];
 
         $responseQuote = array(
             "citat" => $randomQuote["citat"],
@@ -56,5 +58,3 @@ class ApiJsonController extends AbstractController
         return $response;
     }
 }
-
-
