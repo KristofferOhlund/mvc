@@ -52,7 +52,8 @@ class CardGameController extends AbstractController
         $session->set("card_amount", $decOfCards->countCards());
 
         $data = [
-            "cards" => $decOfCards->getCards()
+            "cards" => $decOfCards->getCards(),
+            "sort" => "sorted"
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
@@ -60,13 +61,16 @@ class CardGameController extends AbstractController
 
 
     #[Route("/card/deck/shuffle", name:"card_deck_shuffle")]
-    public function cardDeckShuffle(): Response
+    public function cardDeckShuffle(SessionInterface $session): Response
     {
-        // hämta kort från session
+        // hämta decOfCards från session
+        $decOfCards = $session->get("decOfCards");
+        $decOfCards->shuffleCards();
         $data = [
-            "card" => ""
+            "cards" => $decOfCards->getCards(),
+            "sort" => "shuffled"
         ];
 
-        return $this->render("cards/single_card.html.twig", $data);
+        return $this->render("cards/card_deck.html.twig", $data);
     }
 }
