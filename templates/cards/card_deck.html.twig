@@ -4,12 +4,8 @@
 
 {% block main %}
 <h1>
-	Här är min card deck sida
-
+	Deck of cards - {{ sort }}
 </h1>
-<p>
-    Skapa en sida card/deck som visar samtliga kort i kortleken sorterade per färg och värde.
-</p>
 <div class="card-container">
     {% for card in cards %}
     <span class="card"> {{ card }}</span>
