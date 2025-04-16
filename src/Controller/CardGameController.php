@@ -7,22 +7,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-// use App\Card\Card;
-// use App\Card\CardGraphic;
-// use App\Card\CardHand;
-// use App\Card\DecOfCards;
+use App\Card\Card;
+use App\Card\CardGraphic;
+use App\Card\CardHand;
+use App\Card\DecOfCards;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardGameController extends AbstractController
 {
-    #[Route("/session", name:"session_dump")]
-    public function session(SessionInterface $session): Response
-    {
-        $data = [
-            "session_dump" => ""
-        ];
+    // #[Route("/session", name:"session_dump")]
+    // public function session(SessionInterface $session): Response
+    // {
+    //     $data = [
+    //         "session_dump" => ""
+    //     ];
 
-        return $this->render("cards/session.html.twig", $data);
-    }
+    //     return $this->render("cards/session.html.twig", $data);
+    // }
 
     #[Route("/card", name:"card")]
     public function card(): Response
@@ -31,14 +32,41 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck", name:"card_deck")]
-    public function cardDeck(): Response
+    public function cardDeck(SessionInterface $session): Response
     {
-        return $this->render("cards/card_deck.html.twig");
+        $decOfCards = new DecOfCards();
+
+        $names = ["spader", "hjärter", "ruter", "klöver"];
+        sort($names);
+        $values = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
+
+        foreach($names as $name) {
+            foreach($values as $value) {
+                $card = new CardGraphic($value, $name);
+                $decOfCards->add($card);
+            }
+        }
+
+        // add to session
+        $session->set("decOfCards", $decOfCards);
+        $session->set("card_amount", $decOfCards->countCards());
+
+        $data = [
+            "cards" => $decOfCards->getCards()
+        ];
+
+        return $this->render("cards/card_deck.html.twig", $data);
     }
+
 
     #[Route("/card/deck/shuffle", name:"card_deck_shuffle")]
     public function cardDeckShuffle(): Response
     {
-        return $this->redirectToRoute("card_deck");
+        // hämta kort från session
+        $data = [
+            "card" => ""
+        ];
+
+        return $this->render("cards/single_card.html.twig", $data);
     }
 }
