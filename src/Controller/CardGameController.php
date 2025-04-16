@@ -15,15 +15,37 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardGameController extends AbstractController
 {
-    // #[Route("/session", name:"session_dump")]
-    // public function session(SessionInterface $session): Response
-    // {
-    //     $data = [
-    //         "session_dump" => ""
-    //     ];
+    private const SESSION_VARIABLES = [
+        1 => "decOfCards",
+        2 => "cardsInhand"
+    ];
 
-    //     return $this->render("cards/session.html.twig", $data);
-    // }
+    #[Route("/session", name:"session_show")]
+    public function showSession(SessionInterface $session): Response {
+
+        $data = [
+            "decOfCards" => $session->get("decOfCards") ?? "null",
+            "cardsInHand" => $session->get("cardsInHand") ?? "null"
+        ];
+
+        return $this->render("cards/session.html.twig", $data);
+    }
+    
+
+
+    #[Route("/session/delete", name:"session_dump")]
+    public function deleteSession(SessionInterface $session): Response
+    {
+        $session->set("decOfCards", null);
+        $session->set("cardsInhand", null);
+
+        $this->addFlash(
+            'notice',
+            'Session has been reset'
+        );
+
+        return $this->redirectToRoute('session_show');
+    }
 
     #[Route("/card", name:"card")]
     public function card(): Response
@@ -34,16 +56,21 @@ class CardGameController extends AbstractController
     #[Route("/card/deck", name:"card_deck")]
     public function cardDeck(SessionInterface $session): Response
     {
-        $decOfCards = new DecOfCards();
+        $decOfCards = $session->get("deckOfCards") ?? null;
 
-        $names = ["spader", "hjärter", "ruter", "klöver"];
-        sort($names);
-        $values = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
+        // if session is empty, we create a new deck
+        if (!$decOfCards) {
+            $decOfCards = new DecOfCards();
 
-        foreach($names as $name) {
-            foreach($values as $value) {
-                $card = new CardGraphic($value, $name);
-                $decOfCards->add($card);
+            $names = ["spader", "hjärter", "ruter", "klöver"];
+            sort($names);
+            $values = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
+
+            foreach($names as $name) {
+                foreach($values as $value) {
+                    $card = new CardGraphic($value, $name);
+                    $decOfCards->add($card);
+                }
             }
         }
 
@@ -53,6 +80,7 @@ class CardGameController extends AbstractController
 
         $data = [
             "cards" => $decOfCards->getCards(),
+            "count_cards" => $decOfCards->countCards(),
             "sort" => "sorted"
         ];
 
@@ -72,5 +100,22 @@ class CardGameController extends AbstractController
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
+    }
+
+    #[Route("/card/deck/draw", name:"draw_card")]
+    public function drawCard(SessionInterface $session): Response {
+        // hämta decOfCards från session
+        $decOfCards = $session->get("decOfCards");
+        $drawCard = $decOfCards->draw();
+
+        $data = [
+            "card" => $drawCard->getSymbol(),
+            "count_cards" => $decOfCards->countCards()
+        ];
+
+        // Uppdatera session
+        $session->set("decOfCards", $decOfCards);
+        
+        return $this->render("cards/single_card.html.twig", $data);
     }
 }

@@ -4,8 +4,13 @@
 
 {% block main %}
 <h1>
-    Dumping session..
+    Session data
 </h1>
-{{ session_dump }}
+
+{{ include("flash.html.twig")}}
+
+<p>Antal kort i sessionen: {{ dump(decOfCards) }} </p>
+<p>Antal kort i handen: {{ dump(cardsInHand) }} </p>
+
 {% endblock main%}
 
