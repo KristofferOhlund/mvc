@@ -10,5 +10,11 @@
 <p>
     Skapa en sida card/deck som visar samtliga kort i kortleken sorterade per färg och värde.
 </p>
+<div class="card-container">
+    {% for card in cards %}
+    <span class="card"> {{ card }}</span>
+    {% endfor %}
+</div>
+
 {% endblock main%}
 
