@@ -89,27 +89,13 @@ class CardGameController extends AbstractController
     }
 
     /**
-     * Route resets the deck to 52 cards, and shuffles it in random order.
-     * Todo: make the creation of cards and symbols DRY, now does the same
-     * thing in /card/deck if cards are not in session.
+     * Shuffle all cards in session
      */
     #[Route("/card/deck/shuffle", name:"shuffle")]
     public function cardDeckShuffle(SessionInterface $session): Response
     {
-        // Always reset deck
-        $deckOfCards = new DeckOfCards();
+        $deckOfCards = $session->get("deckOfCards") ?? null;
 
-        $names = ["spader", "hjärter", "ruter", "klöver"];
-        sort($names);
-        $values = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
-
-        foreach($names as $name) {
-            foreach($values as $value) {
-                $card = new CardGraphic($value, $name);
-                $deckOfCards->add($card);
-                }
-            }
-        
         // Shuffle all cards
         $deckOfCards->shuffleCards();
 
