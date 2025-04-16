@@ -80,8 +80,14 @@ class CardGraphic extends Card
         parent::__construct($cardValue, $cardName);
     }
 
-    public function getAsString(string $name, string $value) {
+
+    /**
+     * Method to get symbol for a specifik card.
+     * @return string symbol in utf-8 format
+     */
+    public function getSymbol() {
+        $name = $this->getCardName();
+        $value = $this->getCardValue();
         return $this->$name[$value];
     }
-
 }

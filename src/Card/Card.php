@@ -45,8 +45,8 @@ class Card
     // {
     //     return $this->name ;
     // }
-    // public function getAsString(): string
-    // {
-    //     return "[{$this->name}]";
-    // }
+    public function getAsString(): string
+    {
+        return "[{$this->name}]";
+    }
 }

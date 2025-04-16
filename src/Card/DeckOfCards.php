@@ -5,9 +5,10 @@
  */
 
 namespace App\Card;
-use App\Card\Card;
+// use App\Card\Card;
+use App\Card\CardGraphic;
 
-class DecOfCards
+class DeckOfCards
 {
     /**
      * Array holding card objekts.
@@ -18,7 +19,7 @@ class DecOfCards
      * Add a card objekt to the array $cards
      * @return void
      */
-    public function add(Card $card): void
+    public function add(CardGraphic $card): void
     {
         $this->cards[] = $card;
     }
@@ -32,12 +33,13 @@ class DecOfCards
     }
 
     /**
-     * Returns the list of cards as strings
+     * Function to get a card symbol
+     * @return array of card symbols, as utf-8 strings.
      */
-    public function getCards() {
+    public function getCards():array {
         $values = [];
         foreach ($this->cards as $card) {
-            $values[] = $card->getAsString($card->getCardName(), $card->getCardValue());
+            $values[] = $card->getSymbol();
         }
         return $values;
     }
@@ -49,7 +51,7 @@ class DecOfCards
     public function draw() {
         $randomPos = random_int(0, count($this->cards) -1);
         $removedCard = array_splice($this->cards, $randomPos, 1);
-        return $removedCard;
+        return $removedCard[0];
     }
 
     /**

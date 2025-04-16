@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Draw card{% endblock title%}
+
+{% block main %}
+
+<h1>You removed the card below</h1>
+    <span class="card"> {{ card }}</span>
+
+    <p>cards left: {{ count_cards }}</p>
+{% endblock main %}

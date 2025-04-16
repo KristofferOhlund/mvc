@@ -6,7 +6,9 @@
 <h1>
 	Deck of cards - {{ sort }}
 </h1>
+<h2>Det finns {{ count_cards }} kort kvar i deck.</h2>
 <div class="card-container">
+    
     {% for card in cards %}
     <span class="card"> {{ card }}</span>
     {% endfor %}
