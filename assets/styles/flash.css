@@ -1,0 +1,10 @@
+.flash-notice {
+  padding: 0.5em;
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+}
+
+.flash-notice:before {
+  content: "ⓘ";
+}
