@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
 use App\Card\CardGraphic;
 use App\Card\CardHand;
-use App\Card\deckOfCards;
+use App\Card\DeckOfCards;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardGameController extends AbstractController
@@ -115,13 +115,60 @@ class CardGameController extends AbstractController
     public function drawCard(SessionInterface $session): Response {
         // hämta deckOfCards från session
         $deckOfCards = $session->get("deckOfCards");
-        $drawCard = $deckOfCards->draw();
 
+        // om inte deck är tom
+        if ($deckOfCards->countCards() > 0) {
+            $drawCard = $deckOfCards->draw();
+
+            $data = [
+                "card" => $drawCard->getSymbol(),
+                "count_cards" => $deckOfCards->countCards()
+            ];
+        } else {
+            $this->addFlash(
+                "notice",
+                "The deck is empty"
+            );
+
+            $data["card"] = null;
+            $data["count_cards"] = 0;
+        }
+
+        // Uppdatera session
+        $session->set("deckOfCards", $deckOfCards);
+        
+        return $this->render("cards/single_card.html.twig", $data);
+    }
+
+    #[Route("/card/deck/draw/{num<\d+>}", name:"draw_num")]
+    public function drawCardNum(SessionInterface $session, ?int $num=null): Response {
+        // hämta deckOfCards från session
+        $deckOfCards = $session->get("deckOfCards");
+
+        // validate num range
+        $cardCount = $deckOfCards->countCards();
+
+        // current state
         $data = [
-            "card" => $drawCard->getSymbol(),
+            "card" => null,
             "count_cards" => $deckOfCards->countCards()
-        ];
+            ];
 
+        if ($num < 1 || $num > $cardCount) {
+                $this->addFlash(
+                'warning',
+                'Number is bigger then the count of Deck'
+            );
+        } else {
+            $drawCard = $deckOfCards->draw($num);
+
+            // update state of data
+            $data = [
+                "card" => $drawCard->getSymbol(),
+                "count_cards" => $deckOfCards->countCards()
+            ];
+        }
+        
         // Uppdatera session
         $session->set("deckOfCards", $deckOfCards);
         
