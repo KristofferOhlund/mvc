@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Card\Card;
 use App\Card\CardGraphic;
 use App\Card\CardHand;
-use App\Card\DecOfCards;
+use App\Card\deckOfCards;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardGameController extends AbstractController
 {
     private const SESSION_VARIABLES = [
-        1 => "decOfCards",
+        1 => "deckOfCards",
         2 => "cardsInhand"
     ];
 
@@ -24,7 +24,7 @@ class CardGameController extends AbstractController
     public function showSession(SessionInterface $session): Response {
 
         $data = [
-            "decOfCards" => $session->get("decOfCards") ?? "null",
+            "deckOfCards" => $session->get("deckOfCards") ?? "null",
             "cardsInHand" => $session->get("cardsInHand") ?? "null"
         ];
 
@@ -36,7 +36,7 @@ class CardGameController extends AbstractController
     #[Route("/session/delete", name:"session_dump")]
     public function deleteSession(SessionInterface $session): Response
     {
-        $session->set("decOfCards", null);
+        $session->set("deckOfCards", null);
         $session->set("cardsInhand", null);
 
         $this->addFlash(
@@ -53,14 +53,15 @@ class CardGameController extends AbstractController
         return $this->render("cards/card.html.twig");
     }
 
+
     #[Route("/card/deck", name:"card_deck")]
     public function cardDeck(SessionInterface $session): Response
     {
-        $decOfCards = $session->get("deckOfCards") ?? null;
+        $deckOfCards = $session->get("deckOfCards") ?? null;
 
         // if session is empty, we create a new deck
-        if (!$decOfCards) {
-            $decOfCards = new DecOfCards();
+        if (!$deckOfCards) {
+            $deckOfCards = new DeckOfCards();
 
             $names = ["spader", "hjärter", "ruter", "klöver"];
             sort($names);
@@ -69,52 +70,74 @@ class CardGameController extends AbstractController
             foreach($names as $name) {
                 foreach($values as $value) {
                     $card = new CardGraphic($value, $name);
-                    $decOfCards->add($card);
+                    $deckOfCards->add($card);
                 }
             }
         }
 
         // add to session
-        $session->set("decOfCards", $decOfCards);
-        $session->set("card_amount", $decOfCards->countCards());
+        $session->set("deckOfCards", $deckOfCards);
+        $session->set("card_amount", $deckOfCards->countCards());
 
         $data = [
-            "cards" => $decOfCards->getCards(),
-            "count_cards" => $decOfCards->countCards(),
+            "cards" => $deckOfCards->getCards(),
+            "count_cards" => $deckOfCards->countCards(),
             "sort" => "sorted"
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
     }
 
-
-    #[Route("/card/deck/shuffle", name:"card_deck_shuffle")]
+    /**
+     * Route resets the deck to 52 cards, and shuffles it in random order.
+     * Todo: make the creation of cards and symbols DRY, now does the same
+     * thing in /card/deck if cards are not in session.
+     */
+    #[Route("/card/deck/shuffle", name:"shuffle")]
     public function cardDeckShuffle(SessionInterface $session): Response
     {
-        // hämta decOfCards från session
-        $decOfCards = $session->get("decOfCards");
-        $decOfCards->shuffleCards();
+        // Always reset deck
+        $deckOfCards = new DeckOfCards();
+
+        $names = ["spader", "hjärter", "ruter", "klöver"];
+        sort($names);
+        $values = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
+
+        foreach($names as $name) {
+            foreach($values as $value) {
+                $card = new CardGraphic($value, $name);
+                $deckOfCards->add($card);
+                }
+            }
+        
+        // Shuffle all cards
+        $deckOfCards->shuffleCards();
+
+        // Save deck in session
+        $session->set("deckOfCards", $deckOfCards);
+
         $data = [
-            "cards" => $decOfCards->getCards(),
+            "cards" => $deckOfCards->getCards(),
+            "count_cards" => $deckOfCards->countCards(),
             "sort" => "shuffled"
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
     }
 
-    #[Route("/card/deck/draw", name:"draw_card")]
+    #[Route("/card/deck/draw", name:"draw")]
     public function drawCard(SessionInterface $session): Response {
-        // hämta decOfCards från session
-        $decOfCards = $session->get("decOfCards");
-        $drawCard = $decOfCards->draw();
+        // hämta deckOfCards från session
+        $deckOfCards = $session->get("deckOfCards");
+        $drawCard = $deckOfCards->draw();
 
         $data = [
             "card" => $drawCard->getSymbol(),
-            "count_cards" => $decOfCards->countCards()
+            "count_cards" => $deckOfCards->countCards()
         ];
 
         // Uppdatera session
-        $session->set("decOfCards", $decOfCards);
+        $session->set("deckOfCards", $deckOfCards);
         
         return $this->render("cards/single_card.html.twig", $data);
     }
