@@ -45,12 +45,21 @@ class DeckOfCards
     }
 
     /**
-     * public function to draw a random card from the list of cards.
-     * @return Card card objekt drawn from list
+     * Function to draw a card from the list of cards.
+     * If @param $num, draw the card at index == num
+     * else removes a random card.
+     * The list of cards is updated directly.
+     * 
+     * @return Card card objekt which was removed from the list
      */
-    public function draw() {
-        $randomPos = random_int(0, count($this->cards) -1);
-        $removedCard = array_splice($this->cards, $randomPos, 1);
+    public function draw(?int $num=null): Card {
+        if (!$num) {
+            $removeIndex = random_int(0, count($this->cards) -1);
+        } else {
+            $removeIndex = $num -1;
+        }
+
+        $removedCard = array_splice($this->cards, $removeIndex, 1);
         return $removedCard[0];
     }
 
