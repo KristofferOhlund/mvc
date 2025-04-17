@@ -55,21 +55,12 @@ class CardGameController extends AbstractController
      * @return void
      */
     public function startSession($session): void {
-        $deckOfCards = new DeckOfCards();
-
-        $colors = ["spader", "hjärter", "ruter", "klöver"];
-        sort($colors);
-        $stringValues = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
-
-        foreach($colors as $color) {
-            foreach($stringValues as $string) {
-                $deckOfCards->add($color, $string);
-            }
-        }
+        $deck = new DeckOfCards();
+        $deck->generateDeck();
 
         // add to session
-        $session->set("deckOfCards", $deckOfCards);
-        $session->set("card_amount", $deckOfCards->countCards());
+        $session->set("deckOfCards", $deck);
+        $session->set("card_amount", $deck->countCards());
     }
 
 
