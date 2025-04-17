@@ -69,8 +69,7 @@ class CardGameController extends AbstractController
 
             foreach($names as $name) {
                 foreach($values as $value) {
-                    $card = new CardGraphic($value, $name);
-                    $deckOfCards->add($card);
+                    $deckOfCards->add($value, $name);
                 }
             }
         }

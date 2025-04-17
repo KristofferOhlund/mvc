@@ -5,7 +5,6 @@
  */
 
 namespace App\Card;
-// use App\Card\Card;
 use App\Card\CardGraphic;
 
 class DeckOfCards
@@ -19,8 +18,9 @@ class DeckOfCards
      * Add a card objekt to the array $cards
      * @return void
      */
-    public function add(CardGraphic $card): void
-    {
+    public function add(string $value, string $name): void
+    {   
+        $card = new CardGraphic($value, $name);
         $this->cards[] = $card;
     }
 
