@@ -8,45 +8,58 @@ namespace App\Card;
 
 class Card
 {
-    private ?string $value = null;
-    private ?string $name = null;
+    /**
+     * stringValue, aka "11, "knekt" etc
+     * Color is type, aka "hjäter, ruter" etc
+     */
+    private ?string $stringValue;
+    private ?string $color;
+    private const array CARDVALUES = [
+        "2" => 2,
+        "3" => 3,
+        "4" => 4,
+        "5" => 5,
+        "6" => 6,
+        "7" => 7,
+        "8" => 8,
+        "9" => 9,
+        "10" => 10,
+        "knekt" => 11,
+        "dam" => 12,
+        "kung" => 13,
+        "ess" => 14,
+    ];
 
     /**
-     * Constructior, initiating a card object.
-     * Card Value must be above 1
+     * Constructor
      */
-    public function __construct(?string $cardValue=null, ?string $cardName = null)
+    public function __construct(?string $colorValue=null, ?string $valueAsString=null)
     {
-        $this->value = $cardValue;
-        $this->name = $cardName;
+        $this->color = $colorValue;
+        $this->stringValue = $valueAsString;
     }
 
     /**
-     * returns the value of the card as int
-     * 
+     * Get the string value of the card, aka "11", "knekt"
+     * @return string - stringvalue of the card
      */
-    public function getCardValue():string {
-        return $this->value;
+    public function getCardStringValue():string {
+        return $this->stringValue;
     }
 
     /**
-     * returns the value of the card as int
-     * 
+     * Get the value of the card
+     * @return int - value of the card, mapped to stringvalue
      */
-    public function getCardName():string {
-        return $this->name;
+    public function getCardValue():int {
+        return self::CARDVALUES[$this->stringValue];
     }
 
     /**
-     * Function to return the name of the card, 
-     * aka hjärter, ess, dam etc
+     * Get the color of the card
+     * @return string of the card color, aka "spader", "ruter", etc
      */
-    // public function getAsString(): string
-    // {
-    //     return $this->name ;
-    // }
-    public function getAsString(): string
-    {
-        return "[{$this->name}]";
+    public function getCardColor():string {
+        return $this->color;
     }
 }

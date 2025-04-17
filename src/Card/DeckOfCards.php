@@ -18,9 +18,9 @@ class DeckOfCards
      * Add a card objekt to the array $cards
      * @return void
      */
-    public function add(string $value, string $name): void
+    public function add(string $color, string $stringValue): void
     {   
-        $card = new CardGraphic($value, $name);
+        $card = new CardGraphic($color, $stringValue);
         $this->cards[] = $card;
     }
 

@@ -75,9 +75,9 @@ class CardGraphic extends Card
     /**
      * Constructor calling the Card parents constructor
      */
-    public function __construct(?string $cardValue = null, ?string $cardName = null)
+    public function __construct(?string $color = null, ?string $stringValue = null,)
     {
-        parent::__construct($cardValue, $cardName);
+        parent::__construct($color, $stringValue);
     }
 
 
@@ -86,8 +86,8 @@ class CardGraphic extends Card
      * @return string symbol in utf-8 format
      */
     public function getSymbol() {
-        $name = $this->getCardName();
-        $value = $this->getCardValue();
-        return $this->$name[$value];
+        $color = $this->getCardColor();
+        $stringValue = $this->getCardStringValue();
+        return $this->$color[$stringValue];
     }
 }
