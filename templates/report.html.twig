@@ -1,15 +1,10 @@
 {% extends "base.html.twig" %}
+{% block title %}Report{% endblock title %}
 
 {% block main %}
 <article>
-<div class="report-container">
-    <aside class="right">
-        <h3>Förteckning</h3>
-        <ul>
-            <li><a href="#kmom01">Kmom01</a></li>
-        </ul>
-    </aside>
-    <div class="report">
+<div class="about-container">
+    <div class="box1">
         <section>
             <h1 id="kmom01">Kmom01</h1>
             <p>Nu är jag igång med kursen mvc! För mig var det en omställning att gå från Python till Php, men det kändes lättare efter att ha gått igenom klasser och objekt i Php. Objektorientering generellt har jag erfarenhet av från tidigare oopython kurs och jag har även gått en kurs i C# vilket gör att jag känner igen begrepp som private, public, instans, typdeklarationer etc.</p>
@@ -20,13 +15,44 @@
                 Klasser i Php går även att göra <code>encapuslated</code> vilket betyder att vi kan välja vilka metoder och attribug vi vill ska kunna användas utanför klasen. En <code>private</code> attribut eller metod kan bara användas av klassen internt, medan en <code>public</code> kan användas utanför klassen.
             </p>
             <p>
-                Om jag ska reflektera över strukturen för uppgiften i report så är den lite delad. Allt är ju väl organiserat med moduler indelat i egna mappar etc. Nackdelen är dock att du får en mängd olika mappar och filer som du inte har någon aning om vad de gör. Utöver Symfonys egna appstruktur så får du även filer för composer och package.json. <br>
+                Om jag ska reflektera över strukturen för uppgiften i report så är den lite delad. Allt är ju väl organiserat med moduler indelat i egna mappar etc. Nackdelen är dock att du får en mängd olika mappar och filer som du inte har någon aning om vad de gör. Utöver Symfonys egna appstruktur så får du även filer för composer och package.json.
                 Däremot var övningen vi gjorde inför uppgiften välstrukturerad som vanligt, det var bra exempel och mycket gick att återanvända och anpassa inför uppgiften.
             </p>
             <p>Gällande artikel PHP The Right Way så är det svårt att välja ett specifikt område. Allting ser egentligen intressant ut men om jag ska välja några rubriker som jag finner extra intressanta så är det Security. Det känns som att när vi kan skapa användare och hantera inloggningar m.m så har vi skapat en &quot;riktig&quot; webbapplikation. Till användare och inloggningar hör ju även databaser, något som också är intressant att få grepp om tillsammans med hur vi kan använda det i PHP. Docker känner jag bara igen vid namn så det blir jag också nyfiken på, utan att ha någon som helst tidigare erfarenhet eller kunskap om vad det egentligen är.</p>
             <p>Min TIL för detta kmom är nog främst Symfony, att få lite flyt i arbetet med att skapa Controllers och Templates. Först tyckte jag det kändes rörigt med att visa assets men jag har ändå lyckats visa de bilder jag velat, så det börjar också landa. Utöver det så är det helheten, att kunna följa en krav specifikation och skapa innehåll som matsvarar dem.</p>
         </section>
+        <section>
+            <h1 id="kmom02">Kmom02</h1>
+            <p>
+                Nu har vi tittat mer på Objektorientering inom Php. Några konstruktioner vi jobbat med är: </p>
+                <ul>
+                    <li>
+                        <p><strong>Kompositon</strong> Vilket innebär när en klass en starkt koppling till en annan klass. I min egna lösning så har klassen <strong>CardGraphic</strong> en stark koppling till klassen <strong>DeckOfCards</strong> då alla instanser av CardGraphic skapas inuti DeckOfCards. Om vi därför skulle radera vårat objekt av DeckOfCards så försvinner även alla instanser av CardGraphic.</p>
+                    </li>
+                    <li><p>
+                        <strong>Interface</strong> är som ett kontrakt, en blueprint över vilka metoder som ska finnas i en klass. Ett interface har ingen body för sina metoder och beskriver inte hur någonting ska genomföras, bara att de ska genomföras.
+                    </p></li>
+                    <li><p>
+                        <strong>Ett Trait</strong> är som en klass men ändå inte, ett Trait är ett sätt för PHP att jobba med "multiple inheritence". Då en klass i PHP inte kan ärva från flera klasser, men använda sig av flera traits. Ett trait kan definera funktioner och attribut som en klass sedan kan använda sig av, och då båda av en eller flera traits.
+                    </p></li>
+                </ul>
+            
+                <p>Jag har <strong>implementerat</strong> uppgiften genom att skapa klasserna enligt UML diagrammet ovan. För varje route kollar jag först om det finns en session, om inte skapar jag först en instans av DeckOfCards, därefter anropar jag metoden generateDeck som skapar 52st CardGraphic obekt, dessa objekt lägger jag sedan tillsammans med några attribut från Card klassen, som stringValue och color (&quot;4&quot;, &quot;hjärter&quot;) och symbol från CardGraphic i en array. Därefter sparar jag mitt DeckOfCards objekt i session, vilket gör att jag kan hämta objektet och använda dess metoder i övriga routes.</p>
+
+                <p>
+                    För tillfället är jag <strong>mycket nöjd med min implementation</strong>. Det är svårt att se nu men om man jämför mot mina tidigare commits så ser man att min lösning är ganska annorlunda. Det var först när jag kom till uppgiften API/Json som jag insåg att jag måste strukturera om koden och då främst för hur jag hämtar symboler för varje kort. Detta gör att mitt UML diagram skiljer sig något mot min slutgiltiga implementation.
+                </p>
+                <p><strong>Reflektioner</strong> såhär långt är att det är smidigt att jobba med applikationskod och symfony enligt MVC. Det är bra struktur och det är skönt att ha olika directories under src/ - en med Controllers och en annan med applikationskod. En annan reflektion är att veckans kmom var väldigt stor och jag hade uppskattat tydligare instruktioner / krav på uppgiften. Jag har i princip aldrig spelat kort och såg därför inte alls hur jag skulle börja eller vad jag ville uppnå.</p>
+                <p>Min <strong>TIL</strong> för detta kmom är nog just MVC delen, att skapa applikationskod och sedan Controllers med olika routes för att bygga en applikation. I och med min senaste implementation känner jag även att jag blivit bättre på &quot;kod-design&quot; allt är väl upp till betraktarens ögon men jag tycker mig genom uppgiften fått större förståelse för objektorienterad kod i PHP vilket ledde till nuvarande implementation.</p>
+        </section>
     </div>
+        <div class="box2">
+            <h3>Förteckning</h3>
+            <ul>
+                <li><a href="#kmom01">Kmom01</a></li>
+                <li><a href="#kmom02">Kmom02</a></li>
+            </ul>
+        </div>
 </div>
 </article>
 {% endblock %}
