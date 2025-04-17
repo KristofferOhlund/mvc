@@ -12,7 +12,7 @@ class DeckOfCards
     /**
      * Array holding card objekts.
      */
-    private array $cards = [];
+    private array $jsonCards = [];
 
     private array $colors = [
         "spader",
@@ -39,19 +39,6 @@ class DeckOfCards
 
 
     /**
-     * Generate a new deck of cards
-     * @return void
-     */
-    public function generateDeck(): void {
-        sort($this->colors);
-        foreach($this->colors as $color) {
-            foreach(self::STRINGVALUES as $string) {
-                $card = new CardGraphic($color, $string);
-                $this->cards[] = $card;
-            }
-        }
-    }
-    /**
      * Generate a new deck of cards.
      * Each element in the array is an object of CardGraphic: Card.
      * Each element containts of [
@@ -60,15 +47,14 @@ class DeckOfCards
      *  "stringValue" => "11", "dam" etc
      *  "symbol" utf-8 symbol representing the card
      * ]
-     * @return array
+     * @return void
      */
-    public function generateDeckJson(): array {
-        $deck = [];
+    public function generateDeckJson(): void {
         sort($this->colors);
         foreach($this->colors as $color) {
             foreach(self::STRINGVALUES as $string) {
                 $card = new CardGraphic($color, $string);
-                $deck[] = [
+                $this->jsonCards[] = [
                     "card" => $card,
                     "color" => $card->getCardColor(),
                     "stringValue" => $card->getCardStringValue(),
@@ -76,27 +62,22 @@ class DeckOfCards
                 ];
             }
         }
-        return $deck;
     }
+
 
     /**
      * Shuffle the list of cards,
      * @return true
      */
-    public function shuffleCards() {
-        shuffle($this->cards);
+    public function shuffleCardsJson() {
+        shuffle($this->jsonCards);
     }
 
     /**
-     * Function to get a card symbol
-     * @return array of card symbols, as utf-8 strings.
+     * Return all jsonCardObjects
      */
-    public function getCards():array {
-        $values = [];
-        foreach ($this->cards as $card) {
-            $values[] = $card->getSymbol();
-        }
-        return $values;
+    public function getJsonCards() {
+        return $this->jsonCards;
     }
 
     /**
@@ -107,15 +88,15 @@ class DeckOfCards
      * 
      * @return array with card objects which was removed from the list
      */
-    public function draw(?int $num=1): array {
-        $removedCards = array_splice($this->cards, -$num);
+    public function drawJson(?int $num=1): array {
+        $removedCards = array_splice($this->jsonCards, -$num);
         return $removedCards;
     }
 
     /**
      * Count the number of cards
      */
-    public function countCards(): int{
-        return count($this->cards);
+    public function countCardsJson(): int{
+        return count($this->jsonCards);
     }
 }

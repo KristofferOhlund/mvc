@@ -8,7 +8,7 @@
     {% if cards %}
         <h1>You removed the cards below</h1>
         {% for card in cards %}
-            <span class="card"> {{ card }}</span>
+            <span class="card"> {{ card.symbol }}</span>
         {% endfor %}
         <p>cards left: {{ count_cards }}</p>
     {% else %}

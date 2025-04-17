@@ -5,10 +5,26 @@
 <h1>Tillgängliga JsonRoutes:</h1>
     <ul>
         <li><a href="{{ path('quote') }}">Quote</a> - Generate a random qute in Json format</li>
-        <li><a href="{{ path('json_deck') }}">Deck</a> - Return a deck of cards sorted by color and value, as Json</li>
-        <li><a href="shuffle">Shuffle</a> - Shuffle a deck of cards sorted by color and value, as Json</li>
-        <li><a href="draw">Draw</a> - Draw a card and display the card as Json, save remaning cards</li>
-        <li><a href="draw">Draw 5 cards</a> - Draw 5 cards and display the cards as Json, save remaning cards</li>
+
+        <form method="POST" action="">
+            <ul>
+                <li><input type="submit" name="deck" value="Show deck"
+                    onClick="this.form.action='{{ path('json_deck') }}';this.form.method='get';"> - Show cards as Json
+                </li>
+                <li>
+                    <input type="submit" name="shuffle" value="Shuffle" onClick="this.form.action='{{ path('json_shuffle') }}';">
+                    - Shuffle all cards
+                </li>
+                <li>
+                    <input type="submit" name="draw" value="Draw" onClick="this.form.action='{{ path('json_draw') }}';"> - Draw a card from the deck of cards
+                </li>
+                <li>
+                    <input type="submit" name="draw" value="Draw 5" onClick="this.form.action='{{ path('json_draw', {num:5}) }}';"> - Draw 5 cards from the deck of cards
+                </li>
+            </ul>
+        </form>
+
+
     </ul>
 </article>
 {% endblock %}

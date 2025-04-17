@@ -21,7 +21,8 @@ class CardGameController extends AbstractController
 
         $data = [
             "deckOfCards" => $session->get("deckOfCards") ?? "null",
-            "cardsInHand" => $session->get("cardsInHand") ?? "null"
+            "cardsInHand" => $session->get("cardsInHand") ?? "null",
+            "deckObject" => $session->get("deckObject") ?? "null",
         ];
 
         return $this->render("cards/session.html.twig", $data);
@@ -34,6 +35,7 @@ class CardGameController extends AbstractController
     {
         $session->set("deckOfCards", null);
         $session->set("cardsInHand", null);
+        $session->set("deckObject", null);
 
         $this->addFlash(
             'notice',
@@ -56,33 +58,33 @@ class CardGameController extends AbstractController
      */
     public function startSession($session): void {
         $deck = new DeckOfCards();
-        $deck->generateDeck();
+        $deck->generateDeckJson();
 
         // add to session
-        $session->set("deckOfCards", $deck);
-        $session->set("card_amount", $deck->countCards());
+        $session->set("deckObject", $deck);
     }
 
 
     #[Route("/card/deck", name:"card_deck")]
     public function cardDeck(SessionInterface $session): Response
     {
-        $deckOfCards = $session->get("deckOfCards") ?? null;
+        $deck = $session->get("deckObject") ?? null;
 
         // if session is empty, we create a new deck
-        if (!$deckOfCards) {
+        if (!$deck) {
             $this->startSession($session);
-            $deckOfCards = $session->get("deckOfCards");
+            $deck = $session->get("deckObject");
         }
 
         $data = [
-            "cards" => $deckOfCards->getCards(),
-            "count_cards" => $deckOfCards->countCards(),
+            "cards" => $deck->getJsonCards(),
+            "count_cards" => $deck->countCardsJson(),
             "sort" => "sorted"
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
     }
+
 
     /**
      * Shuffle all cards in session
@@ -90,23 +92,23 @@ class CardGameController extends AbstractController
     #[Route("/card/deck/shuffle", name:"shuffle")]
     public function cardDeckShuffle(SessionInterface $session): Response
     {
-        $deckOfCards = $session->get("deckOfCards") ?? null;
+        $deck = $session->get("deckObject") ?? null;
 
         // if session is empty, we create a new deck
-        if (!$deckOfCards) {
+        if (!$deck) {
             $this->startSession($session);
-            $deckOfCards = $session->get("deckOfCards");
+            $deck = $session->get("deckObject");
         }
 
         // Shuffle all cards
-        $deckOfCards->shuffleCards();
+        $deck->shuffleCardsJson();
 
         // Save deck in session
-        $session->set("deckOfCards", $deckOfCards);
+        $session->set("deckObject", $deck);
 
         $data = [
-            "cards" => $deckOfCards->getCards(),
-            "count_cards" => $deckOfCards->countCards(),
+            "cards" => $deck->getJsonCards(),
+            "count_cards" => $deck->countCardsJson(),
             "sort" => "shuffled"
         ];
 
@@ -117,21 +119,21 @@ class CardGameController extends AbstractController
     #[Route("/card/deck/draw/{num}", name:"draw", requirements: ['num' => '\d+'])]
     public function drawCardNum(SessionInterface $session, ?int $num=1): Response {
         // hämta deckOfCards från session
-        $deckOfCards = $session->get("deckOfCards");
+        $deck = $session->get("deckObject") ?? null;
 
         // if session is empty, we create a new deck
-        if (!$deckOfCards) {
+        if (!$deck) {
             $this->startSession($session);
-            $deckOfCards = $session->get("deckOfCards");
+            $deck = $session->get("deckObject");
         }
 
         // validate num range
-        $cardCount = $deckOfCards->countCards();
+        $cardCount = $deck->countCardsJson();
 
         // current state
         $data = [
             "cards" => null,
-            "count_cards" => $deckOfCards->countCards()
+            "count_cards" => $cardCount,
             ];
 
         if ($num < 1 || $num > $cardCount) {
@@ -140,21 +142,17 @@ class CardGameController extends AbstractController
                 'Number is 0 or bigger then the count of Deck'
             );
         } else {
-            $removedCards = $deckOfCards->draw($num);
-            $symbols = [];
-            foreach($removedCards as $card) {
-               $symbols[] = $card->getSymbol(); 
-            }
+            $removedCards = $deck->drawJson($num);
             // update state of data
             $data = [
-                "cards" => $symbols,
-                "count_cards" => $deckOfCards->countCards()
+                "cards" => $removedCards,
+                "count_cards" => $deck->countCardsJson(),
             ];
         }
         
         // Uppdatera session
         $session->set("cardsInHand", $removedCards);
-        $session->set("deckOfCards", $deckOfCards);
+        $session->set("deckObject", $deck);
         
         return $this->render("cards/draw_card.html.twig", $data);
     }
