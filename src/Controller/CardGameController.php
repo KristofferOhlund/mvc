@@ -59,13 +59,13 @@ class CardGameController extends AbstractController
         if (!$deckOfCards) {
             $deckOfCards = new DeckOfCards();
 
-            $names = ["spader", "hjärter", "ruter", "klöver"];
-            sort($names);
-            $values = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
+            $colors = ["spader", "hjärter", "ruter", "klöver"];
+            sort($colors);
+            $stringValues = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
 
-            foreach($names as $name) {
-                foreach($values as $value) {
-                    $deckOfCards->add($value, $name);
+            foreach($colors as $color) {
+                foreach($stringValues as $string) {
+                    $deckOfCards->add($color, $string);
                 }
             }
         }
