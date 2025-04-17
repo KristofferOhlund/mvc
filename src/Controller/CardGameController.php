@@ -111,37 +111,9 @@ class CardGameController extends AbstractController
         return $this->render("cards/card_deck.html.twig", $data);
     }
 
-    #[Route("/card/deck/draw", name:"draw")]
-    public function drawCard(SessionInterface $session): Response {
-        // hämta deckOfCards från session
-        $deckOfCards = $session->get("deckOfCards");
 
-        // om inte deck är tom
-        if ($deckOfCards->countCards() > 0) {
-            $drawCard = $deckOfCards->draw();
-
-            $data = [
-                "card" => $drawCard->getSymbol(),
-                "count_cards" => $deckOfCards->countCards()
-            ];
-        } else {
-            $this->addFlash(
-                "notice",
-                "The deck is empty"
-            );
-
-            $data["card"] = null;
-            $data["count_cards"] = 0;
-        }
-
-        // Uppdatera session
-        $session->set("deckOfCards", $deckOfCards);
-        
-        return $this->render("cards/single_card.html.twig", $data);
-    }
-
-    #[Route("/card/deck/draw/{num<\d+>}", name:"draw_num")]
-    public function drawCardNum(SessionInterface $session, ?int $num=null): Response {
+    #[Route("/card/deck/draw/{num}", name:"draw", requirements: ['num' => '\d+'])]
+    public function drawCardNum(SessionInterface $session, ?int $num=1): Response {
         // hämta deckOfCards från session
         $deckOfCards = $session->get("deckOfCards");
 
@@ -150,21 +122,24 @@ class CardGameController extends AbstractController
 
         // current state
         $data = [
-            "card" => null,
+            "cards" => null,
             "count_cards" => $deckOfCards->countCards()
             ];
 
         if ($num < 1 || $num > $cardCount) {
                 $this->addFlash(
                 'warning',
-                'Number is bigger then the count of Deck'
+                'Number is 0 or bigger then the count of Deck'
             );
         } else {
-            $drawCard = $deckOfCards->draw($num);
-
+            $removedCards = $deckOfCards->draw($num);
+            $symbols = [];
+            foreach($removedCards as $card) {
+               $symbols[] = $card->getSymbol(); 
+            }
             // update state of data
             $data = [
-                "card" => $drawCard->getSymbol(),
+                "cards" => $symbols,
                 "count_cards" => $deckOfCards->countCards()
             ];
         }
@@ -172,6 +147,6 @@ class CardGameController extends AbstractController
         // Uppdatera session
         $session->set("deckOfCards", $deckOfCards);
         
-        return $this->render("cards/single_card.html.twig", $data);
+        return $this->render("cards/draw_card.html.twig", $data);
     }
 }
