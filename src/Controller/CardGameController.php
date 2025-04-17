@@ -49,6 +49,29 @@ class CardGameController extends AbstractController
         return $this->render("cards/card.html.twig");
     }
 
+    /**
+     * If there is no active session, create a new one
+     * Creating all 52 cards.
+     * @return void
+     */
+    public function startSession($session): void {
+        $deckOfCards = new DeckOfCards();
+
+        $colors = ["spader", "hjärter", "ruter", "klöver"];
+        sort($colors);
+        $stringValues = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
+
+        foreach($colors as $color) {
+            foreach($stringValues as $string) {
+                $deckOfCards->add($color, $string);
+            }
+        }
+
+        // add to session
+        $session->set("deckOfCards", $deckOfCards);
+        $session->set("card_amount", $deckOfCards->countCards());
+    }
+
 
     #[Route("/card/deck", name:"card_deck")]
     public function cardDeck(SessionInterface $session): Response
@@ -57,22 +80,9 @@ class CardGameController extends AbstractController
 
         // if session is empty, we create a new deck
         if (!$deckOfCards) {
-            $deckOfCards = new DeckOfCards();
-
-            $colors = ["spader", "hjärter", "ruter", "klöver"];
-            sort($colors);
-            $stringValues = ["ess", "2", "3", "4", "5", "6", "7", "8", "9", "10", "knekt", "dam", "kung"];
-
-            foreach($colors as $color) {
-                foreach($stringValues as $string) {
-                    $deckOfCards->add($color, $string);
-                }
-            }
+            $this->startSession($session);
+            $deckOfCards = $session->get("deckOfCards");
         }
-
-        // add to session
-        $session->set("deckOfCards", $deckOfCards);
-        $session->set("card_amount", $deckOfCards->countCards());
 
         $data = [
             "cards" => $deckOfCards->getCards(),
@@ -90,6 +100,12 @@ class CardGameController extends AbstractController
     public function cardDeckShuffle(SessionInterface $session): Response
     {
         $deckOfCards = $session->get("deckOfCards") ?? null;
+
+        // if session is empty, we create a new deck
+        if (!$deckOfCards) {
+            $this->startSession($session);
+            $deckOfCards = $session->get("deckOfCards");
+        }
 
         // Shuffle all cards
         $deckOfCards->shuffleCards();
@@ -111,6 +127,12 @@ class CardGameController extends AbstractController
     public function drawCardNum(SessionInterface $session, ?int $num=1): Response {
         // hämta deckOfCards från session
         $deckOfCards = $session->get("deckOfCards");
+
+        // if session is empty, we create a new deck
+        if (!$deckOfCards) {
+            $this->startSession($session);
+            $deckOfCards = $session->get("deckOfCards");
+        }
 
         // validate num range
         $cardCount = $deckOfCards->countCards();
