@@ -14,14 +14,42 @@ class DeckOfCards
      */
     private array $cards = [];
 
+    private array $colors = [
+        "spader",
+        "hjärter",
+        "ruter",
+        "klöver",
+    ];
+
+    private const array STRINGVALUES = [
+        "ess", 
+        "2", 
+        "3", 
+        "4", 
+        "5", 
+        "6", 
+        "7", 
+        "8", 
+        "9", 
+        "10", 
+        "knekt", 
+        "dam", 
+        "kung",
+    ];
+
+
     /**
-     * Add a card objekt to the array $cards
+     * Generate a new deck of cards
      * @return void
      */
-    public function add(string $color, string $stringValue): void
-    {   
-        $card = new CardGraphic($color, $stringValue);
-        $this->cards[] = $card;
+    public function generateDeck(): void {
+        sort($this->colors);
+        foreach($this->colors as $color) {
+            foreach(self::STRINGVALUES as $string) {
+                $card = new CardGraphic($color, $string);
+                $this->cards[] = $card;
+            }
+        }
     }
 
     /**
