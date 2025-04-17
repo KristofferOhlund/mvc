@@ -15,10 +15,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardGameController extends AbstractController
 {
-    private const SESSION_VARIABLES = [
-        1 => "deckOfCards",
-        2 => "cardsInhand"
-    ];
 
     #[Route("/session", name:"session_show")]
     public function showSession(SessionInterface $session): Response {
@@ -37,7 +33,7 @@ class CardGameController extends AbstractController
     public function deleteSession(SessionInterface $session): Response
     {
         $session->set("deckOfCards", null);
-        $session->set("cardsInhand", null);
+        $session->set("cardsInHand", null);
 
         $this->addFlash(
             'notice',
@@ -144,6 +140,7 @@ class CardGameController extends AbstractController
         }
         
         // Uppdatera session
+        $session->set("cardsInHand", $removedCards);
         $session->set("deckOfCards", $deckOfCards);
         
         return $this->render("cards/draw_card.html.twig", $data);
