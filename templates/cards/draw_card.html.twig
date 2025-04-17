@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Draw card{% endblock title%}
+
+{% block main %}
+
+
+
+{% if cards %}
+    <h1>You removed the cards below</h1>
+    {% for card in cards %}
+        <span class="card"> {{ card }}</span>
+    {% endfor %}
+    <p>cards left: {{ count_cards }}</p>
+{% else %}
+
+{{ include("flash.html.twig")}}
+
+{% endif %}
+
+{% if count_cards == 0%}
+
+<p>Deck is empty, do you wanna <a href="{{ path('session_dump') }}">reset</a> session?</p>
+
+{% endif %}
+
+{% endblock main %}
