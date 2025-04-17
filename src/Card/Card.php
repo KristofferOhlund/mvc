@@ -33,7 +33,7 @@ class Card
     /**
      * Constructor
      */
-    public function __construct(?string $colorValue=null, ?string $valueAsString=null)
+    public function __construct(?string $colorValue = null, ?string $valueAsString = null)
     {
         $this->color = $colorValue;
         $this->stringValue = $valueAsString;
@@ -43,7 +43,8 @@ class Card
      * Get the string value of the card, aka "11", "knekt"
      * @return string - stringvalue of the card
      */
-    public function getCardStringValue():string {
+    public function getCardStringValue(): string
+    {
         return $this->stringValue;
     }
 
@@ -51,7 +52,8 @@ class Card
      * Get the value of the card
      * @return int - value of the card, mapped to stringvalue
      */
-    public function getCardValue():int {
+    public function getCardValue(): int
+    {
         return self::CARDVALUES[$this->stringValue];
     }
 
@@ -59,7 +61,8 @@ class Card
      * Get the color of the card
      * @return string of the card color, aka "spader", "ruter", etc
      */
-    public function getCardColor():string {
+    public function getCardColor(): string
+    {
         return $this->color;
     }
 }

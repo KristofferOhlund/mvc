@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardGameController extends AbstractController
 {
-
     #[Route("/session", name:"session_show")]
-    public function showSession(SessionInterface $session): Response {
+    public function showSession(SessionInterface $session): Response
+    {
 
         $data = [
             "deckOfCards" => $session->get("deckOfCards") ?? "null",
@@ -27,7 +27,7 @@ class CardGameController extends AbstractController
 
         return $this->render("cards/session.html.twig", $data);
     }
-    
+
 
 
     #[Route("/session/delete", name:"session_dump")]
@@ -56,7 +56,8 @@ class CardGameController extends AbstractController
      * Creating all 52 cards.
      * @return void
      */
-    public function startSession($session): void {
+    public function startSession($session): void
+    {
         $deck = new DeckOfCards();
         $deck->generateDeckJson();
 
@@ -117,7 +118,8 @@ class CardGameController extends AbstractController
 
 
     #[Route("/card/deck/draw/{num}", name:"draw", requirements: ['num' => '\d+'])]
-    public function drawCardNum(SessionInterface $session, ?int $num=1): Response {
+    public function drawCardNum(SessionInterface $session, ?int $num = 1): Response
+    {
         // hämta deckOfCards från session
         $deck = $session->get("deckObject") ?? null;
 
@@ -137,7 +139,7 @@ class CardGameController extends AbstractController
             ];
 
         if ($num < 1 || $num > $cardCount) {
-                $this->addFlash(
+            $this->addFlash(
                 'warning',
                 'Number is 0 or bigger then the count of Deck'
             );
@@ -149,11 +151,11 @@ class CardGameController extends AbstractController
                 "count_cards" => $deck->countCardsJson(),
             ];
         }
-        
+
         // Uppdatera session
         $session->set("cardsInHand", $removedCards);
         $session->set("deckObject", $deck);
-        
+
         return $this->render("cards/draw_card.html.twig", $data);
     }
 }

@@ -55,7 +55,7 @@ class CardGraphic extends Card
         "dam" => "🃍",
         "kung" => "🃎",
     ];
-    
+
     private array $klöver = [
         "ess" => "🃑",
         "2" => "🃒",
@@ -75,7 +75,7 @@ class CardGraphic extends Card
     /**
      * Constructor calling the Card parents constructor
      */
-    public function __construct(?string $color = null, ?string $stringValue = null,)
+    public function __construct(?string $color = null, ?string $stringValue = null)
     {
         parent::__construct($color, $stringValue);
     }
@@ -85,7 +85,8 @@ class CardGraphic extends Card
      * Method to get symbol for a specifik card.
      * @return string symbol in utf-8 format
      */
-    public function getSymbol() {
+    public function getSymbol()
+    {
         $color = $this->getCardColor();
         $stringValue = $this->getCardStringValue();
         return $this->$color[$stringValue];

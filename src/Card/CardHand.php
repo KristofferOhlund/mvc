@@ -6,6 +6,7 @@
  */
 
 namespace App\Card;
+
 use App\Card\CardGraphic;
 
 class CardHand
@@ -17,9 +18,10 @@ class CardHand
         $this->cards = [];
     }
 
-    public function addCard(CardGraphic $card) {
+    public function addCard(CardGraphic $card)
+    {
         $this->cards[] = $card;
     }
-    
+
 
 }

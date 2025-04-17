@@ -16,7 +16,8 @@ class CardJsonApiController extends AbstractController
      * Creating all 52 cards.
      * @return void
      */
-    public function startSession($session): void {
+    public function startSession($session): void
+    {
         $deck = new DeckOfCards();
         $deck->generateDeckJson();
 
@@ -26,7 +27,8 @@ class CardJsonApiController extends AbstractController
 
 
     #[Route("/api/deck", name: "json_deck", methods: ["GET"])]
-    public function jsonDeck(SessionInterface $session): JsonResponse {
+    public function jsonDeck(SessionInterface $session): JsonResponse
+    {
         $deck = $session->get("deckObject") ?? null;
 
         // if session is empty, we create a new deck
@@ -41,13 +43,14 @@ class CardJsonApiController extends AbstractController
 
         $response = new JsonResponse($deck->getJsonCards());
         $response->setEncodingOptions(
-        $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
     }
 
     #[Route("/api/deck/shuffle", name: "json_shuffle", methods: ["GET", "POST"])]
-    public function jsonShuffle(SessionInterface $session): JsonResponse {
+    public function jsonShuffle(SessionInterface $session): JsonResponse
+    {
         $deck = $session->get("deckObject") ?? null;
 
         // if session is empty, we create a new deck
@@ -63,13 +66,14 @@ class CardJsonApiController extends AbstractController
 
         $response = new JsonResponse($deck->getJsonCards());
         $response->setEncodingOptions(
-        $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
         return $response;
     }
 
     #[Route("/api/deck/draw/{num}", name:"json_draw", requirements: ['num' => '\d+'], methods: ["POST", "GET"])]
-    public function drawCardNum(SessionInterface $session, ?int $num=1): JsonResponse {
+    public function drawCardNum(SessionInterface $session, ?int $num = 1): JsonResponse
+    {
         $deck = $session->get("deckObject") ?? null;
 
         // if session is empty, we create a new deck
