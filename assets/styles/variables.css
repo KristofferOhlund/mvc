@@ -10,4 +10,5 @@
   --text-on-light-background: #2D383F;
 
   --border-radius: 5px;
+  --box-shadow: 2px 2px 2px var(--light-accent);
 }

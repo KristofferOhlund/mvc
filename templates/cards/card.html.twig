@@ -19,11 +19,24 @@
     </ul>
 </div>
 
-<p>
-    På din landdningssida, berätta kort om strukturen på dina klasser, vilka klasser har du och hur är de relaterade till
-    varandra. Rita ett UML klass diagram och visa i sidan.
-</p>
+<h2>Klasser och struktur</h2>
 
+<div class="flex-container">
+    <div class="text-box">
+        <p><strong>Card</strong> är den klass som representerar det logiska med ett kort. Den har färg, sträng och värde som privata attribut. Och erbjuder ett API för att hämta dessa.</p><br>
+        <p><strong>CardGraphic</strong> representerar det visuella med ett kort och private attribut för för alla utf-8 symboler från respektive färg av spader, hjärter, ruter och klöver. <strong>CardGraphic</strong> har ett API för att hämta en utf8-str som representerar ett kort. <strong>CardGraphic</strong> är en subklass av <strong>Card</strong></p><br>
+        <p>
+            <strong>CardHand</strong> är en klass med relation aggregation och kan hålla kort i en lista. <strong>CardHand</strong> har förtillfället ett API för att lägga till ett kort i handen, fler kommer att komma i nästa kmom.
+        </p><br>
+        <p>
+            <strong>DeckOfCards</strong> har en kompositionsrelation med <strong>CardGraphic</strong> och skapar instanser av dessa genom metoden <code>generateDeck()</code>. <strong>DeckOfCards</strong> håller samtliga kort i spelet och erbjuder API för att shuffla alla kort, dra och räkna antal kort.
+        </p>
+    </div>
+    <div class="image-box">
+        <img class="uml" src="{{ asset('build/images/uml.png')}}" alt="UML diagram">
+    </div>
+
+</div>
 </article>
 {% endblock main%}
 

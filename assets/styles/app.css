@@ -9,6 +9,7 @@
 /* @import url('pig.css'); */
 @import url('card.css');
 @import url('flash.css');
+@import url('containers.css');
 
 
 
@@ -51,6 +52,8 @@ h1 {
 h2 {
     font-size: 2rem;
     margin-bottom: 1.4rem;
+    border-bottom: 4px double var(--dark-shades);
+    width: fit-content;
 }
 
 h3 {

@@ -20,3 +20,8 @@
 .dice:nth-child(odd) {
   background-color: var(--dark-shades);
 }
+
+.uml {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
