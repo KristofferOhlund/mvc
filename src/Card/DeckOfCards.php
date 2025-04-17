@@ -51,6 +51,33 @@ class DeckOfCards
             }
         }
     }
+    /**
+     * Generate a new deck of cards.
+     * Each element in the array is an object of CardGraphic: Card.
+     * Each element containts of [
+     *  "card" => card object,
+     *  "color" => Color of the card, hjärter, klöver,
+     *  "stringValue" => "11", "dam" etc
+     *  "symbol" utf-8 symbol representing the card
+     * ]
+     * @return array
+     */
+    public function generateDeckJson(): array {
+        $deck = [];
+        sort($this->colors);
+        foreach($this->colors as $color) {
+            foreach(self::STRINGVALUES as $string) {
+                $card = new CardGraphic($color, $string);
+                $deck[] = [
+                    "card" => $card,
+                    "color" => $card->getCardColor(),
+                    "stringValue" => $card->getCardStringValue(),
+                    "symbol" => $card->getSymbol(),
+                ];
+            }
+        }
+        return $deck;
+    }
 
     /**
      * Shuffle the list of cards,
