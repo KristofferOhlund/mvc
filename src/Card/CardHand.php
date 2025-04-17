@@ -6,9 +6,20 @@
  */
 
 namespace App\Card;
-use App\Card\Card;
+use App\Card\CardGraphic;
 
 class CardHand
 {
+    private array $cards;
+
+    public function __construct()
+    {
+        $this->cards = [];
+    }
+
+    public function addCard(CardGraphic $card) {
+        $this->cards[] = $card;
+    }
     
+
 }
