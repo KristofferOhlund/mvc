@@ -1,4 +1,5 @@
 # ignore tools
+tools/*
 */tools/**/vendor/
 */tools/**/composer.lock
 .php-cs-fixer.cache
