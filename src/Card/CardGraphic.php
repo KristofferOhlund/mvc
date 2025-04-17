@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Representing the Graphical part of a Card
+ * Representing the Graphical part of a French Card Game
  */
 
 namespace App\Card;
