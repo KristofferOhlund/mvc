@@ -3,24 +3,25 @@
 
 {% block main %}
 
+<article>
 
+    {% if cards %}
+        <h1>You removed the cards below</h1>
+        {% for card in cards %}
+            <span class="card"> {{ card }}</span>
+        {% endfor %}
+        <p>cards left: {{ count_cards }}</p>
+    {% else %}
 
-{% if cards %}
-    <h1>You removed the cards below</h1>
-    {% for card in cards %}
-        <span class="card"> {{ card }}</span>
-    {% endfor %}
-    <p>cards left: {{ count_cards }}</p>
-{% else %}
+    {{ include("flash.html.twig")}}
 
-{{ include("flash.html.twig")}}
+    {% endif %}
 
-{% endif %}
+    {% if count_cards == 0%}
 
-{% if count_cards == 0%}
+    <p>Deck is empty, do you wanna <a href="{{ path('session_dump') }}">reset</a> session?</p>
 
-<p>Deck is empty, do you wanna <a href="{{ path('session_dump') }}">reset</a> session?</p>
+    {% endif %}
 
-{% endif %}
-
+</article>
 {% endblock main %}

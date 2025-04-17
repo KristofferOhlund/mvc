@@ -10,3 +10,20 @@
   flex-wrap: wrap;
   row-gap: 0;
 }
+
+.card-routes-container {
+  border: 1px solid var(--dark-accent);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
+.card-container li {
+  list-style-type: disc;
+}
+
+.card-container a {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+

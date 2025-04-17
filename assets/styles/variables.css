@@ -7,4 +7,7 @@
   --light-accent: #ACA3A2;
   --dark-accent: #A08C6E;
   --dark-shades: #2D383F;
+  --text-on-light-background: #2D383F;
+
+  --border-radius: 5px;
 }

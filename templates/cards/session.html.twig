@@ -3,14 +3,16 @@
 {% block title%}Session debug{% endblock title %}
 
 {% block main %}
-<h1>
-    Session data
-</h1>
+<article>
+    <h1>
+        Session data
+    </h1>
 
-{{ include("flash.html.twig")}}
+    {{ include("flash.html.twig")}}
 
-<p>Antal kort i sessionen: {{ dump(deckOfCards) }} </p>
-<p>Antal kort i handen: {{ dump(cardsInHand) }} </p>
+    <p>Antal kort i sessionen: {{ dump(deckOfCards) }} </p>
+    <p>Antal kort i handen: {{ dump(cardsInHand) }} </p>
+</article>
 
 {% endblock main%}
 
