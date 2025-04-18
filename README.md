@@ -38,5 +38,12 @@ Ställ dig i din projektmapp och kör kommandot `git clone XX`
 kör sedan `composer install` fölt av `npm install` för att installera samtliga moduler och paket.
 Om du får någon promt, tryck Enter för default installation.
 
+# Skapa assets
+För att få med bilder i form av assets, kör `npm run build`, detta kommer att göra dina bilder under assets/images till assets
+och hamna i public/build/images. Om detta inte körs kommer bilderna inte visas korrekt då bilder hänvisar genom `{{ path(asset/build/images/<bild>)}}`
+
 # Starta servern
 Kör sedan `symfony server:start` och gå till lokalhost:8000
+
+# Uppdatera .htaccess
+För att publicera till studentservern, justera sökvägen för ReWriteRule i public/.htaccess
