@@ -1,0 +1,28 @@
+// Lägg till denna rad högst upp i varje fil som använder variabler
+@use 'variables' as *;
+
+.dice-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+}
+
+.dice {
+  width: 100px;
+  border-radius: $border-radius;
+}
+
+.dice:nth-child(even) {
+  background-color: $primary-color;
+}
+
+.dice:nth-child(odd) {
+  background-color: $dark-shades;
+}
+
+.uml {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}

@@ -78,6 +78,7 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
+        "style": "sass assets/styles/base.scss assets/styles/style.min.css  --no-source-map --style compressed",
         "phpmd": "php -d error_reporting='E_ALL & ~E_DEPRECATED' tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml || true",
         "phpstan": "tools/phpstan/vendor/bin/phpstan analyse -l 8 src -c tools/phpstan/phpstan.neon || true",
         "lint": [

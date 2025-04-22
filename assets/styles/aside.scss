@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+.report-container {
+  .right {
+    float: right;
+    clear: both;
+    padding: 2rem;
+    border-left: 1px solid #ccc; // Du kan byta ut denna mot en variabel om du har en liknande nyans
+  }
+}
+
+.container {
+  .right {
+    float: right;
+    clear: both;
+    padding: 0rem 1rem;
+    border-left: 1px solid $dark-accent;
+    height: 500px;
+    overflow: hidden;
+  }
+}
+
+.right {
+  ul {
+    list-style-type: none;
+  }
+}

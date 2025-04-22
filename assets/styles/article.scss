@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+article {
+  padding: 2rem;
+  border: 1px solid $dark-accent;
+  border-radius: $border-radius;
+  box-shadow: 2px 2px 2px $light-accent;
+  margin-bottom: 2rem;
+}
+
+.dynamic {
+  margin: 0 auto;
+}

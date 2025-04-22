@@ -1,0 +1,24 @@
+// Lägg till denna rad högst upp i varje fil som använder variabler
+@use 'variables' as *;
+
+.flash-notice {
+  padding: 0.5em;
+  color: $flash-notice-text-color; // Ersätt med en variabel om du har definierat den
+  background-color: $flash-notice-bg-color; // Ersätt med en variabel om du har definierat den
+  border-color: $flash-notice-border-color; // Ersätt med en variabel om du har definierat den
+}
+
+.flash-notice:before {
+  content: "ⓘ";
+}
+
+.flash-warning {
+  padding: 0.5em;
+  color: $flash-warning-text-color; // Ersätt med en variabel om du har definierat den
+  background-color: $flash-warning-bg-color; // Ersätt med en variabel om du har definierat den
+  border-color: $flash-warning-border-color; // Ersätt med en variabel om du har definierat den
+}
+
+.flash-warning:before {
+  content: "⚠";
+}

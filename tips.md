@@ -17,13 +17,15 @@ php -S localhost:8888 -t public
 File: LuckyJsonController
 Class: LuckyJsonController
 
+# För att kompiliera css till SASS kod
+npm run style
+
 # För att använda styleSheet och javascript mha Encore
 npm run build
+
 ## Detta skapar en public/build mapp där dina assets mappas
 # för att även tömma cache
 rm -rf node_modules/.cache
-npm run build
-
 
 # Kör symfonys lokala server istället för php's
 symfony server:start

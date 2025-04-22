@@ -1,0 +1,42 @@
+@use 'variables' as *;
+
+.jag {
+  width: 50%;
+  margin-right: 1rem;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.presentation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.strong {
+  font-size: 2rem;
+}
+
+.container img {
+  max-width: 500px;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.box1 {
+  padding: 2rem;
+  flex: 3;
+}
+
+.box2 {
+  flex: 1;
+  padding: 2rem;
+  border-left: 1px solid $dark-accent;
+  box-shadow: 2px 2px 2px $light-shades;
+}
