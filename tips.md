@@ -41,3 +41,10 @@ symfony server:start
     </a>
 
 # För att printa ett objekt, använd print_r
+
+# PHPMD - För att kontrollera messy code, kör
+tools/phpmd/vendor/bin/phpmd . text tools/phpmd/phpmd.xml
+Felen som inleds med Depricated har med PHP själv att göra och kan ignoreras.
+
+# PHPStan - find bugs before production
+tools/phpstan/vendor/bin/phpstan analyse -l 8 src
