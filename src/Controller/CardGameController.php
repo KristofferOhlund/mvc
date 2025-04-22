@@ -59,7 +59,7 @@ class CardGameController extends AbstractController
     public function startSession($session): void
     {
         $deck = new DeckOfCards();
-        $deck->generateDeckJson();
+        $deck->generateDeck();
 
         // add to session
         $session->set("deckObject", $deck);
@@ -78,8 +78,8 @@ class CardGameController extends AbstractController
         }
 
         $data = [
-            "cards" => $deck->getJsonCards(),
-            "count_cards" => $deck->countCardsJson(),
+            "cards" => $deck->getCards(),
+            "count_cards" => $deck->countCards(),
             "sort" => "sorted"
         ];
 
@@ -102,14 +102,14 @@ class CardGameController extends AbstractController
         }
 
         // Shuffle all cards
-        $deck->shuffleCardsJson();
+        $deck->shuffleCards();
 
         // Save deck in session
         $session->set("deckObject", $deck);
 
         $data = [
-            "cards" => $deck->getJsonCards(),
-            "count_cards" => $deck->countCardsJson(),
+            "cards" => $deck->getCards(),
+            "count_cards" => $deck->countCards(),
             "sort" => "shuffled"
         ];
 
@@ -130,7 +130,7 @@ class CardGameController extends AbstractController
         }
 
         // validate num range
-        $cardCount = $deck->countCardsJson();
+        $cardCount = $deck->countCards();
 
         // current state
         $data = [
@@ -144,11 +144,11 @@ class CardGameController extends AbstractController
                 'Number is 0 or bigger then the count of Deck'
             );
         } else {
-            $removedCards = $deck->drawJson($num);
+            $removedCards = $deck->draw($num);
             // update state of data
             $data = [
                 "cards" => $removedCards,
-                "count_cards" => $deck->countCardsJson(),
+                "count_cards" => $deck->countCards(),
             ];
         }
 

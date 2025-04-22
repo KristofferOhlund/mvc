@@ -12,9 +12,14 @@ class DeckOfCards
 {
     /**
      * Array holding card objekts.
+     * @var array<mixed>
      */
     private array $jsonCards = [];
 
+    /**
+     * Array with strings representing the color of a card
+     * @var array<string>
+     */
     private array $colors = [
         "spader",
         "hjärter",
@@ -22,6 +27,10 @@ class DeckOfCards
         "klöver",
     ];
 
+    /**
+     * Array with strings representing the string values of a card
+     * @var array<string>
+     */
     private const array STRINGVALUES = [
         "ess",
         "2",
@@ -50,7 +59,7 @@ class DeckOfCards
      * ]
      * @return void
      */
-    public function generateDeckJson(): void
+    public function generateDeck(): void
     {
         sort($this->colors);
         foreach ($this->colors as $color) {
@@ -69,17 +78,18 @@ class DeckOfCards
 
     /**
      * Shuffle the list of cards,
-     * @return true
+     * @return void
      */
-    public function shuffleCardsJson()
+    public function shuffleCards(): void
     {
         shuffle($this->jsonCards);
     }
 
     /**
      * Return all jsonCardObjects
+     * @return array<mixed>
      */
-    public function getJsonCards()
+    public function getCards()
     {
         return $this->jsonCards;
     }
@@ -90,9 +100,9 @@ class DeckOfCards
      * always removes the cards from "top-to-bottom".
      * The list of cards is updated directly.
      *
-     * @return array with card objects which was removed from the list
+     * @return array<mixed> with card objects which was removed from the list
      */
-    public function drawJson(?int $num = 1): array
+    public function draw(?int $num = 1): array
     {
         $removedCards = array_splice($this->jsonCards, -$num);
         return $removedCards;
@@ -101,7 +111,7 @@ class DeckOfCards
     /**
      * Count the number of cards
      */
-    public function countCardsJson(): int
+    public function countCards(): int
     {
         return count($this->jsonCards);
     }

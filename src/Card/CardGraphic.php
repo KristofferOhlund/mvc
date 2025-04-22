@@ -10,6 +10,7 @@ class CardGraphic extends Card
 {
     /**
      * Array with all symbols
+     * @var array<string, array<int|string, string>>
      */
     private array $symbols = [
         "spader" => [
@@ -74,7 +75,7 @@ class CardGraphic extends Card
         ]
     ];
 
-    
+
     /**
      * Constructor calling the Card parents constructor
      */

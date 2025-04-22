@@ -16,10 +16,10 @@ class CardJsonApiController extends AbstractController
      * Creating all 52 cards.
      * @return void
      */
-    public function startSession($session): void
+    public function startSession(SessionInterface $session): void
     {
         $deck = new DeckOfCards();
-        $deck->generateDeckJson();
+        $deck->generateDeck();
 
         // add to session
         $session->set("deckObject", $deck);
@@ -41,7 +41,7 @@ class CardJsonApiController extends AbstractController
         // save in session
         $session->set("deckObject", $deck);
 
-        $response = new JsonResponse($deck->getJsonCards());
+        $response = new JsonResponse($deck->getCards());
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
@@ -59,12 +59,12 @@ class CardJsonApiController extends AbstractController
             $deck = $session->get("deckObject");
         }
 
-        $deck->shuffleCardsJson();
+        $deck->shuffleCards();
 
         // save in session
         $session->set("deckObject", $deck);
 
-        $response = new JsonResponse($deck->getJsonCards());
+        $response = new JsonResponse($deck->getCards());
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
         );
@@ -82,13 +82,13 @@ class CardJsonApiController extends AbstractController
             $deck = $session->get("deckObject");
         }
 
-        $removed_cards = $deck->drawJson($num);
+        $removed_cards = $deck->draw($num);
 
         $session->set("deckObject", $deck);
         $session->set("removed_cards", $removed_cards);
 
         $data = [
-            "cards_left" => $deck->countCardsJson(),
+            "cards_left" => $deck->countCards(),
             "removed_cards" => $removed_cards
         ];
 

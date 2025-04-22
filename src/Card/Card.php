@@ -42,8 +42,9 @@ class Card
     /**
      * Get the string value of the card, aka "11", "knekt"
      * @return string - stringvalue of the card
+     * @return null - if no stringvalue, return null
      */
-    public function getCardStringValue(): string
+    public function getCardStringValue(): string | null
     {
         return $this->stringValue;
     }
@@ -60,8 +61,9 @@ class Card
     /**
      * Get the color of the card
      * @return string of the card color, aka "spader", "ruter", etc
+     * @return null - if no color, return null
      */
-    public function getCardColor(): string
+    public function getCardColor(): string | null
     {
         return $this->color;
     }
