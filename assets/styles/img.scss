@@ -26,3 +26,9 @@
   border-radius: $border-radius;
   box-shadow: $box-shadow;
 }
+
+.img1 img,
+.img2 img {
+  height: 400px;
+  object-fit: cover;
+}

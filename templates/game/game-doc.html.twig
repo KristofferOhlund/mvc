@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documentation{% endblock %}
+{% block main %}
+<article>
+    <h1>Dokumentation kortspel 21</h1>
+    <section class="pusedo">
+    <h2>Psuedo kod</h2>
+    <h3>Spelaren</h3>
+    <p><pre>
+SET VALUE = 0
+DRAW kort
+VALUE += VALUE
+REPEAT UNTILL VALUE >= 17
+    IF daredevil
+        DRAW kort
+    ELSE
+        STOP
+    </pre>
+        
+    </p>
+    <h3>Banken</h3>
+    <p>
+<pre>
+SET VALUE = 0
+SET flip to true
+WHILE flip
+    DRAW kort
+    VALUE += VALUE
+    flip = random(0, 1)
+    IF 0
+        flip = false
+        STOP
+
+</pre>
+    </p>
+    <h3>Game</h3>
+    <pre>
+SET winner = null
+SET players = spelaren, banken
+IF players | banken is active AND points > 21:
+    winner = player | banken
+ELSE
+    IF both players.stop
+        WINNER = player.points > banken.points ? player : banken
+    </pre>
+</section>
+<section class="flowchart">
+
+    <h2>Flowchart</h2>
+    <div class="image-container">
+        <div class="img1">
+            <h3>Player / Bank</h3>
+            <img src=" {{ asset('build/images/flowchart.png') }}" alt="flowchart">
+        </div>
+        <div class="img2">
+            <h3>Game</h3>
+            <img src=" {{ asset('build/images/flowchart-game.png') }}" alt="flowchart-game">
+        </div>
+    </div>
+</section>
+
+<section class="classes">
+    <h2>Klasser</h2>
+    <p><strong>Player:</strong> är en klass som representerar spelaren. Varje spelare har en korthand (<strong>CardHand</strong>) och kan dra kort från <strong>CardDeck</strong>
+    <p><strong>Bank</strong> är en subklass av Player men där logiken för att dra kort eller inte görs utan input från användaren.</p>
+    <p><strong>GameMaster</strong> är en klass som håller nuvarande antalet spelare i session och som utser vinnaren efter respektive omgång.</p>
+</section>
+</article>
+{% endblock %}

@@ -1,8 +1,13 @@
-.flex-container {
+.flex-container,
+.image-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.image-container {
+  justify-content: space-around;
 }
 
 .text-box {
