@@ -20,7 +20,7 @@ class DeckOfCards
      * Array holding an array of CardGraphic objects
      * @var array<CardGraphic>
      */
-    private array $cards = [];
+    private array $graphicCards = [];
 
     /**
      * Array with strings representing the color of a card
@@ -86,17 +86,24 @@ class DeckOfCards
      * Each element in the deck is a GraphicCard object
      * @return void
      */
-    public function generateDeck2(): void
+    public function generateGraphicDeck(): void
     {
         sort($this->colors);
         foreach ($this->colors as $color) {
             foreach (self::STRINGVALUES as $string) {
                 $card = new CardGraphic($color, $string);
-                $thiscards[] = $card;
+                $this->graphicCards[] = $card;
             }
         }
     }
 
+    /**
+     * Shuffle the CardGraphic array
+     * @return void
+     */
+    public function shuffleGraphic(): void {
+        shuffle($this->graphicCards);
+    }
 
     /**
      * Shuffle the list of cards,
@@ -104,7 +111,6 @@ class DeckOfCards
      */
     public function shuffleCards(): void
     {
-        shuffle($this->cards);
         shuffle($this->jsonCards);
     }
 
@@ -115,6 +121,15 @@ class DeckOfCards
     public function getCards()
     {
         return $this->jsonCards;
+    }
+
+    /**
+     * Return the array of CardGraphic objects
+     * @return array<mixed>
+     */
+    public function getGraphicCards()
+    {
+        return $this->graphicCards;
     }
 
     /**
@@ -134,10 +149,31 @@ class DeckOfCards
     }
 
     /**
+     * Function to draw a card from the array of graphicCards.
+     * If @param $num, draw $num of cards.
+     * always removes the cards from "top-to-bottom".
+     * The array of cards is updated at place.
+     * @return CardGraphic object
+     */
+    public function drawGraphic(): CardGraphic
+    {   
+        $removedCards = array_pop($this->graphicCards);
+        return $removedCards;
+    }
+
+    /**
      * Count the number of cards
      */
     public function countCards(): int
     {
         return count($this->jsonCards);
+    }
+
+    /**
+     * Count the number of cards
+     */
+    public function countGraphicCards(): int
+    {
+        return count($this->graphicCards);
     }
 }
