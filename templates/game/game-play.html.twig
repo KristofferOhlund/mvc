@@ -13,12 +13,12 @@
     <section class="player1">
         <div class="player" class="{{ player.getName() ? 'active' : 'inactive' }}">
             <article>
-                <h2>Cards</h2>
+                <h3>Cards</h3>
                 {% for card in player.showHand() %}
                 <span class="card">{{card}}</span>
                 {% endfor %}
-                <h2>Points</h2>
-
+                <h3>Points</h3>
+                {{ player.getPoints() }}
             </article>
 
 
@@ -32,13 +32,12 @@
     <section class="player2">
         <div class="bank" class="{{ bank.getName() ? 'active' : 'inactive' }}">
             <article>
-                <h2>Cards</h2>
+                <h3>Cards</h3>
                 {% for card in bank.showHand() %}
                 <span class="card">{{card}}</span>
                 {% endfor %}
-                <h2>Points</h2>
-
-                
+                <h3>Points</h3>
+                {{ bank.getPoints() }}
             </article>
         </div>
     </section>
