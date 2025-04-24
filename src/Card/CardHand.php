@@ -37,4 +37,16 @@ class CardHand
         }
         return $symbols;
     }
+
+    /**
+     * Get the sum of all int values from cards in hand
+     * @return int the Sum of all values
+     */
+    public function getPointsOfHand(): int {
+        $points = 0;
+        foreach($this->cards as $card){
+            $points += $card->getCardValue();
+        }
+        return $points;
+    }
 }
