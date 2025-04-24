@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Multiplayer{% endblock %}
+{% block main %}
+
+<article>
+    <h1>Multiplayer</h1>
+
+<form action=" {{ path('multiplayer') }}" method="post">
+    <p><label for="players">Choose the amount of players</label></p>
+    <input type="number" name="players" min="1" max="5">
+    <button type="submit" class="button primary-button">Börja spelet</button>
+</form>
+
+
+</article>
+{% endblock %}

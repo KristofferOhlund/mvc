@@ -153,4 +153,17 @@ class GameController extends AbstractController {
     public function gameDoc(): Response {
         return $this->render("game/game-doc.html.twig");
     }
+
+
+    #[Route("/game/init", name:"game_init")]
+    public function initgame() {
+        return $this->render("game/game-form.html.twig");
+    }
+
+
+    #[Route("/game/multiplayer{num}", name:"multiplayer", requirements: ['num' => '\d+'])]
+    public function initMultiplayer(?int $num = 1) {
+        return $this->render("game/game-form.html.twig");
+    }
 }
+
