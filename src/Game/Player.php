@@ -12,8 +12,25 @@ use app\Card\DeckOfCards;
 
 class Player {
 
+    /**
+     * The name of the player
+     * Can be implemented to set a specific name
+     */
     private string $name;
+
+    /**
+     * Player points
+     * Points gets added from the Cardhand
+     */
     private int $points;
+
+    /**
+     * Bool representing wheter a player
+     * wants to draw another card.
+     * Defaults to true,
+     * when false player round is done.
+     */
+    private bool $stop;
 
     protected CardHand $cardhand;
 
@@ -27,6 +44,24 @@ class Player {
         $this->name = $name;
         $this->points = 0;
         $this->cardhand = new CardHand();
+        $this->stop = false;
+    }
+
+    /**
+     * Stop the round
+     * Set daredevil to false
+     * @return void
+     */
+    public function stop(): void {
+        $this->stop = true;
+    }
+
+    /**
+     * Get the current state of daredevil
+     * @return bool
+     */
+    public function getStop(): bool {
+        return $this->stop;
     }
 
     /**
@@ -46,9 +81,9 @@ class Player {
     /**
      * Get total points of the player
      */
-    public function getPoints() {
-        return $this->points;
-    }
+    // public function getPoints() {
+    //     return $this->points;
+    // }
 
     /**
      * Add points to the player
@@ -58,7 +93,7 @@ class Player {
     }
 
     /**
-     * Add a CardGraphic object to the list of cards
+     * Add a CardGraphic object to the card hand
      * @return void
      */
     public function addCard(CardGraphic $card): void {
@@ -72,5 +107,12 @@ class Player {
     public function drawCard(DeckOfCards $cardDeck): CardGraphic {
         $card = $cardDeck->drawGraphic();
         return $card;
+    }
+
+    /**
+     * Get the points of the players card hand
+     */
+    public function getPoints() {
+        return $this->cardhand->getPointsOfHand();
     }
 }
