@@ -2,7 +2,6 @@
 
 /**
  * Representing a hand of Cards.
- * Uses composition to create cards in the hand.
  */
 
 namespace App\Card;
@@ -18,10 +17,24 @@ class CardHand
         $this->cards = [];
     }
 
-    public function addCard(CardGraphic $card)
+    /**
+     * Add a CardGraphic Object to the list of cards
+     * @return void
+     */
+    public function addCard(CardGraphic $card): void
     {
-        $this->cards[] = $card;
+        array_push($this->cards, $card);
     }
 
-
+    /**
+     * Get all card symbols for current hand
+     * @return array of Symbols
+     */
+    public function getCards(): array {
+        $symbols = [];
+        foreach($this->cards as $card){
+            array_push($symbols, $card->getSymbol());
+        }
+        return $symbols;
+    }
 }

@@ -6,16 +6,19 @@
 <article>
     <a href=" {{ path('game_destroy') }}" class="button">Destroy game Session</a>
     <h1>We are now playing the game of 21</h1>
-    <h2>Current player: {{ player.getName() }}</h2>
+    <h2>Current player: {{ currentPlayer }}</h2>
     <div class="flex-container">
 
     
     <section class="player1">
-        <div class="player" class="{{ player.getName ? "active" : "inactive" }}">
+        <div class="player" class="{{ player.getName() ? 'active' : 'inactive' }}">
             <article>
-                <h2>Hello there</h2>
-                <button>Dra kort</button>
-                <button>Stop</button>
+                <h2>Cards</h2>
+                {% for card in player.showHand() %}
+                <span class="card">{{card}}</span>
+                {% endfor %}
+                <h2>Points</h2>
+
             </article>
 
 
@@ -27,16 +30,28 @@
         </div>
     </section>
     <section class="player2">
-        <div class="bank" class="{{ player.getName ? "active" : "inactive" }}">
+        <div class="bank" class="{{ bank.getName() ? 'active' : 'inactive' }}">
             <article>
-                <h2>Hello there</h2>
-                <button>Dra kort</button>
-                <button>Stop</button>
+                <h2>Cards</h2>
+                {% for card in bank.showHand() %}
+                <span class="card">{{card}}</span>
+                {% endfor %}
+                <h2>Points</h2>
+
+                
             </article>
         </div>
     </section>
     </div>
 
+    <section class="buttons">
+        <div class="flex-container">
+            <a href="{{ path('game_roll') }}" class="button primary-button" style="width:200px">Draw</a>
+            <a href="{{ path('game_roll') }}" class="button primary-button" style="width:200px">Stop</a>
+            
+        </div>
+        
+    </section>
     </div>
 </article>
 

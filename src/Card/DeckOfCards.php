@@ -17,6 +17,12 @@ class DeckOfCards
     private array $jsonCards = [];
 
     /**
+     * Array holding an array of CardGraphic objects
+     * @var array<CardGraphic>
+     */
+    private array $cards = [];
+
+    /**
      * Array with strings representing the color of a card
      * @var array<string>
      */
@@ -75,6 +81,22 @@ class DeckOfCards
         }
     }
 
+    /**
+     * Generate a deck of cards
+     * Each element in the deck is a GraphicCard object
+     * @return void
+     */
+    public function generateDeck2(): void
+    {
+        sort($this->colors);
+        foreach ($this->colors as $color) {
+            foreach (self::STRINGVALUES as $string) {
+                $card = new CardGraphic($color, $string);
+                $thiscards[] = $card;
+            }
+        }
+    }
+
 
     /**
      * Shuffle the list of cards,
@@ -82,6 +104,7 @@ class DeckOfCards
      */
     public function shuffleCards(): void
     {
+        shuffle($this->cards);
         shuffle($this->jsonCards);
     }
 
@@ -99,6 +122,8 @@ class DeckOfCards
      * If @param $num, draw $num of cards.
      * always removes the cards from "top-to-bottom".
      * The list of cards is updated directly.
+     * Return assosciavtive array ("card": GraphicCard object, "symbol", utf-8 symbol,
+     * "value": intValue, "stringValue": value as string, ess, knekt etc)
      *
      * @return array<mixed> with card objects which was removed from the list
      */

@@ -13,8 +13,9 @@ use app\Card\DeckOfCards;
 class Player {
 
     private string $name;
+    private int $points;
 
-    private CardHand $cardhand;
+    protected CardHand $cardhand;
 
     /**
      * Constructor
@@ -24,6 +25,7 @@ class Player {
     public function __construct(?string $name="player")
     {
         $this->name = $name;
+        $this->points = 0;
         $this->cardhand = new CardHand();
     }
 
@@ -31,7 +33,7 @@ class Player {
      * Return all cards in hand
      */
     public function showHand() {
-        return $this->cardhand;
+        return $this->cardhand->getCards();
     }
 
     /**
@@ -42,16 +44,33 @@ class Player {
     }
 
     /**
-     * Add cards to hand
+     * Get total points of the player
      */
-    public function addCard(CardGraphic $card) {
+    public function getPoints() {
+        return $this->points;
+    }
+
+    /**
+     * Add points to the player
+     */
+    public function addPoints(int $points) {
+        $this->points += $points;
+    }
+
+    /**
+     * Add a CardGraphic object to the list of cards
+     * @return void
+     */
+    public function addCard(CardGraphic $card): void {
         $this->cardhand->addCard($card);
     }
 
     /**
      * Draw a card from DeckOfCards object
+     * @return CardGraphic Card drawn from deck
      */
-    public function drawCard(DeckOfCards $cardDeck) {
-        $this->addCard($cardDeck->draw()[0]);
+    public function drawCard(DeckOfCards $cardDeck): CardGraphic {
+        $card = $cardDeck->draw()[0]["card"];
+        return $card;
     }
 }
