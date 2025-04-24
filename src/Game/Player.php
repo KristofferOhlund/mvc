@@ -49,7 +49,6 @@ class Player {
 
     /**
      * Stop the round
-     * Set daredevil to false
      * @return void
      */
     public function stop(): void {
@@ -77,13 +76,6 @@ class Player {
     public function getName():string {
         return $this->name;
     }
-
-    /**
-     * Get total points of the player
-     */
-    // public function getPoints() {
-    //     return $this->points;
-    // }
 
     /**
      * Add points to the player

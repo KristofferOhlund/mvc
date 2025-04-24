@@ -119,15 +119,14 @@ class GameController extends AbstractController {
         } 
 
         return $this->redirectToRoute("bank_init");
-        // return $this->redirectToRoute("game_play");
-        // return $this->render("game/draw-test.html.twig", $data);
     }
+
 
     #[Route("/game/bank/init", name:"bank_init")]
     public function bankInit(SessionInterface $session) {
-        $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
+        $bank = $session->get(self::SESSIONATTRIBUTES[1]);
         $deckOfCards = $session->get(self::SESSIONATTRIBUTES[2]);
-        $gameMaster->bankRoll($deckOfCards);
+        $bank->bankDrawCard($deckOfCards);
 
         return $this->redirectToRoute("game_play");
     }

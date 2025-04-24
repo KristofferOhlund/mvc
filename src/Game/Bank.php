@@ -21,12 +21,18 @@ class Bank extends Player {
         parent::__construct($name);
     }
 
+
     /**
      * Draw a card from the deck of cards object
      * @return CardGraphic object
      */
-    public function drawCard(DeckOfCards $cardDeck): CardGraphic {
-        $card = parent::drawCard($cardDeck);
-        return $card;
+    public function bankDrawCard(DeckOfCards $cardDeck): void {
+        $points = 0;
+        while ($points < 21) {
+            $card = $this->drawCard($cardDeck);
+            $this->addCard($card);
+            $points = $this->getPoints();
+        }
+        $this->stop();
     }
 }

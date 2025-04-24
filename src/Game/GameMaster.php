@@ -18,7 +18,7 @@ class GameMaster
      * The bank acts as a player but is
      * controlled by the GameMaster
      */
-    private Bank $bank;
+    private ?Bank $bank;
 
     /**
      * Constructor, keeping all players of the game
@@ -32,28 +32,28 @@ class GameMaster
     private array $queue;
 
 
-    public function __construct(Player $player, Bank $bank)
+    /**
+     * Constructor
+     * Play multiple players or with bank
+     */
+    public function __construct(Player $player, ?Bank $bank=null)
     {   
         $this->bank = $bank;
         // $this->players = [$player, $bank];
-        $this->players = [$player, $this->bank];
+        // $this->players = [$player, $this->bank];
+        $this->players = [$player];
         $this->queue = array_slice($this->players, 0, count($this->players));
     }
 
     /**
-     * Function to make bank rolls.
-     * Use when bank is not controlled by a player.
-     * @return void
+     * Add players to the game
+     * @var Player
      */
-    public function bankRoll(DeckOfCards $cardDeck): void {
-        $points = 0;
-        while ($points < 21) {
-            $card = $this->bank->drawCard($cardDeck);
-            $this->bank->addCard($card);
-            $points = $this->bank->getPoints();
-        }
-        $this->bank->stop();
+    public function addPlayer(Player $player) {
+        array_push($this->players, $player);
+        $this->queue = array_slice($this->players, 0, count($this->players));
     }
+
 
     /**
      * Return the current player in Queue
