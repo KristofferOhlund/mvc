@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\DeckOfCards;
@@ -98,7 +97,8 @@ class CardJsonApiController extends AbstractController
     }
 
     #[Route("/api/game", name:"game_api")]
-    public function gameApi(SessionInterface $session) {
+    public function gameApi(SessionInterface $session)
+    {
         $player = $session->get("player");
         $bank = $session->get("bank") ? $session->get("bank") : null;
 
@@ -110,7 +110,7 @@ class CardJsonApiController extends AbstractController
             "bank" => [
                 "points" => $bank->getPoints(),
                 "cards" => join(",", $bank->showHand())
-            ],   
+            ],
         ];
 
         $response = new JsonResponse($data);

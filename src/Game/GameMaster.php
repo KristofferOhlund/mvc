@@ -13,7 +13,7 @@ use App\Card\DeckOfCards;
 // use app\Card\DeckOfCards;
 
 class GameMaster
-{   
+{
     /**
      * The bank acts as a player but is
      * controlled by the GameMaster
@@ -27,7 +27,7 @@ class GameMaster
 
     /**
      * Private queue, keeping track of whos turn it is
-     * 
+     *
      */
     private array $queue;
 
@@ -36,8 +36,8 @@ class GameMaster
      * Constructor
      * Play multiple players or with bank
      */
-    public function __construct(Player $player, ?Bank $bank=null)
-    {   
+    public function __construct(Player $player, ?Bank $bank = null)
+    {
         $this->bank = $bank;
         // $this->players = [$player, $bank];
         // $this->players = [$player, $this->bank];
@@ -49,7 +49,8 @@ class GameMaster
      * Add players to the game
      * @var Player
      */
-    public function addPlayer(Player $player) {
+    public function addPlayer(Player $player)
+    {
         array_push($this->players, $player);
         $this->queue = array_slice($this->players, 0, count($this->players));
     }
@@ -59,7 +60,8 @@ class GameMaster
      * Return the current player in Queue
      * Raise error if Queue is empty
      */
-    public function peek() {
+    public function peek()
+    {
         if ($this->getSize()) {
             return $this->queue[0];
         }
@@ -69,7 +71,8 @@ class GameMaster
      * Get the size of the queue array
      * @return int - the size of the queue stack
      */
-    public function getSize():int {
+    public function getSize(): int
+    {
         return count($this->queue);
     }
 
@@ -77,7 +80,8 @@ class GameMaster
      * Dequeue
      * @return Player object
      */
-    public function dequeue(): Player {
+    public function dequeue(): Player
+    {
         return array_shift($this->queue);
     }
 
@@ -85,7 +89,8 @@ class GameMaster
      * Enqueue a player object
      * Appends to the end of the queue
      */
-    public function enqueue(Player $player): void {
+    public function enqueue(Player $player): void
+    {
         array_push($this->queue, $player);
     }
 
@@ -96,7 +101,8 @@ class GameMaster
      * If both.points < 21, highest points wins.
      * @return array<CardGraphic>
      */
-    public function declareWinner(): array {
+    public function declareWinner(): array
+    {
         $winner = $this->bank;
         $looser = $this->players[0];
         $bankPoints = $this->bank->getPoints();
@@ -105,13 +111,13 @@ class GameMaster
         if ($playerPoints > 21) {
             $winner = $this->bank;
             $looser = $this->players[0];
-        } else if ($playerPoints == $bankPoints) {
+        } elseif ($playerPoints == $bankPoints) {
             $winner = $this->bank;
             $looser = $this->players[0];
-        } else if ($playerPoints < 21 && $playerPoints > $bankPoints) {
+        } elseif ($playerPoints < 21 && $playerPoints > $bankPoints) {
             $winner = $this->players[0];
             $looser = $this->bank;
-        } else if ($bankPoints > 21 && $playerPoints <= 21) {
+        } elseif ($bankPoints > 21 && $playerPoints <= 21) {
             $winner = $this->players[0];
             $looser = $this->bank;
         }
@@ -124,15 +130,16 @@ class GameMaster
      * Comparing points between Player objects
      * Method is suitable if multiple real players
      */
-    public function getWinner() {
+    public function getWinner()
+    {
         $winner = null;
         $max = 0;
         for ($i = 0; $i < count($this->players); $i++) {
             $playerPoints = $this->players[$i]->getPoints();
-            if ( $playerPoints > $max && $playerPoints < 21) {
+            if ($playerPoints > $max && $playerPoints < 21) {
                 $max = $playerPoints;
                 $winner = $this->players[$i];
-            } 
+            }
         }
         return $winner;
     }
@@ -141,8 +148,9 @@ class GameMaster
      * Controlls wether all players stop are set to true
      * @return bool
      */
-    public function checkGameStop(): bool {
-        return array_all($this->players, function(Player $player) {
+    public function checkGameStop(): bool
+    {
+        return array_all($this->players, function (Player $player) {
             return $player->getStop();
         });
     }

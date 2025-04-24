@@ -10,8 +10,8 @@ use App\Card\CardGraphic;
 use App\Card\CardHand;
 use app\Card\DeckOfCards;
 
-class Player {
-
+class Player
+{
     /**
      * The name of the player
      * Can be implemented to set a specific name
@@ -39,7 +39,7 @@ class Player {
      * set name to name if any
      * Initialize a new DiceHand object
      */
-    public function __construct(?string $name="player")
+    public function __construct(?string $name = "player")
     {
         $this->name = $name;
         $this->points = 0;
@@ -51,7 +51,8 @@ class Player {
      * Stop the round
      * @return void
      */
-    public function stop(): void {
+    public function stop(): void
+    {
         $this->stop = true;
     }
 
@@ -59,28 +60,32 @@ class Player {
      * Get the current state of daredevil
      * @return bool
      */
-    public function getStop(): bool {
+    public function getStop(): bool
+    {
         return $this->stop;
     }
 
     /**
      * Return all cardsymbols in hand
      */
-    public function showHand() {
+    public function showHand()
+    {
         return $this->cardhand->getCardSymbols();
     }
 
     /**
      * Return the name of the player
      */
-    public function getName():string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
     /**
      * Add points to the player
      */
-    public function addPoints(int $points) {
+    public function addPoints(int $points)
+    {
         $this->points += $points;
     }
 
@@ -88,7 +93,8 @@ class Player {
      * Add a CardGraphic object to the card hand
      * @return void
      */
-    public function addCard(CardGraphic $card): void {
+    public function addCard(CardGraphic $card): void
+    {
         $this->cardhand->addCard($card);
     }
 
@@ -96,7 +102,8 @@ class Player {
      * Draw a card from DeckOfCards object
      * @return CardGraphic Card drawn from deck
      */
-    public function drawCard(DeckOfCards $cardDeck): CardGraphic {
+    public function drawCard(DeckOfCards $cardDeck): CardGraphic
+    {
         $card = $cardDeck->drawGraphic();
         return $card;
     }
@@ -104,7 +111,8 @@ class Player {
     /**
      * Get the points of the players card hand
      */
-    public function getPoints() {
+    public function getPoints()
+    {
         return $this->cardhand->getPointsOfHand();
     }
 }

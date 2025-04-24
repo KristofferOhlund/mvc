@@ -7,14 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
 use App\Game\Player;
 use App\Game\Bank;
 use App\Game\GameMaster;
 
-class GameController extends AbstractController {
+class GameController extends AbstractController
+{
     private const SESSIONATTRIBUTES = [
         "player",
         "bank",
@@ -22,7 +22,8 @@ class GameController extends AbstractController {
         "gameMaster"
     ];
 
-    public function createSession(SessionInterface $session) {
+    public function createSession(SessionInterface $session)
+    {
         // CREATE OBJECTS
         $player = new Player("Kingen");
         $bank = new Bank("Bank");
@@ -39,11 +40,12 @@ class GameController extends AbstractController {
         $session->set(self::SESSIONATTRIBUTES[3], new GameMaster($player, $bank));
     }
 
-    public function checkSession(SessionInterface $session) {
+    public function checkSession(SessionInterface $session)
+    {
         // Make sure all attributes are set
         // Else create new instances of all
         $sessionAttributes = ["player", "bank", "deckOfCards", "gameMaster"];
-        foreach($sessionAttributes as $attribute) {
+        foreach ($sessionAttributes as $attribute) {
             if ($session->get($attribute) == null) {
                 $this->createSession($session);
             }
@@ -51,7 +53,8 @@ class GameController extends AbstractController {
     }
 
     #[Route("/game/destroy", name:"game_destroy")]
-    public function gameDestroy(SessionInterface $session) {
+    public function gameDestroy(SessionInterface $session)
+    {
         $session->set("player", null);
         $session->set("bank", null);
         $session->set("deckOfCards", null);
@@ -61,16 +64,18 @@ class GameController extends AbstractController {
     }
 
     #[Route("/game", name:"game_info")]
-    public function game(): Response {
+    public function game(): Response
+    {
         return $this->render("game/game-info.html.twig");
     }
 
     #[Route("/game/play", name:"game_play", methods:["GET"])]
-    public function gamePlay(SessionInterface $session): Response {
+    public function gamePlay(SessionInterface $session): Response
+    {
 
         // CHECK SESSION
         $this->checkSession($session);
-        
+
         // GET SESSION
         $player = $session->get(self::SESSIONATTRIBUTES[0]);
         $bank = $session->get(self::SESSIONATTRIBUTES[1]);
@@ -85,7 +90,7 @@ class GameController extends AbstractController {
         if ($gameMaster->checkGameStop()) {
             return $this->redirectToRoute("game_winner");
         };
-        
+
         $data = [
             "currentPlayer" => $currentPlayer->getName(),
             "player" => $player,
@@ -96,7 +101,8 @@ class GameController extends AbstractController {
     }
 
     #[Route("/game/roll", name:"game_roll", methods:["GET"])]
-    public function gameRoll(SessionInterface $session): Response {
+    public function gameRoll(SessionInterface $session): Response
+    {
         // GET SESSION
         $currentPlayer = $session->get("currentPlayer");
         $deckOfCards = $session->get(self::SESSIONATTRIBUTES[2]);
@@ -107,23 +113,25 @@ class GameController extends AbstractController {
     }
 
     #[Route("/game/roll/stop", name:"roll_stop", methods:["GET"])]
-    public function rollStop(SessionInterface $session): Response {
+    public function rollStop(SessionInterface $session): Response
+    {
         // GET SESSION
         $currentPlayer = $session->get("currentPlayer");
         $currentPlayer->stop();
 
-        $gameMaster = $session->get(SELF::SESSIONATTRIBUTES[3]);
+        $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
 
         if ($gameMaster->getSize() > 1) {
             $gameMaster->dequeue();
-        } 
+        }
 
         return $this->redirectToRoute("bank_init");
     }
 
 
     #[Route("/game/bank/init", name:"bank_init")]
-    public function bankInit(SessionInterface $session) {
+    public function bankInit(SessionInterface $session)
+    {
         $bank = $session->get(self::SESSIONATTRIBUTES[1]);
         $deckOfCards = $session->get(self::SESSIONATTRIBUTES[2]);
         $bank->bankDrawCard($deckOfCards);
@@ -133,9 +141,10 @@ class GameController extends AbstractController {
 
 
     #[Route("/game/winner", name:"game_winner", methods:["GET"])]
-    public function showWinner(SessionInterface $session): Response {
+    public function showWinner(SessionInterface $session): Response
+    {
         // GET SESSION
-        $gameMaster = $session->get(SELF::SESSIONATTRIBUTES[3]);
+        $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
         $result = $gameMaster->declareWinner();
         $data = [
             "winner" => $result["winner"],
@@ -150,20 +159,22 @@ class GameController extends AbstractController {
 
 
     #[Route("/game/doc", name:"game_doc")]
-    public function gameDoc(): Response {
+    public function gameDoc(): Response
+    {
         return $this->render("game/game-doc.html.twig");
     }
 
 
     #[Route("/game/init", name:"game_init")]
-    public function initgame() {
+    public function initgame()
+    {
         return $this->render("game/game-form.html.twig");
     }
 
 
     #[Route("/game/multiplayer{num}", name:"multiplayer", requirements: ['num' => '\d+'])]
-    public function initMultiplayer(?int $num = 1) {
+    public function initMultiplayer(?int $num = 1)
+    {
         return $this->render("game/game-form.html.twig");
     }
 }
-

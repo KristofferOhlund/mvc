@@ -101,7 +101,8 @@ class DeckOfCards
      * Shuffle the CardGraphic array
      * @return void
      */
-    public function shuffleGraphic(): void {
+    public function shuffleGraphic(): void
+    {
         shuffle($this->graphicCards);
     }
 
@@ -156,7 +157,7 @@ class DeckOfCards
      * @return CardGraphic object
      */
     public function drawGraphic(): CardGraphic
-    {   
+    {
         $removedCards = array_pop($this->graphicCards);
         return $removedCards;
     }
