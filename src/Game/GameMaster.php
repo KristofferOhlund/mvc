@@ -64,59 +64,29 @@ class GameMaster
 
     /**
      * Declare the winner
-     * Comparing points between two Player objects
+     * Comparing points between Player objects
      */
-    public function declareWinner() {
-        $player1 = $this->players[0];
-        $player2 = $this->players[1];
-        $winner = $player1->points > $player2->points ? $player1->getName() : $player2->getName();
-        return $winner; 
+    public function getWinner() {
+        $winner = null;
+        $max = 0;
+        for ($i = 0; $i < count($this->players); $i++) {
+            $playerPoints = $this->players[$i]->getPoints();
+            if ( $playerPoints > $max) {
+                $max = $playerPoints;
+                $winner = $this->players[$i];
+            } 
+        }
+        return $winner;
+    }
+
+    /**
+     * Controlls wheter all players daredevil are set to false
+     * @return bool
+     */
+    public function checkGameStop(): bool {
+        return array_all($this->players, function(Player $player) {
+            return $player->getStop();
+        });
     }
     
 }
-
-// """ Queue module """
-
-// class Queue:
-//     """ Queue class """
-//     def __init__(self, data=None):
-//         self._items = data or []
-
-//     def is_empty(self):
-//         """ If queue is empty, return True, else False"""
-//         if not self._items:
-//             return True
-//         return False
-
-//     def enqueue(self, item):
-//         """ add to queue """
-//         self._items.append(item)
-
-//     def dequeue(self):
-//         """ Remove queue """
-//         try:
-//             return self._items.pop(0)
-
-//         except IndexError:
-//             return "Empty list."
-
-//     def peek(self):
-//         """ Peek to see who's next """
-//         return self._items[0]
-
-//     def size(self):
-//         """ Return the len of items"""
-//         return len(self._items)
-
-//     def to_list(self):
-//         """ Return queue as list """
-//         queue = []
-//         for player in self._items:
-//             queue.append(player)
-//         return queue
-
-
-//     @classmethod
-//     def from_session(cls, data):
-//         """ Create a queue instance from current data """
-//         return cls(data)
