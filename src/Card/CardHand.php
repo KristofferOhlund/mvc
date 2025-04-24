@@ -30,7 +30,7 @@ class CardHand
      * Get all card symbols for current hand
      * @return array of Symbols
      */
-    public function getCards(): array {
+    public function getCardSymbols(): array {
         $symbols = [];
         foreach($this->cards as $card){
             array_push($symbols, $card->getSymbol());

@@ -30,10 +30,10 @@ class Player {
     }
 
     /**
-     * Return all cards in hand
+     * Return all cardsymbols in hand
      */
     public function showHand() {
-        return $this->cardhand->getCards();
+        return $this->cardhand->getCardSymbols();
     }
 
     /**
@@ -70,7 +70,7 @@ class Player {
      * @return CardGraphic Card drawn from deck
      */
     public function drawCard(DeckOfCards $cardDeck): CardGraphic {
-        $card = $cardDeck->draw()[0]["card"];
+        $card = $cardDeck->drawGraphic();
         return $card;
     }
 }

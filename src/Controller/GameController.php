@@ -27,7 +27,7 @@ class GameController extends AbstractController {
         $player = new Player("Kingen");
         $bank = new Bank("Bank");
         $deckOfCards = new DeckOfCards();
-        $deckOfCards->generateDeck();
+        $deckOfCards->generateGraphicDeck();
 
         // CREATE ALL ATTRIBUTES
         $session->set(self::SESSIONATTRIBUTES[0], $player);
