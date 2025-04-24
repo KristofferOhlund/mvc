@@ -97,4 +97,24 @@ class CardJsonApiController extends AbstractController
         return $response;
     }
 
+    #[Route("/api/game", name:"game_api")]
+    public function gameApi(SessionInterface $session) {
+        $player = $session->get("player");
+        $bank = $session->get("bank") ? $session->get("bank") : null;
+
+        $data = [
+            "player" => [
+                "points" => $player->getPoints(),
+                "cards" => join(",", $player->showHand())
+            ],
+            "bank" => [
+                "points" => $bank->getPoints(),
+                "cards" => join(",", $bank->showHand())
+            ],   
+        ];
+
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+        return $response;
+    }
 }
