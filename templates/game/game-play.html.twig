@@ -6,7 +6,7 @@
 <article>
     <a href=" {{ path('game_destroy') }}" class="button">Destroy game Session</a>
     <h1>We are now playing the game of 21</h1>
-    <h2>Current player: {{ currentPlayer }}</h2>
+    {# <h2>Current player: {{ currentPlayer }}</h2> #}
     <div class="flex-container">
 
     
@@ -47,7 +47,7 @@
     <section class="buttons">
         <div class="flex-container">
             <a href="{{ path('game_roll') }}" class="button primary-button" style="width:200px">Draw</a>
-            <a href="{{ path('game_roll') }}" class="button primary-button" style="width:200px">Stop</a>
+            <a href="{{ path('roll_stop') }}" class="button primary-button" style="width:200px">Stop</a>
             
         </div>
         

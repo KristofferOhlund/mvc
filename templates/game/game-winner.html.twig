@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Winner{% endblock %}
+{% block main %}
+
+<article>
+    <h1>And the winner is {{ winner.getName() }}</h1>
+    <h3>Points: {{ winner.getPoints() }}</h3>
+
+    <a href=" {{ path('game_destroy') }}" class="button primary-button ">Spela igen?</a>
+    </div>
+</article>
+
+{% endblock %}

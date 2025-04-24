@@ -73,14 +73,16 @@ class GameController extends AbstractController {
         $bank = $session->get(self::SESSIONATTRIBUTES[1]);
         $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
 
-        // GET NEXT PLAYER
+        // GET CURRENT PLAYER
         $currentPlayer = $gameMaster->peek();
-        $gameMaster->dequeue();
-        $gameMaster->enqueue($currentPlayer);
-
-        // UPDATE SESSION
+        // SET CURRENT PLAYER
         $session->set("currentPlayer", $currentPlayer);
 
+        // Check if round is over
+        if ($gameMaster->checkGameStop()) {
+            return $this->redirectToRoute("game_winner");
+        };
+        
         $data = [
             "currentPlayer" => $currentPlayer->getName(),
             "player" => $player,
@@ -99,8 +101,40 @@ class GameController extends AbstractController {
         $currentPlayer->addCard($card);
 
         return $this->redirectToRoute("game_play");
+    }
+
+    #[Route("/game/roll/stop", name:"roll_stop", methods:["GET"])]
+    public function rollStop(SessionInterface $session): Response {
+        // GET SESSION
+        $currentPlayer = $session->get("currentPlayer");
+        $currentPlayer->stop();
+
+        $gameMaster = $session->get(SELF::SESSIONATTRIBUTES[3]);
+
+        if ($gameMaster->getSize() > 1) {
+            $gameMaster->dequeue();
+        } 
+
+        return $this->redirectToRoute("game_play");
         // return $this->render("game/draw-test.html.twig", $data);
     }
+
+    #[Route("/game/winner", name:"game_winner", methods:["GET"])]
+    public function showWinner(SessionInterface $session): Response {
+        // GET SESSION
+        $gameMaster = $session->get(SELF::SESSIONATTRIBUTES[3]);
+        $winner = $gameMaster->getWinner();
+
+        $data = [
+            "winner" => $winner
+        ];
+
+        // return $this->redirectToRoute("game_play");
+        return $this->render("game/game-winner.html.twig", $data);
+    }
+
+
+
 
     #[Route("/game/doc", name:"game_doc")]
     public function gameDoc(): Response {
