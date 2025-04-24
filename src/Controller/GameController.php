@@ -28,6 +28,9 @@ class GameController extends AbstractController {
         $bank = new Bank("Bank");
         $deckOfCards = new DeckOfCards();
         $deckOfCards->generateGraphicDeck();
+        $deckOfCards->shuffleGraphic();
+        $deckOfCards->shuffleGraphic();
+        $deckOfCards->shuffleGraphic();
 
         // CREATE ALL ATTRIBUTES
         $session->set(self::SESSIONATTRIBUTES[0], $player);
@@ -115,18 +118,29 @@ class GameController extends AbstractController {
             $gameMaster->dequeue();
         } 
 
-        return $this->redirectToRoute("game_play");
+        return $this->redirectToRoute("bank_init");
+        // return $this->redirectToRoute("game_play");
         // return $this->render("game/draw-test.html.twig", $data);
     }
+
+    #[Route("/game/bank/init", name:"bank_init")]
+    public function bankInit(SessionInterface $session) {
+        $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
+        $deckOfCards = $session->get(self::SESSIONATTRIBUTES[2]);
+        $gameMaster->bankRoll($deckOfCards);
+
+        return $this->redirectToRoute("game_play");
+    }
+
 
     #[Route("/game/winner", name:"game_winner", methods:["GET"])]
     public function showWinner(SessionInterface $session): Response {
         // GET SESSION
         $gameMaster = $session->get(SELF::SESSIONATTRIBUTES[3]);
-        $winner = $gameMaster->getWinner();
-
+        $result = $gameMaster->declareWinner();
         $data = [
-            "winner" => $winner
+            "winner" => $result["winner"],
+            "looser" => $result["looser"],
         ];
 
         // return $this->redirectToRoute("game_play");
