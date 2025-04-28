@@ -24,8 +24,8 @@
                     <li><a href="{{ path('lucky') }}" class="{{ (app.request.pathinfo == path('lucky')) ? 'active' : '' }}">Lucky</a></li> |
                     <li><a href="{{ path('jsonRoutes') }}" class="{{ (app.request.pathinfo == path('jsonRoutes')) ? 'active' : '' }}">Api</a></li> |
                     <li><a href="{{ path('card') }}" class="{{ (app.request.pathinfo == path('card')) ? 'active' : '' }}">Card</a></li> |
-                    <li><a href="{{ path('game_info') }}" class="{{ (app.request.pathinfo == path('game_info')) ? 'active' : '' }}">Game</a></li> 
-                    
+                    <li><a href="{{ path('game_info') }}" class="{{ (app.request.pathinfo == path('game_info')) ? 'active' : '' }}">Game</a></li> |
+                    <li><a href="{{ path('session_dump') }}" class="{{ (app.request.pathinfo == path('session_dump')) ? 'active' : '' }}">Reset Session</a></li>             
                 </ul>
             </nav>
         </header>
