@@ -14,6 +14,7 @@ class Card
      */
     private ?string $stringValue;
     private ?string $color;
+    private ?string $cardColor;
     private const array CARDVALUES = [
         "2" => 2,
         "3" => 3,
@@ -33,9 +34,10 @@ class Card
     /**
      * Constructor
      */
-    public function __construct(?string $colorValue = null, ?string $valueAsString = null)
+    public function __construct(?string $colorValue = null, ?string $cardColor = null, ?string $valueAsString = null)
     {
         $this->color = $colorValue;
+        $this->cardColor = $cardColor;
         $this->stringValue = $valueAsString;
     }
 
@@ -66,5 +68,9 @@ class Card
     public function getCardColor(): string | null
     {
         return $this->color;
+    }
+
+    public function getCardGraphicColor(): string {
+        return $this->cardColor;
     }
 }

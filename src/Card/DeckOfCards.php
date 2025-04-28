@@ -27,10 +27,22 @@ class DeckOfCards
      * @var array<string>
      */
     private array $colors = [
-        "spader",
-        "hjärter",
-        "ruter",
-        "klöver",
+        "spader" => [
+            "name" => "spader",
+            "color" => "black"
+        ],
+        "hjärter" => [
+            "name" => "hjärter",
+            "color" => "red"
+        ],
+        "ruter" => [
+            "name" => "ruter",
+            "color" => "red"
+        ],
+        "klöver" => [
+            "name" => "klöver",
+            "color" => "black"
+        ]
     ];
 
     /**
@@ -70,12 +82,13 @@ class DeckOfCards
         sort($this->colors);
         foreach ($this->colors as $color) {
             foreach (self::STRINGVALUES as $string) {
-                $card = new CardGraphic($color, $string);
+                $card = new CardGraphic($color["name"], $color["color"], $string);
                 $this->jsonCards[] = [
                     "card" => $card,
                     "color" => $card->getCardColor(),
                     "stringValue" => $card->getCardStringValue(),
                     "symbol" => $card->getSymbol(),
+                    "graphicColor" => $card->getCardGraphicColor(),
                 ];
             }
         }
@@ -91,7 +104,7 @@ class DeckOfCards
         sort($this->colors);
         foreach ($this->colors as $color) {
             foreach (self::STRINGVALUES as $string) {
-                $card = new CardGraphic($color, $string);
+                $card = new CardGraphic($color["name"], $color["color"], $string);
                 $this->graphicCards[] = $card;
             }
         }
