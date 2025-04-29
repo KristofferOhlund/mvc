@@ -167,12 +167,16 @@ class DeckOfCards
      * If @param $num, draw $num of cards.
      * always removes the cards from "top-to-bottom".
      * The array of cards is updated at place.
-     * @return CardGraphic object
+     * If not num, return a single CardGraphic object
+     * If nom, return a array of CardGraphic objects
+     * @return mixed with removed cards
      */
-    public function drawGraphic(): CardGraphic
-    {
-        $removedCards = array_pop($this->graphicCards);
-        return $removedCards;
+    public function drawGraphic(?int $num = null): mixed
+    {   
+        if ($num) {
+            return array_splice($this->graphicCards, -$num);
+        }
+            return array_pop($this->graphicCards);
     }
 
     /**
