@@ -202,15 +202,12 @@ class DeckOfCards
      * @return array
      */
     public function getArrayOfCardsPresentation(array $cards): array {
-        $jsonObject = [];
-        foreach($this->graphicCards as $card) {
-            $jsonObject[] = [
-                "card" => $card->getCardFamily(),
-                "string" => $card->getCardStringValue(),
-                "points" => $card->getCardValue(),
-                "symbol" => $card->getSymbol()
+        $array = [];
+        foreach($cards as $card) {
+            $array[] = [
+                $card->getCardGraphicPresentation()
             ];
         }
-        return $jsonObject;
+        return $array;
     }
 }
