@@ -85,7 +85,7 @@ class DeckOfCards
                 $card = new CardGraphic($family["name"], $family["color"], $string);
                 $this->jsonCards[] = [
                     "card" => $card,
-                    "color" => $card->getCardColor(),
+                    "color" => $card->getCardFamily(),
                     "stringValue" => $card->getCardStringValue(),
                     "symbol" => $card->getSymbol(),
                     "graphicColor" => $card->getCardGraphicColor(),
