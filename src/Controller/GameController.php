@@ -23,7 +23,7 @@ class GameController extends AbstractController
     ];
 
     public function createSession(SessionInterface $session)
-    {
+    {   
         // CREATE OBJECTS
         $player = new Player("Kingen");
         $bank = new Bank("Bank");
@@ -167,8 +167,9 @@ class GameController extends AbstractController
 
     #[Route("/game/init", name:"game_init")]
     public function initgame()
-    {
-        return $this->render("game/game-form.html.twig");
+    {   
+        // Always destroy any current game session when launched from game_info route
+        return $this->redirectToRoute("game_destroy");
     }
 
 
