@@ -105,11 +105,11 @@ class CardJsonApiController extends AbstractController
         $data = [
             "player" => [
                 "points" => $player->getPoints(),
-                "cards" => join(",", $player->showHand())
+                "cards" => join(",", $player->showSymbolsInHand())
             ],
             "bank" => [
                 "points" => $bank->getPoints(),
-                "cards" => join(",", $bank->showHand())
+                "cards" => join(",", $bank->showSymbolsInHand())
             ],
         ];
 
