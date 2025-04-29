@@ -91,7 +91,7 @@ class CardGraphic extends Card
      */
     public function getSymbol()
     {
-        $color = $this->getCardColor();
+        $color = $this->getCardFamily();
         $stringValue = $this->getCardStringValue();
         return $this->symbols[$color][$stringValue];
     }
