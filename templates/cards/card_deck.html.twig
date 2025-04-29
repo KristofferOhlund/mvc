@@ -11,7 +11,7 @@
     <div class="card-container">
         
         {% for card in cards %}
-        <span class="card {{ card.graphicColor }}"> {{ card.symbol }}</span>
+        <span class="card {{ card.getCardColor() }}"> {{ card.getSymbol() }}</span>
         {% endfor %}
     </div>
 </article>
