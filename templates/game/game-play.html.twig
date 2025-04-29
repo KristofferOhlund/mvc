@@ -4,49 +4,31 @@
 {% block main %}
 
 <article>
-    <a href=" {{ path('game_destroy') }}" class="button">Destroy game Session</a>
-    <h1>We are now playing the game of 21</h1>
-    {# <h2>Current player: {{ currentPlayer }}</h2> #}
-    <div class="flex-container">
-
-    
-    <section class="player1">
-        <div class="player" class="{{ player.getName() ? 'active' : 'inactive' }}">
-            <article>
-                <h3>Cards</h3>
-                {% for card in player.showHand() %}
-                <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
-                {% endfor %}
-                <h3>Points</h3>
-                {{ player.getPoints() }}
-            </article>
-        </div>
+    <div class="game-layout">
+        <a href=" {{ path('game_destroy') }}" class="button">Destroy game Session</a>
+        <h1>We are now playing the game of 21</h1>
+        {# <h2>Current player: {{ currentPlayer }}</h2> #}
 
 
-    <!-- USE IF MULTIPLE PLAYERS 
-    </section>
-    <section class="player2">
-        <div class="bank" class="{{ bank.getName() ? 'active' : 'inactive' }}">
-            <article>
-                <h3>Cards</h3>
-                {% for card in bank.showHand() %}
-                <span class="card">{{card}}</span>
-                {% endfor %}
-                <h3>Points</h3>
-                {{ bank.getPoints() }}
-            </article>
-        </div>
-    </section>
-    </div>-->
+        <section class="player1">
+            <div class="player" class="{{ player.getName() ? 'active' : 'inactive' }}">
+                <article>
+                    <h3>Cards</h3>
+                    {% for card in player.showHand() %}
+                    <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
+                    {% endfor %}
+                    <h3>Points</h3>
+                    {{ player.getPoints() }}
+                </article>
+            </div>
+        </section>
 
-    <section class="buttons">
-        <div class="flex-container">
-            <a href="{{ path('game_roll') }}" class="button primary-button" style="width:200px">Draw</a>
-            <a href="{{ path('roll_stop') }}" class="button primary-button" style="width:200px">Stop</a>
-            
-        </div>
-        
-    </section>
+        <section class="buttons">
+            <div class="button-container">
+                <a href="{{ path('game_roll') }}" class="button blue-button" style="width:200px">Draw</a>
+                <a href="{{ path('roll_stop') }}" class="button primary-button" style="width:200px">Stop</a>
+            </div>
+        </section>
     </div>
 </article>
 

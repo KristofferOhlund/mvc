@@ -25,7 +25,7 @@ class GameController extends AbstractController
     public function createSession(SessionInterface $session)
     {   
         // CREATE OBJECTS
-        $player = new Player("Kingen");
+        $player = new Player("Player");
         $bank = new Bank("Bank");
         $deckOfCards = new DeckOfCards();
         $deckOfCards->generateGraphicDeck();
