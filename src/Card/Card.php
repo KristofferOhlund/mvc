@@ -13,7 +13,7 @@ class Card
      * Color is type, aka "hjäter, ruter" etc
      */
     private ?string $stringValue;
-    private ?string $color;
+    private ?string $family;
     private ?string $cardColor;
     private const array CARDVALUES = [
         "2" => 2,
@@ -34,9 +34,9 @@ class Card
     /**
      * Constructor
      */
-    public function __construct(?string $colorValue = null, ?string $cardColor = null, ?string $valueAsString = null)
+    public function __construct(?string $familyValue = null, ?string $cardColor = null, ?string $valueAsString = null)
     {
-        $this->color = $colorValue;
+        $this->family = $familyValue;
         $this->cardColor = $cardColor;
         $this->stringValue = $valueAsString;
     }
@@ -65,9 +65,9 @@ class Card
      * @return string of the card color, aka "spader", "ruter", etc
      * @return null - if no color, return null
      */
-    public function getCardColor(): string | null
+    public function getCardFamily(): string | null
     {
-        return $this->color;
+        return $this->family;
     }
 
     public function getCardGraphicColor(): string {
