@@ -133,9 +133,7 @@ class Player
     public function getPlayerRepresentation(): array {
         $array = [];
         foreach($this->showHand() as $card) {
-            $array[] = [
-                $card->getCardGraphicPresentation()
-            ];
+            $array[] = $card->getCardGraphicPresentation();
         }
         return $array;
     }
