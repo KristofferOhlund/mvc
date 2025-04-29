@@ -59,7 +59,8 @@ class CardGameController extends AbstractController
     public function startSession($session): void
     {
         $deck = new DeckOfCards();
-        $deck->generateDeck();
+        // $deck->generateDeck();
+        $deck->generateGraphicDeck();
 
         // add to session
         $session->set("deckObject", $deck);
@@ -78,9 +79,8 @@ class CardGameController extends AbstractController
         }
 
         $data = [
-            "cards" => $deck->getCards(),
-            "count_cards" => $deck->countCards(),
-            "sort" => "sorted"
+            "cards" => $deck->getGraphicCards(),
+            "count_cards" => $deck->countGraphicCards(),
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
@@ -102,15 +102,14 @@ class CardGameController extends AbstractController
         }
 
         // Shuffle all cards
-        $deck->shuffleCards();
+        $deck->shuffleGraphic();
 
         // Save deck in session
         $session->set("deckObject", $deck);
 
         $data = [
-            "cards" => $deck->getCards(),
-            "count_cards" => $deck->countCards(),
-            "sort" => "shuffled"
+            "cards" => $deck->getGraphicCards(),
+            "count_cards" => $deck->countGraphicCards(),
         ];
 
         return $this->render("cards/card_deck.html.twig", $data);
@@ -130,7 +129,7 @@ class CardGameController extends AbstractController
         }
 
         // validate num range
-        $cardCount = $deck->countCards();
+        $cardCount = $deck->countGraphicCards();
 
         // current state
         $data = [
@@ -144,16 +143,15 @@ class CardGameController extends AbstractController
                 'Number is 0 or bigger then the count of Deck'
             );
         } else {
-            $removedCards = $deck->draw($num);
+            $removedCards = $deck->drawGraphic($num);
             // update state of data
             $data = [
                 "cards" => $removedCards,
-                "count_cards" => $deck->countCards(),
+                "count_cards" => $deck->countGraphicCards(),
             ];
         }
 
         // Uppdatera session
-        $session->set("cardsInHand", $removedCards);
         $session->set("deckObject", $deck);
 
         return $this->render("cards/draw_card.html.twig", $data);
