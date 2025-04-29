@@ -26,7 +26,7 @@ class DeckOfCards
      * Array with strings representing the color of a card
      * @var array<string>
      */
-    private array $colors = [
+    private array $familys = [
         "spader" => [
             "name" => "spader",
             "color" => "black"
@@ -79,10 +79,10 @@ class DeckOfCards
      */
     public function generateDeck(): void
     {
-        sort($this->colors);
-        foreach ($this->colors as $color) {
+        sort($this->familys);
+        foreach ($this->familys as $family) {
             foreach (self::STRINGVALUES as $string) {
-                $card = new CardGraphic($color["name"], $color["color"], $string);
+                $card = new CardGraphic($family["name"], $family["color"], $string);
                 $this->jsonCards[] = [
                     "card" => $card,
                     "color" => $card->getCardColor(),
@@ -101,10 +101,10 @@ class DeckOfCards
      */
     public function generateGraphicDeck(): void
     {
-        sort($this->colors);
-        foreach ($this->colors as $color) {
+        sort($this->familys);
+        foreach ($this->familys as $family) {
             foreach (self::STRINGVALUES as $string) {
-                $card = new CardGraphic($color["name"], $color["color"], $string);
+                $card = new CardGraphic($family["name"], $family["color"], $string);
                 $this->graphicCards[] = $card;
             }
         }
