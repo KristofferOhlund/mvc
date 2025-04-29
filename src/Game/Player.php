@@ -109,7 +109,7 @@ class Player
 
     /**
      * Draw a card from DeckOfCards object
-     * @return CardGraphic Card drawn from deck
+     * @return CardGraphic object drawn from deck
      */
     public function drawCard(DeckOfCards $cardDeck): CardGraphic
     {
