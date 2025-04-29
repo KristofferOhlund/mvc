@@ -194,4 +194,23 @@ class DeckOfCards
     {
         return count($this->graphicCards);
     }
+
+    /**
+     * Function to return a json-like presentation for 
+     * an array of GraphicCards
+     * @var array<CardGraphic>
+     * @return array
+     */
+    public function getArrayOfCardsPresentation(array $cards): array {
+        $jsonObject = [];
+        foreach($this->graphicCards as $card) {
+            $jsonObject[] = [
+                "card" => $card->getCardFamily(),
+                "string" => $card->getCardStringValue(),
+                "points" => $card->getCardValue(),
+                "symbol" => $card->getSymbol()
+            ];
+        }
+        return $jsonObject;
+    }
 }
