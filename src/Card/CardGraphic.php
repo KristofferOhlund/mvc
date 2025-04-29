@@ -95,4 +95,21 @@ class CardGraphic extends Card
         $stringValue = $this->getCardStringValue();
         return $this->symbols[$color][$stringValue];
     }
+
+
+    /**
+     * Method to return a json-like presentation
+     * of a GraphicCard object.
+     * @return array [family: family, name: name, point: point, symbol:symbol]
+     */
+    public function getCardGraphicPresentation() {
+        $presentation = [
+            "card" => $this->getCardFamily(),
+            "string" => $this->getCardStringValue(),
+            "points" => $this->getCardValue(),
+            "symbol" => $this->getSymbol()
+        ];
+
+        return $presentation;
+    }
 }
