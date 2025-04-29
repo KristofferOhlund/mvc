@@ -61,16 +61,16 @@ class Card
     }
 
     /**
-     * Get the color of the card
-     * @return string of the card color, aka "spader", "ruter", etc
-     * @return null - if no color, return null
+     * Get the family of the card
+     * @return string of the card family, aka "spader", "ruter", etc
+     * @return null - if no family, return null
      */
     public function getCardFamily(): string | null
     {
         return $this->family;
     }
 
-    public function getCardGraphicColor(): string {
+    public function getCardColor(): string {
         return $this->cardColor;
     }
 }

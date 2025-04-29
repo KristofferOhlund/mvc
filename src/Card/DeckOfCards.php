@@ -88,7 +88,7 @@ class DeckOfCards
                     "color" => $card->getCardFamily(),
                     "stringValue" => $card->getCardStringValue(),
                     "symbol" => $card->getSymbol(),
-                    "graphicColor" => $card->getCardGraphicColor(),
+                    "graphicColor" => $card->getCardColor(),
                 ];
             }
         }
