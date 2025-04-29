@@ -70,7 +70,7 @@ class Player
      */
     public function showHand()
     {
-        return $this->cardhand->getCardSymbols();
+        return $this->cardhand->getCardsInHand();
     }
 
     /**
