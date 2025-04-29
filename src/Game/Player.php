@@ -124,4 +124,21 @@ class Player
     {
         return $this->cardhand->getPointsOfHand();
     }
+
+    /**
+     * Show a Json representation of the Player
+     * 
+     */
+    public function getPlayerRepresentation() {
+        $jsonObject = [];
+        foreach($this->showHand() as $card) {
+            $jsonObject[] = [
+                "card" => $card->getCardFamily(),
+                "string" => $card->getCardStringValue(),
+                "points" => $card->getCardValue(),
+                "symbol" => $card->getSymbol()
+            ];
+        }
+        return $jsonObject;
+    }
 }
