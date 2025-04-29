@@ -78,7 +78,8 @@ class Player
      * Return all card symbols in hand
      * @return array<string> utf-8 symbol
      */
-    public function showSymbolsInHand(): array {
+    public function showSymbolsInHand(): array
+    {
         return $this->cardhand->getCardSymbols();
     }
 
@@ -128,11 +129,12 @@ class Player
     /**
      * Show a Json-like representation of the Player cards.
      * Showing each cards family, name, value and symbol
-     * 
+     *
      */
-    public function getPlayerRepresentation(): array {
+    public function getPlayerRepresentation(): array
+    {
         $array = [];
-        foreach($this->showHand() as $card) {
+        foreach ($this->showHand() as $card) {
             $array[] = $card->getCardGraphicPresentation();
         }
         return $array;

@@ -97,7 +97,7 @@ class CardJsonApiController extends AbstractController
     }
 
     #[Route("/api/game", name:"game_api")]
-    public function gameApi(SessionInterface $session)
+    public function gameApi(SessionInterface $session): JsonResponse
     {
         $player = $session->get("player");
         $bank = $session->get("bank") ? $session->get("bank") : null;

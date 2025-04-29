@@ -98,11 +98,12 @@ class CardGraphic extends Card
 
 
     /**
-     * Method to return a json-like presentation
+     * Method to return an assosciative array
      * of a GraphicCard object.
-     * @return array [family: family, name: name, point: point, symbol:symbol]
+     * @return array<string,int|string> [family: family, name: name, point: point, symbol:symbol]
      */
-    public function getCardGraphicPresentation() {
+    public function getCardGraphicPresentation(): array
+    {
         $presentation = [
             "card" => $this->getCardFamily(),
             "string" => $this->getCardStringValue(),

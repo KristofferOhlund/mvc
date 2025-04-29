@@ -10,24 +10,24 @@ namespace App\Game;
 
 use App\Card\DeckOfCards;
 
-// use app\Card\DeckOfCards;
-
 class GameMaster
 {
     /**
      * The bank acts as a player but is
      * controlled by the GameMaster
+     * @var Bank|null
      */
     private ?Bank $bank;
 
     /**
      * Constructor, keeping all players of the game
+     * @var array<Player>
      */
     private array $players;
 
     /**
      * Private queue, keeping track of whos turn it is
-     *
+     * @var array<Player>
      */
     private array $queue;
 
@@ -46,10 +46,13 @@ class GameMaster
     }
 
     /**
+     * NOT IMPLEMENTED
+     * USE IF MULTIPLAYER
      * Add players to the game
-     * @var Player
+     * @param Player $player
+     * @return void
      */
-    public function addPlayer(Player $player)
+    public function addPlayer(Player $player): void
     {
         array_push($this->players, $player);
         $this->queue = array_slice($this->players, 0, count($this->players));
@@ -58,13 +61,11 @@ class GameMaster
 
     /**
      * Return the current player in Queue
-     * Raise error if Queue is empty
+     * @return Player|null
      */
-    public function peek()
+    public function peek(): ?Player
     {
-        if ($this->getSize()) {
-            return $this->queue[0];
-        }
+        return $this->queue[0];
     }
 
     /**
@@ -78,9 +79,9 @@ class GameMaster
 
     /**
      * Dequeue
-     * @return Player object
+     * @return Player|null object
      */
-    public function dequeue(): Player
+    public function dequeue(): ?Player
     {
         return array_shift($this->queue);
     }
@@ -99,14 +100,23 @@ class GameMaster
      * If player.points > 21, bank wins
      * If bank.points > 21, player wins
      * If both.points < 21, highest points wins.
-     * @return array<CardGraphic>
+     * @return array<string, Player|null>
      */
     public function declareWinner(): array
     {
         $winner = $this->bank;
         $looser = $this->players[0];
-        $bankPoints = $this->bank->getPoints();
-        $playerPoints = $this->players[0]->getPoints();
+        $bankPoints = 0;
+        $playerPoints = 0;
+
+        if ($this->bank) {
+            $bankPoints = $this->bank->getPoints();
+        }
+
+        if ($this->players) {
+            $playerPoints = $this->players[0]->getPoints();
+        }
+
 
         if ($playerPoints > 21) {
             $winner = $this->bank;
@@ -129,8 +139,9 @@ class GameMaster
      * Declare the winner
      * Comparing points between Player objects
      * Method is suitable if multiple real players
+     * @return Player|null
      */
-    public function getWinner()
+    public function getWinner(): ?Player
     {
         $winner = null;
         $max = 0;

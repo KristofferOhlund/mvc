@@ -10,6 +10,9 @@ use App\Card\CardGraphic;
 
 class CardHand
 {
+    /**
+     * @var array<CardGraphic>
+     */
     private array $cards;
 
     public function __construct()
@@ -28,7 +31,7 @@ class CardHand
 
     /**
      * Get all card symbols for current hand
-     * @return array of Symbols
+     * @return array<string> of Symbols
      */
     public function getCardSymbols(): array
     {
@@ -41,7 +44,7 @@ class CardHand
 
     /**
      * Get all Card objects in hand
-     * @return array of Cards
+     * @return array<CardGraphic> of Cards
      */
     public function getCardsInHand(): array
     {

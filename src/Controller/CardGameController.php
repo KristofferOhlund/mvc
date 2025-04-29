@@ -56,7 +56,7 @@ class CardGameController extends AbstractController
      * Creating all 52 cards.
      * @return void
      */
-    public function startSession($session): void
+    public function startSession(SessionInterface $session): void
     {
         $deck = new DeckOfCards();
         // $deck->generateDeck();

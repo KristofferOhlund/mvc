@@ -24,7 +24,7 @@ class Bank extends Player
 
     /**
      * Draw a card from the deck of cards object
-     * @return CardGraphic object
+     * @return void
      */
     public function bankDrawCard(DeckOfCards $cardDeck): void
     {

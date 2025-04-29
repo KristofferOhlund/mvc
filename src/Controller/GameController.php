@@ -20,8 +20,8 @@ class GameController extends AbstractController
         "gameMaster"
     ];
 
-    public function createSession(SessionInterface $session)
-    {   
+    public function createSession(SessionInterface $session): void
+    {
         // CREATE OBJECTS
         $player = new Player("Player");
         $bank = new Bank("Bank");
@@ -38,7 +38,7 @@ class GameController extends AbstractController
         $session->set(self::SESSIONATTRIBUTES[3], new GameMaster($player, $bank));
     }
 
-    public function checkSession(SessionInterface $session)
+    public function checkSession(SessionInterface $session): void
     {
         // Make sure all attributes are set
         // Else create new instances of all
@@ -51,7 +51,7 @@ class GameController extends AbstractController
     }
 
     #[Route("/game/destroy", name:"game_destroy")]
-    public function gameDestroy(SessionInterface $session)
+    public function gameDestroy(SessionInterface $session): Response
     {
         $session->set("player", null);
         $session->set("bank", null);
@@ -128,7 +128,7 @@ class GameController extends AbstractController
 
 
     #[Route("/game/bank/init", name:"bank_init")]
-    public function bankInit(SessionInterface $session)
+    public function bankInit(SessionInterface $session): Response
     {
         $bank = $session->get(self::SESSIONATTRIBUTES[1]);
         $deckOfCards = $session->get(self::SESSIONATTRIBUTES[2]);
@@ -164,15 +164,15 @@ class GameController extends AbstractController
 
 
     #[Route("/game/init", name:"game_init")]
-    public function initgame()
-    {   
+    public function initgame(): Response
+    {
         // Always destroy any current game session when launched from game_info route
         return $this->redirectToRoute("game_destroy");
     }
 
 
     #[Route("/game/multiplayer{num}", name:"multiplayer", requirements: ['num' => '\d+'])]
-    public function initMultiplayer(?int $num = 1)
+    public function initMultiplayer(?int $num = 1): Response
     {
         return $this->render("game/game-form.html.twig");
     }

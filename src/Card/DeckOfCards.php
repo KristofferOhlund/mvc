@@ -18,7 +18,7 @@ class DeckOfCards
 
     /**
      * Array with strings representing the color of a card
-     * @var array<string>
+     * @var array<string, array{name: string, color: string}>
      */
     private array $familys = [
         "spader" => [
@@ -56,7 +56,7 @@ class DeckOfCards
         "10",
         "knekt",
         "dam",
-        "kung",
+        "kung"
     ];
 
 
@@ -106,11 +106,11 @@ class DeckOfCards
      * @return mixed with removed cards
      */
     public function drawGraphic(?int $num = null): mixed
-    {   
+    {
         if ($num) {
             return array_splice($this->graphicCards, -$num);
         }
-            return array_pop($this->graphicCards);
+        return array_pop($this->graphicCards);
     }
 
 
@@ -123,17 +123,16 @@ class DeckOfCards
     }
 
     /**
-     * Function to return a json-like presentation for 
+     * Function to return a json-like presentation for
      * an array of GraphicCards
-     * @var array<CardGraphic>
-     * @return array
+     * @param array<CardGraphic> $cards
+     * @return array<array<string, int|string>>
      */
-    public function getArrayOfCardsPresentation(array $cards): array {
+    public function getArrayOfCardsPresentation(array $cards): array
+    {
         $array = [];
-        foreach($cards as $card) {
-            $array[] = [
-                $card->getCardGraphicPresentation()
-            ];
+        foreach ($cards as $card) {
+            $array[] = $card->getCardGraphicPresentation();
         }
         return $array;
     }

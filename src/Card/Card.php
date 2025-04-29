@@ -14,7 +14,7 @@ class Card
      */
     private ?string $stringValue;
     private ?string $family;
-    private ?string $cardColor;
+    private ?string $color;
     private const array CARDVALUES = [
         "2" => 2,
         "3" => 3,
@@ -37,17 +37,19 @@ class Card
     public function __construct(?string $familyValue = null, ?string $cardColor = null, ?string $valueAsString = null)
     {
         $this->family = $familyValue;
-        $this->cardColor = $cardColor;
+        $this->color = $cardColor;
         $this->stringValue = $valueAsString;
     }
 
     /**
      * Get the string value of the card, aka "11", "knekt"
      * @return string - stringvalue of the card
-     * @return null - if no stringvalue, return null
      */
-    public function getCardStringValue(): string | null
+    public function getCardStringValue(): string
     {
+        if (!$this->stringValue) {
+            return "stringvalue not set";
+        }
         return $this->stringValue;
     }
 
@@ -63,14 +65,20 @@ class Card
     /**
      * Get the family of the card
      * @return string of the card family, aka "spader", "ruter", etc
-     * @return null - if no family, return null
      */
-    public function getCardFamily(): string | null
+    public function getCardFamily(): string
     {
+        if (!$this->family) {
+            return "family not set";
+        }
         return $this->family;
     }
 
-    public function getCardColor(): string {
-        return $this->cardColor;
+    public function getCardColor(): string
+    {
+        if (!$this->color) {
+            return "color not set";
+        }
+        return $this->color;
     }
 }
