@@ -66,11 +66,20 @@ class Player
     }
 
     /**
-     * Return all cardsymbols in hand
+     * Return all card objects in hand
+     * @return array<GraphicCard>
      */
-    public function showHand()
+    public function showHand(): array
     {
         return $this->cardhand->getCardsInHand();
+    }
+
+    /**
+     * Return all card symbols in hand
+     * @return array<string> utf-8 symbol
+     */
+    public function showSymbolsInHand(): array {
+        return $this->cardhand->getCardSymbols();
     }
 
     /**
