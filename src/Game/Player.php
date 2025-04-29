@@ -126,19 +126,17 @@ class Player
     }
 
     /**
-     * Show a Json representation of the Player
+     * Show a Json-like representation of the Player cards.
+     * Showing each cards family, name, value and symbol
      * 
      */
-    public function getPlayerRepresentation() {
-        $jsonObject = [];
+    public function getPlayerRepresentation(): array {
+        $array = [];
         foreach($this->showHand() as $card) {
-            $jsonObject[] = [
-                "card" => $card->getCardFamily(),
-                "string" => $card->getCardStringValue(),
-                "points" => $card->getCardValue(),
-                "symbol" => $card->getSymbol()
+            $array[] = [
+                $card->getCardGraphicPresentation()
             ];
         }
-        return $jsonObject;
+        return $array;
     }
 }
