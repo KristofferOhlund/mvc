@@ -4,19 +4,21 @@
 {% block main %}
 
 <article>
-    <h1>And the winner is {{ winner.getName() }}</h1>
-    <h3>Points: {{ winner.getPoints() }}</h3>
-    {% for card in winner.showHand() %}
-    <span class="card">{{card}}</span>
-    {% endfor %}
+    <section class="winner">
+        <h1>And the winner is {{ winner.getName() }}</h1>
+        <h3>Points: {{ winner.getPoints() }}</h3>
+        {% for card in winner.showHand() %}
+            <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
+        {% endfor %}
+    </section>
 
-
-    <h1>And the looser is {{ looser.getName() }}</h1>
-    <h3>Points: {{ looser.getPoints() }}</h3>
-    {% for card in looser.showHand() %}
-    <span class="card">{{card}}</span>
-    {% endfor %}
-
+    <section>
+        <h1>And the looser is {{ looser.getName() }}</h1>
+        <h3>Points: {{ looser.getPoints() }}</h3>
+        {% for card in looser.showHand() %}
+            <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
+        {% endfor %}
+    </section>
 
     <a href=" {{ path('game_destroy') }}" class="button primary-button ">Spela igen?</a>
     </div>
