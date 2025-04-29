@@ -40,6 +40,15 @@ class CardHand
     }
 
     /**
+     * Get all Card objects in hand
+     * @return array of Cards
+     */
+    public function getCardsInHand(): array
+    {
+        return $this->cards;
+    }
+
+    /**
      * Get the sum of all int values from cards in hand
      * @return int the Sum of all values
      */
