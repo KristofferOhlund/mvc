@@ -108,53 +108,39 @@ class GameMaster
         array_push($this->queue, $player);
     }
 
+
     /**
-     * Declare winner
-     * If player.points > 21, bank wins
-     * If bank.points > 21, player wins
-     * If both.points < 21, highest points wins.
-     * @return array<string, Player|null>
+     * Compare the best player vs the bank
+     * Return an assosciative array ["winner" => winnerObj, "players" => 
+     *  this.players, "bank" => this.bank]
      */
-    public function declareWinner(): array
-    {
-        $winner = $this->bank;
-        $looser = $this->players[0];
-        $bankPoints = 0;
-        $playerPoints = 0;
+    public function declareWinner(): array {
+        $bestPlayer = $this->getBestPlayer();
+        $bank = $this->getBank();
+        $winner = null;
 
-        if ($this->bank) {
-            $bankPoints = $this->bank->getPoints();
+        if ($bestPlayer->getPoints() > 21) {
+            $winner = $bank;
+        } else if ($bank->getPoints() > 21) {
+            $winner = $bestPlayer;
+        } else if ($bank->getPoints() == $bestPlayer->getPoints()) {
+            $winner = $bank;
+        } else if ($bank->getPoints() > $bestPlayer->getPoints()) {
+            $winner = $bank;
+        } else {
+            $winner = $bestPlayer;
         }
 
-        if ($this->players) {
-            $playerPoints = $this->players[0]->getPoints();
-        }
-
-
-        if ($playerPoints > 21) {
-            $winner = $this->bank;
-            $looser = $this->players[0];
-        } elseif ($playerPoints == $bankPoints) {
-            $winner = $this->bank;
-            $looser = $this->players[0];
-        } elseif ($playerPoints > $bankPoints) {
-            $winner = $this->players[0];
-            $looser = $this->bank;
-        } elseif ($bankPoints > 21) {
-            $winner = $this->players[0];
-            $looser = $this->bank;
-        }
-
-        return ["winner" => $winner, "looser" => $looser];
+        $result = ["winner" => $winner, "players" => $this->getPlayers(), "bank" => $bank];
+        return $result;
     }
 
     /**
-     * Declare the winner
-     * Comparing points between Player objects
-     * Method is suitable if multiple real players
+     * Get the player with highest score < 21
+     * Comparing points between Player all objects
      * @return Player|null
      */
-    public function getWinner(): ?Player
+    private function getBestPlayer(): ?Player
     {
         $winner = null;
         $max = 0;
