@@ -1,0 +1,39 @@
+@use 'variables' as *;
+
+.input {
+  // font-size: $body-font-size;
+  // line-height: $line-height;
+  // font-family: $font-body;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 0.2rem;
+  padding: 0.6rem;
+  width: 10rem;
+  margin-bottom: 1.4rem;
+}
+
+.input:valid {
+  border: 1px solid green;
+}
+
+.input:invalid {
+  border: 1px solid red;
+}
+
+.input-label {
+  font-weight: bold;
+  margin: 2rem 0 0;
+  display: block;
+}
+
+.input-label:first-of-type {
+  margin: 1rem 0 0;
+}
+
+.input-label::after {
+  content: ':';
+}
+
+textarea {
+  resize: none;
+}
