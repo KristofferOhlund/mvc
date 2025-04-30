@@ -73,9 +73,9 @@ class GameController extends AbstractController
         // GET SESSION
         $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
 
-        // CHECK IF ROUND IS OVER
-        if ($gameMaster->checkGameStop()) {
-            return $this->redirectToRoute("game_winner");
+        // CHECK IF PLAYERS ARE DONE
+        if ($gameMaster->checkPlayersDone()) {
+            return $this->redirectToRoute("bank_init");
         };
 
         // GET CURRENT PLAYER
@@ -113,7 +113,7 @@ class GameController extends AbstractController
         $gameMaster = $session->get(self::SESSIONATTRIBUTES[3]);
         $gameMaster->dequeue();
 
-        return $this->redirectToRoute("bank_init");
+        return $this->redirectToRoute("game_play");
     }
 
 
@@ -125,7 +125,7 @@ class GameController extends AbstractController
         $deckOfCards = $session->get(self::SESSIONATTRIBUTES[2]);
         $bank->bankDrawCard($deckOfCards);
 
-        return $this->redirectToRoute("game_play");
+        return $this->redirectToRoute("game_winner");
     }
 
 
@@ -140,11 +140,8 @@ class GameController extends AbstractController
             "looser" => $result["looser"],
         ];
 
-        // return $this->redirectToRoute("game_play");
         return $this->render("game/game-winner.html.twig", $data);
     }
-
-
 
 
     #[Route("/game/doc", name:"game_doc")]
