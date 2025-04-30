@@ -16,7 +16,7 @@ class Player
      * The name of the player
      * Can be implemented to set a specific name
      */
-    private string $name;
+    private ?string $name;
 
     /**
      * Player points
@@ -67,7 +67,7 @@ class Player
 
     /**
      * Return all card objects in hand
-     * @return array<GraphicCard>
+     * @return array<CardGraphic>
      */
     public function showHand(): array
     {
@@ -85,16 +85,18 @@ class Player
 
     /**
      * Return the name of the player
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
      * Add points to the player
+     * @return void
      */
-    public function addPoints(int $points)
+    public function addPoints(int $points): void
     {
         $this->points += $points;
     }
@@ -120,8 +122,9 @@ class Player
 
     /**
      * Get the points of the players card hand
+     * @return int
      */
-    public function getPoints()
+    public function getPoints(): int
     {
         return $this->cardhand->getPointsOfHand();
     }
@@ -129,7 +132,7 @@ class Player
     /**
      * Show a Json-like representation of the Player cards.
      * Showing each cards family, name, value and symbol
-     *
+     * @return list<array<string, int|string>>
      */
     public function getPlayerRepresentation(): array
     {

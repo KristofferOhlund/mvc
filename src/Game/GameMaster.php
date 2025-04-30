@@ -8,7 +8,6 @@
 
 namespace App\Game;
 
-use App\Card\DeckOfCards;
 
 class GameMaster
 {
@@ -124,10 +123,10 @@ class GameMaster
         } elseif ($playerPoints == $bankPoints) {
             $winner = $this->bank;
             $looser = $this->players[0];
-        } elseif ($playerPoints < 21 && $playerPoints > $bankPoints) {
+        } elseif ($playerPoints > $bankPoints) {
             $winner = $this->players[0];
             $looser = $this->bank;
-        } elseif ($bankPoints > 21 && $playerPoints <= 21) {
+        } elseif ($bankPoints > 21) {
             $winner = $this->players[0];
             $looser = $this->bank;
         }
