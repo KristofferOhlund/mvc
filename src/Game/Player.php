@@ -8,7 +8,7 @@ namespace App\Game;
 
 use App\Card\CardGraphic;
 use App\Card\CardHand;
-use app\Card\DeckOfCards;
+use App\Card\DeckOfCards;
 
 class Player
 {
