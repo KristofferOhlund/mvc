@@ -36,37 +36,26 @@ class GameMaster
      * Games always include a bank
      * @param array<Player>
      */
-    public function __construct(Player ...$player)
+    public function __construct(...$player)
     {
         $this->bank = new Bank();
         $this->players = $player;
         $this->queue = array_slice($this->players, 0, count($this->players));
     }
-    // /**
-    //  * Constructor
-    //  * Play multiple players or with bank
-    //  */
-    // public function __construct(Player $player, ?Bank $bank = null)
-    // {
-    //     $this->bank = $bank;
-    //     // $this->players = [$player, $bank];
-    //     // $this->players = [$player, $this->bank];
-    //     $this->players = [$player];
-    //     $this->queue = array_slice($this->players, 0, count($this->players));
-    // }
 
-    // /**
-    //  * NOT IMPLEMENTED
-    //  * USE IF MULTIPLAYER
-    //  * Add players to the game
-    //  * @param Player $player
-    //  * @return void
-    //  */
-    // public function addPlayer(Player $player): void
-    // {
-    //     array_push($this->players, $player);
-    //     $this->queue = array_slice($this->players, 0, count($this->players));
-    // }
+    /**
+     * Return the length of queue
+     */
+    public function getQueueCount(): ?int {
+        return count($this->queue);
+    }
+
+    /**
+     * Get count of players
+     */
+    public function getPlayerCount(): ?int {
+        return count($this->players);
+    }
 
     /**
      * Return an array of all players in game
