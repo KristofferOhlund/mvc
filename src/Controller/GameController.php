@@ -29,12 +29,8 @@ class GameController extends AbstractController
         $deckOfCards = new DeckOfCards();
         $deckOfCards->generateGraphicDeck();
         $deckOfCards->shuffleGraphic();
-        $deckOfCards->shuffleGraphic();
-        $deckOfCards->shuffleGraphic();
 
         // CREATE ALL ATTRIBUTES
-        $session->set(self::SESSIONATTRIBUTES[0], $player);
-        $session->set(self::SESSIONATTRIBUTES[1], $gameMaster->getBank());
         $session->set(self::SESSIONATTRIBUTES[2], $deckOfCards);
         $session->set(self::SESSIONATTRIBUTES[3], $gameMaster);
     }
@@ -43,7 +39,6 @@ class GameController extends AbstractController
     {
         // Make sure all attributes are set
         // Else create new instances of all
-        // $sessionAttributes = ["player", "bank", "deckOfCards", "gameMaster"];
         $sessionAttributes = ["deckOfCards", "gameMaster"];
         foreach ($sessionAttributes as $attribute) {
             if ($session->get($attribute) == null) {
