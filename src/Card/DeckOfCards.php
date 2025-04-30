@@ -78,11 +78,14 @@ class DeckOfCards
 
     /**
      * Shuffle the CardGraphic array
+     * @param int $num Number of times to shuffle (default: 3)
      * @return void
      */
-    public function shuffleGraphic(): void
-    {
-        shuffle($this->graphicCards);
+    public function shuffleGraphic(int $num = 3): void
+    {   
+        for ($i = 0; $i < $num; $i++ ) {
+            shuffle($this->graphicCards);
+        }
     }
 
 
