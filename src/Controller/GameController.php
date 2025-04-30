@@ -137,7 +137,8 @@ class GameController extends AbstractController
         $result = $gameMaster->declareWinner();
         $data = [
             "winner" => $result["winner"],
-            "looser" => $result["looser"],
+            "players" => $result["players"],
+            "bank" => $result["bank"],
         ];
 
         return $this->render("game/game-winner.html.twig", $data);
