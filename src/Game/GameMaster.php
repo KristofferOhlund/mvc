@@ -172,7 +172,7 @@ class GameMaster
      * Controlls wether all players stop are set to true
      * @return bool
      */
-    public function checkGameStop(): bool
+    public function checkPlayersDone(): bool
     {
         return array_all($this->players, function (Player $player) {
             return $player->getStop();
