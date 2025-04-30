@@ -12,10 +12,22 @@
         {% endfor %}
     </section>
 
-    <section>
-        <h1>And the looser is {{ looser.getName() }}</h1>
-        <h3>Points: {{ looser.getPoints() }}</h3>
-        {% for card in looser.showHand() %}
+    <h1>Scoreboard</h1>
+    <section class="players">
+        {% for player in players %}
+            <h1>{{ player.getName() }}</h1>
+            <h3>Points: {{ player.getPoints() }}</h3>
+                {% for card in player.showHand() %}
+                    <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
+                {% endfor %}
+                <hr>
+        {% endfor %}
+    </section>
+
+    <section class="bank">
+        <h1>{{ bank.getName() }}:</h1>
+        <h3>Points: {{ bank.getPoints() }}</h3>
+        {% for card in bank.showHand() %}
             <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
         {% endfor %}
     </section>
