@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Card\DeckOfCards;
@@ -24,7 +25,7 @@ class GameController extends AbstractController
     {
         // CREATE OBJECTS
         $player = new Player("Player");
-        $bank = new Bank("Bank");
+        $gameMaster = new GameMaster($player);
         $deckOfCards = new DeckOfCards();
         $deckOfCards->generateGraphicDeck();
         $deckOfCards->shuffleGraphic();
@@ -33,9 +34,9 @@ class GameController extends AbstractController
 
         // CREATE ALL ATTRIBUTES
         $session->set(self::SESSIONATTRIBUTES[0], $player);
-        $session->set(self::SESSIONATTRIBUTES[1], $bank);
+        $session->set(self::SESSIONATTRIBUTES[1], $gameMaster->getBank());
         $session->set(self::SESSIONATTRIBUTES[2], $deckOfCards);
-        $session->set(self::SESSIONATTRIBUTES[3], new GameMaster($player, $bank));
+        $session->set(self::SESSIONATTRIBUTES[3], $gameMaster);
     }
 
     public function checkSession(SessionInterface $session): void
@@ -171,9 +172,29 @@ class GameController extends AbstractController
     }
 
 
-    #[Route("/game/multiplayer{num}", name:"multiplayer", requirements: ['num' => '\d+'])]
-    public function initMultiplayer(?int $num = 1): Response
+    #[Route("/game/multiplayer/init", name:"multiplayer_get", methods:["GET"])]
+    public function multiplayer(): Response
     {
+        return $this->render("game/game-form.html.twig");
+    }
+
+
+    #[Route("/game/multiplayer", name:"multiplayer_post", methods:["POST"])]
+    public function multiplayerCallback(Request $request, SessionInterface $session): Response
+    {   
+        $playerCount = intval($request->get("player_amount"));
+        $players = [];
+        for ($i = 1; $i < $playerCount +1; $i++) {
+            $players[] = new Player("Player $i");
+        }
+
+        $gameMaster = new GameMaster($players);
+
+        // CREATE ALL ATTRIBUTES
+        // $session->set(self::SESSIONATTRIBUTES[0], $player);
+        // $session->set(self::SESSIONATTRIBUTES[1], $bank);
+        // $session->set(self::SESSIONATTRIBUTES[2], $deckOfCards);
+        // $session->set(self::SESSIONATTRIBUTES[3], new GameMaster($player, $bank));
         return $this->render("game/game-form.html.twig");
     }
 }
