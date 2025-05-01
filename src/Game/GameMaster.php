@@ -8,6 +8,8 @@
 
 namespace App\Game;
 
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+
 class GameMaster
 {
     /**
@@ -141,7 +143,13 @@ class GameMaster
      * @return Player|null
      */
     private function getBestPlayer(): ?Player
-    {
+    {   
+        $pointsToHigh = $this->checkPlayerPointsInvalid();
+        if ($pointsToHigh) {
+            // get player closest to 21
+            return $this->getClosestPlayer();
+        }
+
         $winner = null;
         $max = 0;
         for ($i = 0; $i < count($this->players); $i++) {
@@ -163,5 +171,29 @@ class GameMaster
         return array_all($this->players, function (Player $player) {
             return $player->getStop();
         });
+    }
+
+    /**
+     * Check if all players have points > 21
+     * @return bool
+     */
+    private function checkPlayerPointsInvalid(): bool {
+        return array_all($this->players, function (Player $player) {
+            return $player->getPoints() > 21;
+        });
+    }
+
+    /**
+     * Get the player who's closest to 21
+     * @return Player
+     */
+    private function getClosestPlayer(): ?Player {
+        if (count($this->players) > 1) {
+            $lowest = array_reduce($this->players, function (?Player $carry, Player $player) {
+                return ($carry == null || $player->getPoints() < $carry->getPoints()? $player : $carry);
+            });
+
+        } return $this->players[0];
+        return $lowest;
     }
 }
