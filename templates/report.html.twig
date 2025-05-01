@@ -45,12 +45,40 @@
                 <p><strong>Reflektioner</strong> såhär långt är att det är smidigt att jobba med applikationskod och symfony enligt MVC. Det är bra struktur och det är skönt att ha olika directories under src/ - en med Controllers och en annan med applikationskod. En annan reflektion är att veckans kmom var väldigt stor och jag hade uppskattat tydligare instruktioner / krav på uppgiften. Jag har i princip aldrig spelat kort och såg därför inte alls hur jag skulle börja eller vad jag ville uppnå.</p>
                 <p>Min <strong>TIL</strong> för detta kmom är nog just MVC delen, att skapa applikationskod och sedan Controllers med olika routes för att bygga en applikation. I och med min senaste implementation känner jag även att jag blivit bättre på &quot;kod-design&quot; allt är väl upp till betraktarens ögon men jag tycker mig genom uppgiften fått större förståelse för objektorienterad kod i PHP vilket ledde till nuvarande implementation.</p>
         </section>
+        <section>
+            <h1 id="kmom03">Kmom03</h1>
+            <p>
+                Nu har jag modellerat kortspelet 21 efter ett flödesdiagram samt psuedo kod. Psuedo kod har jag hört vid namn förut men har inte skrivt egen psuedo kod för ett eget problem eller uppgift. Även om psueodkoden och flödesdiagrammen är ganska korta, så var det en nyttig övning. Det fick mig att tänka igenom övergripande vad jag behövde göra för att implementera mitt spel och det gick sedan lättare att skriva koden då jag redan &quot;tänkt igenom&quot; mycket. Det som var svårast var att försökta följa någon form av standard i hur psuedo koden skulle skrivas.
+            </p>
+            <p>
+                Såhär i kmom03 är jag väldigt nöjd med mitt slutresultat. Jag har skrivit om min kod en hel del från kmom02 och jag tycker nu att jag har en betydligt lättare struktur och kod att följa. Jag har även lagt till röd färg på hjärter och ruter, något som jag fick som ett tips i kmom02. Att implementera det krävde att jag strukturerade om min kod ganska mycket, vilket krävde endel jobb innan jag ens kunde komma igång med uppgiften för kmom03. <br>
+                Värt att nämna är att jag i slutändan implementerade en egen, optionell lösning för att stödja &quot;multiplayer&quot;
+                läge för kortspelet. Istället för att vara en spelare och spela mot en bank kan jag initiera flera spelare, och genom en
+                Queue rotera vilken spelare som har sin tur och i slutändan tävlar alla mot banken. Detta alternativa spel gjorde att
+                min psueodkod samt flödesdiagram skiljer sig något.</p>
+                <p>
+                    För att lösa uppgiften implementerade jag tre klasser, <strong>Player</strong>, <strong>Bank</strong> - som en subklass från Player, samt <strong>GameMaster</strong> som agerar som spelledare. <strong>GameMaster</strong> hanterar alla spelare och för att implementera multiplayer läget implementerade jag en queue, som gjorde att spelarna roterades på rätt sätt. När alla spelare är klara initieras Bank som drar sina kort, och därefter visas resultatet, vem som vann samt respektive spelares kort och poäng. <br>
+                    <p>
+                        Jag tycker jag har fått till en bra indelning på mina klasser, där metoder tillhör rätt klass och jag har lyckats hålla mina Controllers relativt korta. Näst intill all logik ligger i mina klasser och min Controller hanterar i princip bara get och set i sessionen samt redirects till andra routes.
+                    </p>
+                    <p>
+                    En förbättringspotential hade kunna vara att implementera andra alternativa krav, som att satsa pengar på sina kort eller implementera en mer avancerad Bank. Det kan även finns även lite kod som är rest kod från tidigare kmom som jag inte hunnit rensa bort. Jag hade även velat implementera något interface och trait, nu har jag endast klasser med arv, kompositions eller aggregation relationer. 
+                    </p>
+                <p>
+                    Att arbeta med Symfony känns nu ok, jag behöver egentligen bara skapa klasser och controllers, några inställningar för Symfony vågar jag inte pilla på.
+                </p>
+                <p>
+                    Min TIL är dels psudeo kod och flödesdiagram, att dessa inte bara är &quot;käbbel&quot;utan att de faktiskt underlättar för själva kodandet sen. Kod kan ibland skapa fel för att man har problem med syntax eller annat och man kan fastna på &quot;oviktiga saker&quot; eller avgå lite från första tanken. Men med ett flödesdiagram så har jag nästan en &quot;blue print&quot; på vad jag ska göra vilket gör det lättare att hålla sig till planen. Jag tycker även att jag lärt mig mer om objektorienterad kod och hur jag kan implementera min egen sådan, kmom03 är mycket lättare att följa än kmom02 trots att jag har mycket mer kod.
+                </p>
+            </p>
+        </section>
     </div>
         <div class="box2">
             <h3>Förteckning</h3>
             <ul>
                 <li><a href="#kmom01">Kmom01</a></li>
                 <li><a href="#kmom02">Kmom02</a></li>
+                <li><a href="#kmom03">Kmom03</a></li>
             </ul>
         </div>
 </div>
