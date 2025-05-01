@@ -159,10 +159,10 @@ class GameController extends AbstractController
 
     #[Route("/game/multiplayer", name:"multiplayer_post", methods:["POST"])]
     public function multiplayerCallback(Request $request, SessionInterface $session): Response
-    {   
+    {
         $playerCount = intval($request->get("player_amount"));
         $players = [];
-        for ($i = 1; $i < $playerCount +1; $i++) {
+        for ($i = 1; $i < $playerCount + 1; $i++) {
             $players[] = new Player("Player $i");
         }
 

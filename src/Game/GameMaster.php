@@ -15,9 +15,9 @@ class GameMaster
     /**
      * The bank acts as a player but is
      * controlled by the GameMaster
-     * @var Bank|null
+     * @var Bank $bank
      */
-    private ?Bank $bank;
+    private Bank $bank;
 
     /**
      * Constructor, keeping all players of the game
@@ -36,9 +36,9 @@ class GameMaster
      * Constructor with multiplayer support
      * Set player to players
      * Games always include a bank
-     * @param array<Player>
+     * Add an array of Player objects to this->players
      */
-    public function __construct(...$player)
+    public function __construct(Player ...$player)
     {
         $this->bank = new Bank();
         $this->players = $player;
@@ -48,28 +48,33 @@ class GameMaster
     /**
      * Return the length of queue
      */
-    public function getQueueCount(): ?int {
+    public function getQueueCount(): ?int
+    {
         return count($this->queue);
     }
 
     /**
      * Get count of players
      */
-    public function getPlayerCount(): ?int {
+    public function getPlayerCount(): ?int
+    {
         return count($this->players);
     }
 
     /**
      * Return an array of all players in game
+     * @return array<Player>
      */
-    public function getPlayers(): array {
+    public function getPlayers(): array
+    {
         return $this->players;
     }
 
     /**
      * Return the bank object
      */
-    public function getBank(): Bank {
+    public function getBank(): Bank
+    {
         return $this->bank;
     }
 
@@ -113,21 +118,27 @@ class GameMaster
 
     /**
      * Compare the best player vs the bank
-     * Return an assosciative array ["winner" => winnerObj, "players" => 
+     * Return an assosciative array ["winner" => winnerObj, "players" =>
      *  this.players, "bank" => this.bank]
+     * @return array<string, Player|array<Player>|null>
      */
-    public function declareWinner(): array {
+    public function declareWinner(): array
+    {
         $bestPlayer = $this->getBestPlayer();
+        // if player is null
+        if (!$bestPlayer) {
+            $bestPlayer = new Player();
+        }
         $bank = $this->getBank();
         $winner = null;
 
         if ($bestPlayer->getPoints() > 21) {
             $winner = $bank;
-        } else if ($bank->getPoints() > 21) {
+        } elseif ($bank->getPoints() > 21) {
             $winner = $bestPlayer;
-        } else if ($bank->getPoints() == $bestPlayer->getPoints()) {
+        } elseif ($bank->getPoints() == $bestPlayer->getPoints()) {
             $winner = $bank;
-        } else if ($bank->getPoints() > $bestPlayer->getPoints()) {
+        } elseif ($bank->getPoints() > $bestPlayer->getPoints()) {
             $winner = $bank;
         } else {
             $winner = $bestPlayer;
@@ -143,7 +154,7 @@ class GameMaster
      * @return Player|null
      */
     private function getBestPlayer(): ?Player
-    {   
+    {
         $pointsToHigh = $this->checkPlayerPointsInvalid();
         if ($pointsToHigh) {
             // get player closest to 21
@@ -177,7 +188,8 @@ class GameMaster
      * Check if all players have points > 21
      * @return bool
      */
-    private function checkPlayerPointsInvalid(): bool {
+    private function checkPlayerPointsInvalid(): bool
+    {
         return array_all($this->players, function (Player $player) {
             return $player->getPoints() > 21;
         });
@@ -187,13 +199,13 @@ class GameMaster
      * Get the player who's closest to 21
      * @return Player
      */
-    private function getClosestPlayer(): ?Player {
+    private function getClosestPlayer(): ?Player
+    {
         if (count($this->players) > 1) {
             $lowest = array_reduce($this->players, function (?Player $carry, Player $player) {
-                return ($carry == null || $player->getPoints() < $carry->getPoints()? $player : $carry);
+                return ($carry == null || $player->getPoints() < $carry->getPoints() ? $player : $carry);
             });
-
+            return $lowest;
         } return $this->players[0];
-        return $lowest;
     }
 }

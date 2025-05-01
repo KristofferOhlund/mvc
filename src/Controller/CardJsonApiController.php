@@ -98,7 +98,7 @@ class CardJsonApiController extends AbstractController
 
     #[Route("/api/game", name:"game_api")]
     public function gameApi(SessionInterface $session): JsonResponse
-    {   
+    {
         $data = [];
 
         $gameMaster = $session->get("gameMaster");
@@ -106,7 +106,7 @@ class CardJsonApiController extends AbstractController
             $data = "There is no active game session";
         } else {
             $players = $gameMaster->getPlayers();
-            foreach($players as $player) {
+            foreach ($players as $player) {
                 $data["Players"][$player->getname()] = [
                     "points" => $player->getPoints(),
                     "card" => $player->getPlayerRepresentation()

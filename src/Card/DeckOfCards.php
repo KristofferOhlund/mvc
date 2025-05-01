@@ -82,8 +82,8 @@ class DeckOfCards
      * @return void
      */
     public function shuffleGraphic(int $num = 3): void
-    {   
-        for ($i = 0; $i < $num; $i++ ) {
+    {
+        for ($i = 0; $i < $num; $i++) {
             shuffle($this->graphicCards);
         }
     }
