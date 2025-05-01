@@ -23,6 +23,7 @@ class CardGameController extends AbstractController
             "deckOfCards" => $session->get("deckOfCards") ?? "null",
             "cardsInHand" => $session->get("cardsInHand") ?? "null",
             "deckObject" => $session->get("deckObject") ?? "null",
+            "gameMaster" => $session->get("gameMaster") ?? "null",
         ];
 
         return $this->render("cards/session.html.twig", $data);
@@ -36,6 +37,7 @@ class CardGameController extends AbstractController
         $session->set("deckOfCards", null);
         $session->set("cardsInHand", null);
         $session->set("deckObject", null);
+        $session->set("gameMaster", null);
 
         $this->addFlash(
             'notice',
