@@ -23,3 +23,23 @@
 .game-layout h1 {
   margin: 2rem auto;
 }
+
+.winner,
+.player,
+.bank {
+  text-align: center;
+  border: 1px solid #a08c6e;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #aca3a2;
+  margin-bottom: 2rem;
+}
+
+.winner h1,
+.player h1,
+.bank h1 {
+  margin: 0 auto;
+}
+
+.winner {
+  background-color: #85BB65;
+}

@@ -5,23 +5,25 @@
 
 <article>
     <section class="winner">
-        <h1>And the winner is {{ winner.getName() }}</h1>
+        <h1>{{ winner.getName() }} wins!</h1>
         <h3>Points: {{ winner.getPoints() }}</h3>
         {% for card in winner.showHand() %}
             <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
         {% endfor %}
     </section>
 
-    <h1>Scoreboard</h1>
     <section class="players">
         {% for player in players %}
+        <div class="player">
             <h1>{{ player.getName() }}</h1>
             <h3>Points: {{ player.getPoints() }}</h3>
                 {% for card in player.showHand() %}
                     <span class="card {{ card.getCardColor() }}">{{ card.getSymbol() }}</span>
                 {% endfor %}
-                <hr>
+               
+        </div>
         {% endfor %}
+        
     </section>
 
     <section class="bank">
@@ -32,7 +34,7 @@
         {% endfor %}
     </section>
 
-    <a href=" {{ path('game_destroy') }}" class="button blue-button fifty">Spela igen?</a>
+    <a href=" {{ path('game_destroy') }}" class="button blue-button">Spela igen?</a>
     </div>
 </article>
 
