@@ -50,12 +50,10 @@ class GameController extends AbstractController
     #[Route("/game/destroy", name:"game_destroy")]
     public function gameDestroy(SessionInterface $session): Response
     {
-        $session->set("player", null);
-        $session->set("bank", null);
         $session->set("deckOfCards", null);
         $session->set("gameMaster", null);
 
-        return $this->redirectToRoute("game_play");
+        return $this->redirectToRoute("multiplayer_get");
     }
 
     #[Route("/game", name:"game_info")]
@@ -149,14 +147,6 @@ class GameController extends AbstractController
     public function gameDoc(): Response
     {
         return $this->render("game/game-doc.html.twig");
-    }
-
-
-    #[Route("/game/init", name:"game_init")]
-    public function initgame(): Response
-    {
-        // Always destroy any current game session when launched from game_info route
-        return $this->redirectToRoute("game_destroy");
     }
 
 
