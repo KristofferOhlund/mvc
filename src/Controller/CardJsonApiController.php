@@ -98,20 +98,30 @@ class CardJsonApiController extends AbstractController
 
     #[Route("/api/game", name:"game_api")]
     public function gameApi(SessionInterface $session): JsonResponse
-    {
-        $player = $session->get("player");
-        $bank = $session->get("bank") ? $session->get("bank") : null;
+    {   
+        $data = [];
 
-        $data = [
-            "player" => [
-                "points" => $player->getPoints(),
-                "cards" => $player->getPlayerRepresentation()
-            ],
-            "bank" => [
+        $gameMaster = $session->get("gameMaster");
+        if (!$gameMaster) {
+            $data = "There is no active game session";
+        } else {
+            $players = $gameMaster->getPlayers();
+            foreach($players as $player) {
+                $data["Players"][$player->getname()] = [
+                    "points" => $player->getPoints(),
+                    "card" => $player->getPlayerRepresentation()
+                ];
+            }
+            $bank = $gameMaster->getBank();
+            $data["Bank"] = [
                 "points" => $bank->getPoints(),
                 "cards" => $bank->getPlayerRepresentation()
-            ],
-        ];
+            ];
+            if ($gameMaster->checkPlayersDone()) {
+                $result = $gameMaster->declareWinner();
+                $data["Winner"] = $result["winner"]->getName();
+            }
+        }
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
