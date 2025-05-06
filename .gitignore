@@ -3,7 +3,7 @@ tools/*
 */tools/**/vendor/
 */tools/**/composer.lock
 .php-cs-fixer.cache
-
+.phpdoc/
 
 .DS_Store
 ###> symfony/framework-bundle ###
