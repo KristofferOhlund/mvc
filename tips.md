@@ -50,3 +50,10 @@ Felen som inleds med Depricated har med PHP själv att göra och kan ignoreras.
 
 # PHPStan - find bugs before production
 tools/phpstan/vendor/bin/phpstan analyse -l 8 src
+
+# PHPDoc - Skapa dokumentation utifrån koden
+tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml
+
+# COMPOSER RUN
+Kör 'compser run lint' för att köra phpmd, phpstan och csfix 
+Kör 'composer run doc' för att skapa dokumentation utifrån koden
