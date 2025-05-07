@@ -88,14 +88,6 @@ class GameMaster
         return $this->queue[0];
     }
 
-    /**
-     * Get the size of the queue array
-     * @return int - the size of the queue stack
-     */
-    public function getSize(): int
-    {
-        return count($this->queue);
-    }
 
     /**
      * Dequeue
