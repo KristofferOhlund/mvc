@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Player class, representing a player in Card game
+ * Bank class inhereting from Player, representing a Bank in Card game
  */
 
 namespace App\Game;
 
-use App\Card\CardGraphic;
 use App\Card\DeckOfCards;
 
 class Bank extends Player
