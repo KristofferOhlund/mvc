@@ -19,16 +19,10 @@ class Player
     private ?string $name;
 
     /**
-     * Player points
-     * Points gets added from the Cardhand
-     */
-    private int $points;
-
-    /**
      * Bool representing wheter a player
-     * wants to draw another card.
-     * Defaults to true,
-     * when false player round is done.
+     * wants to stop the current round.
+     * Defaults to false
+     * When set to true, player is done.
      */
     private bool $stop;
 
@@ -42,7 +36,6 @@ class Player
     public function __construct(?string $name = "player")
     {
         $this->name = $name;
-        $this->points = 0;
         $this->cardhand = new CardHand();
         $this->stop = false;
     }
@@ -54,6 +47,14 @@ class Player
     public function stop(): void
     {
         $this->stop = true;
+    }
+
+    /**
+     * Get the class of this->cardhand
+     */
+    public function getCardHandClass()
+    {
+        return get_class($this->cardhand);
     }
 
     /**
@@ -92,14 +93,6 @@ class Player
         return $this->name;
     }
 
-    /**
-     * Add points to the player
-     * @return void
-     */
-    public function addPoints(int $points): void
-    {
-        $this->points += $points;
-    }
 
     /**
      * Add a CardGraphic object to the card hand
