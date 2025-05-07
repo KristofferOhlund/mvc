@@ -86,6 +86,7 @@
             "@phpstan",
             "@csfix"
         ],
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
         "doc": "php -n -d error_reporting=E_ALL -d error_reporting=-E_DEPRECATED tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml",
         "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests",
         "csfix:dry": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.dist.php fix src tests --dry-run -v",
