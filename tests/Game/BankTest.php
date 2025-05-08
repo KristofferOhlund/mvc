@@ -2,6 +2,10 @@
 
 namespace App\Game;
 
+use App\Card\DeckOfCards;
+use App\Card\Card;
+use App\Card\CardGraphic;
+use App\Card\CardHand;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,6 +30,26 @@ class BankTest extends TestCase
 
         $stop = $player->getStop();
         $this->assertEquals(false, $stop);
+    }
+
+    /**
+     * Test bankDrawCard method
+     */
+    public function testBankDrawCard()
+    {
+        $bank = new Bank();
+
+        /** @var DeckOfCards&\PHPunit\Framework\MockObject\MockObject $deck*/
+        $deck = $this->createMock(DeckOfCards::class);
+
+        /** @var CardGraphic&\PHPunit\Framework\MockObject\MockObject $card*/
+        $card = $this->createMock(CardGraphic::class);
+        $card->method("getCardValue")->willReturn(22);
+
+        $deck->method("drawGraphic")->willReturn($card);
+        $bank->bankDrawCard($deck);
+        $this->assertTrue($bank->getStop());
+        $this->assertEquals(22, $bank->getPoints());
     }
 
 }
