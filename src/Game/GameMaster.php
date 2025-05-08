@@ -8,7 +8,6 @@
 
 namespace App\Game;
 
-
 class GameMaster
 {
     /**
@@ -48,7 +47,8 @@ class GameMaster
      * Adds a player to the game
      * @return void
      */
-    public function addPlayer(?Player $player): void {
+    public function addPlayer(?Player $player): void
+    {
         $this->players[] = $player;
     }
 
@@ -203,14 +203,15 @@ class GameMaster
         if (count($this->players) > 1) {
             $lowest = $this->sortPlayerPointsAsc();
             return $lowest;
-            }
+        }
         return $this->players[0];
     }
 
     /**
      * test method for private method getClosestPlayer
      */
-    public function getClosestPlayerTest() {
+    public function getClosestPlayerTest()
+    {
         return $this->getClosestPlayer();
     }
 
@@ -219,10 +220,11 @@ class GameMaster
      * Returns the player with lowest points
      * @return Player
      */
-    private function sortPlayerPointsAsc(): ?Player {
+    private function sortPlayerPointsAsc(): ?Player
+    {
         $lowest = null;
         $max = 0;
-        foreach($this->players as $player) {
+        foreach ($this->players as $player) {
             if ($player->getPoints() > $max) {
                 $lowest = $player;
             }
