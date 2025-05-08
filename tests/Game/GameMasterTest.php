@@ -47,8 +47,10 @@ class GameMasterTest extends TestCase
         $this->assertNull($gameMaster->enqueue($player));
     }
 
-
-    public function testGameMasterWinner()
+    /**
+     * Test getWinner when multiple players
+     */
+    public function testGameMasterWinnerMultipayer()
     {
         /** @var Player&\PHPunit\Framework\MockObject\MockObject $player*/
         $player = $this->createMock(Player::class);
@@ -70,5 +72,18 @@ class GameMasterTest extends TestCase
             "App\Game\Player",
             $gameMaster->getClosestPlayerTest()
         );
+    }
+
+    /**
+     * test getWinner when 1 player
+     */
+    public function testGameWasterWinnerSingleplayer()
+    {
+        /** @var Player&\PHPunit\Framework\MockObject\MockObject $player*/
+        $player = $this->createMock(Player::class);
+        $player->method("getPoints")->willReturn(22);
+        $gameMaster = new GameMaster($player);
+
+        $this->assertInstanceOf("App\Game\Player", $gameMaster->getClosestPlayerTest());
     }
 }
