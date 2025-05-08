@@ -89,7 +89,7 @@ class CardGraphic extends Card
      * Method to get symbol for a specifik card.
      * @return string symbol in utf-8 format
      */
-    public function getSymbol()
+    public function getSymbol(): string
     {
         $color = $this->getCardFamily();
         $stringValue = $this->getCardStringValue();
