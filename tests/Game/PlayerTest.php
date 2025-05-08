@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 class PlayerTest extends TestCase
 {
-
     /**
      * Create object without any arguments
      * Test all constructor-initiated values
@@ -46,10 +45,10 @@ class PlayerTest extends TestCase
 
         $this->assertTrue($isStopped);
     }
-    
+
     /**
      * Verify that player->getPoints returns an integer
-     * 
+     *
      */
     public function testPlayerPointsIsInt()
     {
