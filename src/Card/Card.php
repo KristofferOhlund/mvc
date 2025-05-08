@@ -30,22 +30,25 @@ class Card
         "kung" => 13,
         "ess" => 14,
     ];
+    private const array FAMILYVALUES = [
+        "ruter", "hjärter", "spader", "klöver"
+    ];
 
     /**
      * Constructor
      */
     public function __construct(string $familyValue, string $cardColor, string $valueAsString)
     {
-        $this->family = $familyValue;
         $this->color = $cardColor;
-        $this->stringValue = $valueAsString;
+        if (!in_array($familyValue, self::FAMILYVALUES) || !array_key_exists($valueAsString, self::CARDVALUES))
+        {
+            throw new CardException("Invalid card arguments");
+        } else {
+            $this->family = $familyValue;
+            $this->stringValue = $valueAsString;
+        }
+        
     }
-    // public function __construct(?string $familyValue = null, ?string $cardColor = null, ?string $valueAsString = null)
-    // {
-    //     $this->family = $familyValue;
-    //     $this->color = $cardColor;
-    //     $this->stringValue = $valueAsString;
-    // }
 
     /**
      * Get the string value of the card, aka "11", "knekt"
@@ -53,9 +56,6 @@ class Card
      */
     public function getCardStringValue(): string
     {
-        if (!$this->stringValue) {
-            return "stringvalue not set";
-        }
         return $this->stringValue;
     }
 
@@ -74,17 +74,11 @@ class Card
      */
     public function getCardFamily(): string
     {
-        if (!$this->family) {
-            return "family not set";
-        }
         return $this->family;
     }
 
     public function getCardColor(): string
     {
-        if (!$this->color) {
-            return "color not set";
-        }
         return $this->color;
     }
 }
