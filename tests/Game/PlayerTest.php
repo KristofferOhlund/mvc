@@ -98,6 +98,12 @@ class PlayerTest extends TestCase
     public function testPlayerRepresentation()
     {
         $player = new Player();
+
+        /** @var CardGraphic&\PHPUnit\Framework\MockObject\MockObject $cardMock */
+        $cardMock = $this->createMock(CardGraphic::class);
+        $cardMock->method("getCardGraphicPresentation")->willReturn([]);
+
+        $player->addCard($cardMock);
         $this->assertIsArray($player->getPlayerRepresentation());
     }
 }
