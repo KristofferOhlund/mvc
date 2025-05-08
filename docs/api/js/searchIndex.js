@@ -8,7 +8,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Constructor",
+            "summary": "Constructor\nRaise\u0020CardException\u0020if\u0020invalid\u0020args",
             "url": "classes/App-Card-Card.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetCardStringValue\u0028\u0029",
@@ -28,13 +28,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetCardColor\u0028\u0029",
             "name": "getCardColor",
-            "summary": "",
+            "summary": "Get\u0020the\u0020card\u0020of\u0020a\u0020color",
             "url": "classes/App-Card-Card.html#method_getCardColor"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003ACARDVALUES",
             "name": "CARDVALUES",
             "summary": "",
             "url": "classes/App-Card-Card.html#constant_CARDVALUES"
+        },                {
+            "fqsen": "\\App\\Card\\Card\u003A\u003AFAMILYVALUES",
+            "name": "FAMILYVALUES",
+            "summary": "",
+            "url": "classes/App-Card-Card.html#constant_FAMILYVALUES"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A\u0024stringValue",
             "name": "stringValue",
@@ -50,6 +55,11 @@ Search.appendIndex(
             "name": "color",
             "summary": "",
             "url": "classes/App-Card-Card.html#property_color"
+        },                {
+            "fqsen": "\\App\\Card\\CardException",
+            "name": "CardException",
+            "summary": "Exception\u0020class\u0020for\u0020Guess.",
+            "url": "classes/App-Card-CardException.html"
         },                {
             "fqsen": "\\App\\Card\\CardGraphic",
             "name": "CardGraphic",
@@ -83,7 +93,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "constructor",
             "url": "classes/App-Card-CardHand.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AaddCard\u0028\u0029",
@@ -143,7 +153,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AgetArrayOfCardsPresentation\u0028\u0029",
             "name": "getArrayOfCardsPresentation",
-            "summary": "Function\u0020to\u0020return\u0020a\u0020json\u002Dlike\u0020presentation\u0020for\nan\u0020array\u0020of\u0020GraphicCards",
+            "summary": "Function\u0020to\u0020return\u0020a\u0020assosciative\u0020array\u0020of\u0020cards.\u0020Return\u0020a\u0020array\u0020for\u0020each\u0020card\u0020\u003D\u003E\u0020\u005Bcard\u0020\u003D\u003E\u0020card\u0020famiyl,\u0020string\u0020\u003D\u003E\u0020value\u0020as\u0020string,\u0020points\u0020\u003D\u003E\u0020int,\u0020symbol\u0020\u003D\u003E\u0020string\u005D",
             "url": "classes/App-Card-DeckOfCards.html#method_getArrayOfCardsPresentation"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003ASTRINGVALUES",
@@ -511,6 +521,11 @@ Search.appendIndex(
             "summary": "Constructor\u0020with\u0020multiplayer\u0020support\nSet\u0020player\u0020to\u0020players\nGames\u0020always\u0020include\u0020a\u0020bank\nAdd\u0020an\u0020array\u0020of\u0020Player\u0020objects\u0020to\u0020this\u002D\u003Eplayers",
             "url": "classes/App-Game-GameMaster.html#method___construct"
         },                {
+            "fqsen": "\\App\\Game\\GameMaster\u003A\u003AaddPlayer\u0028\u0029",
+            "name": "addPlayer",
+            "summary": "Adds\u0020a\u0020player\u0020to\u0020the\u0020game",
+            "url": "classes/App-Game-GameMaster.html#method_addPlayer"
+        },                {
             "fqsen": "\\App\\Game\\GameMaster\u003A\u003AgetQueueCount\u0028\u0029",
             "name": "getQueueCount",
             "summary": "Return\u0020the\u0020length\u0020of\u0020queue",
@@ -535,11 +550,6 @@ Search.appendIndex(
             "name": "peek",
             "summary": "Return\u0020the\u0020current\u0020player\u0020in\u0020Queue",
             "url": "classes/App-Game-GameMaster.html#method_peek"
-        },                {
-            "fqsen": "\\App\\Game\\GameMaster\u003A\u003AgetSize\u0028\u0029",
-            "name": "getSize",
-            "summary": "Get\u0020the\u0020size\u0020of\u0020the\u0020queue\u0020array",
-            "url": "classes/App-Game-GameMaster.html#method_getSize"
         },                {
             "fqsen": "\\App\\Game\\GameMaster\u003A\u003Adequeue\u0028\u0029",
             "name": "dequeue",
@@ -576,6 +586,16 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020player\u0020who\u0027s\u0020closest\u0020to\u002021",
             "url": "classes/App-Game-GameMaster.html#method_getClosestPlayer"
         },                {
+            "fqsen": "\\App\\Game\\GameMaster\u003A\u003AgetClosestPlayerTest\u0028\u0029",
+            "name": "getClosestPlayerTest",
+            "summary": "test\u0020method\u0020for\u0020private\u0020method\u0020getClosestPlayer",
+            "url": "classes/App-Game-GameMaster.html#method_getClosestPlayerTest"
+        },                {
+            "fqsen": "\\App\\Game\\GameMaster\u003A\u003AsortPlayerPointsAsc\u0028\u0029",
+            "name": "sortPlayerPointsAsc",
+            "summary": "Sort\u0020the\u0020player\u0020scores\u0020in\u0020ascending\u0020order\nReturns\u0020the\u0020player\u0020with\u0020lowest\u0020points",
+            "url": "classes/App-Game-GameMaster.html#method_sortPlayerPointsAsc"
+        },                {
             "fqsen": "\\App\\Game\\GameMaster\u003A\u003A\u0024bank",
             "name": "bank",
             "summary": "The\u0020bank\u0020acts\u0020as\u0020a\u0020player\u0020but\u0020is\ncontrolled\u0020by\u0020the\u0020GameMaster",
@@ -603,8 +623,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024stop",
             "name": "stop",
-            "summary": "Bool\u0020representing\u0020wheter\u0020a\u0020player\nwants\u0020to\u0020draw\u0020another\u0020card.",
+            "summary": "Bool\u0020representing\u0020wheter\u0020a\u0020player\nwants\u0020to\u0020stop\u0020the\u0020current\u0020round.",
             "url": "classes/App-Game-Player.html#property_stop"
+        },                {
+            "fqsen": "\\App\\Game\\Player\u003A\u003AgetCardHandClass\u0028\u0029",
+            "name": "getCardHandClass",
+            "summary": "Get\u0020the\u0020class\u0020of\u0020this\u002D\u003Ecardhand",
+            "url": "classes/App-Game-Player.html#method_getCardHandClass"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AgetStop\u0028\u0029",
             "name": "getStop",
@@ -625,11 +650,6 @@ Search.appendIndex(
             "name": "getName",
             "summary": "Return\u0020the\u0020name\u0020of\u0020the\u0020player",
             "url": "classes/App-Game-Player.html#method_getName"
-        },                {
-            "fqsen": "\\App\\Game\\Player\u003A\u003AaddPoints\u0028\u0029",
-            "name": "addPoints",
-            "summary": "Add\u0020points\u0020to\u0020the\u0020player",
-            "url": "classes/App-Game-Player.html#method_addPoints"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AaddCard\u0028\u0029",
             "name": "addCard",
@@ -655,11 +675,6 @@ Search.appendIndex(
             "name": "name",
             "summary": "The\u0020name\u0020of\u0020the\u0020player\nCan\u0020be\u0020implemented\u0020to\u0020set\u0020a\u0020specific\u0020name",
             "url": "classes/App-Game-Player.html#property_name"
-        },                {
-            "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024points",
-            "name": "points",
-            "summary": "Player\u0020points\nPoints\u0020gets\u0020added\u0020from\u0020the\u0020Cardhand",
-            "url": "classes/App-Game-Player.html#property_points"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003A\u0024cardhand",
             "name": "cardhand",

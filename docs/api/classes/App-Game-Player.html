@@ -178,20 +178,12 @@
 Can be implemented to set a specific name</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/App-Game-Player.html#property_points">$points</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd>Player points
-Points gets added from the Cardhand</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Game-Player.html#property_stop">$stop</a>
     <span>
                         &nbsp;: bool            </span>
 </dt>
 <dd>Bool representing wheter a player
-wants to draw another card.</dd>
+wants to stop the current round.</dd>
 
     </dl>
 
@@ -218,18 +210,18 @@ Initialize a new DiceHand object</dd>
 <dd>Add a CardGraphic object to the card hand</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/App-Game-Player.html#method_addPoints">addPoints()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Add points to the player</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Game-Player.html#method_drawCard">drawCard()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Card-CardGraphic.html"><abbr title="\App\Card\CardGraphic">CardGraphic</abbr></a>    </span>
 </dt>
 <dd>Draw a card from DeckOfCards object</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/App-Game-Player.html#method_getCardHandClass">getCardHandClass()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Get the class of this-&gt;cardhand</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Game-Player.html#method_getName">getName()</a>
@@ -310,7 +302,7 @@ Initialize a new DiceHand object</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -374,44 +366,6 @@ Can be implemented to set a specific name</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_points">
-        $points
-        <a href="classes/App-Game-Player.html#property_points" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">25</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Player points
-Points gets added from the Cardhand</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$points</span>
-    </code>
-
-    
-    
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_stop">
         $stop
         <a href="classes/App-Game-Player.html#property_stop" class="headerlink"><i class="fas fa-link"></i></a>
@@ -422,12 +376,12 @@ Points gets added from the Cardhand</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Bool representing wheter a player
-wants to draw another card.</p>
+wants to stop the current round.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -436,8 +390,8 @@ wants to draw another card.</p>
     <span class="phpdocumentor-signature__name">$stop</span>
     </code>
 
-        <section class="phpdocumentor-description"><p>Defaults to true,
-when false player round is done.</p>
+        <section class="phpdocumentor-description"><p>Defaults to false
+When set to true, player is done.</p>
 </section>
 
     
@@ -468,7 +422,7 @@ when false player round is done.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -515,7 +469,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -552,51 +506,6 @@ Initialize a new DiceHand object</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_addPoints">
-        addPoints()
-        <a href="classes/App-Game-Player.html#method_addPoints" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">99</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Add points to the player</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addPoints</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$points</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$points</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_drawCard">
         drawCard()
         <a href="classes/App-Game-Player.html#method_drawCard" class="headerlink"><i class="fas fa-link"></i></a>
@@ -605,7 +514,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -650,6 +559,51 @@ Initialize a new DiceHand object</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getCardHandClass">
+        getCardHandClass()
+        <a href="classes/App-Game-Player.html#method_getCardHandClass" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the class of this-&gt;cardhand</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCardHandClass</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><ul>
+<li>the name of the class</li>
+</ul>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getName">
         getName()
         <a href="classes/App-Game-Player.html#method_getName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -658,7 +612,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -697,7 +651,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -738,7 +692,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
@@ -777,7 +731,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 
     </aside>
 
@@ -816,7 +770,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -855,7 +809,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -898,7 +852,7 @@ Initialize a new DiceHand object</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Game/Player.php"><a href="files/src-game-player.html"><abbr title="src/Game/Player.php">Player.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -1034,7 +988,6 @@ Initialize a new DiceHand object</p>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/App-Game-Player.html#property_cardhand">$cardhand</a></li>
                                                     <li class=""><a href="classes/App-Game-Player.html#property_name">$name</a></li>
-                                                    <li class=""><a href="classes/App-Game-Player.html#property_points">$points</a></li>
                                                     <li class=""><a href="classes/App-Game-Player.html#property_stop">$stop</a></li>
                                             </ul>
                 </li>
@@ -1044,8 +997,8 @@ Initialize a new DiceHand object</p>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/App-Game-Player.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/App-Game-Player.html#method_addCard">addCard()</a></li>
-                                            <li class=""><a href="classes/App-Game-Player.html#method_addPoints">addPoints()</a></li>
                                             <li class=""><a href="classes/App-Game-Player.html#method_drawCard">drawCard()</a></li>
+                                            <li class=""><a href="classes/App-Game-Player.html#method_getCardHandClass">getCardHandClass()</a></li>
                                             <li class=""><a href="classes/App-Game-Player.html#method_getName">getName()</a></li>
                                             <li class=""><a href="classes/App-Game-Player.html#method_getPlayerRepresentation">getPlayerRepresentation()</a></li>
                                             <li class=""><a href="classes/App-Game-Player.html#method_getPoints">getPoints()</a></li>
