@@ -45,6 +45,14 @@ class GameMaster
     }
 
     /**
+     * Adds a player to the game
+     * @return void
+     */
+    public function addPlayer(?Player $player): void {
+        $this->players[] = $player;
+    }
+
+    /**
      * Return the length of queue
      */
     public function getQueueCount(): ?int
@@ -193,10 +201,32 @@ class GameMaster
     private function getClosestPlayer(): ?Player
     {
         if (count($this->players) > 1) {
-            $lowest = array_reduce($this->players, function (?Player $carry, Player $player) {
-                return ($carry == null || $player->getPoints() < $carry->getPoints() ? $player : $carry);
-            });
+            $lowest = $this->sortPlayerPointsAsc();
             return $lowest;
-        } return $this->players[0];
+            }
+        return $this->players[0];
+    }
+
+    /**
+     * test method for private method getClosestPlayer
+     */
+    public function getClosestPlayerTest() {
+        return $this->getClosestPlayer();
+    }
+
+    /**
+     * Sort the player scores in ascending order
+     * Returns the player with lowest points
+     * @return Player
+     */
+    private function sortPlayerPointsAsc(): ?Player {
+        $lowest = null;
+        $max = 0;
+        foreach($this->players as $player) {
+            if ($player->getPoints() > $max) {
+                $lowest = $player;
+            }
+        }
+        return $lowest;
     }
 }
