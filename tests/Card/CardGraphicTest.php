@@ -23,15 +23,17 @@ class CardGraphicTestTest extends TestCase
         $this->assertIsString($card->getSymbol());
 
         // Make sure keys are in presentation
-        $this->assertArrayHasKey("card", $card->getCardGraphicPresentation());
-        $this->assertArrayHasKey("string", $card->getCardGraphicPresentation());
-        $this->assertArrayHasKey("points", $card->getCardGraphicPresentation());
-        $this->assertArrayHasKey("symbol", $card->getCardGraphicPresentation());
+        $presentation = $card->getCardGraphicPresentation();
+
+        $this->assertArrayHasKey("card", $presentation);
+        $this->assertArrayHasKey("string", $presentation);
+        $this->assertArrayHasKey("points", $presentation);
+        $this->assertArrayHasKey("symbol", $presentation);
 
         // Make sure values are in presentation
-        $this->assertContains("hjärter", $card->getCardGraphicPresentation());
-        $this->assertContains("kung", $card->getCardGraphicPresentation());
-        $this->assertContains(13, $card->getCardGraphicPresentation());
-        $this->assertContains("🂾", $card->getCardGraphicPresentation());
+        $this->assertContains("hjärter", $presentation);
+        $this->assertContains("kung", $presentation);
+        $this->assertContains(13, $presentation);
+        $this->assertContains("🂾", $presentation);
     }
 }
