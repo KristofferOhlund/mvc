@@ -3,11 +3,6 @@
 namespace App\Game;
 
 use PHPUnit\Framework\TestCase;
-use App\Card\DeckOfCards;
-use App\Card\CardGraphic;
-use App\Card\CardHand;
-use phpDocumentor\Reflection\Types\Void_;
-use SebastianBergmann\Type\VoidType;
 
 /**
  * Test cases for class Bank
