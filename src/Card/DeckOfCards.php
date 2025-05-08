@@ -119,6 +119,7 @@ class DeckOfCards
 
     /**
      * Count the number of cards
+     * @return int
      */
     public function countGraphicCards(): int
     {
@@ -126,8 +127,7 @@ class DeckOfCards
     }
 
     /**
-     * Function to return a json-like presentation for
-     * an array of GraphicCards
+     * Function to return a assosciative array of cards. Return a array for each card => [card => card famiyl, string => value as string, points => int, symbol => string]
      * @param array<CardGraphic> $cards
      * @return array<array<string, int|string>>
      */

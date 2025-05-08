@@ -15,6 +15,9 @@ class CardHand
      */
     private array $cards;
 
+    /**
+     * constructor
+     */
     public function __construct()
     {
         $this->cards = [];

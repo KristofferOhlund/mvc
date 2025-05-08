@@ -51,6 +51,7 @@ class Player
 
     /**
      * Get the class of this->cardhand
+     * @return string - the name of the class
      */
     public function getCardHandClass()
     {

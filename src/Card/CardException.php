@@ -7,5 +7,4 @@ namespace App\Card;
  */
 class CardException extends \Exception
 {
-
 }

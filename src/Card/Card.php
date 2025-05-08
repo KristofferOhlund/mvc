@@ -36,6 +36,7 @@ class Card
 
     /**
      * Constructor
+     * Raise CardException if invalid args
      */
     public function __construct(string $familyValue, string $cardColor, string $valueAsString)
     {
@@ -75,6 +76,10 @@ class Card
         return $this->family;
     }
 
+    /**
+     * Get the card of a color
+     * @return string red or black
+     */
     public function getCardColor(): string
     {
         return $this->color;

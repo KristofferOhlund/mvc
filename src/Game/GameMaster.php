@@ -47,7 +47,7 @@ class GameMaster
      * Adds a player to the game
      * @return void
      */
-    public function addPlayer(?Player $player): void
+    public function addPlayer(Player $player): void
     {
         $this->players[] = $player;
     }
@@ -196,7 +196,7 @@ class GameMaster
 
     /**
      * Get the player who's closest to 21
-     * @return Player
+     * @return Player|null
      */
     private function getClosestPlayer(): ?Player
     {
@@ -209,8 +209,9 @@ class GameMaster
 
     /**
      * test method for private method getClosestPlayer
+     * @return Player|null
      */
-    public function getClosestPlayerTest()
+    public function getClosestPlayerTest(): ?Player
     {
         return $this->getClosestPlayer();
     }
@@ -218,7 +219,7 @@ class GameMaster
     /**
      * Sort the player scores in ascending order
      * Returns the player with lowest points
-     * @return Player
+     * @return Player|null
      */
     private function sortPlayerPointsAsc(): ?Player
     {
