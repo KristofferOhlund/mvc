@@ -12,9 +12,9 @@ class Card
      * stringValue, aka "11, "knekt" etc
      * Color is type, aka "hjäter, ruter" etc
      */
-    private ?string $stringValue;
-    private ?string $family;
-    private ?string $color;
+    private string $stringValue;
+    private string $family;
+    private string $color;
     private const array CARDVALUES = [
         "2" => 2,
         "3" => 3,
@@ -34,12 +34,18 @@ class Card
     /**
      * Constructor
      */
-    public function __construct(?string $familyValue = null, ?string $cardColor = null, ?string $valueAsString = null)
+    public function __construct(string $familyValue, string $cardColor, string $valueAsString)
     {
         $this->family = $familyValue;
         $this->color = $cardColor;
         $this->stringValue = $valueAsString;
     }
+    // public function __construct(?string $familyValue = null, ?string $cardColor = null, ?string $valueAsString = null)
+    // {
+    //     $this->family = $familyValue;
+    //     $this->color = $cardColor;
+    //     $this->stringValue = $valueAsString;
+    // }
 
     /**
      * Get the string value of the card, aka "11", "knekt"

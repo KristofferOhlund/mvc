@@ -79,7 +79,7 @@ class CardGraphic extends Card
     /**
      * Constructor calling the Card parents constructor
      */
-    public function __construct(?string $color = null, ?string $cardColor = null, ?string $stringValue = null)
+    public function __construct(string $color, string $cardColor, string $stringValue)
     {
         parent::__construct($color, $cardColor, $stringValue);
     }
