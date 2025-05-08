@@ -72,6 +72,29 @@
                 </p>
             </p>
         </section>
+        <section>
+            <h1 id="kmom04">Kmom04</h1>
+            <p>
+                Nu har jag även lärt mig skriva kod som testar annan kod via PHPunit. Måste säga att det känns riktigt bra när man väl får till det. Det var lite svårt att testa metoder där det fanns beroenden av andra metoder. Men efter att jag lärt mig hur man mockar objekt och metoder så gick det bättre, det är väldigt tillfredsställande när man får till en hög kodtäckning. <br>
+                Att kunna skapa snygga rapporter och diagram baserat på testresultaten är ju helt fantastiskt, så enkelt att navigera mellan testerna och det var enkelt att se vilka klasser och metoder som inte blivit testade. Otroligt skönt att enkelt kunna &quot;checka av&quot; en efter en.
+            </p>
+            <p>
+                För mitt kortspel har jag främst två paket, Game och Card. Card innehåller klasserna för att skapa kort enligt en fransk kortlek. Modulen Game innehåller klasser för att kunna köra spelet 21. För Card uppnådde jag en kodteckning på 100% och för Game nådde jag en teckning på 92.42%. Givetvis är inte kodteckningen det primära utan det gäller att ha värdefulla tester, testa metoders return och värde för att säkerställa att man har ett fungerande spel.
+            </p>
+            <p>
+                Till stora delar upplever jag min kod som testbar, framförallt Card var enkel att testa. Det som var svårt var Game vilket kanske är logiskt eftersom det är ett större flöde och sammanhang att testa. Card testar klasserna för kort vilket är fler tester i typen av &quot;hämta värde x&quot; medan Game kräver ett flöde, vilket gör testerna svårare att utföra.
+                Delar som jag inte gillar eller känner var särskilt värdefulla var metoder för att visa representationer av en kortlek. Dessa representationer är i princip arrayer med strängar och de kändes därför som mindre värdefulla. Tvärtom gäller för tester när jag måste validera att jag tar emot eller skickar ett objekt som argument. 
+            </p>
+            <p>
+                Jag gjorde en större code-refractoring i kmom03 vilket gjorde att jag nu hade relativt testbar kod. Jag har i kmom03 brutit ner metoder till att göra så få saker som möjligt och det blev därför enklare att testa respektive klasser.
+            </p>
+            <p>
+                Jag tycker att testbar kod visar på snygg och ren kod. Det är då enkelt att följa metoderna och att få en överblick i vad som händer. Att sedan kunna testa och verifiera att metoderna gör det dem ska ger absolut känslan av en bättre kod.
+            </p>
+            <p>
+                Min TIL för detta momen är givetvis PHPunit som verktyg, men en viktigare lärdom är nog just att skriva testbar kod. Detta kommer jag ta med mig i framtiden och jag hoppas på att kunna skriva bättre, renare och mer testbar kod.
+            </p>
+        </section>
     </div>
         <div class="box2">
             <h3>Förteckning</h3>
@@ -79,6 +102,7 @@
                 <li><a href="#kmom01">Kmom01</a></li>
                 <li><a href="#kmom02">Kmom02</a></li>
                 <li><a href="#kmom03">Kmom03</a></li>
+                <li><a href="#kmom04">Kmom04</a></li>
             </ul>
         </div>
 </div>
