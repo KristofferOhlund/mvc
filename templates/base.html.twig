@@ -30,7 +30,9 @@
             </nav>
         </header>
         <main>
-            {% block main %}{% endblock %}
+            {% block main %}
+                {% block body %}{% endblock %}
+            {% endblock %}
         </main>
         <footer>
             Copyright av mig &copy;

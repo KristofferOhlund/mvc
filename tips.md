@@ -57,3 +57,42 @@ tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml
 # COMPOSER RUN
 Kör 'compser run lint' för att köra phpmd, phpstan och csfix 
 Kör 'composer run doc' för att skapa dokumentation utifrån koden
+
+# Debug the dotenv
+php bin/console debug:dotenv
+
+# DOCTRINE FLÖDE
+Skapa databas: 
+    php bin/console doctrine:database:create
+Skapa entity (class): 
+    php bin/console make:entity
+Du får då dina klasser i src/Entity/klass.php
+Repository (hanterar klassen mot databasen) i src/Repository
+
+För varje klass får du en motsvarande Repository.
+Repository i sig använder sig av 'ManagerRegistry' för att hantera koppling mellan Klass och Databas.
+I Routes använder vi därför vår Repository för att interagera med databasen, det vi kan göra med databasen
+defineras i vår Klass.
+
+För att commita dina ändringar: 
+    php bin/console make:migration
+vilket skapar en version under migrations/
+Om ok, för att "pusha" dina ändringar kör:
+    php bin/console doctrine:migrations:migrate 
+
+Skapa en Controller som använder din entity:
+    php bin/console make:controller ProductController
+
+Kolla att route fungerar:
+    php bin/console debug:router
+    php bin/console debug:router product
+    php bin/console router:match /product
+
+Om readonly error på databas:
+    chmod 666 var/data.db
+
+# Escape output i dina views
+För att escapa output för att undika CSS attacker, använd Twigs funktion |e
+Exempel:
+    {{ product.getName|e }}
+Ovan är alltså motsvarande som htmlentities()/htmlspecialchars()
