@@ -66,10 +66,21 @@ final class ProductController extends AbstractController
 
     /**
      * 
-    * line 13 The EntityManagerInterface $entityManager argument tells Symfony to inject the Entity Manager service into the controller method. This object is responsible for saving objects to, and fetching objects from, the database.
-    * lines 15-18 In this section, you instantiate and work with the $product object like any other normal PHP object.
-    * line 21 The persist($product) call tells Doctrine to "manage" the $product object. This does not cause a query to be made to the database.
-    * line 24 When the flush() method is called, Doctrine looks through all of the objects that it's managing to see if they need to be persisted to the database. In this example, the $product object's data doesn't exist in the database, so the entity manager executes an INSERT query, creating a new row in the product table.
+     * line 13 The EntityManagerInterface $entityManager argument tells Symfony to inject the Entity Manager service into the controller method. This object is responsible for saving objects to, and fetching objects from, the database.
+     *     Använd EntityManagerInterface direkt om du bara har en databas – det är tydligare, snabbare och enklare.
+     * Använd ManagerRegistry om:
+     * - Du har flera entity managers
+     * - Du bygger generisk logik (t.ex. ett bibliotek eller verktyg)
+     * - Du behöver tillgång till annan funktionalitet i Doctrine-registret
+     * EntityManager och MangerRegistry är alltså lite samma sak men ManagerRegistry
+     * är fördelaktig och vi har flera databas kopplingar.
+     * lines 15-18 In this section, you instantiate and work with the $product object like any other normal PHP object.
+     * line 21 The persist($product) call tells Doctrine to "manage" the $product object. This does not cause a query to be made to the database.
+     * line 24 When the flush() method is called, Doctrine looks through all of the objects that it's managing to see if they need to be persisted to the database. In this example, the $product object's data doesn't exist in the database, so the entity manager executes an INSERT query, creating a new row in the product table.
+     *
+     * Doctrine separerar läsa från skriva till en databas.
+     * Därför används EntityManager för att spara, uppdatera eller ta bort från databasen.
+     * Repository används för att läsa / hämta entiteter
      */
     #[Route("/product/create", name: "product_create")]
     public function createProduct(ManagerRegistry $doctrine): Response {
@@ -90,6 +101,17 @@ final class ProductController extends AbstractController
         return new Response('Saved new product with id '.$product->getId());
     }
 
+    /**
+     * Doctrine separerar läsa från skriva till en databas.
+     * Därför används EntityManager för att spara, uppdatera eller ta bort från databasen.
+     * ProductRepository ärver från EntityRepository, vilket är där find, findall m.m
+     * metoderna är definierade.
+     * Repository används för att läsa / hämta entiteter
+     * 
+     * Alla entiteter får en EntityRepository, detta för att kunna använda find, findall m.mm
+     * Önskar vi ytterligare queries så är det i vår EntityRepository vi definerar nya metoder.
+     * Dessa metoder kan använda Doctrine QueryBuilder (DQL) eller ren sql
+     */
     #[Route("/product/show", name:"product_show_all")]
     public function showAllProduct(ProductRepository $productRepository): Response {
         $products = $productRepository->findAll();
