@@ -14,8 +14,8 @@
             <p><strong>Author: </strong> {{ bok.getAuthor }}</p>
             <p><strong>Publisher: </strong> {{ bok.getPublisher }}</p>
             <p><strong>ISBN: </strong> {{ bok.getIsbn }}</p>
-            <a href=""><button type="submit" class="button primary-button">Radera bok</button></a>
-            <a href=""><button type="submit" class="button blue-button">Uppdatera bok</button></a>
+            <a href=" {{ path('delete_book', {num: bok.getId }) }}"><button type="submit" class="button primary-button">Radera bok</button></a>
+            <a href=" {{ path('update_book', {num: bok.getId}) }}"><button type="submit" class="button blue-button">Uppdatera bok</button></a>
         </div>
 </article>
 {% endblock %}
