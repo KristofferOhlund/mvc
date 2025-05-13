@@ -4,6 +4,7 @@
 
 {% block body %}
 <article>
+    {% include ("flash.html.twig") %}
     <h2>Befintliga böcker</h2>
     <div class="flex-container">
         {% for bok in böcker %}
