@@ -2,10 +2,12 @@
 @use 'sass:color';
 
 .bok {
+  height: 500px;
   padding: 0.5rem;
   width: 150px;
   border-radius: 0.2rem;
   background-color: color.scale($color: $dark-shades, $lightness: 90%);
+  overflow-y: hidden;
 }
 
 .bok img {
