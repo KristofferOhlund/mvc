@@ -34,15 +34,62 @@ class LibraryController extends AbstractController
     }
 
 
-    #[Route("/library/book/", name: "read_one")]
-    public function viewBook(): Response
+    #[Route("/library/book/{num}", name: "read_one", requirements: ['num' => '\d+'])]
+    public function viewBook(BookRepository $bookRepository, int $num): Response
     {   
+        $book = $bookRepository->find($num);
 
         $data = [
-            "böcker" => []
+            "bok" => $book
         ];
 
-        return $this->render("library/index.html.twig", $data);
+        return $this->render("library/view.html.twig", $data);
+    }
+
+
+    #[Route("/library/book/delete/{num}", name: "confirm_delete")]
+    public function confirmDelete(BookRepository $bookRepository, int $num, Request $request): Response
+    {   
+        $book = $bookRepository->find($num);
+
+        $data = [
+            "bok" => $book
+        ];
+
+        return $this->render("library/delete.html.twig", $data);
+    }
+
+
+    #[Route("/library/book/delete", name: "delete_book")]
+    public function deleteBook(BookRepository $bookRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        $bookId = $request->request->get("book_id");
+        if (!$bookId) {
+            return $this->redirectToRoute("index");
+        }
+        $book = $bookRepository->find($bookId);
+
+        $entityManager->remove($book);
+
+        $entityManager->flush();
+
+        $this->addFlash("notice", "Book with id $bookId has been removed");
+
+        return $this->redirectToRoute("book_view_all");
+    }
+
+
+
+    #[Route("/library/book/update/{num}", name: "update_book")]
+    public function updateBook(BookRepository $bookRepository, int $num): Response
+    {   
+        $book = $bookRepository->find($num);
+
+        $data = [
+            "bok" => $book
+        ];
+
+        return $this->render("library/view.html.twig", $data);
     }
 
 
