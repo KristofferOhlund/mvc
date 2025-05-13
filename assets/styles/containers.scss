@@ -1,3 +1,6 @@
+@use 'variables' as *;
+@use 'sass:color';
+
 .flex-container,
 .image-container,
 .button-container {
@@ -48,4 +51,16 @@
 
 .winner {
   background-color: #85BB65;
+}
+
+.warning {
+  border-radius: 0.2rem;
+  color: $warning-text;
+  background-color: color.scale($warning-text, $lightness:70%);
+}
+
+.warning h1 {
+  padding: 0.5rem;
+  border-bottom: 0;
+  margin-bottom: 1.4rem;
 }
