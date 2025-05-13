@@ -7,6 +7,12 @@
   align-items: center;
 }
 
+.flex-container {
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
 .image-container {
   justify-content: space-around;
 }

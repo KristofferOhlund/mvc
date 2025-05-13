@@ -1,0 +1,14 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+.bok {
+  padding: 0.5rem;
+  width: 150px;
+  border-radius: 0.2rem;
+  background-color: color.scale($color: $dark-shades, $lightness: 90%);
+}
+
+.bok img {
+  height: 200px;
+  width: 100%
+}
