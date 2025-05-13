@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library Index{% endblock %}
+
+{% block body %}
+<article>
+    <h1>Välkommen till Biblioteket</h1>
+    <p>Här på Doctrin's Bibliotek har vi en samling spännande böcker.</p>
+    <p>Välj alternativen nedan för att inspektera våra böcker</p>
+
+    <div class="flex-container">
+        {% for bok in böcker %}
+            <div class="bok">
+                <a href=" {{ path('read_one', {num: bok.id })}} ">
+                    <img src="{{ bok.image }}" alt="Bokens bild">
+                </a>
+                <p><strong>{{ bok.title|e }}</strong></p>
+                <p><strong>{{ bok.author|e }}</strong></p>
+                <p><strong>{{ bok.ISBN|e }}</strong></p>
+            </div>
+        {% endfor %}
+    </div>
+</article>
+{% endblock %}
