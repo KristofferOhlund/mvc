@@ -53,9 +53,23 @@ class LibraryController extends AbstractController
     }
 
 
+    /**
+     * Add new book to the database
+     */
     #[Route("/library/book/add", name: "add_book", methods:["POST"])]
-    public function addBook(): Response
+    public function addBook(Request $request, EntityManagerInterface $entityManager): Response
     {   
+        $request->request->get("title");
+        $book = new Book();
+        $book->setTitle($request->request->get("title"));
+        $book->setIsbn($request->request->get("isbn"));
+        $book->setAuthor($request->request->get("author"));
+        $book->setPublisher($request->request->get("publisher"));
+        $book->setImgUrl($request->request->get("img_url")."png" ?? "na");
+        
+        $entityManager->persist($book);
+
+        $entityManager->flush();
         return $this->redirectToRoute("book_view_all");
     }
 }
