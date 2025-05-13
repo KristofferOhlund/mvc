@@ -21,7 +21,7 @@
                     <li><a href="{{ path('home') }}" class="{{ (app.request.pathinfo == path('home')) ? 'active' : '' }}">Me</a></li> |
                     <li><a href="{{ path('about') }}" class="{{ (app.request.pathinfo == path('about')) ? 'active' : '' }}">About</a></li> |
                     <li><a href="{{ path('report') }}" class="{{ (app.request.pathinfo == path('report')) ? 'active' : '' }}">Report</a></li> |
-                    <li><a href="{{ path('lucky') }}" class="{{ (app.request.pathinfo == path('lucky')) ? 'active' : '' }}">Lucky</a></li> |
+                    {# <li><a href="{{ path('lucky') }}" class="{{ (app.request.pathinfo == path('lucky')) ? 'active' : '' }}">Lucky</a></li> | #}
                     <li><a href="{{ path('jsonRoutes') }}" class="{{ (app.request.pathinfo == path('jsonRoutes')) ? 'active' : '' }}">Api</a></li> |
                     <li><a href="{{ path('card') }}" class="{{ (app.request.pathinfo == path('card')) ? 'active' : '' }}">Card</a></li> |
                     <li><a href="{{ path('game_info') }}" class="{{ (app.request.pathinfo == path('game_info')) ? 'active' : '' }}">Game</a></li> |
