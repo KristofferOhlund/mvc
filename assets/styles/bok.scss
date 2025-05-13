@@ -12,3 +12,20 @@
   height: 200px;
   width: 100%
 }
+
+.single-bok {
+  margin: 0 auto;
+  padding: 0.5rem;
+  width: 27rem;
+  border-radius: 0.2rem;
+  background-color: color.scale($color: $dark-shades, $lightness: 90%);
+  text-align: center;
+}
+
+.single-bok img {
+  width: 300px;
+}
+
+.single-bok .button {
+  margin: 1rem;
+}
