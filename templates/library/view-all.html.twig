@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tillgängliga böcker{% endblock %}
+
+{% block body %}
+<article>
+    <h2>Befintliga böcker</h2>
+    <div class="flex-container">
+        {% for bok in böcker %}
+        <div class="bok">
+            <a href=" {{ path('read_one', {num: bok.id })}} ">
+                <img src="{{ asset('build/images/library/{{bok.image_url}}') }}" alt="Bokens bild">
+            </a>
+            <p><strong>{{ bok.title|e }}</strong></p>
+            <p><strong>{{ bok.author|e }}</strong></p>
+            <p><strong>{{ bok.ISBN|e }}</strong></p>
+        </div>
+        {% endfor %}
+    </div>
+</article>
+{% endblock %}
