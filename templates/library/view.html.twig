@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tillgängliga böcker{% endblock %}
+
+{% block body %}
+<article>
+    
+        <div class="single-bok">
+            <h2>{{ bok.getTitle }}</h2>
+            <a href=" {{ path('read_one', {num: bok.getId|e }) }} ">
+                <img src="{{ asset('build/images/library/' ~ bok.getImgUrl) }}" alt="Bokens bild">
+            </a>
+            <p><strong>Title: </strong> {{ bok.getTitle }}</p>
+            <p><strong>Author: </strong> {{ bok.getAuthor }}</p>
+            <p><strong>Publisher: </strong> {{ bok.getPublisher }}</p>
+            <p><strong>ISBN: </strong> {{ bok.getIsbn }}</p>
+            <a href=""><button type="submit" class="button primary-button">Radera bok</button></a>
+            <a href=""><button type="submit" class="button blue-button">Uppdatera bok</button></a>
+        </div>
+</article>
+{% endblock %}

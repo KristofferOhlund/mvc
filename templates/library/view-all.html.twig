@@ -8,12 +8,13 @@
     <div class="flex-container">
         {% for bok in böcker %}
         <div class="bok">
-            <a href=" {{ path('read_one', {num: bok.id })}} ">
-                <img src="{{ asset('build/images/library/{{bok.image_url}}') }}" alt="Bokens bild">
+            <a href=" {{ path('read_one', {num: bok.getId|e }) }} ">
+                <img src="{{ asset('build/images/library/' ~ bok.getImgUrl) }}" alt="Bokens bild">
             </a>
-            <p><strong>{{ bok.title|e }}</strong></p>
-            <p><strong>{{ bok.author|e }}</strong></p>
-            <p><strong>{{ bok.ISBN|e }}</strong></p>
+            <p><strong>Title: </strong> {{ bok.getTitle }}</p>
+            <p><strong>Author: </strong> {{ bok.getAuthor }}</p>
+            <p><strong>Publisher: </strong> {{ bok.getPublisher }}</p>
+            <p><strong>ISBN: </strong> {{ bok.getIsbn }}</p>
         </div>
         {% endfor %}
     </div>
