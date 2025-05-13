@@ -65,7 +65,9 @@ class LibraryController extends AbstractController
         $book->setIsbn($request->request->get("isbn"));
         $book->setAuthor($request->request->get("author"));
         $book->setPublisher($request->request->get("publisher"));
-        $book->setImgUrl($request->request->get("img_url")."png" ?? "na");
+        
+        $img = $request->request->get("img_url");
+        $book->setImgUrl($img ? $img . ".png" : "na.png");
         
         $entityManager->persist($book);
 
