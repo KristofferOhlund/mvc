@@ -1,0 +1,17 @@
+{% extends 'library/view.html.twig' %}
+
+{% block title %}Ta bort bok{% endblock %}
+
+
+{% block action %}
+<div class="warning">
+    <h1 class="warning">Är du säker på att du vill ta bort följande bok</h1>
+    <h1>{{ bok.getTitle}}</h1>
+    <p>Detta går inte att ångra</p>
+    <form action="{{ path('delete_book') }}" method="post">
+        <input type="hidden" name="book_id" value="{{ bok.getId }}">
+        <button type="submit" class="button primary-button">Bekräfta borttagning</button>
+    </form>
+</div>
+{% endblock %}
+
