@@ -16,7 +16,7 @@
 
             {% block action %}
                 <a href=" {{ path('confirm_delete', {num: bok.getId|e}) }}"><button class="button primary-button">Radera bok</button></a>
-                <a href=" {{ path('update_book', {num: bok.getId}) }}"><button type="submit" class="button blue-button">Uppdatera bok</button></a>
+                <a href=" {{ path('init_update_book', {num: bok.getId}) }}"><button type="submit" class="button blue-button">Uppdatera bok</button></a>
             {% endblock %}
         </div>
 </article>
