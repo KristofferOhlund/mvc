@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Book;
 use App\Repository\BookRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LibraryController extends AbstractController
 {
@@ -80,16 +81,46 @@ class LibraryController extends AbstractController
 
 
 
-    #[Route("/library/book/update/{num}", name: "update_book")]
-    public function updateBook(BookRepository $bookRepository, int $num): Response
+    #[Route("/library/book/update/{num}", name: "init_update_book", requirements: ['num' => '\d+'], methods:["GET"])]
+    public function initUpdateBook(BookRepository $bookRepository, int $num): Response
     {   
         $book = $bookRepository->find($num);
 
         $data = [
-            "bok" => $book
+            "book" => $book
         ];
 
-        return $this->render("library/view.html.twig", $data);
+        return $this->render("library/update-book.html.twig", $data);
+    }
+
+
+    #[Route("/library/book/update", name: "update_book", methods:["POST"])]
+    public function updateBook(BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {   
+        $bookId = $request->request->get("book_id");
+        
+        $book = $bookRepository->find($bookId);
+
+        if (!$book) {
+            throw new NotFoundHttpException("Book with id $bookId cannot be found!");
+        }
+
+        // Uppdatera objekt
+        $book->setTitle($request->request->get("title"));
+        $book->setIsbn($request->request->get("isbn"));
+        $book->setAuthor($request->request->get("author"));
+        $book->setPublisher($request->request->get("publisher"));
+        $imgUrl = $request->request->get("img_url");
+        $imgUrlFull = $imgUrl ? $imgUrl : "na.png";
+        $book->setImgUrl($imgUrlFull);
+
+        // Uppdatera databas
+        $entityManager->persist($book);
+        $entityManager->flush();
+
+        $this->addFlash("notice", "Book with id $bookId has been updated!");
+
+        return $this->redirectToRoute("init_update_book", ["num" => intval($bookId)]);
     }
 
 
