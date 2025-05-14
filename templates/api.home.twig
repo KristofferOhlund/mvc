@@ -25,6 +25,8 @@
         </form>
 
         <li><a href="{{ path('game_api') }}">Game Api</a> - Show the score from current Game of 21 session</li>
+        <li><a href="{{ path('view_books_json') }}">Library Api</a> - View books available in the Doctrin's mega library</li>
+        <li><a href="{{ path('view_single_book_json', {isbn: "978-1-59327-992-953995"}) }}">Library Api ISBN</a> - View a book based on its ISBN number</li>
     </ul>
 </article>
 {% endblock %}
