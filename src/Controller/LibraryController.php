@@ -150,23 +150,20 @@ class LibraryController extends AbstractController
      * Add new book to the database
      */
     #[Route("/library/book/add", name: "add_book", methods:["POST"])]
-    public function addBook(EntityManagerInterface $entityManager): Response
+    public function addBook(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if (array_all($_POST, function ($request) {
-            return is_string($request);
+        $form = $request->request->all();
+        if (array_all($form, function ($attribute) {
+            return is_string($attribute);
         })) {
-            $title = (string)($_POST["title"]);
-            $isbn =   (string)($_POST["isbn"]);
-            $author = (string)($_POST["author"]);
-            $publisher = (string)($_POST["publisher"]);
 
             // Skapa Book objekt, fält är required i form.
             $book = new Book();
-            $book->setTitle($title);
-            $book->setIsbn($isbn);
-            $book->setAuthor($author);
-            $book->setPublisher($publisher);
-            $imgUrl = $_POST["img_url"];
+            $book->setTitle($form["title"]);
+            $book->setIsbn($form["isbn"]);
+            $book->setAuthor($form["author"]);
+            $book->setPublisher($form["publisher"]);
+            $imgUrl = $form["img_url"];
             $imgUrlFull = $imgUrl ? $imgUrl : "na.png";
             $book->setImgUrl($imgUrlFull);
 
@@ -174,9 +171,10 @@ class LibraryController extends AbstractController
 
             $entityManager->flush();
 
+            $title = $book->getTitle();
+
             $this->addFlash('notice', "Added book: $title");
         }
         return $this->redirectToRoute("book_view_all");
-
     }
 }
