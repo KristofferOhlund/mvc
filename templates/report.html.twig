@@ -95,6 +95,22 @@
                 Min TIL för detta momen är givetvis PHPunit som verktyg, men en viktigare lärdom är nog just att skriva testbar kod. Detta kommer jag ta med mig i framtiden och jag hoppas på att kunna skriva bättre, renare och mer testbar kod.
             </p>
         </section>
+        <section>
+            <h1 id="kmom05">Kmom05</h1>
+            <p>Nu har vi även testat på Symfony tillsammans med Doctrine. Till en början tyckte jag det var omständigt för det var så många olika kommandon vi gick igenom i övningen. Men väl i uppgiften tyckte jag det gick smidigt, Doctrine gav ju alltid en hint om nästa steg efter ett utfört kommando, och ingenting sparades i databasen innan vi gjort <code>:migrate</code> kommandot vilket också kändes skönt. Jag fick även testa på att uppdatera en Entitet som redan fanns, Doctrine sa direkt ifrån och antog att jag ville lägga till attribut, vilket var precis vad jag ville göra, så det var bara lägga till attribut och köra <code>:migrate</code> igen, riktigt gött!</p>
+            
+            <p>Angående applikationen Library och dess användargränssnitt så tänkte jag väl egentligen inget speciellt. Vet inte varför gränsnitt är en fråga i detta moment. Men jag tänkte mig att vi skulle ha en överblick över alla böcker. Därifrån kan man välja en bok för att visa mer detaljer, nu visar jag egentligen samma detaljer men med en större bild. Jag hade kunnat lägga till att visa tex en kort beskrivning för varje bok men då behöver jag uppdatera Book entiten igen och lägga till text för varje bok, vilket kändes omständigt. I denna vy la jag även till två knappar, en för att ta bort boken och en annan för att uppdatera boken. Jag tycker det gav ett självförklarande flöde och det kändes logiskt att ha dessa i detaljvyn för en bok.</p>
+
+            <p>
+                Att arbeta med CRUD operationer tillsammans med ORM kändes bra, dessa är ju grundläggande SQL operationer och det fanns då färdiga funktioner för varje operation, så det var bara att bygga ett formulär och sedan använda respektive funktion. Det är så skönt också att inte bara få tillbaka data från en databas, utan hela objekt med metoder och annat att använda, och sedan bara skicka tillbaka objektet till databasen för att uppdatera dess tabell.
+            </p>
+            <p>
+                Jag gillar ORM då det låter mig fokusera på applikationen och inte SQL koden för databasen. Kändes skönt att ha färdiga funktioner för grundläggande SQL kommandon. Nu körde jag med Sqlite istället för MariaDb, jag hade gärna provat på MariaDb men pga tidbrist så valde jag den lättare vägen. 
+            </p>
+            <p>
+                Min TIL för detta kmom är främst Doctrine. Jag ägnade lite tid att läsa dokumentationen och undersöka bl.a vad Entiteter och Repositorys var och hur jag kunde ha färdiga metoder som find, findAll osv. Så här efter momentet så känns ju Doctrine riktigt bra. Har även förstått att man kan skapa FormType entiteter i Symfony, som då kan definera ett formulär och dess valideringsregler och sedan använda Doctrine för att koppla fälten till en Entitet i databasen. Måste dock erkänna att det är lite förvirrande för vad som är Symfony funktionalitet och vad som är Doctrines funktionalitet och vart gränsen går.
+            </p>
+        </section>
     </div>
         <div class="box2">
             <h3>Förteckning</h3>
@@ -103,6 +119,7 @@
                 <li><a href="#kmom02">Kmom02</a></li>
                 <li><a href="#kmom03">Kmom03</a></li>
                 <li><a href="#kmom04">Kmom04</a></li>
+                <li><a href="#kmom05">Kmom05</a></li>
             </ul>
         </div>
 </div>
