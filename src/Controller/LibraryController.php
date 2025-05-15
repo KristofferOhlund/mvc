@@ -102,42 +102,36 @@ class LibraryController extends AbstractController
     #[Route("/library/book/update", name: "update_book", methods:["POST"])]
     public function updateBook(BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $bookId = $request->request->get("book_id");
+        $form = $request->request->all();
 
-        $book = $bookRepository->find($bookId);
-
-        if (!$book) {
-            throw new NotFoundHttpException("Book with id $bookId cannot be found!");
-        }
-
-        if (array_all($_POST, function ($request) {
-            return is_string($request);
-
+        if (array_all($form, function ($attribute) {
+            return is_string($attribute);
         })) {
-            $title = (string)($_POST["title"]);
-            $isbn =   (string)($_POST["isbn"]);
-            $author = (string)($_POST["author"]);
-            $publisher = (string)($_POST["publisher"]);
+
+            $book = $bookRepository->find($form["book_id"]);
+
+            if (!$book) {
+                throw new NotFoundResourceException("Boken finns inte i databasen");
+            }
 
             // Uppdatera objekt, fält är required i form.
-            $book->setTitle($title);
-            $book->setIsbn($isbn);
-            $book->setAuthor($author);
-            $book->setPublisher($publisher);
-            $imgUrl = $_POST["img_url"];
+            $book->setTitle($form["title"]);
+            $book->setIsbn($form["isbn"]);
+            $book->setAuthor($form["author"]);
+            $book->setPublisher($form["publisher"]);
+            $imgUrl = $form["img_url"];
             $imgUrlFull = $imgUrl ? $imgUrl : "na.png";
             $book->setImgUrl($imgUrlFull);
-        };
 
-        // // Uppdatera databas
-        $entityManager->persist($book);
-        $entityManager->flush();
+            // Uppdatera databas
+            $entityManager->persist($book);
+            $entityManager->flush();
 
-        $this->addFlash("notice", "Book with id $bookId has been updated!");
+            $this->addFlash("notice", "Book with id" . $form["book_id"] . "has been updated!");
+        }
 
-        return $this->redirectToRoute("init_update_book", ["num" => intval($bookId)]);
+        return $this->redirectToRoute("init_update_book", ["num" => intval($form["book_id"])]);
     }
-
 
     #[Route("/library/book/register", name: "register_book", methods:["GET"])]
     public function registerBook(): Response
