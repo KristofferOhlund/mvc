@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ProductController extends AbstractController
 {
-
     #[Route("/product/view", name: "product_view_all")]
     public function viewAllProduct(ProductRepository $productRepository): Response
     {
@@ -27,7 +26,7 @@ final class ProductController extends AbstractController
 
     /**
      * Använd Doctrins Query Builder
-     * 
+     *
      */
     #[Route("/product/view/{value}", name: "product_view_minimum_value")]
     public function viewProductWithMinimumValue(ProductRepository $productRepository, int $value): Response
@@ -65,7 +64,7 @@ final class ProductController extends AbstractController
     }
 
     /**
-     * 
+     *
      * line 13 The EntityManagerInterface $entityManager argument tells Symfony to inject the Entity Manager service into the controller method. This object is responsible for saving objects to, and fetching objects from, the database.
      *     Använd EntityManagerInterface direkt om du bara har en databas – det är tydligare, snabbare och enklare.
      * Använd ManagerRegistry om:
@@ -83,7 +82,8 @@ final class ProductController extends AbstractController
      * Repository används för att läsa / hämta entiteter
      */
     #[Route("/product/create", name: "product_create")]
-    public function createProduct(ManagerRegistry $doctrine): Response {
+    public function createProduct(ManagerRegistry $doctrine): Response
+    {
         $entityManager = $doctrine->getManager();
 
         // Create new product
@@ -107,15 +107,16 @@ final class ProductController extends AbstractController
      * ProductRepository ärver från EntityRepository, vilket är där find, findall m.m
      * metoderna är definierade.
      * Repository används för att läsa / hämta entiteter
-     * 
+     *
      * Alla entiteter får en EntityRepository, detta för att kunna använda find, findall m.mm
      * Önskar vi ytterligare queries så är det i vår EntityRepository vi definerar nya metoder.
      * Dessa metoder kan använda Doctrine QueryBuilder (DQL) eller ren sql
      */
     #[Route("/product/show", name:"product_show_all")]
-    public function showAllProduct(ProductRepository $productRepository): Response {
+    public function showAllProduct(ProductRepository $productRepository): Response
+    {
         $products = $productRepository->findAll();
-        
+
         $response = $this->json($products);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT

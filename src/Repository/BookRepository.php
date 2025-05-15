@@ -17,16 +17,19 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find a book with isbn
-     * @var isbn<string> isbn number for the book
+     * Find a book based on its isbn value
+     * @param string $isbn number of the book
+     *
+     * @return Book|null
      */
-    public function findByIsbn(string $isbn) {
+    public function findByIsbn(string $isbn): ?Book
+    {
         return $this->createQueryBuilder("b")
             ->setParameter("isbn", $isbn)
             ->andWhere("b.isbn = :isbn")
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     //    /**
