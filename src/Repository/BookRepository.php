@@ -28,7 +28,7 @@ class BookRepository extends ServiceEntityRepository
             ->setParameter("isbn", $isbn)
             ->andWhere("b.isbn = :isbn")
             ->getQuery()
-            ->getResult()
+            ->getResult()[0]
         ;
     }
 
