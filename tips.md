@@ -96,3 +96,12 @@ För att escapa output för att undika CSS attacker, använd Twigs funktion |e
 Exempel:
     {{ product.getName|e }}
 Ovan är alltså motsvarande som htmlentities()/htmlspecialchars()
+
+# PHPmetrics
+# Go to the root of your Symfony directory
+mkdir --parents tools/phpmetrics
+composer require --working-dir=tools/phpmetrics phpmetrics/phpmetrics
+tools/phpmetrics/vendor/bin/phpmetrics --version
+tools/phpmetrics/vendor/bin/phpmetrics --help
+tools/phpmetrics/vendor/bin/phpmetrics --config=tools/phpmetrics/phpmetrics.json
+
