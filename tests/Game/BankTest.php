@@ -28,7 +28,7 @@ class BankTest extends TestCase
         $cards = $player->showHand();
         $this->assertEmpty($cards);
 
-        $stop = $player->getStop();
+        $stop = $player->hasStop();
         $this->assertEquals(false, $stop);
     }
 
@@ -48,7 +48,7 @@ class BankTest extends TestCase
 
         $deck->method("drawGraphic")->willReturn($card);
         $bank->bankDrawCard($deck);
-        $this->assertTrue($bank->getStop());
+        $this->assertTrue($bank->hasStop());
         $this->assertEquals(22, $bank->getPoints());
     }
 

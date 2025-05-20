@@ -62,7 +62,7 @@ class Player
      * Get the current state of daredevil
      * @return bool
      */
-    public function getStop(): bool
+    public function hasStop(): bool
     {
         return $this->stop;
     }

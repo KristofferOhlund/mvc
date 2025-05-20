@@ -21,7 +21,7 @@ class GameController extends AbstractController
         "gameMaster"
     ];
 
-    public function createSession(SessionInterface $session): void
+    private function createSession(SessionInterface $session): void
     {
         // CREATE OBJECTS
         $player = new Player("Player");
@@ -35,7 +35,7 @@ class GameController extends AbstractController
         $session->set(self::SESSIONATTRIBUTES[3], $gameMaster);
     }
 
-    public function checkSession(SessionInterface $session): void
+    private function checkSession(SessionInterface $session): void
     {
         // Make sure all attributes are set
         // Else create new instances of all

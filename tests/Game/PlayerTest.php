@@ -28,7 +28,7 @@ class PlayerTest extends TestCase
         $cards = $player->showHand();
         $this->assertEmpty($cards);
 
-        $stop = $player->getStop();
+        $stop = $player->hasStop();
         $this->assertEquals(false, $stop);
     }
 
@@ -41,7 +41,7 @@ class PlayerTest extends TestCase
     {
         $player = new Player();
         $player->stop();
-        $isStopped = $player->getStop();
+        $isStopped = $player->hasStop();
 
         $this->assertTrue($isStopped);
     }
@@ -52,7 +52,8 @@ class PlayerTest extends TestCase
      */
     public function testPlayerPointsIsInt()
     {
-        $points = new Player()->getPoints();
+        $player = new Player();
+        $points = $player->getPoints();
         $this->assertIsInt($points);
     }
 

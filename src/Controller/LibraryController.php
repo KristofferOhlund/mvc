@@ -50,7 +50,7 @@ class LibraryController extends AbstractController
 
 
     #[Route("/library/book/delete/{num}", name: "confirm_delete")]
-    public function confirmDelete(BookRepository $bookRepository, int $num, Request $request): Response
+    public function confirmDelete(BookRepository $bookRepository, int $num): Response
     {
         $book = $bookRepository->find($num);
 

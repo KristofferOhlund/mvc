@@ -126,7 +126,7 @@ class GameMaster
         $bestPlayer = $this->getBestPlayer();
         // if player is null
         if (!$bestPlayer) {
-            $bestPlayer = new Player();
+            $bestPlayer = $this->getPlayers()[0];
         }
         $bank = $this->getBank();
         $winner = null;
@@ -139,8 +139,6 @@ class GameMaster
             $winner = $bank;
         } elseif ($bank->getPoints() > $bestPlayer->getPoints()) {
             $winner = $bank;
-        } else {
-            $winner = $bestPlayer;
         }
 
         $result = ["winner" => $winner, "players" => $this->getPlayers(), "bank" => $bank];
@@ -162,7 +160,8 @@ class GameMaster
 
         $winner = null;
         $max = 0;
-        for ($i = 0; $i < count($this->players); $i++) {
+        $playerCount = count($this->players);
+        for ($i = 0; $i < $playerCount; $i++) {
             $playerPoints = $this->players[$i]->getPoints();
             if ($playerPoints > $max && $playerPoints < 21) {
                 $max = $playerPoints;
@@ -179,7 +178,7 @@ class GameMaster
     public function checkPlayersDone(): bool
     {
         return array_all($this->players, function (Player $player) {
-            return $player->getStop();
+            return $player->hasStop();
         });
     }
 

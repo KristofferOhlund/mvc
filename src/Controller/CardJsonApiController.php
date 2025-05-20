@@ -81,14 +81,13 @@ class CardJsonApiController extends AbstractController
             $deck = $session->get("deckObject");
         }
 
-        $removed_cards = $deck->drawGraphic($num);
+        $removedCards = $deck->drawGraphic($num);
 
         $session->set("deckObject", $deck);
-        // $session->set("removed_cards", $removed_cards);
 
         $data = [
             "cards_left" => $deck->countGraphicCards(),
-            "removed_cards" => $deck->getArrayOfCardsPresentation($removed_cards)
+            "removed_cards" => $deck->getArrayOfCardsPresentation($removedCards)
         ];
 
         $response = new JsonResponse($data);
@@ -104,24 +103,47 @@ class CardJsonApiController extends AbstractController
         $gameMaster = $session->get("gameMaster");
         if (!$gameMaster) {
             $data = "There is no active game session";
-        } else {
-            $players = $gameMaster->getPlayers();
-            foreach ($players as $player) {
-                $data["Players"][$player->getname()] = [
-                    "points" => $player->getPoints(),
-                    "card" => $player->getPlayerRepresentation()
-                ];
-            }
-            $bank = $gameMaster->getBank();
-            $data["Bank"] = [
-                "points" => $bank->getPoints(),
-                "cards" => $bank->getPlayerRepresentation()
-            ];
-            if ($gameMaster->checkPlayersDone()) {
-                $result = $gameMaster->declareWinner();
-                $data["Winner"] = $result["winner"]->getName();
-            }
+            $response = new JsonResponse($data);
+            $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+            return $response;
         }
+        $players = $gameMaster->getPlayers();
+        foreach ($players as $player) {
+            $data["Players"][$player->getname()] = [
+                "points" => $player->getPoints(),
+                "card" => $player->getPlayerRepresentation()
+            ];
+        }
+        $bank = $gameMaster->getBank();
+        $data["Bank"] = [
+            "points" => $bank->getPoints(),
+            "cards" => $bank->getPlayerRepresentation()
+        ];
+        if ($gameMaster->checkPlayersDone()) {
+            $result = $gameMaster->declareWinner();
+            $data["Winner"] = $result["winner"]->getName();
+        }
+
+        // if (!$gameMaster) {
+        //     $data = "There is no active game session";
+        // } else {
+        //     $players = $gameMaster->getPlayers();
+        //     foreach ($players as $player) {
+        //         $data["Players"][$player->getname()] = [
+        //             "points" => $player->getPoints(),
+        //             "card" => $player->getPlayerRepresentation()
+        //         ];
+        //     }
+        //     $bank = $gameMaster->getBank();
+        //     $data["Bank"] = [
+        //         "points" => $bank->getPoints(),
+        //         "cards" => $bank->getPlayerRepresentation()
+        //     ];
+        //     if ($gameMaster->checkPlayersDone()) {
+        //         $result = $gameMaster->declareWinner();
+        //         $data["Winner"] = $result["winner"]->getName();
+        //     }
+        // }
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);

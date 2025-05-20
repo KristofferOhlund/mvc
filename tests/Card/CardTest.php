@@ -28,6 +28,6 @@ class CardTest extends TestCase
     public function testCreateCardInvalidArgs()
     {
         $this->expectException(CardException::class);
-        $card = new Card("hjärtor", "red", "dam");
+        new Card("hjärtor", "red", "dam");
     }
 }

@@ -43,10 +43,9 @@ class Card
         $this->color = $cardColor;
         if (!in_array($familyValue, self::FAMILYVALUES) || !array_key_exists($valueAsString, self::CARDVALUES)) {
             throw new CardException("Invalid card arguments");
-        } else {
-            $this->family = $familyValue;
-            $this->stringValue = $valueAsString;
         }
+        $this->family = $familyValue;
+        $this->stringValue = $valueAsString;
     }
 
     /**

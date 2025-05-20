@@ -144,14 +144,14 @@ class CardGameController extends AbstractController
                 'warning',
                 'Number is 0 or bigger then the count of Deck'
             );
-        } else {
-            $removedCards = $deck->drawGraphic($num);
-            // update state of data
-            $data = [
-                "cards" => $removedCards,
-                "count_cards" => $deck->countGraphicCards(),
-            ];
         }
+
+        $removedCards = $deck->drawGraphic($num);
+        // update state of data
+        $data = [
+            "cards" => $removedCards,
+            "count_cards" => $deck->countGraphicCards(),
+        ];
 
         // Uppdatera session
         $session->set("deckObject", $deck);

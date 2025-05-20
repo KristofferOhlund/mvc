@@ -28,7 +28,7 @@ class Bank extends Player
     public function bankDrawCard(DeckOfCards $cardDeck): void
     {
         $points = 0;
-        while ($points < 21) {
+        while ($points < 17) {
             $card = $this->drawCard($cardDeck);
             $this->addCard($card);
             $points = $this->getPoints();
