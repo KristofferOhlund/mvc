@@ -466,6 +466,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-LuckyControllerTwig.html#method_dynamic"
         },                {
+            "fqsen": "\\App\\Controller\\MetricsController",
+            "name": "MetricsController",
+            "summary": "",
+            "url": "classes/App-Controller-MetricsController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\MetricsController\u003A\u003AIndex\u0028\u0029",
+            "name": "Index",
+            "summary": "",
+            "url": "classes/App-Controller-MetricsController.html#method_Index"
+        },                {
             "fqsen": "\\App\\Controller\\ProductController",
             "name": "ProductController",
             "summary": "",
@@ -533,22 +543,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Dice\\Dice\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor",
             "url": "classes/App-Dice-Dice.html#method___construct"
         },                {
             "fqsen": "\\App\\Dice\\Dice\u003A\u003Aroll\u0028\u0029",
             "name": "roll",
-            "summary": "",
+            "summary": "Roll\u0020a\u0020random\u0020dice\u0020value\nif\u0020roll\u0020value,\u0020set\u0020this\u002D\u003Evalue\u0020to\u0020value",
             "url": "classes/App-Dice-Dice.html#method_roll"
         },                {
             "fqsen": "\\App\\Dice\\Dice\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Get\u0020value\u0020as\u0020int\u0020or\u0020null",
             "url": "classes/App-Dice-Dice.html#method_getValue"
         },                {
             "fqsen": "\\App\\Dice\\Dice\u003A\u003AgetAsString\u0028\u0029",
             "name": "getAsString",
-            "summary": "",
+            "summary": "return\u0020value\u0020as\u0020string",
             "url": "classes/App-Dice-Dice.html#method_getAsString"
         },                {
             "fqsen": "\\App\\Dice\\Dice\u003A\u003A\u0024value",
@@ -563,12 +573,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Dice\\DiceGraphic\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructor",
             "url": "classes/App-Dice-DiceGraphic.html#method___construct"
         },                {
             "fqsen": "\\App\\Dice\\DiceGraphic\u003A\u003AgetAsString\u0028\u0029",
             "name": "getAsString",
-            "summary": "",
+            "summary": "Get\u0020value\u0020as\u0020string",
             "url": "classes/App-Dice-DiceGraphic.html#method_getAsString"
         },                {
             "fqsen": "\\App\\Dice\\DiceGraphic\u003A\u003A\u0024representation",
@@ -881,10 +891,10 @@ Search.appendIndex(
             "summary": "Get\u0020the\u0020class\u0020of\u0020this\u002D\u003Ecardhand",
             "url": "classes/App-Game-Player.html#method_getCardHandClass"
         },                {
-            "fqsen": "\\App\\Game\\Player\u003A\u003AgetStop\u0028\u0029",
-            "name": "getStop",
+            "fqsen": "\\App\\Game\\Player\u003A\u003AhasStop\u0028\u0029",
+            "name": "hasStop",
             "summary": "Get\u0020the\u0020current\u0020state\u0020of\u0020daredevil",
-            "url": "classes/App-Game-Player.html#method_getStop"
+            "url": "classes/App-Game-Player.html#method_hasStop"
         },                {
             "fqsen": "\\App\\Game\\Player\u003A\u003AshowHand\u0028\u0029",
             "name": "showHand",

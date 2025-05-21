@@ -12,7 +12,7 @@ use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class DiceGameControllerTest extends WebTestCase
-{   
+{
     /**
      * Test route response for DiceGame
      */
@@ -35,8 +35,8 @@ class DiceGameControllerTest extends WebTestCase
     }
 
     public function testRollManyFail(): void
-    {   
-        
+    {
+
         $client = static::createClient();
         $client->catchExceptions(false);
         $this->expectException(\Exception::class);
@@ -44,7 +44,7 @@ class DiceGameControllerTest extends WebTestCase
     }
 
     public function testRollManySuccess(): void
-    {   
+    {
         $client = static::createClient();
         $client->request('GET', '/game/pig/test/roll/89', ["num_dices" => 89]);
         $this->assertSelectorTextContains("h1", "Roll many dices");
@@ -52,7 +52,7 @@ class DiceGameControllerTest extends WebTestCase
 
 
     public function testDiceHandFail(): void
-    {   
+    {
         $client = static::createClient();
         $client->request('GET', '/game/pig/test/dicehand/100', ["num" => 100]);
         // $client->catchExceptions(false);
@@ -61,13 +61,14 @@ class DiceGameControllerTest extends WebTestCase
     }
 
     public function testDiceHandSuccess(): void
-    {   
+    {
         $client = static::createClient();
         $client->request('GET', '/game/pig/test/dicehand/58', ["num" => 58]);
         $this->assertResponseStatusCodeSame(200);
     }
 
-    public function testInit() {
+    public function testInit()
+    {
         $client = static::createClient();
         $client->request('GET', '/game/pig/init');
         $this->assertSelectorTextContains("h1", "Pig game [START]");

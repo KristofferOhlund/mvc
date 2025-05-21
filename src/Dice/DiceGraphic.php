@@ -23,6 +23,10 @@ class DiceGraphic extends Dice
         parent::__construct();
     }
 
+    /**
+     * Get value as string
+     * @return string
+     */
     public function getAsString(): string
     {
         return $this->representation[$this->value - 1];
