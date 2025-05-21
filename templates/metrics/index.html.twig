@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+{% block title %} Metrics {% endblock title %}
+{% block main %}
+        <article>
+            <h1>Introduktion</h1>
+            <h3>CodeStyle</h3>
+            <p>
+                Att följa en CodeStyle är viktigt för att ha enhetlig kod. Det underlättar för andra utvecklare att skriva kod på samma sätt om alla följer samma style. Den style vi använt i detta projekt är samma som Symfony Community använder och består bl.a av följande:
+                <a href="https://www.php-fig.org/psr/psr-1/">PSR-1: Basic Coding Standard</a>
+                <a href="https://www.php-fig.org/per/coding-style/">PER Coding Style</a>
+                <a href="https://www.php-fig.org/psr/psr-4/">PSR-4 Autoloader</a><p>Vilket är en beskrivning för att &quot;auto-loada&quot; PHP moduler (klasser).</p>
+
+                <p>För att se till att CodeStyle följs korrekt har vi använt verktyget <a href="https://cs.symfony.com/">PHP Coding Standards Fixer</a> vilket automatiskt kan fixa problem relaterade till codestyle.</p>
+            </p>
+            <h3>Coverage</h3>
+            <p>
+                Coverage är ett mätetal för att beskriva hur många rader av ens kod som är testad. Har jag en klass med 200 rader kod och x antal metoder, men inga tester, så kommer jag få ett lågt värde för Coverage.
+                För min del så fick jag ett låg värde i Coverage baserat på hela min /src directory. Däremot har jag i /src övningar och annat som jag inte brytt mig om att testa, se nedan för exempel.
+                <img class="img" src="{{ asset('build/images/metrics/coverage.png') }}" alt="coverage">
+            </p>
+            <h3>Complexity</h3>
+            <p>
+                Gällande Cyclomatic Complexity så är det ett värde för att mäta hur komplex din kod är. Komplexiteten som används i Scrutinzer bygger på en algorithm skapad av Thomas J McCabe, läs mer här: <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a>.
+                <br>
+                Complexiteten är ett värde som mäter hur många &quot;descision points&quot; som finns i en metod, vilket gör att resultatet av en metod kan ha en annan utgång. <br><br>
+                Ett exempel är då loopar och if statements. En metod med många <code>if, elif, else</code> gör att utfallet kan variera väldigt mycket. Här blir det då extra viktigt att testa koden och ha en hög <code>coverage</code>. Complexiteten sätts som ett värde dels på din klass och på klassens metoder. Rekommendationen är att om complexiteten för en modul överstiger 10, så ska den delas upp i flera moduler. Detta för att det blir lättare att följa, testa och underhålla koden. Detta ska dock tas med en gnutta salt då en modul med Complexitet 20 kanske har 100% test coverage, och då minskar behovet att dela upp den i 2 moduler, jämför mot en modul som har Complexity 50 och test 0.
+                Nedan är en bild som visar min Complexity score, sorterat i sjunkande ordning.
+                <img class="img" src="{{ asset('build/images/metrics/complexity.png') }}" alt="complexity">
+            </p>
+            <h3>Cohesion</h3>
+            <p>
+                Cohesion är ett sätt att mäta om en klass har en eller flera uppgifter. Målet är att en klass har en uppgift, vilket då även ger ett högt Cohesion värde. <br>
+                Om en modul istället har flera uppgifter, så får du ett lågt Cohesion värde. Detta värde sammanfattas ofta genom &quot;LCOM - Lack of Cohesive Methods&quot;
+            </p>
+            <h3>Coupling</h3>
+            <p>
+                Coupling mäts i två värden, &quot;Efferent Coupling&quot; och &quot;Afferent coupling&quot; där det första mäter hur många klasser nämnd klass har ett beroende av och det andra mäter hur många klasser som har ett beroende till vald klass.
+                För detta ges ett sammanfattande värde kallat &quot;Instability index&quot; där 1 betyder att det är ostabilt och 0 betyder att det är stabilt. <br>
+                En klass som är beroende av många klasser har stor risk att utsättas för förändringar, eftersom om övriga klasser justeras så kan det direkt påverka den beroende klassen. Tvärtom är egentligen inte en risk för klassen själv, däremot kanske påverkan av justeringar av vald klass, påverkar många andra och därför blir effekten av en förändring väldigt stor.
+            </p>
+            <h3>CRAP</h3>
+            <p>
+                CRAP är ett värde som indikerar hur stor del av koden som inte är testad och därför kräver x mängd arbete att få till en för projektet tillräckligt hög nivå. 
+            </p>
+            <h2>PHPMetrics</h2>
+            <p>
+                Analyserar jag min rapport från PHPMetrics så ser jag att det är främst mina Controllers som har ett lågt &quot;maintainablity index&quot;. Jag väljer ut dessa för att de är relativt enkla att justera, jag antar att om jag lägger till tester för dessa så kommer deras score justeras ganska snabbt, utan att jag behöver implementera ny logik för spel eller routes. Storleken på cirklarna indikerar även complexiteten, vilket ökar behov för tester. Därför känns dessa mest relevanta om jag måste välja en punktinsats.
+                <ul>
+                    <li>- DiceGameController</li>
+                    <li>- LibraryController</li>
+                    <li>- GameController</li>
+                </ul>
+
+                <img class="img small-img" src="{{ asset('build/images/metrics/flaskhalsar.png')}}" alt="flaskhalsar">
+            </p>
+            <h2>Scrutnizer</h2>
+            <p>
+                <div class="badges">
+                    <a href="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main"><img class="badge" src="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/quality-score.png?b=main"
+                        alt="scrutiny score"></a>
+                    <a href="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main"><img class="badge" src="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/coverage.png?b=main" alt="coverage"></a>
+                    
+                    <a href="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main"><img class="badge" src="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/build.png?b=main" alt="build"></a>
+                </div>
+                <br>
+                För att koppla till de tidigare nämnda 6C så syns det tydligt vart jag bör lägga mitt fokus. Samtliga klasser och metoder har fått högsta betyg, A, även om det finns viss förbättringspotential så anser jag att fokuset bör ligga på att få upp nivån för Coverage. Detta är i sig inte bara ett mätetal utan det kommer också innebära att viss komplex kod kommer bli testad vilket även kommer minska värdet för CRAP.
+            </p>
+            <h3>Förbättringar</h3>
+            <p>Eftersom jag min scrutinizer poäng är 10/10 och alla klasser och metoder har betyg A, väljer jag att lägga allt fokus på min kodtäckning.</p>
+            <strong>Före</strong>
+
+            <strong>Efter</strong>
+        </article>
+{% endblock %}

@@ -32,7 +32,7 @@ class DiceGameController extends AbstractController
         return $this->render('pig/test/roll.html.twig', $data);
     }
 
-    #[Route("/game/pig/test/roll/{num_dices<\d+>}", name: "test_roll_dices")]
+    #[Route("/game/pig/test/roll/{num_dices}", name: "test_roll_dices", requirements:["num_dices" => "\d+"])]
     public function testRollDices(int $num_dices): Response
     {
         if ($num_dices > 99) {
@@ -54,7 +54,7 @@ class DiceGameController extends AbstractController
         return $this->render('pig/test/roll_many.html.twig', $data);
     }
 
-    #[Route("/game/pig/test/dicehand/{num<\d+>}", name: "test_dicehand")]
+    #[Route("/game/pig/test/dicehand/{num}", name: "test_dicehand", requirements: ["num" => "\d+"])]
     public function testDiceHand(int $num): Response
     {
         if ($num > 99) {
