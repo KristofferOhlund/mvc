@@ -1,4 +1,7 @@
 # mvc
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/build-status/main)
 
 ![webbplatsen](public/img/webbplats.png)
 
