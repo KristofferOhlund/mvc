@@ -111,6 +111,19 @@
                 Min TIL för detta kmom är främst Doctrine. Jag ägnade lite tid att läsa dokumentationen och undersöka bl.a vad Entiteter och Repositorys var och hur jag kunde ha färdiga metoder som find, findAll osv. Så här efter momentet så känns ju Doctrine riktigt bra. Har även förstått att man kan skapa FormType entiteter i Symfony, som då kan definera ett formulär och dess valideringsregler och sedan använda Doctrine för att koppla fälten till en Entitet i databasen. Måste dock erkänna att det är lite förvirrande för vad som är Symfony funktionalitet och vad som är Doctrines funktionalitet och vart gränsen går.
             </p>
         </section>
+        <section>
+            <h1 id="kmom06"></h1>
+            <p>
+                PHPmetrics var ett ett bra verktyg för att skapa en sammanfattning eller överblick över koden och bilden jag gillade mest var den som visas under overview, med ringar i olika färger beroende på Cyclomatic Complexity och Maintainability Index. Den visar direkt vilka flaskhalsar som finns, däremot saknar jag interaktivetet som finns i Scrutinizer.
+            </p>
+            <p>Personligen föredrar jag Scrutinizer då jag faktiskt kan inspektera min kod och få liknande information som i metrics, men här kan jag då även navigera in i en klass och inspektera koden eller tester som validerats. Om jag måste välja hade jag föredragit Scrutizer, att dessutom få schyssta badges att visa upp är ju bra reklam för mitt projekt. På tala om badges så fick jag vid mitt första bygge 10 poäng från Scrutinizer och 23% i coverage. Nu blev coverage så pass lågt då jag inte hade gjort några tester för mina sido controllers, vilket var något jag försökte förbättra men endast lyckades göra lokalt, mina byggen failade och efter x antal försök så gav jag upp. Jag la till tester för en gammal övning <code>App\Dice\Dice</code> och fick då upp coverage till 24%. Det hade varit kul att få högre teckning och jag kommer ta med mig vikten av att skriva tester från början, det kommer nog hjälpa mig att skapa bra classer för routes också vilket borde ge en bättre coverage till nästa gång.</p>
+            <p>
+                Jag tycker badges kan påvisa kodkvalitét till en viss mån då det ändå ger en stämpel på &quot;bra kod&quot; ungefär som svanenmärkta byggen eller nyckelhålsmärkta produkter också ger en &quot;bra produkt&quot; känsla. Men i slutändan handlar det om koden, eller verktyget används eller inte. Perfekt kod men som inte används känns mindre värd än halvdålig kod men som används överallt.
+            </p>
+            <p>
+                Min TIL för detta moment är främst Scrutnizer, grymt verktyg som vad jag förstår även kan deploya automatiskt vid en push och validerade tester, något som möjliggör CI / CD Pipelines, vilket jag skulle vilja lära mig mer om.
+            </p>
+        </section>
     </div>
         <div class="box2">
             <h3>Förteckning</h3>
@@ -120,6 +133,7 @@
                 <li><a href="#kmom03">Kmom03</a></li>
                 <li><a href="#kmom04">Kmom04</a></li>
                 <li><a href="#kmom05">Kmom05</a></li>
+                <li><a href="#kmom06">Kmom06</a></li>
             </ul>
         </div>
 </div>
