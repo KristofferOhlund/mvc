@@ -11,6 +11,11 @@ abstract class Item
         $this->name = $name;
     }
 
+    /**
+     * Get the name of the item
+     * 
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;

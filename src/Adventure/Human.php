@@ -29,21 +29,25 @@ class Human extends Varelse
     /**
      * Eat Food
      * Increase health by Food healing value
-     * @return void
+     * @return int
      */
     public function eatFood(Food $foodItem): int {
         $this->increaseHealth($foodItem->getHealingValue());
         return $this->getHealth();
     }
 
+    /**
+     * @return null|array
+     */
     public function getItemsInBag(): ?array {
-        return $this->backpack->getItems();
+        return $this->backpack?->getItems();
     }
 
     /**
      * Use a weapon, causing dmg equal to baseattackpower + weapon dmg
+     * @return int total dmg caused by attack
      */
-    public function attackWithWeapon() {
+    public function attackWithWeapon(): int {
         return $this->getAttackPower() + ($this->weapon?->getWeaponDmg() ?? 0);
     }
 }

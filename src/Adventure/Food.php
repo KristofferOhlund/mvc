@@ -5,8 +5,8 @@ namespace App\Adventure;
 use App\Adventure\Item;
 
 class Food extends Item
-{
-    private int $healingValue;
+{   
+    private int $healingValue = 0;
 
     public function __construct(string $name, int $healingValue)
     {
@@ -14,11 +14,12 @@ class Food extends Item
         $this->healingValue = $healingValue;
     }
 
-    public function getHealingValue() {
+    /**
+     * Get the healing value from food
+     * 
+     * @return int healingValue
+     */
+    public function getHealingValue(): int {
         return $this->healingValue;
-    }
-
-    public function getFoodName() {
-        return $this->getName();
     }
 }
