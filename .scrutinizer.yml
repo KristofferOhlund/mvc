@@ -2,7 +2,7 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, tests/*]
+    excluded_paths: [vendor/*, test/*]
 
 build:
     image: default-bionic
@@ -15,14 +15,6 @@ build:
                     # version: 8.1.13
                     # version: 8.1.17
                     # version: 8.2.4
-                hosts:
-                    'local.dev': '127.0.0.1'
-                apache2:
-                    modules: ['rewrite']
-                    sites:
-                        symfony_app:
-                            web_root: 'public/'
-                            host: 'local.dev'
         analysis:
             tests:
                 override:
