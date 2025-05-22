@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1747858384">
-  <project timestamp="1747858384">
+<coverage generated="1747920146">
+  <project timestamp="1747920146">
     <file name="/Users/kristoffer/dbwebb-kurser/mvc/me/report/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="7" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
@@ -299,10 +299,10 @@
     </file>
     <file name="/Users/kristoffer/dbwebb-kurser/mvc/me/report/src/Controller/DiceGameController.php">
       <class name="App\Controller\DiceGameController" namespace="global">
-        <metrics complexity="17" methods="9" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="1" elements="86" coveredelements="2"/>
+        <metrics complexity="17" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="0" elements="86" coveredelements="0"/>
       </class>
-      <line num="16" type="method" name="pighome" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="19" type="stmt" count="1"/>
+      <line num="16" type="method" name="pighome" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="19" type="stmt" count="0"/>
       <line num="22" type="method" name="testRollDice" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="25" type="stmt" count="0"/>
       <line num="27" type="stmt" count="0"/>
@@ -387,7 +387,7 @@
       <line num="175" type="stmt" count="0"/>
       <line num="176" type="stmt" count="0"/>
       <line num="178" type="stmt" count="0"/>
-      <metrics loc="181" ncloc="175" classes="1" methods="9" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="1" elements="86" coveredelements="2"/>
+      <metrics loc="181" ncloc="175" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="0" elements="86" coveredelements="0"/>
     </file>
     <file name="/Users/kristoffer/dbwebb-kurser/mvc/me/report/src/Controller/GameController.php">
       <class name="App\Controller\GameController" namespace="global">
@@ -938,6 +938,6 @@
       <line num="69" type="stmt" count="0"/>
       <metrics loc="82" ncloc="49" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
     </file>
-    <metrics files="28" loc="2511" ncloc="2000" classes="26" methods="140" coveredmethods="55" conditionals="0" coveredconditionals="0" statements="629" coveredstatements="133" elements="769" coveredelements="188"/>
+    <metrics files="28" loc="2511" ncloc="2000" classes="26" methods="140" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="629" coveredstatements="132" elements="769" coveredelements="186"/>
   </project>
 </coverage>

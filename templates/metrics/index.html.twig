@@ -63,12 +63,27 @@
                     <a href="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main"><img class="badge" src="https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/build.png?b=main" alt="build"></a>
                 </div>
                 <br>
-                För att koppla till de tidigare nämnda 6C så syns det tydligt vart jag bör lägga mitt fokus. Samtliga klasser och metoder har fått högsta betyg, A, även om det finns viss förbättringspotential så anser jag att fokuset bör ligga på att få upp nivån för Coverage. Detta är i sig inte bara ett mätetal utan det kommer också innebära att viss komplex kod kommer bli testad vilket även kommer minska värdet för CRAP.
+                <p>För att koppla till de tidigare nämnda 6C så syns det tydligt vart jag bör lägga mitt fokus. Samtliga klasser och metoder har fått högsta betyg, A, även om det finns viss förbättringspotential så anser jag att fokuset bör ligga på att få upp nivån för Coverage. Detta är i sig inte bara ett mätetal utan det kommer också innebära att viss komplex kod kommer bli testad vilket även kommer minska värdet för CRAP.</p>
             </p>
             <h3>Förbättringar</h3>
             <p>Eftersom jag min scrutinizer poäng är 10/10 och alla klasser och metoder har betyg A, väljer jag att lägga allt fokus på min kodtäckning.</p>
-            <strong>Före</strong>
+            <p><Strong>Här</Strong> stötte jag dock på problem. Mina tester validerade lokalt men när Scrutinizer skulle köra testerna så fick jag fail på build med följande som felmeddelande: <code>2) App\Tests\Controller\DiceGameControllerTest::testPigStart
+            Failed asserting that the Response is successful.</code><br>
+            Bild nedanför visar lokalt resultat på metrics och en exempel Controller jag testade, endast för att öka min Coverage.</p>
+            <strong>Coverage Före</strong>
+            <img src=" {{ asset('build/images/metrics/coverage.png')}}" alt="before-coverage">
+            
+            <strong>Coverage Efter</strong>
+            <img src=" {{ asset('build/images/metrics/aftermetrics.png')}}" alt="after-coverage">
+            <img src=" {{ asset('build/images/metrics/afterscruti.png')}}" alt="after-coverage">
 
-            <strong>Efter</strong>
+            <p>Problemet var alltså att mina tester för Controllers fungerade lokalt men via Scrutinzer fick jag build error. Jag försökte med 6 olika tester och körningar på coverage, frågade i forum osv men kom inte framåt. I slutändan ökade jag coverage något litet genom att lägga till tester för min Dice klass.</p>
+            <img class="img small-img" src=" {{ asset('build/images/metrics/flaskhalsar2.png')}}" alt="after-metrics">
+            <section>
+                <h1>Diskussion</h1>
+                <p>Att aktivt jobba med kodkvalitét genom metrics, coverage och Scrutinizer ser jag absolut som ett hjälpmedel till att skriva bra och robust kod. Det var ett super smidigt sätt att skapa en överblick på ens kod, logik och kvalitet. Det ger också intrycket av att man ska förenkla så mycket som möjligt, tex istället för att ha en klass med 400 rader så skapa 2st på 200 istället, det blir lättare att testa och complexiteten minskar. Däremot ska man inte stirra sig blind på de olika mätvärdena, eftersom ibland är säg 80% &quot;good enough&quot; och risken finns kanske att man spenderar onödigt mycket tid bara för att ha toppbetyg i varje mätvärde, men någonstans så är det good enough så länge det funkar och koden används. <br>Är det däremot moduler man bygger och vill säkerställa att det ska gå att utveckla vidare så är det super smidigt att kunna följa upp och få en trygghet över att det man utvecklat inte förstör någonting för tidigare kod. </p>
+                <p>Något som gjorde mig lite besviken var att det blev så mycket krångel för mina tester för Controllers, de mest simpla testerna funkade inte via scrutnizer, men funkade utan problem när jag körde phpunit lokalt. Exempel på test är: <img src=" {{ asset('build/images/metrics/test.png')}}" alt="WebTestCase">
+                Notera bilden ovan som visar Metrics lokalt, där testet får 100% coverage. Efter diskussion med Mikael så var det ok att jag inte kunde påvisa så stor skillnad efteråt, eftersom min scrutinizer poäng redan var 10 med betyg A för alla klasser och metoder.
+            </section>
         </article>
 {% endblock %}
