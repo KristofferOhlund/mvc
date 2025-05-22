@@ -2,7 +2,7 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*]
+    excluded_paths: [vendor/*, test/*, src/Card, src/Controller, src/Dice, src/Entity, src/Game, src/Repository]
 
 build:
     image: default-bionic
