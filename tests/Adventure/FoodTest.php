@@ -17,7 +17,7 @@ class TestFood extends TestCase
 
     public function testGetFoodName() {
         $food = new Food("Burger", 100);
-        $this->assertSame("Burger", $food->getFoodName());
+        $this->assertSame("Burger", $food->getName());
     }
 
     public function testFoodHelingValue() {
