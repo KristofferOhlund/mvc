@@ -29,6 +29,8 @@
                     <li><a href="{{ path('library_index') }}" class="{{ (app.request.pathinfo == path('library_index')) ? 'active' : '' }}">Library</a></li>             
                     <li><a href="{{ path('session_dump') }}" class="{{ (app.request.pathinfo == path('session_dump')) ? 'active' : '' }}">Reset Session</a></li> |
                     <li><a href="{{ path('index_metrics') }}" class="{{ (app.request.pathinfo == path('index_metrics')) ? 'active' : '' }}">Metrics</a></li>
+                    <li><a href="{{ path('session_dump') }}" class="{{ (app.request.pathinfo == path('session_dump')) ? 'active' : '' }}">Reset Session</a></li> |
+                    <!--<li><a href="{{ path('init_adventure') }}" class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li>-->
                 </ul>
             </nav>
         </header>
