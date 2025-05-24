@@ -80,4 +80,17 @@ class RoomHandler
         } throw new \Exception("There is no room with name: $roomName");
     }
 
+    /**
+     * Get the next room
+     * @param string $room - room of the current room
+     * @return Room
+     */
+    public function getNextRoom(string $currentRoom) {
+        $rooms = $this->getAllRooms();
+        for ($idx = 0; $idx <= count($rooms); $idx++) {
+            if ($rooms[$idx]->getName() === $currentRoom) {
+                return $rooms[$idx +1];
+            }
+        }
+    }
 }
