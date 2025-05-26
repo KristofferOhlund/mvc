@@ -10,7 +10,6 @@ use App\Adventure\Room;
 class RoomHandler
 {
     private array $rooms;
-    private int $currentRoom;
 
     public function __construct() {
         $this->rooms = [];
@@ -34,35 +33,46 @@ class RoomHandler
     }
 
     /**
-     * Get the current room
+     * Get the name of all romes
      * 
-     * @return Room
+     * @return array<string|null>
      */
-    public function getCurrentRoom(): Room
-    {   
-        if (!$this->currentRoom && count($this->rooms) > 0) {
-            return $this->rooms[0];
-        } return $this->rooms[$this->currentRoom];        
-    }
-
-    public function getPrevious(): int
+    public function getAllRoomNames(): ?array
     {
-        return array_search($this->currentRoom, $this->rooms);
+        return array_map(fn($room) => $room->getName(), $this->getAllRooms()) ?? [];
     }
 
     /**
-     * Set current room
-     * defaults to the first room in rooms array
-     * @return bool
+     * Return the next Room in the array, if any
+     * else return false
+     * 
+     * @param string $current is the current route, eg adventure/graveyard
+     * @return string|int|false
      */
-    public function setCurrentRoomByName(string $roomName): bool
+    public function getPrev(string $current): ?string
     {
-        foreach($this->rooms as $room) {
-            if ($room->getName === $roomName) {
-                $this->currentRoom = $room;
-                return true;
-            }
-        } throw new \Exception("There is no room with name: $roomName");
+        $currentIndex = array_search($current, $this->getAllRoomNames());
+        if ($currentIndex !== 0) {
+            return $this->rooms[$currentIndex -1]->getName();
+        } return $this->rooms[$currentIndex]->getName();
+        
+        
+    }
+
+    /**
+     * Return the next Room in the array, if any
+     * else return false
+     * 
+     * @param string $current is the current route, eg adventure/graveyard
+     * @return string|int|false
+     */
+    public function getNext(string $current): ?string
+    {
+        $currentIndex = array_search($current, $this->getAllRoomNames());
+        if ($currentIndex + 1 !== count($this->rooms))
+        {
+            return $this->rooms[$currentIndex +1]->getName();
+        } return $this->rooms[$currentIndex]->getName();
     }
 
     /**
@@ -78,19 +88,5 @@ class RoomHandler
                 return $room;
             }
         } throw new \Exception("There is no room with name: $roomName");
-    }
-
-    /**
-     * Get the next room
-     * @param string $room - room of the current room
-     * @return Room
-     */
-    public function getNextRoom(string $currentRoom) {
-        $rooms = $this->getAllRooms();
-        for ($idx = 0; $idx <= count($rooms); $idx++) {
-            if ($rooms[$idx]->getName() === $currentRoom) {
-                return $rooms[$idx +1];
-            }
-        }
     }
 }
