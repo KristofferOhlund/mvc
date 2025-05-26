@@ -22,7 +22,24 @@ class Human extends Varelse
         return $this->backpack ?? null;
     }
 
-    public function addWeapon(Weapon $weapon) {
+    /**
+     * Add an item to the backpack
+     * @param Item item to be added to the backpack
+     * @return true
+     */
+    public function addItemToBackPack(Item $item): bool {
+        if ($this->backpack) {
+            $this->backpack->AddItem($item);
+            return true;
+        } return false;
+    }
+
+    /**
+     * Add a weapon object to the human
+     * @param Weapon $weapon - Weapon to be equipped
+     * @return void
+     */
+    public function addWeapon(Weapon $weapon): void {
         $this->weapon = $weapon;
     }
 
