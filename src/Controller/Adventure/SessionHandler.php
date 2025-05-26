@@ -68,6 +68,8 @@ class SessionHandler
     /**
      * Create rooms
      * Each room has its own set of items and background image
+     * To add more rooms, just add another object
+     * IMG has to be an existing asset
      * 
      * @return void
      */
@@ -120,22 +122,8 @@ class SessionHandler
                     $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"]));
                 }
             }
-            
             $roomHandler->addRoom($room);
         }
-        // $rooms = [
-        //     "graveyard", 
-        //     "house", 
-        //     "apple", 
-        //     "dragon", 
-        //     "win"];
-        // $roomHandler = new RoomHandler();
-        // for ($i = 0; $i < count($rooms); $i++)
-        // {
-        //     $room = new Room($rooms[$i]);
-        //     $room->setImg($rooms[$i] . ".png");
-        //     $roomHandler->addRoom($room);
-        // }
         $session->set("roomHandler", $roomHandler);
     }
 
