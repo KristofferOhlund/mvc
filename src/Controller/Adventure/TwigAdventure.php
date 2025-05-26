@@ -37,8 +37,9 @@ class TwigAdventure extends AbstractController
     private function getDataByRoom(Session $session, string $roomName): array {
         $roomHandler = $session->get("roomHandler");
         $human = $session->get("human");
+        $dragon = $session->get("dragon");
         $validRooms = [
-            "graveyard", "house", "apple", "dragon", "win"
+            "graveyard", "house", "apple", "dragon"
         ];
 
         if (!in_array($roomName, $validRooms)) {
@@ -47,11 +48,14 @@ class TwigAdventure extends AbstractController
 
         $room = $roomHandler->getRoomByName($roomName);
         $data = [
+            "human" => $human,
+            "dragon" => $dragon,
             "backpack" => array_map(fn($item) => $item->getName(), $human->getItemsInBag()), // get all item names in bg
             "img" => $room->getImg(),
             "room" => $room,
             "roomObjects" => $room->getItems(),
-            "next" => $roomHandler->getNextRoom($room->getName())->getName()
+            "next" => $roomHandler->getNext($roomName),
+            "prev" => $roomHandler->getPrev($roomName)
         ];
 
         return $data;
@@ -110,6 +114,14 @@ class TwigAdventure extends AbstractController
         return $this->render("adventure/win.html.twig", $data);
     }
 
+    #[Route("/adventure/lost", name:"lost")]
+    public function lost(Session $session) {
+    
+    // Get data for current room
+    $data = $this->getDataByRoom($session, "lost");    
+        return $this->render("adventure/lost.html.twig", $data);
+    }
+
     #[Route("/adventure/item", name:"equip_item", methods:["POST"])]
     public function equipItem(Request $request)
     {
@@ -126,7 +138,7 @@ class TwigAdventure extends AbstractController
         } else if ($item !== "Sword") {
             $human->addItemToBackPack(new Item($item));
         }
-        $human->addItemToBackPack(new Weapon($item, 100));
+        $human->addWeapon(new Weapon($item, 100));
         
         $this->addFlash("notice", "You equipped the $item");
         // return $this->json($item);
