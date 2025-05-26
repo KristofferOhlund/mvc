@@ -2,7 +2,7 @@
 
 namespace App\Adventure;
 
-abstract class Item
+class Item
 {
     private string $name;
 
