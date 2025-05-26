@@ -78,12 +78,15 @@ class SessionHandler
         {
             $room = new Room($rooms[$i]);
             $room->setImg($rooms[$i] . ".png");
-            $food = new Food("Apple", 100);
-            $weapon = new Weapon("Sword", 100);
-            $room->addItem($food);
-            $room->addItem($weapon);
             $roomHandler->addRoom($room);
         }
         $session->set("roomHandler", $roomHandler);
+    }
+
+    /**
+     * Reset session variables
+     */
+    public function resetSession() {
+        $this->initAdventure();
     }
 }
