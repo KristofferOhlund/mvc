@@ -11,6 +11,7 @@ use App\Adventure\RoomHandler;
 use App\Adventure\Room;
 use App\Adventure\Weapon;
 use App\Adventure\Food;
+use App\Adventure\Item;
 use App\Adventure\BackPack;
 
 class SessionHandler
@@ -72,14 +73,69 @@ class SessionHandler
      */
     private function initRooms(Session $session): void
     {   
-        $rooms = ["graveyard", "house", "apple", "dragon", "win"];
+        $roomData = [
+            "graveyard" => [
+                "title" => "graveyard",
+                "items" => ["Shovel", "Gold coin", "Tooth"],
+                "weapons" => [
+                    [
+                        "name" => "sword", 
+                        "dmg" => 100]]
+            ],
+            "house" => [
+                "title" => "house",
+                "items" => ["Shovel", "Gold coin", "Tooth"],
+                "weapons" => [
+                    [
+                        "name" => "axe", 
+                        "dmg" => 55]
+                    ]
+            ],
+            "apple" => [
+                "title" => "apple",
+                "items" => ["Shield", "glasses", "mysterious note"],
+                "weapons" => [
+                    [
+                        "name" => "knife", 
+                        "dmg" => 10]
+                    ]
+            ],
+            "dragon" => [
+                "title" => "dragon",
+                "items" => ["treassure", "bones", "Tooth"],
+                "weapons" => null
+            ]
+            ];
+        
         $roomHandler = new RoomHandler();
-        for ($i = 0; $i < count($rooms); $i++)
-        {
-            $room = new Room($rooms[$i]);
-            $room->setImg($rooms[$i] . ".png");
+
+        foreach($roomData as $data) {
+            $room = new Room($data["title"]);
+            $room->setImg($data["title"] . ".png");
+            foreach($data["items"] as $item) {
+                $room->addItem(new Item($item));
+            }
+            if ($data["weapons"]) {
+                foreach($data["weapons"] as $weapon) {
+                    $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"]));
+                }
+            }
+            
             $roomHandler->addRoom($room);
         }
+        // $rooms = [
+        //     "graveyard", 
+        //     "house", 
+        //     "apple", 
+        //     "dragon", 
+        //     "win"];
+        // $roomHandler = new RoomHandler();
+        // for ($i = 0; $i < count($rooms); $i++)
+        // {
+        //     $room = new Room($rooms[$i]);
+        //     $room->setImg($rooms[$i] . ".png");
+        //     $roomHandler->addRoom($room);
+        // }
         $session->set("roomHandler", $roomHandler);
     }
 
