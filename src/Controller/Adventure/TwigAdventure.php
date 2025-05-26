@@ -25,94 +25,87 @@ use App\Adventure\BackPack;
 
 class TwigAdventure extends AbstractController
 {   
+    
+    /**
+     * Some data variables are the same for each route
+     * Use method to get basic data and extend data in route
+     * Returns roomObjects stored in room
+     * @param Session $session - current session
+     * @param string $roomName - the current room  
+     * @return array
+     */
+    private function getDataByRoom(Session $session, string $roomName): array {
+        $roomHandler = $session->get("roomHandler");
+        $human = $session->get("human");
+        $validRooms = [
+            "graveyard", "house", "apple", "dragon", "win"
+        ];
+
+        if (!in_array($roomName, $validRooms)) {
+            throw new \Exception("Room $roomName is not a valid room");
+        }
+
+        $room = $roomHandler->getRoomByName($roomName);
+        $data = [
+            "backpack" => array_map(fn($item) => $item->getName(), $human->getItemsInBag()), // get all item names in bg
+            "img" => $room->getImg(),
+            "roomObjects" => $room->getItems(),
+            "next" => $roomHandler->getNextRoom($room->getName())->getName()
+        ];
+
+        return $data;
+    }
+
     #[Route("/adventure/init", name:"init_adventure")]
     public function init(SessionHandler $sessionHandler) {
+        
+        // Get data for current room
         $sessionHandler->initAdventure();
-
         return $this->redirectToRoute("graveyard");
     }
 
 
     #[Route("/adventure/graveyard", name:"graveyard")]
-    public function graveyard(Session $session) {
-        $roomHandler = $session->get("roomHandler");
-        $human = $session->get("human");
-
-        $graveyard = $roomHandler->getRoomByName("graveyard");
-        $data = [
-            "backpack" => array_map(fn($item) => $item->getName(), $human->getItemsInBag()),
-            "img" => $graveyard->getImg(),
-            "roomObjects" => $graveyard->getItems(),
-            "next" => $roomHandler->getNextRoom("graveyard")->getName()
-        ];
-        
+    public function graveyard(Session $session)
+    {    
+        // Get data for current room
+        $data = $this->getDataByRoom($session, "graveyard");
         return $this->render("adventure/graveyard.html.twig", $data);
     }
 
 
     #[Route("/adventure/house", name:"house")]
     public function house(Session $session) {
-        $roomHandler = $session->get("roomHandler"); // måste starta session
 
-        $graveyard = $roomHandler->getRoomByName("house");
-
-        $data = [
-            "rooms" => $roomHandler->getAllRooms(),
-            "img" => $graveyard->getImg(),
-            "items" => $graveyard->getItems(),
-            "next" => $roomHandler->getNextRoom("house")->getName()
-        ];
-        
-        return $this->render("adventure/graveyard.html.twig", $data);
+        // Get data for current room
+        $data = $this->getDataByRoom($session, "house");
+        return $this->render("adventure/house.html.twig", $data);
     }
 
 
     #[Route("/adventure/apple", name:"apple")]
     public function apple(Session $session) {
-        $roomHandler = $session->get("roomHandler"); // måste starta session
-
-        $graveyard = $roomHandler->getRoomByName("apple");
-
-        $data = [
-            "rooms" => $roomHandler->getAllRooms(),
-            "img" => $graveyard->getImg(),
-            "items" => $graveyard->getItems(),
-            "next" => $roomHandler->getNextRoom("apple")->getName()
-        ];
-        
-        return $this->render("adventure/graveyard.html.twig", $data);
+    
+        // Get data for current room
+        $data = $this->getDataByRoom($session, "apple");
+        return $this->render("adventure/apple.html.twig", $data);
     }
 
 
     #[Route("/adventure/dragon", name:"dragon")]
     public function dragon(Session $session) {
-        $roomHandler = $session->get("roomHandler"); // måste starta session
 
-        $graveyard = $roomHandler->getRoomByName("dragon");
-
-        $data = [
-            "rooms" => $roomHandler->getAllRooms(),
-            "img" => $graveyard->getImg(),
-            "items" => $graveyard->getItems(),
-            "next" => $roomHandler->getNextRoom("dragon")->getName()
-        ];
-        
-        return $this->render("adventure/graveyard.html.twig", $data);
+        // Get data for current room
+        $data = $this->getDataByRoom($session, "dragon");
+        return $this->render("adventure/dragon.html.twig", $data);
     }
 
 
     #[Route("/adventure/win", name:"win")]
     public function win(Session $session) {
-        $roomHandler = $session->get("roomHandler"); // måste starta session
-
-        $graveyard = $roomHandler->getRoomByName("win");
-
-        $data = [
-            "rooms" => $roomHandler->getAllRooms(),
-            "img" => $graveyard->getImg(),
-            "items" => $graveyard->getItems(),
-        ];
-        
+    
+    // Get data for current room
+    $data = $this->getDataByRoom($session, "win");    
         return $this->render("adventure/win.html.twig", $data);
     }
 
