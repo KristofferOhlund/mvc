@@ -43,6 +43,15 @@ class Human extends Varelse
         $this->weapon = $weapon;
     }
 
+    /** 
+     * Get the weapon object
+     * 
+     * @return string the name of the weapon
+     */
+    public function getWeapon(): string {
+        return ucfirst($this->weapon?->getName() ?? "");
+    }
+
     /**
      * Eat Food
      * Increase health by Food healing value
