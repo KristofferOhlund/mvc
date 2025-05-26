@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}Adventure - Apple {% endblock %}
 {% block body %}
 {% include 'flash.html.twig' %}
 
@@ -45,17 +46,26 @@
 
     </div>
     <div class="content">
+        <h1>Player health: {{ human.getHealth() }}</h1>
+        <h2>Player weapon: {{ human.getWeapon() }}</h2>
         <form action=" {{ path('equip_item') }}" , method="post">
+            {% for item in roomObjects %}
+            <p>Object i nuvarande rum: {{ item.getName() }}</p>
+            {% endfor %}
+
             {% for item in roomObjects %}
             {% if item.getName() not in backpack %}
             <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
             <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
             {% endif %}
             {% endfor %}
+            {% if roomObjects|length > 0 %}
             <input type="submit" name="submit" id="submit" value="Equip">
+            {% endif %}
         </form>
 
-        <p>Next room: <a href="{{ path(next) }} ">Next room</a></p>
+        <p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
+        <p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
     </div>
 </div>
 {% endblock %}
