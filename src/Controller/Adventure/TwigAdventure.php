@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\Controller\Adventure\JsonAdventure;
 use Symfony\Component\HttpFoundation\Request;
 
 // ADVENTURE
@@ -22,6 +21,7 @@ use App\Adventure\Dragon;
 use App\Adventure\Weapon;
 use App\Adventure\Food;
 use App\Adventure\BackPack;
+use App\Adventure\Item;
 
 class TwigAdventure extends AbstractController
 {   
@@ -49,6 +49,7 @@ class TwigAdventure extends AbstractController
         $data = [
             "backpack" => array_map(fn($item) => $item->getName(), $human->getItemsInBag()), // get all item names in bg
             "img" => $room->getImg(),
+            "room" => $room,
             "roomObjects" => $room->getItems(),
             "next" => $roomHandler->getNextRoom($room->getName())->getName()
         ];
@@ -122,7 +123,10 @@ class TwigAdventure extends AbstractController
 
         if ($item === "Apple"){
             $human->addItemToBackPack(new Food($item, 50));
-        } $human->addItemToBackPack(new Weapon($item, 100));
+        } else if ($item !== "Sword") {
+            $human->addItemToBackPack(new Item($item));
+        }
+        $human->addItemToBackPack(new Weapon($item, 100));
         
         $this->addFlash("notice", "You equipped the $item");
         // return $this->json($item);
