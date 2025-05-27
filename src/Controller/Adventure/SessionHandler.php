@@ -121,18 +121,17 @@ class SessionHandler
                     ]
                 ]
             ],
-            "apple" => [
-                "title" => "apple",
+            "dragon" => [
+                "title" => "dragon",
                 "items" => [
-                    ["name" => "Shield", "icon" => "shield.png"],
-                    ["name" => "glasses", "icon" => "glasses.png"],
-                    ["name" => "mysterious note", "icon" => "mysterious_note.png"]
+                    ["name" => "treassure", "icon" => "treassure.png"],
+                    ["name" => "human remains", "icon" => "humanremains.png"]
                 ],
                 "weapons" => [
                     [
-                        "name" => "knife",
+                        "name" => "Shard bone",
                         "dmg" => 10,
-                        "icon" => "knife.png"
+                        "icon" => "bone.png"
                     ]
                 ]
             ]
