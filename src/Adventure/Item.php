@@ -5,10 +5,12 @@ namespace App\Adventure;
 class Item
 {
     private string $name;
+    private string $icon;
 
-    public function __construct(string $name)
+    public function __construct(string $name, string $icon)
     {
         $this->name = $name;
+        $this->icon = $icon;
     }
 
     /**
@@ -18,6 +20,16 @@ class Item
      */
     public function getName(): string
     {
-        return $this->name;
+        return ucfirst($this->name);
+    }
+
+    /**
+     * Get the icon as string
+     * 
+     * @return string
+     */
+    public function getIcon(): string
+    {
+        return $this->icon;
     }
 }

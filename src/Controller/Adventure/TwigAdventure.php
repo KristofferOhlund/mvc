@@ -126,22 +126,26 @@ class TwigAdventure extends AbstractController
     public function equipItem(Request $request)
     {
         // fetch item
-        $item = $request->request->all()["item"] ?? null;
+        $posted = $request->request->all();
+        $icon = $posted["icon"];
+        $item = $posted["item"];
+        
 
         // add to humans backpack
         $session = $request->getSession();
         
         $human = $session->get("human") ?? "Human finns inte";
 
-        if ($item === "Apple"){
-            $human->addItemToBackPack(new Food($item, 50));
-        } else if ($item !== "Sword") {
-            $human->addItemToBackPack(new Item($item));
-        }
-        $human->addWeapon(new Weapon($item, 100));
+        // if ($item === "Apple"){
+        //     $human->addItemToBackPack(new Food($item, 50, $icon));
+        // } if ($item !== "Sword") {
+        //     $human->addItemToBackPack(new Item($item, $icon));
+        // } if ($item === "Sword") {
+        //     $human->addWeapon(new Weapon($item, 100, $icon));
+        // }
         
-        $this->addFlash("notice", "You equipped the $item");
-        // return $this->json($item);
+        
+        $this->addFlash("notice", "You equipped the $item with icon $icon");
         return $this->redirectToRoute('graveyard');
     }
 }

@@ -78,36 +78,44 @@ class SessionHandler
         $roomData = [
             "graveyard" => [
                 "title" => "graveyard",
-                "items" => ["Shovel", "Gold coin", "Tooth"],
+                "items" => [
+                    ["name" => "shovel",
+                    "icon" => "shovel.png"],
+                    ["name" => "gold coin",
+                    "icon" => "coin.png"],
+                    ["name" => "tooth",
+                    "icon" => "tooth.png"]
+                ],
                 "weapons" => [
                     [
-                        "name" => "sword", 
-                        "dmg" => 100]]
-            ],
-            "house" => [
-                "title" => "house",
-                "items" => ["Shovel", "Gold coin", "Tooth"],
-                "weapons" => [
-                    [
-                        "name" => "axe", 
-                        "dmg" => 55]
-                    ]
-            ],
-            "apple" => [
-                "title" => "apple",
-                "items" => ["Shield", "glasses", "mysterious note"],
-                "weapons" => [
-                    [
-                        "name" => "knife", 
-                        "dmg" => 10]
-                    ]
-            ],
-            "dragon" => [
-                "title" => "dragon",
-                "items" => ["treassure", "bones", "Tooth"],
-                "weapons" => null
-            ]
-            ];
+                        "name" => "Sword", 
+                        "dmg" => 100,
+                        "icon" => "sword.png"]]
+            // ],
+            // "house" => [
+            //     "title" => "house",
+            //     "items" => ["key", "skull"],
+            //     "weapons" => [
+            //         [
+            //             "name" => "axe", 
+            //             "dmg" => 55]
+            //         ]
+            // ],
+            // "apple" => [
+            //     "title" => "apple",
+            //     "items" => ["Shield", "glasses", "mysterious note"],
+            //     "weapons" => [
+            //         [
+            //             "name" => "knife", 
+            //             "dmg" => 10]
+            //         ]
+            // ],
+            // "dragon" => [
+            //     "title" => "dragon",
+            //     "items" => ["treassure", "bones", "Tooth"],
+            //     "weapons" => null
+            // ]
+            ]];
         
         $roomHandler = new RoomHandler();
 
@@ -115,11 +123,11 @@ class SessionHandler
             $room = new Room($data["title"]);
             $room->setImg($data["title"] . ".png");
             foreach($data["items"] as $item) {
-                $room->addItem(new Item($item));
+                $room->addItem(new Item($item["name"], $item["icon"]));
             }
             if ($data["weapons"]) {
                 foreach($data["weapons"] as $weapon) {
-                    $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"]));
+                    $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"], $weapon["icon"]));
                 }
             }
             $roomHandler->addRoom($room);
