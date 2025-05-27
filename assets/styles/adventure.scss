@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
-.adventure *{
+.adventure * {
   font-family: 'Pixelify Sans', sans-serif;
   font-weight: 500;
+  font-size: 2rem;
 }
 
 .player-info {
@@ -15,8 +16,6 @@
 .backpack {
   display: flex;
 }
-
-
 
 .backpack .bag{
   width: 5rem;
