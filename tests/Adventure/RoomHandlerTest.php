@@ -59,6 +59,31 @@ class TestRoomHandler extends TestCase
     }
 
     /**
+     * Assert getRoombyName
+     */
+    public function testGetRoomByName()
+    {
+        $roomHandler = new RoomHandler();
+        $graveyard = new Room("graveyard");
+        $dragon = new Room("dragon");
+        $roomHandler->addRoom($graveyard);
+        $roomHandler->addRoom($dragon);
+        
+        $returned = $roomHandler->getRoomByName("graveyard")->getname();
+        $this->assertSame("graveyard", $returned);
+    }
+
+    /**
+     * Assert getRoombyName Exception
+     */
+    public function testGetRoomByNameException()
+    {   
+        $this->expectExceptionMessage("There is no room with name: graveyard");
+        $roomHandler = new RoomHandler();
+        $roomHandler->getRoomByName("graveyard");
+    }
+
+    /**
      * Test that each rooms returns the correct next room
      */
     public function testGetNext() {

@@ -18,7 +18,7 @@ class TestBackPack extends TestCase
      * Add a item to the backpack
      */
     public function testBackPackAddItem() {
-        $item = new Food("Apple", 50);
+        $item = new Food("Apple", 50, "apple.png");
         $backpack = new BackPack();
         $backpack->AddItem($item);
 
@@ -30,7 +30,7 @@ class TestBackPack extends TestCase
      * Get item object by name
      */
     public function testBackPackGetItemByName() {
-        $food = new Food("Apple", 50);
+        $food = new Food("Apple", 50, "apple.png");
         $backpack = new BackPack();
         $backpack->AddItem($food);
         $name = $backpack->getItemByName("Apple");
