@@ -44,11 +44,11 @@ class Human extends Varelse
     }
 
     /** 
-     * Get the weapon object
+     * Get the weapon objects name
      * 
      * @return string the name of the weapon
      */
-    public function getWeapon(): string {
+    public function getWeaponName(): string {
         return ucfirst($this->weapon?->getName() ?? "");
     }
 
