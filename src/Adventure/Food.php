@@ -10,8 +10,7 @@ class Food extends Item
 
     public function __construct(string $name, int $healingValue, string $icon)
     {
-        parent::__construct($name);
-        parent::__construct($icon);
+        parent::__construct($name, $icon);
         $this->healingValue = $healingValue;
     }
 
