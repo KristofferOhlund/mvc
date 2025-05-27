@@ -127,25 +127,29 @@ class TwigAdventure extends AbstractController
     {
         // fetch item
         $posted = $request->request->all();
-        $icon = $posted["icon"];
-        $item = $posted["item"];
-        
+        $route = $posted["referer_route"];
+        $item = $posted["item"] ?? null;
 
+        // redirect if equip is pressed without a selected option
+        if (!$item) {
+            return $this->redirectToRoute($route);
+        }
+
+        $icon = $item . ".png";
+        
         // add to humans backpack
         $session = $request->getSession();
-        
         $human = $session->get("human") ?? "Human finns inte";
 
-        // if ($item === "Apple"){
-        //     $human->addItemToBackPack(new Food($item, 50, $icon));
-        // } if ($item !== "Sword") {
-        //     $human->addItemToBackPack(new Item($item, $icon));
-        // } if ($item === "Sword") {
-        //     $human->addWeapon(new Weapon($item, 100, $icon));
-        // }
-        
+        if ($item === "Apple"){
+            $human->addItemToBackPack(new Food($item, 50, $icon));
+        } if ($item !== "Sword") {
+            $human->addItemToBackPack(new Item($item, $icon));
+        } if ($item === "Sword") {
+            $human->addWeapon(new Weapon($item, 100, $icon));
+        }
         
         $this->addFlash("notice", "You equipped the $item with icon $icon");
-        return $this->redirectToRoute('graveyard');
+        return $this->redirectToRoute($route);
     }
 }
