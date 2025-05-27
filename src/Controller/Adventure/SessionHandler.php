@@ -81,41 +81,62 @@ class SessionHandler
                 "items" => [
                     ["name" => "shovel",
                     "icon" => "shovel.png"],
-                    ["name" => "gold coin",
+                    ["name" => "coin",
                     "icon" => "coin.png"],
                     ["name" => "tooth",
                     "icon" => "tooth.png"]
                 ],
                 "weapons" => [
                     [
-                        "name" => "Sword", 
+                        "name" => "sword", 
                         "dmg" => 100,
                         "icon" => "sword.png"]]
-            // ],
-            // "house" => [
-            //     "title" => "house",
-            //     "items" => ["key", "skull"],
-            //     "weapons" => [
-            //         [
-            //             "name" => "axe", 
-            //             "dmg" => 55]
-            //         ]
-            // ],
-            // "apple" => [
-            //     "title" => "apple",
-            //     "items" => ["Shield", "glasses", "mysterious note"],
-            //     "weapons" => [
-            //         [
-            //             "name" => "knife", 
-            //             "dmg" => 10]
-            //         ]
-            // ],
-            // "dragon" => [
-            //     "title" => "dragon",
-            //     "items" => ["treassure", "bones", "Tooth"],
-            //     "weapons" => null
-            // ]
-            ]];
+            ],
+            "house" => [
+                "title" => "house",
+                "items" => [
+                    ["name" => "key", "icon" => "key.png"],
+                    ["name" => "skull", "icon" => "skull.png"]
+                ],
+                "weapons" => [
+                    [
+                        "name" => "axe",
+                        "dmg" => 55,
+                        "icon" => "axe.png"
+                    ]
+                ]
+            ],
+            "apple" => [
+                "title" => "apple",
+                "items" => [
+                    ["name" => "Shield", "icon" => "shield.png"],
+                    ["name" => "glasses", "icon" => "glasses.png"],
+                    ["name" => "mysterious note", "icon" => "mysterious_note.png"]
+                ],
+                "weapons" => [
+                    [
+                        "name" => "knife",
+                        "dmg" => 10,
+                        "icon" => "knife.png"
+                    ]
+                ]
+            ],
+            "apple" => [
+                "title" => "apple",
+                "items" => [
+                    ["name" => "Shield", "icon" => "shield.png"],
+                    ["name" => "glasses", "icon" => "glasses.png"],
+                    ["name" => "mysterious note", "icon" => "mysterious_note.png"]
+                ],
+                "weapons" => [
+                    [
+                        "name" => "knife",
+                        "dmg" => 10,
+                        "icon" => "knife.png"
+                    ]
+                ]
+            ]
+        ];
         
         $roomHandler = new RoomHandler();
 
