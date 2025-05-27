@@ -5,17 +5,30 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="{{ asset('build/images/four.png') }}">
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {% if app.request.pathinfo starts with '/adventure' %}
+                {{ encore_entry_link_tags('adventure') }}
+            {% else %}
+                {{ encore_entry_link_tags('app') }}
+            {% endif %}
         {% endblock %}
 
-        {% block javascripts %}
-            {# {{ encore_entry_script_tags('app') }} #}
+        {# {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        {% endblock %} #}
     </head>
     <body>
         <header class="site-header">
-            <span class="site-title">MVC 2025</span>
+            {% if app.request.pathinfo starts with '/adventure' %}
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{{ path('init_adventure') }}"
+                            class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li> |
+                    <li><a href="{{ path('index_adventure') }}"
+                            class="{{ (app.request.pathinfo == path('index_adventure')) ? 'active' : '' }}">Proj</a></li>
+                </ul>
+            </nav>
+            {% else %}
             <nav class="navbar">
                 <ul>
                     <li><a href="{{ path('home') }}" class="{{ (app.request.pathinfo == path('home')) ? 'active' : '' }}">Me</a></li> |
@@ -32,6 +45,7 @@
                     <li><a href="{{ path('index_adventure') }}" class="{{ (app.request.pathinfo == path('index_adventure')) ? 'active' : '' }}">Proj</a></li>
                 </ul>
             </nav>
+            {% endif %}
         </header>
         <main>
             {% block main %}

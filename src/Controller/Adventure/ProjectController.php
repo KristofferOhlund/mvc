@@ -28,7 +28,7 @@ class ProjectController extends AbstractController
     }
 
 
-    #[Route("/adventure/cheat", name:"chear_adventure")]
+    #[Route("/adventure/cheat", name:"cheat_adventure")]
     public function cheat()
     {
         return $this->render("adventure/cheat.html.twig");
