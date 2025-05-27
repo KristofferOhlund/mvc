@@ -1,25 +1,30 @@
 {% extends 'base.html.twig' %}
 {% block title %}Adventure - Graveyard {% endblock %}
 {% block body %}
-{% include 'flash.html.twig' %}
+
 
 
 <div class="adventure">
+
     <div class="background">
         <img src=" {{ asset('build/images/adventure/' ~ img) }} " alt="graveyard">
     </div>
     <div class="content">
+        {% include 'flash.html.twig' %}
         <div class="player-info">
             <h1>Player health: {{ human.getHealth() }}</h1>
-            <h2>Player weapon: {{ human.getWeapon() }}</h2>
+            <h2>Player weapon: <span>{{ human.getWeaponName() }} <img class="icon"
+                        src="{{ asset('build/images/adventure/icons/' ~ human.getWeaponName() ~ " .png") }}" alt="" }}
+                        </span></h2>
+            <h2>Inventory:</h2>
             <div class="backpack">
-                <img class="bag" src=" {{ asset('build/images/adventure/backpack.png') }} " alt="backpack">
+                <!--<img class="bag" src=" {{ asset('build/images/adventure/backpack.png') }} " alt="backpack">-->
                 <ul>
                     {% for item in backpack %}
-                    <li>{{ item }}</li>
+                    <li><img class="icon" src="{{ asset('build/images/adventure/icons/' ~ item ~ " .png") }}" alt="">
+                    </li>
                     {% endfor %}
                 </ul>
-
             </div>
 
         </div>
@@ -63,10 +68,12 @@
         <form action=" {{ path('equip_item') }}" , method="post">
             {% for item in roomObjects %}
             <p>Object i nuvarande rum: {{ item.getName() }}</p>
+            <p>Object i nuvarande rum: {{ item.getIcon() }}</p>
             {% endfor %}
 
             {% for item in roomObjects %}
-            {% if item.getName() not in backpack %}
+            {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
+
             <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
             <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
             {% endif %}
