@@ -25,7 +25,7 @@
             </div>
             
         </div>
-
+        {% block roomtext %}
         <div class="room-text">
             <p>
                 Graveyard Awakening - You wake up with a dull ache at the back of your head. The ground beneath you is cold and damp, covered in
@@ -55,7 +55,8 @@
                 A strange amulet, half-buried near the skeleton, catches the faint light.
         
                 The air is heavy. You feel it in your chest — something watches from beyond the mist.</p>  </div>
-
+        {% endblock roomtext %}
+        {% block roomform %}
         <form action=" {{ path('equip_item') }}", method="post">
 
             {% for item in roomObjects %}
@@ -72,6 +73,7 @@
         
         <p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
         <p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
+        {% endblock roomform %}
     </div>
 </div>
 {% endblock %}

@@ -1,90 +1,27 @@
-{% extends 'base.html.twig' %}
-{% block title %}Adventure - Graveyard {% endblock %}
-{% block body %}
+{% extends 'adventure/graveyard.html.twig' %}
+{% block title %}Adventure - {{app.request.attributes.get('_route')|title}} {% endblock %}
 
 
+{% block roomtext %}
+<h1>Här är massa text for dragon</h1>
+{% endblock roomtext %}
 
-<div class="adventure">
+{% block roomform %}
+<h1>Ny form</h1>
+<form action=" {{ path('equip_item') }}" , method="post">
 
-    <div class="background">
-        <img src=" {{ asset('build/images/adventure/' ~ img) }} " alt="graveyard">
-    </div>
-    <div class="content">
-        {% include 'flash.html.twig' %}
-        <div class="player-info">
-            <h1>Player health: {{ human.getHealth() }}</h1>
-            <h2>Player weapon: <span>{{ human.getWeaponName() }} <img class="icon"
-                        src="{{ asset('build/images/adventure/icons/' ~ human.getWeaponName() ~ ".png") }}" alt="" }}
-                        </span></h2>
-            <h2>Inventory:</h2>
-            <div class="backpack">
-                <!--<img class="bag" src=" {{ asset('build/images/adventure/backpack.png') }} " alt="backpack">-->
-                <ul>
-                    {% for item in backpack %}
-                    <li><img class="icon" src="{{ asset('build/images/adventure/icons/' ~ item ~ ".png") }}" alt="">
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+    {% for item in roomObjects %}
+    {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
+    <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+    <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
+    <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
+    {% endif %}
+    {% endfor %}
+    {% if roomObjects|length > 0 %}
+    <input type="submit" name="submit" id="submit" value="Equip">
+    {% endif %}
+</form>
 
-        </div>
-
-        <div class="room-text">
-            <p>
-                Graveyard Awakening - You wake up with a dull ache at the back of your head. The ground beneath you is
-                cold and damp, covered in
-                rotting
-                leaves and tangled roots. A thick fog clings to the earth, and crooked tombstones loom like silent
-                watchers
-                around you.
-                Everything is quiet. Too quiet.
-
-                Slung over your shoulders is an old, worn backpack. You don’t remember putting it there. You don’t
-                remember how
-                you got
-                here.
-
-                In front of you, at the center of the graveyard, lies a skeleton — half-buried, its ribs wrapped around
-                a rusted
-                sword
-                driven deep into the soil. The body looks ancient, but something about it feels… recent. As if it died
-                with
-                purpose.
-                Protecting something. Or sealing something away.
-
-                Around you:
-
-                A crumbling stone wall encircles the graveyard.
-
-                A broken wooden cross leans against a moss-covered headstone.
-
-                Footprints trail off into a shadowy grove beyond the fence.
-
-                A strange amulet, half-buried near the skeleton, catches the faint light.
-
-                The air is heavy. You feel it in your chest — something watches from beyond the mist.</p>
-        </div>
-
-        <form action=" {{ path('equip_item') }}" , method="post">
-            {% for item in roomObjects %}
-            <p>Object i nuvarande rum: {{ item.getName() }}</p>
-            <p>Object i nuvarande rum: {{ item.getIcon() }}</p>
-            {% endfor %}
-
-            {% for item in roomObjects %}
-            {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
-            <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
-            <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
-            <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
-            {% endif %}
-            {% endfor %}
-            {% if roomObjects|length > 0 %}
-            <input type="submit" name="submit" id="submit" value="Equip">
-            {% endif %}
-        </form>
-
-        <p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
-        <p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
-    </div>
-</div>
-{% endblock %}
+<p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
+<p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
+{% endblock roomform %}

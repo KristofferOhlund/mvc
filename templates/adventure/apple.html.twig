@@ -1,56 +1,27 @@
-{% extends 'base.html.twig' %}
-{% block title %}Adventure - Graveyard {% endblock %}
-{% block body %}
+{% extends 'adventure/graveyard.html.twig' %}
+{% block title %}Adventure - {{app.request.attributes.get('_route')|title}} {% endblock %}
 
 
+{% block roomtext %}
+<h1>Här är massa text for apple</h1>
+{% endblock roomtext %}
 
-<div class="adventure">
+{% block roomform %}
+<h1>Ny form</h1>
+<form action=" {{ path('equip_item') }}" , method="post">
 
-    <div class="background">
-        <img src=" {{ asset('build/images/adventure/' ~ img) }} " alt="graveyard">
-    </div>
-    <div class="content">
-        {% include 'flash.html.twig' %}
-        <div class="player-info">
-            <h1>Player health: {{ human.getHealth() }}</h1>
-            <h2>Player weapon: <span>{{ human.getWeaponName() }} <img class="icon"
-                        src="{{ asset('build/images/adventure/icons/' ~ human.getWeaponName() ~ ".png") }}" alt="" }}
-                        </span></h2>
-            <h2>Inventory:</h2>
-            <div class="backpack">
-                <!--<img class="bag" src=" {{ asset('build/images/adventure/backpack.png') }} " alt="backpack">-->
-                <ul>
-                    {% for item in backpack %}
-                    <li><img class="icon" src="{{ asset('build/images/adventure/icons/' ~ item ~ ".png") }}" alt="">
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+    {% for item in roomObjects %}
+    {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
+    <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+    <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
+    <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
+    {% endif %}
+    {% endfor %}
+    {% if roomObjects|length > 0 %}
+    <input type="submit" name="submit" id="submit" value="Equip">
+    {% endif %}
+</form>
 
-        </div>
-
-        <div class="room-text">
-            <p>
-                text
-            </p>
-        </div>
-
-        <form action=" {{ path('equip_item') }}" , method="post">
-
-            {% for item in roomObjects %}
-            {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
-            <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
-            <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
-            <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
-            {% endif %}
-            {% endfor %}
-            {% if roomObjects|length > 0 %}
-            <input type="submit" name="submit" id="submit" value="Equip">
-            {% endif %}
-        </form>
-
-        <p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
-        <p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
-    </div>
-</div>
-{% endblock %}
+<p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
+<p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
+{% endblock roomform %}
