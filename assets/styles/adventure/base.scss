@@ -1,8 +1,80 @@
-@use 'adventure';
-@use 'normalize';
-@use 'background';
-@use 'player-info';
+// @use 'adventure';
+// @use 'normalize';
+@use 'room';
+// @use 'player-info';
 @use 'nav';
 
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
+// Reset-stilar
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pixelify Sans', monospace;
+  color: #fdf6e3;
+  background-color: #000;
+  min-height: 100vh;
+}
 
 
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  // border: 2px solid white;
+}
+
+// .room-description {
+//   background: rgba(20, 20, 20, 0.9);
+//   padding: 1rem;
+//   margin-bottom: 1.5rem;
+//   border: 1px solid #666;
+//   font-size: 1.1rem;
+//   line-height: 1.6;
+//   border-radius: 5px;
+// }
+
+// .action-form {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.5rem;
+
+//   input[type="text"],
+//   button {
+//     font-family: 'Pixelify Sans', monospace;
+//     font-size: 1rem;
+//     padding: 0.5rem;
+//     border: 1px solid #888;
+//     border-radius: 3px;
+//     background-color: #222;
+//     color: #f0f0f0;
+//   }
+
+//   button {
+//     background-color: #444;
+//     cursor: pointer;
+
+//     &:hover {
+//       background-color: #666;
+//       color: #fff;
+//     }
+//   }
+// }
+
+// footer {
+//   text-align: center;
+//   padding: 1rem;
+//   background-color: #111;
+//   border-top: 1px solid #333;
+//   font-size: 0.9rem;
+//   color: #888;
+// }
