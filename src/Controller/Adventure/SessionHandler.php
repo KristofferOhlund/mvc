@@ -95,7 +95,6 @@ class SessionHandler
             "house" => [
                 "title" => "house",
                 "items" => [
-                    ["name" => "key", "icon" => "key.png"],
                     ["name" => "skull", "icon" => "skull.png"]
                 ],
                 "weapons" => [
@@ -109,9 +108,8 @@ class SessionHandler
             "apple" => [
                 "title" => "apple",
                 "items" => [
-                    ["name" => "Shield", "icon" => "shield.png"],
-                    ["name" => "glasses", "icon" => "glasses.png"],
-                    ["name" => "mysterious note", "icon" => "mysterious_note.png"]
+                    ["name" => "Apple", "icon" => "apple.png"],
+                    ["name" => "note", "icon" => "note.png"]
                 ],
                 "weapons" => [
                     [
@@ -129,7 +127,7 @@ class SessionHandler
                 ],
                 "weapons" => [
                     [
-                        "name" => "Shard bone",
+                        "name" => "Sharp bone",
                         "dmg" => 10,
                         "icon" => "bone.png"
                     ]
