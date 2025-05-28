@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adventure - {{ app.request.attributes.get('_route')|title }}{% endblock %}
+
+{% block body %}
+{% include 'flash.html.twig' %}
+
+<div class="background">
+    <img class="img" src="{{ asset('build/images/adventure/' ~ img) }}" alt="Room background">
+
+    <div class="player-info">
+        <h2>Player health: {{ human.getHealth() }}</h2>
+
+        {% if human.getWeaponName() %}
+        <h2>Player weapon:
+            <span>{{ human.getWeaponName() }}
+                <img class="icon" src="{{ asset('build/images/adventure/icons/' ~ human.getWeaponName() ~ '.png') }}"
+                    alt="icon">
+            </span>
+        </h2>
+        {% endif %}
+
+        <h2>Inventory:</h2>
+        <ul>
+            {% for item in backpack %}
+            <li><img class="icon" src="{{ asset('build/images/adventure/icons/' ~ item ~ '.png') }}" alt=""></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+    <div class="room-content">
+        <p>{% block roomtext %}{% endblock %}</p>
+        <div class="room-form">{% block roomform %}{% endblock %}</div>
+    </div>
+
+    <div class="arrow-nav">
+        <a href="{{ path(prev) }}"><i class="fa-solid fa-arrow-left nav-arrow"></i></a>
+        <a href="{{ path(next) }}"><i class="fa-solid fa-arrow-right nav-arrow"></i></a>
+    </div>
+
+{% endblock %}
