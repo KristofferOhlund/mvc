@@ -31,7 +31,22 @@
 
     <div class="room-content">
         <p>{% block roomtext %}{% endblock %}</p>
-        <div class="room-form">{% block roomform %}{% endblock %}</div>
+        <div class="room-form">
+            <form action=" {{ path('equip_item') }}" , method="post">
+                <div class="button-container">
+                    {% for item in roomObjects %}
+                        {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
+                        <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+                
+                        <button class="action-button" type="submit" name="item" value="{{item.getName()}}">Loot {{ item.getName()
+                            }}</button>
+                
+                        {% endif %}
+                    {% endfor %}
+                </div> 
+            </form>
+        </div>
+        <!--<div class="room-form">{% block roomform %}{% endblock %}</div>-->
     </div>
 
     <div class="arrow-nav">

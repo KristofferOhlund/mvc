@@ -8,21 +8,3 @@ with mystery. Do you take the apple? Do you climb?
 
 {% endblock roomtext %}
 
-{% block roomform %}
-
-    <form action=" {{ path('equip_item') }}" , method="post">
-        {% for item in roomObjects %}
-        {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
-        <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
-        <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
-        <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
-        {% endif %}
-        {% endfor %}
-
-        {% if roomObjects|length > 0 %}
-        <input type="submit" name="submit" id="submit" value="Equip">
-        {% endif %}
-    </form>
-
-{% endblock roomform %}
-
