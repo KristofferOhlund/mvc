@@ -1,29 +1,63 @@
-{% extends 'adventure/graveyard.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}Adventure - {{app.request.attributes.get('_route')|title}} {% endblock %}
 
+{% block body %}
+<div class="background">
+    <img src=" {{ asset('build/images/adventure/' ~ img) }} " alt="graveyard">
+</div>
+
+
+{% include 'flash.html.twig' %}
+<div class="player-info">
+    <h2>Player health: {{ human.getHealth() }}</h2>
+    <h2>Player weapon: <span>{{ human.getWeaponName() }} <img class="icon"
+                src="{{ asset('build/images/adventure/icons/' ~ human.getWeaponName() ~ " .png") }}" alt="" }} </span>
+    </h2>
+    <h2>Inventory:</h2>
+
+    <ul>
+        {% for item in backpack %}
+        <li><img class="icon" src="{{ asset('build/images/adventure/icons/' ~ item ~ " .png") }}" alt=""></li>
+        {% endfor %}
+    </ul>
+
+</div>
 
 {% block roomtext %}
-In the deepest chamber of the world, a monstrous dragon coils around a mountain of gold. Jewels glint in the flickering
-firelight, and the beast's glowing eyes never leave you. Each breath fills the cavern with smoke and heat. This is the
-end of your path… or the beginning of legend.
-{% endblock roomtext %}
+<div class="room-content">
+    <div class="room-text">
+        <p>
+            In the deepest chamber of the world, a monstrous dragon coils around a mountain of gold. Jewels glint in the flickering
+            firelight, and the beast's glowing eyes never leave you. Each breath fills the cavern with smoke and heat. This is the
+            end of your path… or the beginning of legend.
+        </p>
+    </div>
+    {% endblock roomtext %}
 
-{% block roomform %}
-<h1>Ny form</h1>
-<form action=" {{ path('equip_item') }}" , method="post">
+    {% block roomform %}
+    <div class="room-form">
+        <form action=" {{ path('equip_item') }}" , method="post">
+            {% for item in roomObjects %}
+            {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
+            <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+            <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
+            <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
+            {% endif %}
+            {% endfor %}
 
-    {% for item in roomObjects %}
-    {% if item.getName() not in backpack and item.getName() != human.getWeaponName() %}
-    <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
-    <input type="radio" id="{{ item.getName()}}" name="item" value="{{ item.getName()}}">
-    <label for="{{ item.getName()}}">Pick up the {{ item.getName() }}</label><br>
-    {% endif %}
-    {% endfor %}
-    {% if roomObjects|length > 0 %}
-    <input type="submit" name="submit" id="submit" value="Equip">
-    {% endif %}
-</form>
+            {% if roomObjects|length > 0 %}
+            <input type="submit" name="submit" id="submit" value="Equip">
+            {% endif %}
+        </form>
+    </div>
 
-<p>Next room: <a href="{{ path(next) }} ">Next room, {{next}}</a></p>
-<p>Prev room: <a href="{{ path(prev) }} ">prev room, {{prev}}</a></p>
-{% endblock roomform %}
+    <div class="arrow-nav">
+        <a href="{{ path(prev) }} "><i class="fa-solid fa-arrow-left nav-arrow"></i></a>
+        <a href="{{ path(next) }} "><i class="fa-solid fa-arrow-right nav-arrow"></i></a>
+    </div>
+
+    {% endblock roomform %}
+
+</div>
+
+{% endblock body %}
