@@ -4,7 +4,6 @@
   background: rgba(0, 0, 0, 0.8);
   padding: 0.5rem 1rem;
   font-size: 2rem;
-  border-bottom: 2px solid white;
   .navbar {
     display: flex;
     justify-content: center;
@@ -15,7 +14,8 @@
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    border-bottom: 2px solid white;
 
     a {
       color: #ffdd57;

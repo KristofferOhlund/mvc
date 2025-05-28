@@ -24,9 +24,13 @@
             <nav class="navbar">
                 <ul>
                     <li><a href="{{ path('init_adventure') }}"
-                            class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li> |
+                            class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li>
                     <li><a href="{{ path('index_adventure') }}"
                             class="{{ (app.request.pathinfo == path('index_adventure')) ? 'active' : '' }}">Proj</a></li>
+                    <li><a href="{{ path('about_adventure') }}"
+                            class="{{ (app.request.pathinfo == path('about_adventure')) ? 'active' : '' }}">About</a></li>
+                    <li><a href="{{ path('cheat_adventure') }}"
+                            class="{{ (app.request.pathinfo == path('cheat_adventure')) ? 'active' : '' }}">Cheat</a></li>
                 </ul>
             </nav>
             {% else %}
