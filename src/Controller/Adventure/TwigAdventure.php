@@ -141,9 +141,10 @@ class TwigAdventure extends AbstractController
         $session = $request->getSession();
         $human = $session->get("human") ?? "Human finns inte";
 
+        
         if ($item === "Apple"){
             $human->addItemToBackPack(new Food($item, 50, $icon));
-        } if ($item !== "Sword") {
+        } else if ($item !== "Sword") {
             $human->addItemToBackPack(new Item($item, $icon));
         } if ($item === "Sword") {
             $human->addWeapon(new Weapon($item, 100, $icon));
