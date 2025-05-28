@@ -1,15 +1,19 @@
-.player-info {
-  position: absolute;
-  top: 8rem;
-  left: 22rem;
-  color: #ffdd57;
+.background {
+  position: relative;
 }
 
-.background img {
+.background .img {
   width: 100%;
   object-fit: cover;
   height: 700px;
   object-position: center;
+}
+
+.player-info {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #ffdd57;
 }
 
 .room-content {
@@ -19,4 +23,9 @@
 
 .room-form {
   margin: 1rem;
+}
+
+player-info .icon {
+  width: 64px;
+  height: 64px;
 }
