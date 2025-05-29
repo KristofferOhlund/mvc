@@ -59,6 +59,7 @@ class Human extends Varelse
      */
     public function eatFood(Food $foodItem): int {
         $this->increaseHealth($foodItem->getHealingValue());
+        $this->backpack->dropItem($foodItem);
         return $this->getHealth();
     }
 
@@ -75,5 +76,18 @@ class Human extends Varelse
      */
     public function attackWithWeapon(): int {
         return $this->getAttackPower() + ($this->weapon?->getWeaponDmg() ?? 0);
+    }
+
+    /**
+     * Get an item from your backpack
+     * @return Food
+     */
+    public function getItemByName(string $name)
+    {   
+        foreach($this->getItemsInBag() as $food) {
+            if ($food->getName() === $name) {
+                return $food;
+            }
+        } throw new \Exception("There is no food with name: $name");
     }
 }
