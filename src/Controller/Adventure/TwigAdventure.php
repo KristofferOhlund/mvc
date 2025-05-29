@@ -105,16 +105,15 @@ class TwigAdventure extends AbstractController
     public function win(Session $session) {
     
         // Get data for current room
-        $data = $this->getDataByRoom($session, "win");    
-            return $this->render("adventure/win.html.twig", $data);
+        // $data = $this->getDataByRoom($session, "win");
+        return $this->render("adventure/win.html.twig");
     }
 
     #[Route("/adventure/lost", name:"lost")]
     public function lost(Session $session) {
     
         // Get data for current room
-        $data = $this->getDataByRoom($session, "lost");    
-            return $this->render("adventure/lost.html.twig", $data);
+        return $this->render("adventure/lost.html.twig");
     }
 
     #[Route("/adventure/item", name:"equip_item", methods:["POST"])]
@@ -167,5 +166,42 @@ class TwigAdventure extends AbstractController
         $roomHandler = $session->get("roomHandler");
         $roomHandler->addItemToRoom($route, $ItemObj);
         return $this->redirectToRoute($route);
+    }
+
+    #[Route("/adventure/attack", name:"attack", methods:["POST"])]
+    public function attack(Request $request)
+    {
+        $session = $request->getSession();
+        $human = $session->get("human");
+        $dmg = $human->attackWithWeapon();
+
+        $this->addFlash("notice", "You strike the dragon with your weapon, dealing $dmg dmg");
+        
+        $dragon = $session->get("dragon");
+        $dragon->reduceHealth((int) $dmg);
+
+        if ($dragon->getHealth() < 0) {
+            return $this->redirectToRoute("win");
+        }
+
+        $dragonDmg = $dragon->sprayFire();
+        $human->reduceHealth((int) $dragonDmg);
+
+        $this->addFlash("notice", "The dragon roars and draws his breath, filling the entire room with fire");
+
+        if ($human->getHealth() < 0) {
+            return $this->redirectToRoute("lost");
+        } 
+
+        return $this->redirectToRoute("dragon");
+
+    }
+    #[Route("/adventure/eat", name:"eat", methods:["POST"])]
+    public function eat(Request $request)
+    {
+        $session = $request->getSession();
+        $human = $session->get("human");
+        $human->eatFood($human->getItemByName("Apple"));
+        return $this->redirectToRoute("dragon");
     }
 }
