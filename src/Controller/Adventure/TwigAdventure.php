@@ -157,10 +157,15 @@ class TwigAdventure extends AbstractController
         
         if ($action === "dig") {
             $ItemObj = new Item("key", "key.png");
-            $session = $request->getSession();
-            $roomHandler = $session->get("roomHandler");
-            $roomHandler->addItemToRoom("graveyard", $ItemObj);
+
+        } if ($action === "unlock") {
+            $ItemObj = new Item("apple", "apple.png");
+            $route = "apple";
         }
+
+        $session = $request->getSession();
+        $roomHandler = $session->get("roomHandler");
+        $roomHandler->addItemToRoom($route, $ItemObj);
         return $this->redirectToRoute($route);
     }
 }
