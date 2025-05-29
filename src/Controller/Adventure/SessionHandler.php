@@ -121,8 +121,6 @@ class SessionHandler
             "dragon" => [
                 "title" => "dragon",
                 "items" => [
-                    ["name" => "treassure", "icon" => "treassure.png"],
-                    ["name" => "human remains", "icon" => "humanremains.png"]
                 ],
                 "weapons" => [
                     [
