@@ -171,5 +171,37 @@ class TestRoomHandler extends TestCase
         $nextRoom = $roomHandler->getNext("dragon");
         $this->assertSame($nextRoom, "dragon");
     }
-    
+
+    /**
+     * Test addItemToRoom
+     */
+    public function testAddItemToRoom()
+    {   
+        
+        $room = new Room("graveyard");
+        $roomHandler = new RoomHandler();
+        $roomHandler->addRoom($room);
+
+        $item = new Item("key", "key.png");
+
+        $status = $roomHandler->addItemToRoom($room->getName(), $item);
+
+        $this->assertTrue($status);
+    }
+
+    /**
+     * 
+     * Test addItemToRoom
+     */
+    public function testAddItemToRoomNotExist()
+    {   
+        
+        $room = new Room("graveyard");
+        $roomHandler = new RoomHandler();
+        $roomHandler->addRoom($room);
+
+        $item = new Item("key", "key.png");
+        $this->expectExceptionMessage("There is no room with name: invalid");
+        $status = $roomHandler->addItemToRoom("invalid", $item);
+    }
 }
