@@ -46,7 +46,11 @@
                 </div> 
             </form>
         </div>
-        <!--<div class="room-form">{% block roomform %}{% endblock %}</div>-->
+
+        <div class="room-form">
+            {% block action %}
+            {% endblock %}
+        </div>
     </div>
 
     <div class="arrow-nav">
