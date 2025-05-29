@@ -2,8 +2,12 @@
 
 {% block roomtext %}
 
-{% if "Shovel" in backpack|join(", ") %}
+{% if "Shovel" in backpack|join(", ") and not "Key" in backpack|join(", ") %}
 Hmm maybe i can use the shovel to dig up some secrets...
+
+{% elseif "Key" in backpack|join(", ") %}
+
+Ha, a golden Key! This must be special since this knight died defending it..
 
 {% else %}
 

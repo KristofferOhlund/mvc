@@ -6,11 +6,29 @@
 The narrow path winds its way up the grassy hill, leading you to a small, timeworn cottage. Its thatched roof sags
 slightly with age, and the red door stands closed—silent, yet inviting. Wind whispers through the nearby trees, as
 if
-urging you forward. You feel a strange warmth from within. What secrets lie beyond the door? If only i had a key to open
-the door with..
+urging you forward. You feel a strange warmth from within. What secrets lie beyond the door? {% if "Key" in backpack|join(", ") %} <br>Hmm, maybe the key that i found can unlock the door?
+
+{% else %}
+If only i had a key to open
+the door with.. But nevermind, i have a dragon to kill
+
+{% endif %}
 
 {% endblock roomtext %}
 
+{% block action %}
+
+{% if "Key" in backpack|join(",") %}
+<form action=" {{ path('use_item') }}" , method="post">
+
+    <div class="button-container">
+        <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+        <button class="action-button" type="submit" name="action" value="unlock">Use key</button>
+    </div>
+</form>
+{% endif %}
+
+{% endblock action %}
 
 
 
