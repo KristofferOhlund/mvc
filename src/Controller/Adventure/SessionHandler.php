@@ -108,7 +108,6 @@ class SessionHandler
             "apple" => [
                 "title" => "apple",
                 "items" => [
-                    ["name" => "Apple", "icon" => "apple.png"],
                     ["name" => "note", "icon" => "note.png"]
                 ],
                 "weapons" => [
