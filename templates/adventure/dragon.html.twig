@@ -6,5 +6,26 @@ In the deepest chamber of the world, a monstrous dragon coils around a mountain 
 firelight, and the beast's glowing eyes never leave you. Each breath fills the cavern with smoke and heat. This is the
 end of your path… or the beginning of legend.
 
+<h1>Dragon health: {{ dragon.getHealth() }}</h1>
+
 {% endblock roomtext %}
 
+{% block action %}
+<form action="{{path('attack')}}", method="POST">
+    
+        <div class="button-container">
+            <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+            <button class="action-button" type="submit" name="action" value="{{ human.getWeaponName() ?? null }}">Attack </button>
+        </div>
+        </form>
+</form>
+{% if "Apple" in backpack|join(", ") %}
+<form action="{{path('eat')}}", method="POST">
+        <div class="button-container">
+            <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+            <button class="action-button" type="submit" name="eat" value="apple">Eat Apple</button>
+        </div>
+        </form>
+</form>
+{% endif %}
+{% endblock action %}
