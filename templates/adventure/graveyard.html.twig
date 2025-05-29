@@ -2,6 +2,11 @@
 
 {% block roomtext %}
 
+{% if "Shovel" in backpack|join(", ") %}
+Hmm maybe i can use the shovel to dig up some secrets...
+
+{% else %}
+
 Graveyard Awakening - You wake up with a dull ache at the back of your head. The ground beneath you is cold and damp,
 covered in
 rotting
@@ -22,9 +27,23 @@ A broken wooden cross leans against a moss-covered headstone.
 Footprints trail off into a shadowy grove beyond the fence.
 A strange amulet, half-buried near the skeleton, catches the faint light.
 The air is heavy. You feel it in your chest — something watches from beyond the mist.
-    
+
+{% endif %}
+
 {% endblock roomtext %}
 
+{% block action %}
+
+{% if "Shovel" in backpack|join(",") and "Key" not in backpack|join(", ") %}
+<form action=" {{ path('use_item') }}" , method="post">
+
+    <div class="button-container">
+        <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+        <button class="action-button" type="submit" name="action" value="dig">Dig secrets..</button>
+    </div>
+</form>
+{% endif %}
+{% endblock action %}
 
 
 
