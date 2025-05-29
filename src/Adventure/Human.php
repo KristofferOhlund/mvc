@@ -59,7 +59,8 @@ class Human extends Varelse
      */
     public function eatFood(Food $foodItem): int {
         $this->increaseHealth($foodItem->getHealingValue());
-        $this->backpack->dropItem($foodItem);
+        $backPack = $this->backpack;
+        $backPack->dropItem($foodItem);
         return $this->getHealth();
     }
 
