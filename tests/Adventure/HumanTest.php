@@ -90,7 +90,10 @@ class TestHuman extends TestCase
     public function testHumanEatFood() {
         $food = new Food("apple", 50, "apple.png");
         $human = new Human("Player");
-        $this->assertSame(150,$human->eatFood($food));
+        $backpack = new BackPack();
+        $human->equipBackPack($backpack);
+        $backpack->AddItem($food);
+        $this->assertSame(150, $human->eatFood($food));
 
     }
 
