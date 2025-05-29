@@ -7,20 +7,13 @@
 namespace App\Controller\Adventure;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
 // ADVENTURE
-use App\Controller\Adventure\SesssionHandler;
-use App\Adventure\RoomHandler;
-use App\Adventure\Room;
-use App\Adventure\Human;
-use App\Adventure\Dragon;
 use App\Adventure\Weapon;
 use App\Adventure\Food;
-use App\Adventure\BackPack;
 use App\Adventure\Item;
 
 class TwigAdventure extends AbstractController
@@ -36,6 +29,8 @@ class TwigAdventure extends AbstractController
      */
     private function getDataByRoom(Session $session, string $roomName): array {
         $roomHandler = $session->get("roomHandler");
+
+        
         $human = $session->get("human");
         $dragon = $session->get("dragon");
         $validRooms = [
@@ -109,17 +104,17 @@ class TwigAdventure extends AbstractController
     #[Route("/adventure/win", name:"win")]
     public function win(Session $session) {
     
-    // Get data for current room
-    $data = $this->getDataByRoom($session, "win");    
-        return $this->render("adventure/win.html.twig", $data);
+        // Get data for current room
+        $data = $this->getDataByRoom($session, "win");    
+            return $this->render("adventure/win.html.twig", $data);
     }
 
     #[Route("/adventure/lost", name:"lost")]
     public function lost(Session $session) {
     
-    // Get data for current room
-    $data = $this->getDataByRoom($session, "lost");    
-        return $this->render("adventure/lost.html.twig", $data);
+        // Get data for current room
+        $data = $this->getDataByRoom($session, "lost");    
+            return $this->render("adventure/lost.html.twig", $data);
     }
 
     #[Route("/adventure/item", name:"equip_item", methods:["POST"])]
@@ -151,6 +146,21 @@ class TwigAdventure extends AbstractController
         }
         
         $this->addFlash("notice", "You equipped the $item with icon $icon");
+        return $this->redirectToRoute($route);
+    }
+
+    #[Route("/adventure/action", name:"use_item", methods:["POST"])]
+    public function useItem(Request $request) {
+        $posted = $request->request->all();
+        $route = $posted["referer_route"];
+        $action = $posted["action"] ?? null;
+        
+        if ($action === "dig") {
+            $ItemObj = new Item("key", "key.png");
+            $session = $request->getSession();
+            $roomHandler = $session->get("roomHandler");
+            $roomHandler->addItemToRoom("graveyard", $ItemObj);
+        }
         return $this->redirectToRoute($route);
     }
 }
