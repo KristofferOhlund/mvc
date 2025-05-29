@@ -89,4 +89,16 @@ class RoomHandler
             }
         } throw new \Exception("There is no room with name: $roomName");
     }
+
+    /**
+     * Add an Item to a Room
+     * @param Item item to be added
+     * @param string room - the room to which an item is added 
+     * @return bool
+     */
+    public function addItemToRoom(string $roomName, Item $item): bool {
+        $room = $this->getRoomByName($roomName);
+        $room->addItem($item);
+        return true;
+    }
 }
