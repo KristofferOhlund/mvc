@@ -6,8 +6,8 @@
         <link rel="icon" href="{{ asset('build/images/four.png') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         {% block stylesheets %}
-            {% if app.request.pathinfo starts with '/adventure' %}
-                {{ encore_entry_link_tags('adventure') }}
+            {% if app.request.pathinfo starts with '/proj' %}
+                {{ encore_entry_link_tags('proj') }}
             {% else %}
                 {{ encore_entry_link_tags('app') }}
             {% endif %}
@@ -20,13 +20,11 @@
     </head>
     <body>
         <header class="site-header">
-            {% if app.request.pathinfo starts with '/adventure' %}
+            {% if app.request.pathinfo starts with '/proj' %}
             <nav class="navbar">
                 <ul>
                     <li><a href="{{ path('init_adventure') }}"
                             class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li>
-                    <li><a href="{{ path('index_adventure') }}"
-                            class="{{ (app.request.pathinfo == path('index_adventure')) ? 'active' : '' }}">Proj</a></li>
                     <li><a href="{{ path('about_adventure') }}"
                             class="{{ (app.request.pathinfo == path('about_adventure')) ? 'active' : '' }}">About</a></li>
                     <li><a href="{{ path('cheat_adventure') }}"
@@ -46,8 +44,7 @@
                     <li><a href="{{ path('session_dump') }}" class="{{ (app.request.pathinfo == path('session_dump')) ? 'active' : '' }}">Reset Session</a></li> |
                     <li><a href="{{ path('library_index') }}" class="{{ (app.request.pathinfo == path('library_index')) ? 'active' : '' }}">Library</a></li> |
                     <li><a href="{{ path('index_metrics') }}" class="{{ (app.request.pathinfo == path('index_metrics')) ? 'active' : '' }}">Metrics</a></li> |
-                    <li><a href="{{ path('init_adventure') }}" class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li> |
-                    <li><a href="{{ path('index_adventure') }}" class="{{ (app.request.pathinfo == path('index_adventure')) ? 'active' : '' }}">Proj</a></li>
+                    <li><a href="{{ path('about_adventure') }}" class="{{ (app.request.pathinfo == path('about_adventure')) ? 'active' : '' }}">Project</a></li>
                 </ul>
             </nav>
             {% endif %}
