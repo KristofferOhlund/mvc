@@ -56,7 +56,7 @@ class TwigAdventure extends AbstractController
         return $data;
     }
 
-    #[Route("/adventure/init", name:"init_adventure")]
+    #[Route("/proj/init", name:"init_adventure")]
     public function init(SessionHandler $sessionHandler) {
         
         // Get data for current room
@@ -65,7 +65,7 @@ class TwigAdventure extends AbstractController
     }
 
 
-    #[Route("/adventure/graveyard", name:"graveyard")]
+    #[Route("/proj/graveyard", name:"graveyard")]
     public function graveyard(Session $session)
     {    
         // Get data for current room
@@ -74,7 +74,7 @@ class TwigAdventure extends AbstractController
     }
 
 
-    #[Route("/adventure/house", name:"house")]
+    #[Route("/proj/house", name:"house")]
     public function house(Session $session) {
 
         // Get data for current room
@@ -83,7 +83,7 @@ class TwigAdventure extends AbstractController
     }
 
 
-    #[Route("/adventure/apple", name:"apple")]
+    #[Route("/proj/apple", name:"apple")]
     public function apple(Session $session) {
     
         // Get data for current room
@@ -92,7 +92,7 @@ class TwigAdventure extends AbstractController
     }
 
 
-    #[Route("/adventure/dragon", name:"dragon")]
+    #[Route("/proj/dragon", name:"dragon")]
     public function dragon(Session $session) {
 
         // Get data for current room
@@ -101,7 +101,7 @@ class TwigAdventure extends AbstractController
     }
 
 
-    #[Route("/adventure/win", name:"win")]
+    #[Route("/proj/win", name:"win")]
     public function win(Session $session) {
     
         // Get data for current room
@@ -109,14 +109,14 @@ class TwigAdventure extends AbstractController
         return $this->render("adventure/win.html.twig");
     }
 
-    #[Route("/adventure/lost", name:"lost")]
+    #[Route("/proj/lost", name:"lost")]
     public function lost(Session $session) {
     
         // Get data for current room
         return $this->render("adventure/lost.html.twig");
     }
 
-    #[Route("/adventure/item", name:"equip_item", methods:["POST"])]
+    #[Route("/proj/item", name:"equip_item", methods:["POST"])]
     public function equipItem(Request $request)
     {
         // fetch item
@@ -148,7 +148,7 @@ class TwigAdventure extends AbstractController
         return $this->redirectToRoute($route);
     }
 
-    #[Route("/adventure/action", name:"use_item", methods:["POST"])]
+    #[Route("/proj/action", name:"use_item", methods:["POST"])]
     public function useItem(Request $request) {
         $posted = $request->request->all();
         $route = $posted["referer_route"];
@@ -168,7 +168,7 @@ class TwigAdventure extends AbstractController
         return $this->redirectToRoute($route);
     }
 
-    #[Route("/adventure/attack", name:"attack", methods:["POST"])]
+    #[Route("/proj/attack", name:"attack", methods:["POST"])]
     public function attack(Request $request)
     {
         $session = $request->getSession();
@@ -196,7 +196,7 @@ class TwigAdventure extends AbstractController
         return $this->redirectToRoute("dragon");
 
     }
-    #[Route("/adventure/eat", name:"eat", methods:["POST"])]
+    #[Route("/proj/eat", name:"eat", methods:["POST"])]
     public function eat(Request $request)
     {
         $session = $request->getSession();
