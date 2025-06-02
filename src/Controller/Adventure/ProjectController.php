@@ -6,6 +6,7 @@
 
 namespace App\Controller\Adventure;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,5 +27,11 @@ class ProjectController extends AbstractController
     public function cheat()
     {
         return $this->render("adventure/cheat.html.twig");
+    }
+
+    #[Route("/proj/about/database", name: "database")]
+    public function index(): Response
+    {
+        return $this->render("adventure/database.html.twig");
     }
 }
