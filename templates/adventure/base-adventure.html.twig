@@ -55,7 +55,10 @@
 
     <div class="arrow-nav">
         <a href="{{ path(prev) }}"><i class="fa-solid fa-arrow-left nav-arrow"></i></a>
+        
+        {% block next %}
         <a href="{{ path(next) }}"><i class="fa-solid fa-arrow-right nav-arrow"></i></a>
+        {% endblock %}
     </div>
 
 {% endblock %}

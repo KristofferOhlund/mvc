@@ -1,13 +1,9 @@
 {% extends 'adventure/base-adventure.html.twig' %}
 
 {% block roomtext %}
-{{backpack|join(", ")}}
-{% if "Shovel" in backpack|join(", ") and "Key" not in backpack|join(", ") %}
-Hmm maybe i can use the shovel to dig up some secrets...
+{% if msg %}
 
-{% elseif "Key" in backpack|join(", ") %}
-
-Ha, a golden Key! This must be special since this knight died defending it..
+{{msg}}
 
 {% else %}
 
@@ -21,16 +17,15 @@ In front of you, at the center of the graveyard, lies a skeleton — half-buried
 sword
 driven deep into the soil. The body looks ancient, but something about it feels… recent. As if it died with
 purpose.
-Protecting something. Or sealing something away. A shovel is thrown next to the skeleton, is there something burried beneath?
-
+Protecting something. Or sealing something away. A shovel is thrown next to the skeleton, is there something burried
+beneath?
 
 {% endif %}
-
 {% endblock roomtext %}
 
 {% block action %}
 
-{% if "Shovel" in backpack|join(",") and "Key" not in backpack|join(", ") %}
+{% if "Shovel" in backpack|join(", ") and "Key" not in backpack|join(", ") %}
 <form action=" {{ path('use_item') }}" , method="post">
 
     <div class="button-container">

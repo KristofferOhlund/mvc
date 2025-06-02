@@ -2,9 +2,15 @@
 
 {% block roomtext %}
 
+
+{% if msg %}
+{{msg }}
+
+{% else %}
 Inside the cottage, dim light spills across a wooden table. At its center rests a large, flawless apple—too perfect to
 be natural. A ladder leans against the wall nearby, stretching up toward a hatch in the ceiling. The air is still, heavy
-with mystery. I should probaly take the apple to restore my health..
+with mystery. That apple looks almost magical..
 
+{% endif %}
 {% endblock roomtext %}
 
