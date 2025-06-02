@@ -81,13 +81,13 @@ class Human extends Varelse
 
     /**
      * Get an item from your backpack
-     * @return Food
+     * @return Item
      */
-    public function getItemByName(string $name)
+    public function getItemByName(string $name): Item
     {   
-        foreach($this->getItemsInBag() as $food) {
-            if ($food->getName() === $name) {
-                return $food;
+        foreach($this->getItemsInBag() as $item) {
+            if ($item->getName() === $name) {
+                return $item;
             }
         } throw new \Exception("There is no food with name: $name");
     }
