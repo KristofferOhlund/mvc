@@ -13,6 +13,7 @@ use App\Adventure\Weapon;
 use App\Adventure\Food;
 use App\Adventure\Item;
 use App\Adventure\BackPack;
+use App\Adventure\DialogHandler;
 
 class SessionHandler
 {   
@@ -40,6 +41,17 @@ class SessionHandler
         $this->initHuman($session);
         $this->initDragon($session);
         $this->initRooms($session);
+        $this->initDialog($session); 
+    }
+
+    /**
+     * Initiate the dialog
+     * Save dialogHandler in session
+     * @return void
+     */
+    public function initDialog($session): void
+    {
+        $session->set("dialogHandler", new DialogHandler());
     }
 
     /**
