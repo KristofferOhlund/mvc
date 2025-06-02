@@ -10,103 +10,140 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 // ADVENTURE
-use App\Adventure\RoomHandler;
-use App\Adventure\Room;
-use App\Adventure\Human;
-use App\Adventure\Dragon;
-use App\Adventure\Weapon;
-use App\Adventure\Food;
+use App\Controller\Adventure\SessionHandler;
+use App\Adventure;
 use App\Adventure\BackPack;
+use App\Adventure\Food;
+use App\Adventure\Weapon;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class JsonAdventure extends AbstractController
 {
     /**
-     * Create all rooms and assets
-     * @return RoomHandler
+     * Json index page
+     * @return Response
      */
-    private function roomsInit(): RoomHandler {
-        $roomImages = ["graveyard", "house", "apple", "dragon", "win"];
-        $roomHandler = new RoomHandler();
-        for ($i = 0; $i < count($roomImages); $i++)
-        {
-            $room = new Room($roomImages[$i]);
-            $room->setImg($roomImages[$i] . ".png");
-            $food = new Food("Apple", 100);
-            $weapon = new Weapon("Sword", 100);
-            $room->addItem($food);
-            $room->addItem($weapon);
-            $roomHandler->addRoom($room);
-        }
-        // $session->set("roomHandler", $roomHandler);
-        return $roomHandler;
-    }
-
-    /**
-     * Create a new player object
-     * @return Human
-     */
-    private function playerInit(): Human {
-        $player = new Human("Player");
-        $backpack = new BackPack();
-        $player->equipBackPack($backpack);
-        return $player;
-    }
-
-    /**
-     * Create a new dragon object
-     * @return Dragon
-     */
-    private function dragonInit(): Dragon {
-        return new Dragon("DeathWing");
+    #[Route("/proj/json/index", name:"json_index")]
+    public function jsonIndex(): Response
+    {
+        return $this->render("Adventure/json.html.twig");
     }
 
     /**
      * Initiate the game
+     * @return Response
      */
-    #[Route("/jsonadventure/init", name:"init_adventure")]
-    public function initAdventure(Session $session): Response
+    #[Route("/proj/json/init", name:"json_init")]
+    public function initAdventure(Session $session, SessionHandler $sessionHandler): Response
     {   
-        // Create a room handler
-        $roomHandler = $this->roomsInit();
-        $player = $this->playerInit();
-        $dragon = $this->dragonInit();
+        $sessionHandler->initAdventure();
+        $roomHandler = $session->get("roomHandler");
+        $human = $session->get("human");
+        $dragon = $session->get("dragon");
 
         $data = [
-            "rooms" => $roomHandler->getAllRooms(),
-            "human" => $player->getName(),
-            "dragon" => $dragon->getName()
+            "human" => $human,
+            "dragon" => $dragon,
+            "rooms" => $roomHandler
         ];
 
         $response = $this->json($data);
         $response->setEncodingOptions($response->getEncodingOptions() || JSON_PRETTY_PRINT);
 
-        $session->set("roomHandler", $roomHandler);
         return $response;
     }
 
     /**
-     * First route
+     * Equip a sword
+     * @return Reponse
      */
-    #[Route("/jsonadventure/graveyard", name:"graveyard")]
-    public function graveyard(Session $session): Response
+    #[Route("/proj/json/equip", name:"json_equip", methods:["POST"])]
+    public function equipSword(Request $request): Response
     {   
-        $roomHandler = $session->get("roomHandler");
-        $graveyard = $roomHandler->getRoomByName("graveyard");
-        return $this->json($graveyard)?->setEncodingOptions(JSON_PRETTY_PRINT);
+        $post = $request->request->get("item");
+        $sword = new Weapon($post, 100, "sword.png");
+        $session = $request->getSession();
+        $human = $session->get("human");
+        $human->addWeapon($sword);
+
+        $data = [
+            "human" => $human,
+            "weapon" => $sword
+        ];
+
+        return $this->json($data)?->setEncodingOptions(JSON_PRETTY_PRINT);
     }
 
+
     /**
-     * Reset current session
+     * Eat an apple to increase the players health
+     * @return Reponse
      */
-    #[Route("/jsonadventure/reset", name:"reset")]
-    public function reset(Session $session): Response
+    #[Route("/proj/json/eat", name:"json_eat", methods:["POST"])]
+    public function eatApple(Request $request): Response
     {   
-        $session->set("roomHandler", null);
-        $roomHandler = $session->get("roomHandler");
+        $post = $request->request->get("item");
+        $food = new Food($post, 100, "apple.png");
+        $session = $request->getSession();
+        $human = $session->get("human");
+        $backpack = new BackPack();
+        $human->equipBackPack($backpack);
+        $human->addItemToBackPack($food);
+        $human->eatFood($food);
+
+        $data = [
+            "human" => $human,
+            "food" => $food
+        ];
+
+        return $this->json($data)?->setEncodingOptions(JSON_PRETTY_PRINT);
+    }
+
+
+    /**
+     * Attack the dragon
+     * @return Reponse
+     */
+    #[Route("/proj/json/attack", name:"json_attack")]
+    public function attack(Request $request): Response
+    {
+        $session = $request->getSession();
+        $human = $session->get("human");
+        $dmg = $human->attackWithWeapon();
         
-        $response = $this->json($roomHandler);
-        return $response->setEncodingOptions(JSON_PRETTY_PRINT);
+        $dragon = $session->get("dragon");
+        $dragon->reduceHealth((int) $dmg);
+
+        if ($dragon->getHealth() < 0) {
+            return $this->json(["Congratulations, you killed the dragon"]);
+        }
+
+        $dragonDmg = $dragon->sprayFire();
+        $human->reduceHealth((int) $dragonDmg);
+
+        if ($human->getHealth() < 0) {
+            return $this->json(["You got killed by the dragon!"]);
+        }
+
+        $data = [
+            "human" => $human,
+            "dragon" => $dragon
+        ];
+
+        return $this->json($data)?->setEncodingOptions(JSON_PRETTY_PRINT);
+    }
+
+
+    /**
+     * Reset current session by redirecting to json_init
+     * @return RedirectResponse
+     */
+    #[Route("/proj/json/reset", name:"json_reset")]
+    public function reset(): RedirectResponse
+    {   
+        return $this->redirectToRoute("json_init");
     }
 }
