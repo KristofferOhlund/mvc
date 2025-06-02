@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>JSON ROUTES</h1>
+
+<ul>
+    <li><a href="{{path('json_init')}}"><button class="action-button">Init Adventure</button></a> - Initiate the game by creating all rooms, items, a player and dragon instance</li>
+    <li><form action=" {{ path('json_equip') }}" , method="post">
+        <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+        <button class="action-button" type="submit" name="item" value="Sword">Equip Sword</button> - Equip weapon to increase your dmg.
+    </form></li>
+    <li><form action=" {{ path('json_eat') }}" , method="post">
+        <input type="hidden" name="referer_route" value="{{ app.request.attributes.get('_route') }}">
+        <button class="action-button" type="submit" name="item" value="Apple">Eat Apple</button> - Eat an apple to restore some health 
+    </form></li>
+    <li><a href="{{path('json_attack')}}"><button class="action-button">Attack the dragon</button></a> - Attack the dragon </li>
+    
+    <li><a href="{{path('json_reset')}}"><button class="action-button">Reset</button></a> - Reset Adventure Session </li>
+
+</ul>
+
+
+
+{% endblock body %}
