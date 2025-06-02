@@ -210,8 +210,9 @@ class TwigAdventure extends AbstractController
         } 
 
         return $this->redirectToRoute("dragon");
-
     }
+
+    
     #[Route("/proj/eat", name:"eat", methods:["POST"])]
     public function eat(Request $request)
     {
