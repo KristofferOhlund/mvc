@@ -17,6 +17,7 @@ use App\Adventure\Weapon;
 use App\Adventure\Food;
 use App\Adventure\Item;
 use App\Adventure\DialogHandler;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TwigAdventure extends AbstractController
 {   
@@ -58,68 +59,97 @@ class TwigAdventure extends AbstractController
         return $data;
     }
 
+    /**
+     * Init the adventure
+     * Call sessionHandler to setup all game and session variables
+     * @return RedirectResponse
+     */
     #[Route("/proj/init", name:"init_adventure")]
-    public function init(SessionHandler $sessionHandler) {
+    public function init(SessionHandler $sessionHandler): RedirectResponse {
         
         // Get data for current room
         $sessionHandler->initAdventure();
         return $this->redirectToRoute("graveyard");
     }
 
-
+    /**
+     * Route for the graveyard aka the first room of the Adventure
+     * Fetch current data
+     * @return Response
+     */
     #[Route("/proj/graveyard", name:"graveyard")]
-    public function graveyard(Session $session)
+    public function graveyard(Session $session): Response
     {    
         // Get data for current room
         $data = $this->getDataByRoom($session, "graveyard");
         return $this->render("adventure/graveyard.html.twig", $data);
     }
 
-
+    /**
+     * Route for the house aka the second room of the Adventure
+     * Fetch current data
+     * @return Response
+     */
     #[Route("/proj/house", name:"house")]
-    public function house(Session $session) {
-
+    public function house(Session $session): Response
+    {
         // Get data for current room
         $data = $this->getDataByRoom($session, "house");
         return $this->render("adventure/house.html.twig", $data);
     }
 
-
+    /**
+     * Route for the house aka the third room of the Adventure
+     * Fetch current data
+     * @return Response
+     */
     #[Route("/proj/apple", name:"apple")]
-    public function apple(Session $session) {
-    
+    public function apple(Session $session): Response
+    {
         // Get data for current room
         $data = $this->getDataByRoom($session, "apple");
         return $this->render("adventure/apple.html.twig", $data);
     }
 
-
+    /**
+     * Route for the house aka the last room of the Adventure
+     * Fetch current data
+     * @return Response
+     */
     #[Route("/proj/dragon", name:"dragon")]
-    public function dragon(Session $session) {
-
+    public function dragon(Session $session): Response
+    {
         // Get data for current room
         $data = $this->getDataByRoom($session, "dragon");
         return $this->render("adventure/dragon.html.twig", $data);
     }
 
-
+    /**
+     * Route for when successfully killing the dragon
+     * @return Response
+     */
     #[Route("/proj/win", name:"win")]
-    public function win(Session $session) {
-    
-        // Get data for current room
-        // $data = $this->getDataByRoom($session, "win");
+    public function win(): Response
+    {
         return $this->render("adventure/win.html.twig");
     }
 
+    /**
+     * Route for when killed by the dragon
+     * @return Response
+     */
     #[Route("/proj/lost", name:"lost")]
-    public function lost(Session $session) {
-    
-        // Get data for current room
+    public function lost() {
         return $this->render("adventure/lost.html.twig");
     }
 
+    /**
+     * Route for equipping an item
+     * Equips the item and returns a rederict to the referer_route
+     * @return RedirectResponse
+     */
     #[Route("/proj/item", name:"equip_item", methods:["POST"])]
-    public function equipItem(Request $request)
+    public function equipItem(Request $request): RedirectResponse
     {
         // fetch item
         $posted = $request->request->all();
@@ -155,8 +185,16 @@ class TwigAdventure extends AbstractController
         return $this->redirectToRoute($route);
     }
 
+    /**
+     * Route for using an item, aka action
+     * Action could be using a Shovel to dig some secrets,
+     * or eating an apple.
+     * Returns a rederict to the referer_route
+     * @return RedirectResponse
+     */
     #[Route("/proj/action", name:"use_item", methods:["POST"])]
-    public function useItem(Request $request) {
+    public function useItem(Request $request): RedirectResponse
+    {
         $posted = $request->request->all();
         $route = $posted["referer_route"];
         $action = $posted["action"] ?? null;
@@ -184,8 +222,13 @@ class TwigAdventure extends AbstractController
         return $this->redirectToRoute($route);
     }
 
+    /**
+     * Attacking the dragon, each attack also makes the dragon attack you back
+     * Returns a rederict to the dragon route
+     * @return RedirectResponse
+     */
     #[Route("/proj/attack", name:"attack", methods:["POST"])]
-    public function attack(Request $request)
+    public function attack(Request $request): RedirectResponse
     {
         $session = $request->getSession();
         $human = $session->get("human");
@@ -212,9 +255,13 @@ class TwigAdventure extends AbstractController
         return $this->redirectToRoute("dragon");
     }
 
-    
+    /**
+     * Route when eating a food item
+     * Eaths the food to restore some health
+     * @return RedirectResponse
+     */
     #[Route("/proj/eat", name:"eat", methods:["POST"])]
-    public function eat(Request $request)
+    public function eat(Request $request): RedirectResponse
     {
         $session = $request->getSession();
         $human = $session->get("human");
