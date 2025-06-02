@@ -26,10 +26,10 @@ class DialogHandler
             "Coin" => "A golden coin, looks ancient",
             "Tooth" => "A tooth, maybe i can put it under my pillow.",
             "Sword" => "A fine sword, still sharp!",
-            "Key" => "Good thing i found that key, this apple looks almost magical"
+            "Key" => "Look a golden Key, i wonder what door it might unlock"
         ],
         "apple" => [
-            "Apple" => "Perfect, maybe i can eat it later.."
+            "Apple" => "This apple looks almost magical, maybe i can use it later"
         ],
         "dragon" => [
             "Sharp bone" => "Maybe i can increase the dmg with this sharp bone"
