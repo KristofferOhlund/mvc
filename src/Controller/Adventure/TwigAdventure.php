@@ -72,9 +72,6 @@ class TwigAdventure extends AbstractController
     {    
         // Get data for current room
         $data = $this->getDataByRoom($session, "graveyard");
-        $dialogHandler = $session->get("dialogHandler");
-        var_dump($dialogHandler->getDialogByStatus());
-        $data["msg"] = $dialogHandler->getDialogByStatus();
         return $this->render("adventure/graveyard.html.twig", $data);
     }
 
@@ -163,13 +160,22 @@ class TwigAdventure extends AbstractController
         $posted = $request->request->all();
         $route = $posted["referer_route"];
         $action = $posted["action"] ?? null;
+
+        $session = $request->getSession();
         
         if ($action === "dig") {
             $ItemObj = new Item("key", "key.png");
+             // rum i route
+            $dialogHandler = $session->get("dialogHandler");
+            $dialogHandler->setCurrentRoom($route);
+            $dialogHandler->setCurrentItem($ItemObj->getName());
 
         } if ($action === "unlock") {
             $ItemObj = new Item("apple", "apple.png");
             $route = "apple";
+            $dialogHandler = $session->get("dialogHandler");
+            $dialogHandler->setCurrentRoom($route);
+            $dialogHandler->setCurrentItem($ItemObj->getName());
         }
 
         $session = $request->getSession();
