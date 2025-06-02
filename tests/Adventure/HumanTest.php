@@ -108,5 +108,34 @@ class TestHuman extends TestCase
         $this->assertSame("Sword", $human->getWeaponName());
     }
 
+    /**
+     * Test get item by name
+     */
+    public function testgetItemByName()
+    {
+        $human = new Human("dragonslayer");
+        $apple = new Food("Apple", 100, "apple.png");
+        $backpack = new BackPack();
+        $backpack->AddItem($apple);
+        $human->equipBackPack($backpack);
+
+        $item = $human->getItemByName("Apple");
+        $this->assertSame("Apple", $item->getName());
+        $this->assertInstanceOf(Food::class, $item);
+    }
+
+    /**
+     * Test get item by name Exception
+     */
+    public function testgetItemByNameException()
+    {
+        $human = new Human("dragonslayer");
+        $backpack = new BackPack();
+        $human->equipBackPack($backpack);
+        $food = "mango";
+        $this->expectExceptionMessage("There is no food with name: $food");
+        $human->getItemByName($food);
+    }
+
     
 }
