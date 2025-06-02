@@ -10,11 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 // ADVENTURE
 use App\Adventure\Weapon;
 use App\Adventure\Food;
 use App\Adventure\Item;
+use App\Adventure\DialogHandler;
 
 class TwigAdventure extends AbstractController
 {   
@@ -29,8 +31,7 @@ class TwigAdventure extends AbstractController
      */
     private function getDataByRoom(Session $session, string $roomName): array {
         $roomHandler = $session->get("roomHandler");
-
-        
+        $dialogHandler = $session->get("dialogHandler");
         $human = $session->get("human");
         $dragon = $session->get("dragon");
         $validRooms = [
@@ -43,6 +44,7 @@ class TwigAdventure extends AbstractController
 
         $room = $roomHandler->getRoomByName($roomName);
         $data = [
+            "msg" => $dialogHandler->getDialogByStatus(),
             "human" => $human,
             "dragon" => $dragon,
             "backpack" => array_map(fn($item) => $item->getName(), $human->getItemsInBag()), // get all item names in bg
@@ -70,6 +72,9 @@ class TwigAdventure extends AbstractController
     {    
         // Get data for current room
         $data = $this->getDataByRoom($session, "graveyard");
+        $dialogHandler = $session->get("dialogHandler");
+        var_dump($dialogHandler->getDialogByStatus());
+        $data["msg"] = $dialogHandler->getDialogByStatus();
         return $this->render("adventure/graveyard.html.twig", $data);
     }
 
@@ -144,7 +149,12 @@ class TwigAdventure extends AbstractController
             $human->addWeapon(new Weapon($item, 100, $icon));
         }
         
-        $this->addFlash("notice", "You equipped the $item with icon $icon");
+        $this->addFlash("notice", "You equipped the $item");
+
+        // rum i route
+        $dialogHandler = $session->get("dialogHandler");
+        $dialogHandler->setCurrentRoom($route);
+        $dialogHandler->setCurrentItem($item);
         return $this->redirectToRoute($route);
     }
 
