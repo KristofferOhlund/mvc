@@ -106,41 +106,12 @@ class SessionHandler
             ],
             "house" => [
                 "title" => "house",
-                "items" => [
-                    ["name" => "skull", "icon" => "skull.png"]
-                ],
-                "weapons" => [
-                    [
-                        "name" => "axe",
-                        "dmg" => 55,
-                        "icon" => "axe.png"
-                    ]
-                ]
             ],
             "apple" => [
                 "title" => "apple",
-                "items" => [
-                    ["name" => "note", "icon" => "note.png"]
-                ],
-                "weapons" => [
-                    [
-                        "name" => "knife",
-                        "dmg" => 10,
-                        "icon" => "knife.png"
-                    ]
-                ]
             ],
             "dragon" => [
                 "title" => "dragon",
-                "items" => [
-                ],
-                "weapons" => [
-                    [
-                        "name" => "Sharp bone",
-                        "dmg" => 10,
-                        "icon" => "bone.png"
-                    ]
-                ]
             ]
         ];
         
@@ -149,10 +120,13 @@ class SessionHandler
         foreach($roomData as $data) {
             $room = new Room($data["title"]);
             $room->setImg($data["title"] . ".png");
-            foreach($data["items"] as $item) {
-                $room->addItem(new Item($item["name"], $item["icon"]));
+            if (array_key_exists("items", $data)) {
+                foreach($data["items"] as $item) {
+                    $room->addItem(new Item($item["name"], $item["icon"]));
+                }
             }
-            if ($data["weapons"]) {
+            
+            if (array_key_exists("weapons", $data)) {
                 foreach($data["weapons"] as $weapon) {
                     $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"], $weapon["icon"]));
                 }
