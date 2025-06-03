@@ -36,20 +36,16 @@ class DatabaseController extends AbstractController
     #[Route("/proj/about/database/delete", name: "delete_database")]
     public function databaseDelete(EntityManagerInterface $entityManager): Response
     {   
-        $rooms = $entityManager->getRepository(Room::class)->findAll();
-        foreach($rooms as $room) {
-            $delete = $entityManager->getRepository(Room::class)->find($room);
-            $entityManager->remove($delete);
-            $entityManager->flush();
+        
+        $entities = [Room::class, Weapon::class, Food::class, Tool::class];
+        foreach($entities as $entity) {
+            $objects = $entityManager->getRepository($entity)->findAll();
+            foreach($objects as $object) {
+                $entityManager->remove($object);
+                $entityManager->flush();
+            }
         }
 
-
-        $weapons = $entityManager->getRepository(Weapon::class)->findAll();
-        foreach($weapons as $wep) {
-            $delete = $entityManager->getRepository(Weapon::class)->find($wep);
-            $entityManager->remove($delete);
-            $entityManager->flush();
-        }
         return new Response("Database has been reset");
     }
 
