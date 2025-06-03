@@ -62,7 +62,7 @@ class DatabaseController extends AbstractController
     public function showWeapons(EntityManagerInterface $entityManager): Response
     {
         $weapons = $entityManager->getRepository(Weapon::class)->findAll();
-        return $this->json($weapons);
+        return $this->render("adventure/weapons.html.twig", ["weapons" => $weapons]);
     }
 
 
@@ -74,7 +74,7 @@ class DatabaseController extends AbstractController
     public function showRooms(EntityManagerInterface $entityManager): Response
     {
         $rooms = $entityManager->getRepository(Room::class)->findAll();
-        return $this->json($rooms);
+        return $this->render("adventure/rooms.html.twig", ["rooms" => $rooms]);
     }
 
 
@@ -86,7 +86,7 @@ class DatabaseController extends AbstractController
     public function showFoods(EntityManagerInterface $entityManager): Response
     {
         $foods = $entityManager->getRepository(Food::class)->findAll();
-        return $this->json($foods);
+        return $this->render("adventure/foods.html.twig", ["foods" => $foods]);
     }
 
 
@@ -97,7 +97,7 @@ class DatabaseController extends AbstractController
     #[Route("/proj/about/database/tools", name:"show_tools")]
     public function showTools(EntityManagerInterface $entityManager): Response
     {
-        $tools = $entityManager->getRepository(Tool::class)->findAll();
-        return $this->json($tools);
+        $items = $entityManager->getRepository(Tool::class)->findAll();
+        return $this->render("adventure/items.html.twig", ["items" => $items]);
     }
 }
