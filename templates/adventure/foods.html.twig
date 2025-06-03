@@ -4,6 +4,6 @@
 {% for food in foods %}
 <h3>{{food.name}}</h3>
 <h3>Healing value: {{ food.healingValue }}</h3>
-<img class="icon" src="{{ asset('build/images/adventure/icons/' ~ food.icon|capitalize)}}"
+<img class="icon" src="{{ asset('build/images/adventure/icons/' ~ food.icon) }}"
 {% endfor %}
 {% endblock foods%}
