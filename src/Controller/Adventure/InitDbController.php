@@ -15,6 +15,7 @@ use App\Entity\Room;
 use App\Entity\Weapon;
 use App\Entity\Food;
 use App\Entity\Tool;
+use stdClass;
 
 class InitDbController extends AbstractController
 {   
@@ -51,21 +52,18 @@ class InitDbController extends AbstractController
     #[Route("/proj/about/database/initweapons", name:"init_weapons")]
     public function initAdventureWeapons(EntityManagerInterface $entityManager): Response
     {
-        $rooms = ["graveyard", "house", "apple", "dragon"];
-        $existingRooms = array_map(fn($room) => $room->getName(), $entityManager->getRepository(Room::class)->findAll());
+        $sword = new Weapon();
+        $sword->setName("Sword");
+        $sword->setDmg(100);
+        $sword->setIcon("Sword.png");
 
-        foreach($rooms as $room) {
-            if (!in_array($room, $existingRooms)) {
-                $newRoom = new Room();
-                $newRoom->setName($room);
-                $newRoom->setBackground($room . ".png");
-                $entityManager->persist($newRoom);
-                $entityManager->flush($newRoom);
-            } 
+        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName($sword->getName());
+        if (!$result) {
+            $entityManager->persist($sword);
+            $entityManager->flush();
         }
 
-        $existingRoomObjects = $entityManager->getRepository(Room::class)->findAll();
-        return $this->json($existingRoomObjects);
+        return $this->json($sword);
     }
 
     /**
@@ -76,21 +74,18 @@ class InitDbController extends AbstractController
     #[Route("/proj/about/database/initfoods", name:"init_foods")]
     public function initAdventureFoods(EntityManagerInterface $entityManager): Response
     {
-        $rooms = ["graveyard", "house", "apple", "dragon"];
-        $existingRooms = array_map(fn($room) => $room->getName(), $entityManager->getRepository(Room::class)->findAll());
+        $food = new Food();
+        $food->setName("Apple");
+        $food->setHealingValue(100);
+        $food->setIcon("Apple.png");
 
-        foreach($rooms as $room) {
-            if (!in_array($room, $existingRooms)) {
-                $newRoom = new Room();
-                $newRoom->setName($room);
-                $newRoom->setBackground($room . ".png");
-                $entityManager->persist($newRoom);
-                $entityManager->flush($newRoom);
-            } 
+        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName($food->getName());
+        if (!$result) {
+            $entityManager->persist($food);
+            $entityManager->flush();
         }
 
-        $existingRoomObjects = $entityManager->getRepository(Room::class)->findAll();
-        return $this->json($existingRoomObjects);
+        return $this->json($food);
     }
 
     /**
@@ -102,19 +97,18 @@ class InitDbController extends AbstractController
     public function initAdventureTools(EntityManagerInterface $entityManager): Response
     {
         $tools = ["shovel", "coin", "tooth", "skull", "key"];
-        $existingTools = array_map(fn($room) => $room->getName(), $entityManager->getRepository(Room::class)->findAll());
 
         foreach($tools as $tool) {
-            if (!in_array($tool, $existingTools)) {
+            $result = $entityManager->getRepository(Tool::class)->findToolByName($tool);
+            if (!$result) {
                 $newTool = new Tool();
                 $newTool->setName($tool);
-                $newTool->setIcon($tool . ".png");
+                $newTool->setIcon($tool.".png");
                 $entityManager->persist($newTool);
-                $entityManager->flush($newTool);
-            } 
+                $entityManager->flush();
+            }
         }
 
-        $existingRoomObjects = $entityManager->getRepository(Room::class)->findAll();
-        return $this->json($existingRoomObjects);
+        return $this->json($tools);
     }
 }
