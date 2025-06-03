@@ -11,7 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+use App\Entity\Room;
+use App\Entity\Weapon;
 
 class ProjectController extends AbstractController
 {   
@@ -27,11 +28,5 @@ class ProjectController extends AbstractController
     public function cheat()
     {
         return $this->render("adventure/cheat.html.twig");
-    }
-
-    #[Route("/proj/about/database", name: "database")]
-    public function index(): Response
-    {
-        return $this->render("adventure/database.html.twig");
     }
 }
