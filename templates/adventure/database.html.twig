@@ -1,4 +1,54 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <h1>Database</h1>
+
+<div class="db-about">
+    <h2>ER-Diagram</h2>
+</div>
+
+
+<div class="db-init">
+    <h2>Initiera</h2>
+    <ul>
+        <li><a href="{{path('init_rooms')}}">Initiera Rum</a></li>
+        <li><a href="{{path('init_weapons')}}">Initiera Vapen</a></li>
+        <li><a href="{{path('init_foods')}}">Initiera Mat</a></li>
+        <li><a href="{{path('init_tools')}}">Initiera Items</a></li>
+    </ul>
+</div>
+
+
+<div class="db-show">
+    <h2>Databas</h2>
+    <h2>Rum</h2>
+    <div class="db-rooms">
+        {% block rooms %}{% endblock rooms %}
+    </div>
+    <h2>Vapen</h2>
+    <div class="db-weapons">
+        {% block weapons %}{% endblock weapons %}
+    </div>
+    <h2>Mat</h2>
+    <div class="db-foods">
+        {% block foods %}{% endblock foods %}
+    </div>
+    <h2>Items</h2>
+    <div class="db-items">
+        {% block items %}{% endblock items %}
+    </div>
+<ul>
+    <li><a href="{{path('show_weapons')}}">Visa vapen objekt</a></li>
+    <li><a href="{{path('show_rooms')}}">Visa rums objekt</a></li>
+    <li><a href="{{path('show_foods')}}">Visa mat objekt</a></li>
+    <li><a href="{{path('show_tools')}}">Visa item objekt</a></li>
+</ul>
+</div>
+
+<div class="db-delete">
+    <h2>Radera Databas</h2>
+<a href="{{path('delete_database')}}">Radera databas</a>
+</div>
+
+
+
 {% endblock body %}

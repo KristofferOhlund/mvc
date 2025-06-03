@@ -27,6 +27,8 @@
                             class="{{ (app.request.pathinfo == path('init_adventure')) ? 'active' : '' }}">Adventure</a></li>
                     <li><a href="{{ path('json_index') }}"
                             class="{{ (app.request.pathinfo == path('json_index')) ? 'active' : '' }}">Json</a></li>
+                    <li><a href="{{ path('index_database') }}"
+                            class="{{ (app.request.pathinfo == path('index_database')) ? 'active' : '' }}">Database</a></li>
                     <li><a href="{{ path('about_adventure') }}"
                             class="{{ (app.request.pathinfo == path('about_adventure')) ? 'active' : '' }}">About</a></li>
                     <li><a href="{{ path('cheat_adventure') }}"
