@@ -29,7 +29,7 @@ class JsonAdventure extends AbstractController
     #[Route("/proj/json/index", name:"json_index")]
     public function jsonIndex(): Response
     {
-        return $this->render("Adventure/json.html.twig");
+        return $this->render("adventure/json.html.twig");
     }
 
     /**
