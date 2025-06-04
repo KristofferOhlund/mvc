@@ -1,4 +1,26 @@
 {% extends 'base.html.twig' %}
+{% block title %}About{% endblock %}
 {% block body %}
 <h1>About</h1>
+
+<p>
+    Detta är mitt slutprojekt för kursen MVC.
+</p>
+<p>Jag har valt att göra ett Äventyrsspel då jag tyckte det var en roligare utmaning än att skapa ännu ett kortspel (är själv inte intresserad av kortspel).</p>
+<p>Spelet går ut på att du ska försöka döda en drake som vaktar den värdefulla skatten. Spelet kommer ta dig genom olika rum och det finns då olika objekt att interagera med.</p>
+<p>Kanske kan du använda objekt för att ge dig mer liv, eller kanske kan du använda objekt för att öka din skada och därmed öka dina chanser att besegra draken? Kanske... vem vet..</p>
+<br>
+<br>
+<p>Till spelet har jag implementerat en databas i SQLite, implementera databasen för att spela spelet. <br> <a class="action-button" href="{{ path('index_database')}}"> Databas</a></p> <br>
+
+<h1>Krav 6</h1>
+<h2>Äventyrsspel</h2>
+<p>Jag anser att mitt Äventyrsspel visar på en svårare nivå då det är väldigt objekt orienterat och det går enkelt att skapa nya rum, vapen, mat objekt och annat. Logiken är inte hårdkodad utan bygger på de objekt som skapats vid initiering. Jag har även implementerat det så att användaren behöver interagera med vissa objekt för att i slutändan kunna döda draken, detta ger en roligare spelupplevelse, som exempel måste du först equippa en "Shovel" för att genom den gräva vid skelettet i Graveyard, när du grävt visas ett nytt objekt som du sedan kan använda för att låsa upp nästa rum - och hitta det magiska äpplet.</p><br>
+<p>
+    Jag har även minimalt med spellogik i mina routes och hämtar istället data genom diverse klasser, de routes som
+    innehåller någon form av spellogik är endast /action, /eat och /equip-item.
+</p><br>
+<p>Jag har även skapat en klass RoomHandler för att hantera alla rumsobjekt, och genom RoomHandler kan jag få fram navigering för föregående samt nästa rum, istället för att i samtliga room-templates hårdskriva routes.</p><br>
+<p>Jag har även skapat en klass (DialogHandler) för att hantera dialoger, så att jag genom de interagerade items / objekten kunnat visa ett meddelande kopplat till interaktionen och detta medan jag fortfarande minimerat spellogiken i mina templates och routes.</p>
+
 {% endblock body %}

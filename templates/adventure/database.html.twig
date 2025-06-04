@@ -16,6 +16,7 @@
 <div class="db init">
     <h1>Initiera Databas</h1>
     <p>För att spela spelet behöver objekten finnas i databasen. Initiera därför samtliga objekt via knapparna nedan.</p>
+    <p>Varefter du initierar databasen kommer befintliga objekt visas nedan.</p>
     <ul>
         <li><a class="action-button" href="{{path('init_rooms')}}">Initiera Rum</a></li>
         <li><a class="action-button" href="{{path('init_weapons')}}">Initiera Vapen</a></li>
@@ -68,6 +69,14 @@
 <div class="db db-delete">
     <h1>Radera Databas</h1>
 <a class="action-button" href="{{path('delete_database')}}">Radera databas</a>
+</div>
+
+<div class="db reflections">
+    <h1>Reflektioner </h1>
+    <p>Jag gillar att arbeta med ORM då det går snabbt att sätta upp tabellerna och du behöver inte skriva SQL för att hantera nycklar eller annat. Däremot blev det i detta fall lite onödigt komplicerat då jag ändå skapar objektinstanser för mitt spel. Detta eftersom jag vill ha klasser som ärver från andra klasser och spellogiken vill jag ha i klasserna och inte i databasen.</p>
+    <p>Spelet inkluderade heller inte CRUD så just ORM blev i detta fall lite irrelevant, annat vore det om jag ska hantera ett lager av något slag, tex E-shop eller ett bibliotek.</p>
+    <p>Likheten mellan ORM och hur vi jobbade i databaskursen var att i databas kursen fick vi skapa APi för alla anrop, här får vi ett färdigt Api direkt, vilket sparar tid.</p>
+    <p>Nackdelen om vi kan kalla det så är att den som kan databaser även behöver lära sig ORM i Doctrine, vilket kan kännas omständigt för att bara göra en enkel join av två tabeller. Men jag skulle säga att behovet styr tillämpningssättet.</p>
 </div>
 
 
