@@ -14,7 +14,6 @@ use App\Entity\Room;
 use App\Entity\Weapon;
 use App\Entity\Food;
 use App\Entity\Tool;
-use stdClass;
 
 class InitDbController extends AbstractController
 {
@@ -39,8 +38,7 @@ class InitDbController extends AbstractController
             }
         }
 
-        $existingRoomObjects = $entityManager->getRepository(Room::class)->findAll();
-        return $this->json($existingRoomObjects);
+        return $this->redirectToRoute("index_database");
     }
 
     /**
@@ -62,7 +60,7 @@ class InitDbController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->json($sword);
+        return $this->redirectToRoute("index_database");
     }
 
     /**
@@ -84,7 +82,7 @@ class InitDbController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->json($food);
+        return $this->redirectToRoute("index_database");
     }
 
     /**
@@ -108,6 +106,6 @@ class InitDbController extends AbstractController
             }
         }
 
-        return $this->json($tools);
+        return $this->redirectToRoute("index_database");
     }
 }
