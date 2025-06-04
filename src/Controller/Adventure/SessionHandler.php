@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Room as dbRoom;
 use App\Entity\Tool as dbTool;
 use App\Entity\Weapon as dbWeapon;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionHandler
 {
@@ -25,9 +26,9 @@ class SessionHandler
      */
     private $requestStack;
     /**
-     * @var EntityManager $entityManager
+     * @var EntityManagerInterface $entityManager
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
     {
@@ -38,19 +39,153 @@ class SessionHandler
     /**
      * Main method for adventure
      * Call private methods for setting upp the rooms, player and dragon
+     * All lootable weapons and items are added in the Graveyard room
      *
      * @return void
      */
     public function initAdventure(): void
     {
         $session = $this->requestStack->getSession();
-        if (!$this->initRoomsDb()) {
-            $this->initRooms($session);
-        };
-        $this->initItemsDb();
+        $rooms = $this->entityManager->getRepository(dbRoom::class)->findAll();
+        if (!$rooms) {
+            $rooms = $this->createDbRooms();
+        }
+        $this->initDbRooms($rooms);
+
+        $weapons = $this->entityManager->getRepository(dbWeapon::class)->findAll();
+        if (!$weapons) {
+            $weapons = $this->createDbWeapons();
+        }
+        $this->initDbWeapons($weapons);
+
+        $items = $this->entityManager->getRepository(dbTool::class)->findAll();
+        if (!$items) {
+            $items = $this->createDbItems();
+        }
+        $this->initDbItems($items);
+        
         $this->initHuman($session);
         $this->initDragon($session);
         $this->initDialog($session);
+    }
+
+
+    /**
+     * Create rooms in db, return list of rooms
+     * @return array<int, object>
+     */
+    private function createDbRooms(): array
+    {   
+        $create = ["graveyard", "house", "apple", "dragon"];
+        foreach($create as $room) {
+            $newRoom = new dbRoom();
+            $newRoom->setName($room);
+            $newRoom->setBackground($room . ".png");
+            $this->entityManager->persist($newRoom);
+            $this->entityManager->flush();
+        }
+
+        return $this->entityManager->getRepository(dbRoom::class)->findAll();
+    }
+
+    /**
+     * Create room objects based on rooms in database
+     * If there are no rooms in database, create rooms.
+     * Then create objects based on those rooms
+     * @param array<int, object> $rooms
+     * @return string msg
+     */
+    private function initDbRooms($rooms): string
+    {
+        $session = $session = $this->requestStack->getSession();
+        // $rooms = $this->entityManager->getRepository(dbRoom::class)->findAll();
+
+        $roomHandler = new RoomHandler();
+
+        foreach ($rooms as $room) {
+            $newRoom = new Room($room->getName());
+            $newRoom->setImg($room->getBackground());
+            $roomHandler->addRoom($newRoom);
+        }
+        $session->set("roomHandler", $roomHandler);
+        return "room objects created from database";
+    }
+
+    /**
+     * Create weapons in db, return list of rooms
+     * @return array<int, object>
+     */
+    private function createDbWeapons(): array
+    {   
+        $create = ["Sword"];
+        foreach($create as $weapon) {
+            $newWeapon = new dbWeapon();
+            $newWeapon->setName($weapon);
+            $newWeapon->setIcon($weapon . ".png");
+            $newWeapon->setDmg(100);
+            $this->entityManager->persist($newWeapon);
+            $this->entityManager->flush();
+        }
+
+        return $this->entityManager->getRepository(dbWeapon::class)->findAll();
+    }
+
+
+    /**
+     * Create weapon objects in Graveyard
+     * @return string msg
+     *
+     */
+    private function initDbWeapons($weapons): string
+    {
+        $session = $session = $this->requestStack->getSession();
+        $roomHandler = $session->get("roomHandler");
+        $graveyard = $roomHandler->getRoombyName("graveyard");
+
+        foreach ($weapons as $weapon) {
+            $newWeapon = new Weapon($weapon->getName(), $weapon->getDmg(), $weapon->getIcon());
+            $graveyard->addItem($newWeapon);
+        }
+        $session->set("roomHandler", $roomHandler);
+        return "Weapons initiated from database";
+    }
+
+
+    /**
+     * Create weapons in db, return list of rooms
+     * @return array<int, object>
+     */
+    private function createDbItems(): array
+    {   
+        $create = ["shovel", "coin", "tooth"];
+        foreach($create as $tool) {
+            $newItem = new dbTool();
+            $newItem->setName($tool);
+            $newItem->setIcon($tool . ".png");
+            $this->entityManager->persist($newItem);
+            $this->entityManager->flush();
+        }
+
+        return $this->entityManager->getRepository(dbWeapon::class)->findAll();
+    }
+
+    /**
+     * Create item objects in rooms based on items and rooms in database
+     *
+     * @return string msg
+     */
+    private function initDbItems($items): string
+    {
+        $session = $session = $this->requestStack->getSession();
+        $roomHandler = $session->get("roomHandler");
+        $graveyard = $roomHandler->getRoombyName("graveyard");
+
+        foreach ($items as $item) {
+            $newItem = new Item($item->getName(), $item->getIcon());
+            $graveyard->addItem($newItem);
+        }
+        $session->set("roomHandler", $roomHandler);
+        return "items from db initiated";
     }
 
     /**
@@ -58,7 +193,7 @@ class SessionHandler
      * Save dialogHandler in session
      * @return void
      */
-    public function initDialog($session): void
+    private function initDialog(SessionInterface $session): void
     {
         $session->set("dialogHandler", new DialogHandler());
     }
@@ -68,7 +203,7 @@ class SessionHandler
      *
      * @return void
      */
-    private function initHuman(Session $session): void
+    private function initHuman(SessionInterface $session): void
     {
         $human = new Human("DragonSlayer");
         $backpack = new BackPack();
@@ -81,124 +216,18 @@ class SessionHandler
      *
      * @return void
      */
-    private function initDragon(Session $session): void
+    private function initDragon(SessionInterface $session): void
     {
-        $session->set("dragon", new Dragon("DeathWing"));
+        $session->set("dragon", new Dragon());
     }
 
-
-    /**
-     * Create room objects based on rooms in database
-     * If there are no rooms in database, room objects cannot be created
-     * therefore returns false, else true
-     * @return bool wheter it was created or not
-     */
-    public function initRoomsDb(): bool
-    {
-        $session = $session = $this->requestStack->getSession();
-        $rooms = $this->entityManager->getRepository(dbRoom::class)->findAll();
-
-        $roomHandler = new RoomHandler();
-        if (!$rooms) {
-            return false;
-        } foreach ($rooms as $room) {
-            $newRoom = new Room($room->getName());
-            $newRoom->setImg($room->getBackground());
-            $roomHandler->addRoom($newRoom);
-        }
-        $session->set("roomHandler", $roomHandler);
-        return true;
-    }
-
-
-    /**
-     * Create item objects in rooms based on items and rooms in database
-     *
-     */
-    public function initItemsDb(): void
-    {
-        $session = $session = $this->requestStack->getSession();
-        $roomHandler = $session->get("roomHandler");
-        $graveyard = $roomHandler->getRoombyName("graveyard");
-
-        $items = $this->entityManager->getRepository(dbTool::class)->findAll();
-        $weapon = $this->entityManager->getRepository(dbWeapon::class)->findWeaponByName("Sword");
-
-        foreach ($items as $item) {
-            $newItem = new Item($item->getName(), $item->getIcon());
-            $graveyard->addItem($newItem);
-        }
-
-        $newWeapon = new Weapon($weapon->getName(), $weapon->getDmg(), $weapon->getIcon());
-        $graveyard->addItem($newWeapon);
-
-        $session->set("roomHandler", $roomHandler);
-    }
-
-
-    /**
-     * Create rooms
-     * Each room has its own set of items and background image
-     * To add more rooms, just add another object
-     * IMG has to be an existing asset
-     *
-     * @return void
-     */
-    private function initRooms(Session $session): void
-    {
-        $roomData = [
-            "graveyard" => [
-                "title" => "graveyard",
-                "items" => [
-                    ["name" => "shovel",
-                    "icon" => "shovel.png"],
-                    ["name" => "coin",
-                    "icon" => "coin.png"],
-                    ["name" => "tooth",
-                    "icon" => "tooth.png"]
-                ],
-                "weapons" => [
-                    [
-                        "name" => "sword",
-                        "dmg" => 100,
-                        "icon" => "sword.png"]]
-            ],
-            "house" => [
-                "title" => "house",
-            ],
-            "apple" => [
-                "title" => "apple",
-            ],
-            "dragon" => [
-                "title" => "dragon",
-            ]
-        ];
-
-        $roomHandler = new RoomHandler();
-
-        foreach ($roomData as $data) {
-            $room = new Room($data["title"]);
-            $room->setImg($data["title"] . ".png");
-            if (array_key_exists("items", $data)) {
-                foreach ($data["items"] as $item) {
-                    $room->addItem(new Item($item["name"], $item["icon"]));
-                }
-            }
-
-            if (array_key_exists("weapons", $data)) {
-                foreach ($data["weapons"] as $weapon) {
-                    $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"], $weapon["icon"]));
-                }
-            }
-            $roomHandler->addRoom($room);
-        }
-        $session->set("roomHandler", $roomHandler);
-    }
 
     /**
      * Reset session variables
+     * 
+     * @return void
      */
-    public function resetSession()
+    public function resetSession(): void
     {
         $this->initAdventure();
     }
