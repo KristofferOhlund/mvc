@@ -1,8 +1,0 @@
-{% extends 'adventure/database.html.twig' %}
-
-{% block items %}
-{% for item in items %}
-<h3>{{item.name}}</h3>
-<img class="icon" src="{{ asset('build/images/adventure/icons/' ~ item.icon|capitalize) }}"
-{% endfor %}
-{% endblock items%}

@@ -1,9 +1,0 @@
-{% extends 'adventure/database.html.twig' %}
-
-{% block weapons %}
-{% for weapon in weapons %}
-<h3>Name: {{weapon.name}}</h3>
-<h3>Dmg: {{weapon.dmg}}</h3>
-<img class="icon" src="{{ asset('build/images/adventure/icons/' ~ weapon.icon) }}"
-{% endfor %}
-{% endblock weapons%}

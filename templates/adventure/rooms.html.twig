@@ -1,8 +1,0 @@
-{% extends 'adventure/database.html.twig' %}
-
-{% block rooms %}
-{% for room in rooms %}
-<h3>{{room.name}}</h3>
-<img class="" src="{{ asset('build/images/adventure/' ~ room.background) }}"
-{% endfor %}
-{% endblock rooms%}
