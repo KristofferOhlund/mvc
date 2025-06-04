@@ -6,11 +6,12 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class TestDialogHandler extends TestCase
-{   
+{
     /**
      * Create instance of Human
      */
-    public function testDialogInstance() {
+    public function testDialogInstance()
+    {
         $dialog = new DialogHandler();
         $this->assertInstanceOf(DialogHandler::class, $dialog);
     }

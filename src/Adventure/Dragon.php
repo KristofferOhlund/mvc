@@ -16,7 +16,7 @@ class Dragon extends Varelse
     /**
      * SprayFire, causing baseDmg + fireDmg
      */
-    public function sprayFire(): int 
+    public function sprayFire(): int
     {
         return $this->attack() + $this->fireDmg;
     }

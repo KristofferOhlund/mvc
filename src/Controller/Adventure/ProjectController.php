@@ -10,13 +10,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Entity\Room;
 use App\Entity\Weapon;
 
 class ProjectController extends AbstractController
-{   
-
+{
     #[Route("/proj/about", name:"about_adventure")]
     public function about()
     {

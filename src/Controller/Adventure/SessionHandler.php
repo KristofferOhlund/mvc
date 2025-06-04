@@ -4,7 +4,6 @@ namespace App\Controller\Adventure;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
-
 use App\Adventure\Human;
 use App\Adventure\Dragon;
 use App\Adventure\RoomHandler;
@@ -20,7 +19,7 @@ use App\Entity\Tool as dbTool;
 use App\Entity\Weapon as dbWeapon;
 
 class SessionHandler
-{   
+{
     /**
      * @var RequestStack $requestStack
      */
@@ -39,19 +38,19 @@ class SessionHandler
     /**
      * Main method for adventure
      * Call private methods for setting upp the rooms, player and dragon
-     * 
+     *
      * @return void
      */
     public function initAdventure(): void
     {
         $session = $this->requestStack->getSession();
         if (!$this->initRoomsDb()) {
-            $this->initRooms($session); 
+            $this->initRooms($session);
         };
         $this->initItemsDb();
         $this->initHuman($session);
         $this->initDragon($session);
-        $this->initDialog($session); 
+        $this->initDialog($session);
     }
 
     /**
@@ -66,11 +65,11 @@ class SessionHandler
 
     /**
      * Initiate the human
-     * 
+     *
      * @return void
      */
     private function initHuman(Session $session): void
-    {   
+    {
         $human = new Human("DragonSlayer");
         $backpack = new BackPack();
         $human->equipBackPack($backpack);
@@ -79,7 +78,7 @@ class SessionHandler
 
     /**
      * Initiate the dragon
-     * 
+     *
      * @return void
      */
     private function initDragon(Session $session): void
@@ -95,29 +94,29 @@ class SessionHandler
      * @return bool wheter it was created or not
      */
     public function initRoomsDb(): bool
-    {   
+    {
         $session = $session = $this->requestStack->getSession();
         $rooms = $this->entityManager->getRepository(dbRoom::class)->findAll();
 
         $roomHandler = new RoomHandler();
         if (!$rooms) {
             return false;
-        } foreach($rooms as $room) {
+        } foreach ($rooms as $room) {
             $newRoom = new Room($room->getName());
             $newRoom->setImg($room->getBackground());
             $roomHandler->addRoom($newRoom);
-        } 
+        }
         $session->set("roomHandler", $roomHandler);
         return true;
     }
 
-    
+
     /**
      * Create item objects in rooms based on items and rooms in database
-     * 
+     *
      */
     public function initItemsDb(): void
-    {   
+    {
         $session = $session = $this->requestStack->getSession();
         $roomHandler = $session->get("roomHandler");
         $graveyard = $roomHandler->getRoombyName("graveyard");
@@ -125,14 +124,14 @@ class SessionHandler
         $items = $this->entityManager->getRepository(dbTool::class)->findAll();
         $weapon = $this->entityManager->getRepository(dbWeapon::class)->findWeaponByName("Sword");
 
-        foreach($items as $item) {
+        foreach ($items as $item) {
             $newItem = new Item($item->getName(), $item->getIcon());
             $graveyard->addItem($newItem);
         }
 
         $newWeapon = new Weapon($weapon->getName(), $weapon->getDmg(), $weapon->getIcon());
         $graveyard->addItem($newWeapon);
-        
+
         $session->set("roomHandler", $roomHandler);
     }
 
@@ -142,11 +141,11 @@ class SessionHandler
      * Each room has its own set of items and background image
      * To add more rooms, just add another object
      * IMG has to be an existing asset
-     * 
+     *
      * @return void
      */
     private function initRooms(Session $session): void
-    {   
+    {
         $roomData = [
             "graveyard" => [
                 "title" => "graveyard",
@@ -160,7 +159,7 @@ class SessionHandler
                 ],
                 "weapons" => [
                     [
-                        "name" => "sword", 
+                        "name" => "sword",
                         "dmg" => 100,
                         "icon" => "sword.png"]]
             ],
@@ -174,20 +173,20 @@ class SessionHandler
                 "title" => "dragon",
             ]
         ];
-        
+
         $roomHandler = new RoomHandler();
 
-        foreach($roomData as $data) {
+        foreach ($roomData as $data) {
             $room = new Room($data["title"]);
             $room->setImg($data["title"] . ".png");
             if (array_key_exists("items", $data)) {
-                foreach($data["items"] as $item) {
+                foreach ($data["items"] as $item) {
                     $room->addItem(new Item($item["name"], $item["icon"]));
                 }
             }
-            
+
             if (array_key_exists("weapons", $data)) {
-                foreach($data["weapons"] as $weapon) {
+                foreach ($data["weapons"] as $weapon) {
                     $room->addItem(new Weapon($weapon["name"], (int) $weapon["dmg"], $weapon["icon"]));
                 }
             }
@@ -199,7 +198,8 @@ class SessionHandler
     /**
      * Reset session variables
      */
-    public function resetSession() {
+    public function resetSession()
+    {
         $this->initAdventure();
     }
 }

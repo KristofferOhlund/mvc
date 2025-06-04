@@ -6,7 +6,6 @@ use App\Repository\FoodRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // krävs för att sätta attribut till unikt
 
-
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
 #[UniqueEntity('name')] // sätter name attribut till ett unikt fält
 class Food

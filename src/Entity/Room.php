@@ -7,7 +7,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // krävs för att sätta attribut till unikt
 
-
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 #[UniqueEntity('name')] // sätter name attribut till ett unikt fält
 class Room

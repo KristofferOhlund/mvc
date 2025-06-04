@@ -5,11 +5,12 @@ namespace App\Adventure;
 use PHPUnit\Framework\TestCase;
 
 class TestBackPack extends TestCase
-{   
+{
     /**
      * Create instance of BackPack
      */
-    public function testBackPackInstance() {
+    public function testBackPackInstance()
+    {
         $backpack = new BackPack();
         $this->assertInstanceOf(BackPack::class, $backpack);
     }
@@ -17,10 +18,11 @@ class TestBackPack extends TestCase
     /**
      * Add a item to the backpack
      */
-    public function testBackPackAddItem() {
+    public function testBackPackaddItem()
+    {
         $item = new Food("Apple", 50, "apple.png");
         $backpack = new BackPack();
-        $backpack->AddItem($item);
+        $backpack->addItem($item);
 
         $items = $backpack->getItems();
         $this->assertCount(1, $items);
@@ -29,10 +31,11 @@ class TestBackPack extends TestCase
     /**
      * Get item object by name
      */
-    public function testBackPackGetItemByName() {
+    public function testBackPackGetItemByName()
+    {
         $food = new Food("Apple", 50, "apple.png");
         $backpack = new BackPack();
-        $backpack->AddItem($food);
+        $backpack->addItem($food);
         $name = $backpack->getItemByName("Apple");
 
         $this->assertEquals($food, $name);
@@ -41,7 +44,8 @@ class TestBackPack extends TestCase
     /**
      * Test missing item, return null
      */
-    public function testBackPackGetItemByMissingName() {
+    public function testBackPackGetItemByMissingName()
+    {
         $backpack = new BackPack();
         $name = $backpack->getItemByName("Apple");
 

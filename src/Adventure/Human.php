@@ -2,12 +2,23 @@
 
 namespace App\Adventure;
 
+use Exception;
 use App\Adventure\Varelse;
 use App\Adventure\BackPack;
 
 class Human extends Varelse
 {   
+
+    /**
+     * Weapon objekt
+     * @var Weapon $weapon
+     */
     private ?Weapon $weapon;
+
+    /**
+     * Backpack objekt, to carry items
+     * @var BackPack $backpack
+     */
     private ?BackPack $backpack = null;
 
     public function __construct(string $name)
@@ -16,7 +27,7 @@ class Human extends Varelse
         $this->weapon = null;
     }
 
-    public function equipBackPack(?BackPack $backPack): ?BackPack 
+    public function equipBackPack(?BackPack $backPack): ?BackPack
     {
         $this->backpack = $backPack;
         return $this->backpack ?? null;
@@ -24,14 +35,15 @@ class Human extends Varelse
 
     /**
      * Add an item to the backpack
-     * @param Item item to be added to the backpack
-     * @return true
+     * @param Item $item to be added to the backpack
+     * @return string
      */
-    public function addItemToBackPack(Item $item): bool {
+    public function addItemToBackPack(Item $item): string
+    {
         if ($this->backpack) {
-            $this->backpack->AddItem($item);
-            return true;
-        } return false;
+            return $this->backpack->addItem($item);  
+        }
+        return "Can't equip item since there is no backpack equipped";
     }
 
     /**
@@ -39,35 +51,41 @@ class Human extends Varelse
      * @param Weapon $weapon - Weapon to be equipped
      * @return void
      */
-    public function addWeapon(Weapon $weapon): void {
+    public function addWeapon(Weapon $weapon): void
+    {
         $this->weapon = $weapon;
     }
 
-    /** 
+    /**
      * Get the weapon objects name
-     * 
+     *
      * @return string the name of the weapon
      */
-    public function getWeaponName(): string {
+    public function getWeaponName(): string
+    {
         return ucfirst($this->weapon?->getName() ?? "");
     }
 
     /**
      * Eat Food
      * Increase health by Food healing value
-     * @return int
+     * @return null|int
      */
-    public function eatFood(Food $foodItem): int {
-        $this->increaseHealth($foodItem->getHealingValue());
-        $backPack = $this->backpack;
-        $backPack->dropItem($foodItem);
+    public function eatFood(Food $foodItem): ?int
+    {
+        if ($this->backpack) {
+            $this->increaseHealth($foodItem->getHealingValue());
+            $backPack = $this->backpack;
+            $backPack->dropItem($foodItem);
+        }
         return $this->getHealth();
     }
 
     /**
-     * @return null|array
+     * @return null|array<Item>
      */
-    public function getItemsInBag(): ?array {
+    public function getItemsInBag(): ?array
+    {
         return $this->backpack?->getItems();
     }
 
@@ -75,7 +93,8 @@ class Human extends Varelse
      * Use a weapon, causing dmg equal to baseattackpower + weapon dmg
      * @return int total dmg caused by attack
      */
-    public function attackWithWeapon(): int {
+    public function attackWithWeapon(): int
+    {
         return $this->getAttackPower() + ($this->weapon?->getWeaponDmg() ?? 0);
     }
 
@@ -84,11 +103,15 @@ class Human extends Varelse
      * @return Item
      */
     public function getItemByName(string $name): Item
-    {   
-        foreach($this->getItemsInBag() as $item) {
-            if ($item->getName() === $name) {
-                return $item;
+    {
+        $items = $this->getItemsInBag();
+        if ($items) {
+            foreach($items as $item) {
+                if ($item->getName() === $name) {
+                    return $item;
+                }
             }
-        } throw new \Exception("There is no food with name: $name");
+        }
+        throw new Exception("There is no item with name: $name");
     }
 }

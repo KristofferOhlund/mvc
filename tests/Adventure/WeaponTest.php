@@ -5,7 +5,7 @@ namespace App\Adventure;
 use PHPUnit\Framework\TestCase;
 
 class TestWeapon extends TestCase
-{   
+{
     /**
      * Create instance of Food
      */
@@ -18,7 +18,8 @@ class TestWeapon extends TestCase
     /**
      * Assert weapon dmg
      */
-    public function testGetWeaponDmg() {
+    public function testGetWeaponDmg()
+    {
         $weapon = new Weapon("Sword", 100, "sword.png");
         $dmg = $weapon->getWeaponDmg();
 
@@ -36,5 +37,5 @@ class TestWeapon extends TestCase
         $this->assertSame("sword.png", $icon);
     }
 
-    
+
 }

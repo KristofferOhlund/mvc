@@ -17,10 +17,11 @@ class Weapon extends Item
 
     /**
      * Get the dmg caused by the weapon
-     * 
+     *
      * @return int
      */
-    public function getWeaponDmg(): int {
+    public function getWeaponDmg(): int
+    {
         return $this->dmg;
     }
 }

@@ -5,7 +5,7 @@ namespace App\Adventure;
 use PHPUnit\Framework\TestCase;
 
 class RoomTest extends TestCase
-{   
+{
     /**
      * Assert Item instance
      */
@@ -17,7 +17,7 @@ class RoomTest extends TestCase
 
     /**
      * Assert get Name returns name with first letter upper case
-     * 
+     *
      */
     public function testGetRoomImg()
     {
@@ -29,7 +29,7 @@ class RoomTest extends TestCase
     /**
      * Assert addGetItems
      */
-    public function testAddGetItems() 
+    public function testAddGetItems()
     {
         $room = new Room("graveyard");
         $item = new Item("coing", "coing.png");
@@ -40,5 +40,5 @@ class RoomTest extends TestCase
         $this->assertCount(2, $room->getItems());
     }
 
-    
+
 }

@@ -5,13 +5,20 @@
 */
 namespace App\Adventure;
 
+use Exception;
 use App\Adventure\Room;
 
 class RoomHandler
-{
+{   
+    /**
+     * Current Rooms in array
+     * 
+     * @var array<Room>
+     */
     private array $rooms;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->rooms = [];
     }
 
@@ -19,13 +26,14 @@ class RoomHandler
      * Add a room Object to the room array
      * @return void
      */
-    public function addRoom(Room $room): void {
+    public function addRoom(Room $room): void
+    {
         $this->rooms[] = $room;
     }
 
     /**
      * Get all rooms
-     * @return array
+     * @return array<Room>
      */
     public function getAllRooms(): array
     {
@@ -34,45 +42,64 @@ class RoomHandler
 
     /**
      * Get the name of all romes
-     * 
+     *
      * @return array<string|null>
      */
     public function getAllRoomNames(): ?array
     {
-        return array_map(fn($room) => $room->getName(), $this->getAllRooms()) ?? [];
+        return array_map(fn ($room) => $room->getName(), $this->getAllRooms());
+    }
+
+    /**
+     * Return the next Room in the array
+     *
+     * @param string $current is the current route, eg adventure/graveyard
+     * @return string
+     */
+    public function getPrev(string $current): string
+    {   
+        $names = $this->getAllRoomNames();
+
+        // Kontrollera att det verkligen är en array
+        if (!is_array($names)) {
+            return "No rooms";
+        }
+
+        for($idx = 0; $idx < count($names) +1; $idx++) {
+            if ($names[$idx] == $current && $idx > 0) {
+                return $this->rooms[$idx -1]->getName();
+            } 
+            if ($names[$idx] == $current && $idx == 0) {
+                return $this->rooms[$idx]->getName();
+            }
+        }
+        return "There is no room with $current as";
     }
 
     /**
      * Return the next Room in the array, if any
      * else return false
-     * 
+     *
      * @param string $current is the current route, eg adventure/graveyard
-     * @return string|int|false
+     * @return string
      */
-    public function getPrev(string $current): ?string
+    public function getNext(string $current): string
     {
-        $currentIndex = array_search($current, $this->getAllRoomNames());
-        if ($currentIndex !== 0) {
-            return $this->rooms[$currentIndex -1]->getName();
-        } return $this->rooms[$currentIndex]->getName();
-        
-        
-    }
+        $names = $this->getAllRoomNames();
+        // Kontrollera att det verkligen är en array
+        if (!is_array($names)) {
+            return "No rooms";
+        }
 
-    /**
-     * Return the next Room in the array, if any
-     * else return false
-     * 
-     * @param string $current is the current route, eg adventure/graveyard
-     * @return string|int|false
-     */
-    public function getNext(string $current): ?string
-    {
-        $currentIndex = array_search($current, $this->getAllRoomNames());
-        if ($currentIndex + 1 !== count($this->rooms))
-        {
-            return $this->rooms[$currentIndex +1]->getName();
-        } return $this->rooms[$currentIndex]->getName();
+        for($idx = 0; $idx < count($names) +1; $idx++) {
+            if ($names[$idx] == $current && $idx +1 !== count($names)) {
+                return $this->rooms[$idx +1]->getName();
+            }
+            if ($names[$idx] == $current && $idx == count($names) -1) {
+                return $this->rooms[$idx]->getName();    
+            }
+        }
+        return "There is no room with $current as";
     }
 
     /**
@@ -83,22 +110,25 @@ class RoomHandler
      */
     public function getRoomByName(string $roomName): ?Room
     {
-        foreach($this->rooms as $room) {
+        foreach ($this->rooms as $room) {
             if ($room->getName() === $roomName) {
                 return $room;
             }
-        } throw new \Exception("There is no room with name: $roomName");
+        } throw new Exception("There is no room with name: $roomName");
     }
 
     /**
      * Add an Item to a Room
-     * @param Item item to be added
-     * @param string room - the room to which an item is added 
-     * @return bool
+     * @param string $roomName - the room to which an item is added
+     * @param Item $item to be added
+     * @return string
      */
-    public function addItemToRoom(string $roomName, Item $item): bool {
+    public function addItemToRoom(string $roomName, Item $item): string
+    {
         $room = $this->getRoomByName($roomName);
-        $room->addItem($item);
-        return true;
+        if ($room) {
+            return $room->addItem($item);
+        }
+        return "There is no room with name $roomName";
     }
 }

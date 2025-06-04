@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class MetricsController extends AbstractController
 {
     #[Route("/metrics", name:"index_metrics")]
-    public function Index(): Response
+    public function index(): Response
     {
         return $this->render("metrics/index.html.twig");
     }

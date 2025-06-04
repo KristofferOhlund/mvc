@@ -6,11 +6,12 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class TestHuman extends TestCase
-{   
+{
     /**
      * Create instance of Human
      */
-    public function testHumanInstance() {
+    public function testHumanInstance()
+    {
         $human = new Human("Player");
         $this->assertInstanceOf(Human::class, $human);
     }
@@ -18,7 +19,8 @@ class TestHuman extends TestCase
     /**
      * Test equip backpack
      */
-    public function testHumanEquipBackPack() {
+    public function testHumanEquipBackPack()
+    {
         $backpack = new BackPack();
         $human = new Human("Player");
         $this->assertSame($backpack, $human->equipBackPack($backpack));
@@ -27,7 +29,7 @@ class TestHuman extends TestCase
     /**
      * Test addItemToBackPack
      */
-    public function testAddItemToBackPack()
+    public function testaddItemToBackPack()
     {
         $item = new Item("skull", "skull.png");
         $backpack = new BackPack();
@@ -40,7 +42,7 @@ class TestHuman extends TestCase
     /**
      * Test addItemToBackPack
      */
-    public function testAddItemToBackPackFalse()
+    public function testaddItemToBackPackFalse()
     {
         $item = new Item("skull", "skull.png");
         $human = new Human("DragonSlayer");
@@ -49,50 +51,26 @@ class TestHuman extends TestCase
     }
 
     /**
-     * Get items in bag
-     */
-    public function testGetitemsInBag() {
-        $backpack = new BackPack();
-        $food = new Food("apple", 50, "apple.png");
-        $weapon = new Weapon("sword", 100, "sword.png");
-        $backpack->AddItem($food);
-        $backpack->AddItem($weapon);
-
-        $human = new Human("Player");
-        $human->equipBackPack($backpack);
-        $this->assertCount(2, $human->getItemsInBag());
-    }
-
-    /**
-     * Get items in bag when empty
-     */
-    public function testGetitemsInBagEmpty() {
-        $backpack = new BackPack();
-
-        $human = new Human("Player");
-        $human->equipBackPack($backpack);
-        $this->assertCount(0, $human->getItemsInBag());
-    }
-
-    /**
      * Test attack with weapon
      */
-    public function testHumanAttackWithWeapon() {
+    public function testHumanAttackWithWeapon()
+    {
         $weapon = new Weapon("sword", 100, "sword.png");
         $human = new Human("Player");
         $human->addWeapon($weapon);
-        $this->assertEquals(($human->getAttackPower() + 100) ,$human->attackWithWeapon($weapon));
+        $this->assertEquals(($human->getAttackPower() + 100), $human->attackWithWeapon($weapon));
     }
 
     /**
      * Test eat food
      */
-    public function testHumanEatFood() {
+    public function testHumanEatFood()
+    {
         $food = new Food("apple", 50, "apple.png");
         $human = new Human("Player");
         $backpack = new BackPack();
         $human->equipBackPack($backpack);
-        $backpack->AddItem($food);
+        $backpack->addItem($food);
         $this->assertSame(150, $human->eatFood($food));
 
     }
@@ -116,7 +94,7 @@ class TestHuman extends TestCase
         $human = new Human("dragonslayer");
         $apple = new Food("Apple", 100, "apple.png");
         $backpack = new BackPack();
-        $backpack->AddItem($apple);
+        $backpack->addItem($apple);
         $human->equipBackPack($backpack);
 
         $item = $human->getItemByName("Apple");
@@ -137,5 +115,5 @@ class TestHuman extends TestCase
         $human->getItemByName($food);
     }
 
-    
+
 }

@@ -6,11 +6,12 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class TestRoomHandler extends TestCase
-{   
+{
     /**
      * Verify instance of RoomHandler
      */
-    public function testInstanceOf() {
+    public function testInstanceOf()
+    {
         $roomHandler = new RoomHandler();
         $this->assertInstanceOf(RoomHandler::class, $roomHandler);
     }
@@ -18,14 +19,15 @@ class TestRoomHandler extends TestCase
     /**
      * Verify AllRooms return the correct number of rooms
      */
-    public function testGetAllRooms(){
+    public function testGetAllRooms()
+    {
         $rooms = [
             "graveyard", "house", "apple", "dragon"
         ];
 
         $roomHandler = new RoomHandler();
-        
-        foreach($rooms as $room) {
+
+        foreach ($rooms as $room) {
             /**
              * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
              */
@@ -39,14 +41,15 @@ class TestRoomHandler extends TestCase
     /**
      * Verify that getAllRoomNames returns all the names of the rooms
      */
-    public function getAllRoomNames() {
+    public function getAllRoomNames()
+    {
         $rooms = [
             "graveyard", "house", "apple", "dragon"
         ];
 
         $roomHandler = new RoomHandler();
-        
-        foreach($rooms as $room) {
+
+        foreach ($rooms as $room) {
             /**
              * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
              */
@@ -68,7 +71,7 @@ class TestRoomHandler extends TestCase
         $dragon = new Room("dragon");
         $roomHandler->addRoom($graveyard);
         $roomHandler->addRoom($dragon);
-        
+
         $returned = $roomHandler->getRoomByName("graveyard")->getname();
         $this->assertSame("graveyard", $returned);
     }
@@ -77,7 +80,7 @@ class TestRoomHandler extends TestCase
      * Assert getRoombyName Exception
      */
     public function testGetRoomByNameException()
-    {   
+    {
         $this->expectExceptionMessage("There is no room with name: graveyard");
         $roomHandler = new RoomHandler();
         $roomHandler->getRoomByName("graveyard");
@@ -86,14 +89,15 @@ class TestRoomHandler extends TestCase
     /**
      * Test that each rooms returns the correct next room
      */
-    public function testGetNext() {
+    public function testGetNext()
+    {
         $rooms = [
             "graveyard", "house", "apple", "dragon"
         ];
 
         $roomHandler = new RoomHandler();
-        
-        foreach($rooms as $room) {
+
+        foreach ($rooms as $room) {
             /**
              * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
              */
@@ -109,14 +113,15 @@ class TestRoomHandler extends TestCase
      * Test that each rooms returns the correct previous room
      * If current room is the first  room, previous room should point at it self
      */
-    public function testGetPrevFirst() {
+    public function testGetPrevFirst()
+    {
         $rooms = [
             "graveyard", "house", "apple", "dragon"
         ];
 
         $roomHandler = new RoomHandler();
-        
-        foreach($rooms as $room) {
+
+        foreach ($rooms as $room) {
             /**
              * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
              */
@@ -131,14 +136,15 @@ class TestRoomHandler extends TestCase
     /**
      * Test to return the previous room
      */
-    public function testGetPrevNotFirst() {
+    public function testGetPrevNotFirst()
+    {
         $rooms = [
             "graveyard", "house", "apple", "dragon"
         ];
 
         $roomHandler = new RoomHandler();
-        
-        foreach($rooms as $room) {
+
+        foreach ($rooms as $room) {
             /**
              * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
              */
@@ -153,14 +159,15 @@ class TestRoomHandler extends TestCase
     /**
      * Test to return the previous room
      */
-    public function testGetNextWhenLast() {
+    public function testGetNextWhenLast()
+    {
         $rooms = [
             "graveyard", "house", "apple", "dragon"
         ];
 
         $roomHandler = new RoomHandler();
-        
-        foreach($rooms as $room) {
+
+        foreach ($rooms as $room) {
             /**
              * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
              */
@@ -175,9 +182,9 @@ class TestRoomHandler extends TestCase
     /**
      * Test addItemToRoom
      */
-    public function testAddItemToRoom()
-    {   
-        
+    public function testaddItemToRoom()
+    {
+
         $room = new Room("graveyard");
         $roomHandler = new RoomHandler();
         $roomHandler->addRoom($room);
@@ -190,18 +197,18 @@ class TestRoomHandler extends TestCase
     }
 
     /**
-     * 
+     *
      * Test addItemToRoom
      */
-    public function testAddItemToRoomNotExist()
-    {   
-        
+    public function testaddItemToRoomNotExist()
+    {
+
         $room = new Room("graveyard");
         $roomHandler = new RoomHandler();
         $roomHandler->addRoom($room);
 
         $item = new Item("key", "key.png");
         $this->expectExceptionMessage("There is no room with name: invalid");
-        $status = $roomHandler->addItemToRoom("invalid", $item);
+        $roomHandler->addItemToRoom("invalid", $item);
     }
 }

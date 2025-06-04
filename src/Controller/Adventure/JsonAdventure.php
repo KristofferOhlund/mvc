@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
-
 // ADVENTURE
 use App\Controller\Adventure\SessionHandler;
 use App\Adventure;
@@ -38,7 +37,7 @@ class JsonAdventure extends AbstractController
      */
     #[Route("/proj/json/init", name:"json_init")]
     public function initAdventure(Session $session, SessionHandler $sessionHandler): Response
-    {   
+    {
         $sessionHandler->initAdventure();
         $roomHandler = $session->get("roomHandler");
         $human = $session->get("human");
@@ -62,7 +61,7 @@ class JsonAdventure extends AbstractController
      */
     #[Route("/proj/json/equip", name:"json_equip", methods:["POST"])]
     public function equipSword(Request $request): Response
-    {   
+    {
         $post = $request->request->get("item");
         $sword = new Weapon($post, 100, "sword.png");
         $session = $request->getSession();
@@ -84,7 +83,7 @@ class JsonAdventure extends AbstractController
      */
     #[Route("/proj/json/eat", name:"json_eat", methods:["POST"])]
     public function eatApple(Request $request): Response
-    {   
+    {
         $post = $request->request->get("item");
         $food = new Food($post, 100, "apple.png");
         $session = $request->getSession();
@@ -113,7 +112,7 @@ class JsonAdventure extends AbstractController
         $session = $request->getSession();
         $human = $session->get("human");
         $dmg = $human->attackWithWeapon();
-        
+
         $dragon = $session->get("dragon");
         $dragon->reduceHealth((int) $dmg);
 
@@ -143,7 +142,7 @@ class JsonAdventure extends AbstractController
      */
     #[Route("/proj/json/reset", name:"json_reset")]
     public function reset(): RedirectResponse
-    {   
+    {
         return $this->redirectToRoute("json_init");
     }
 }

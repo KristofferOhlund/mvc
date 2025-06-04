@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Entity\Room;
 use App\Entity\Weapon;
 use App\Entity\Food;
@@ -18,26 +17,26 @@ use App\Entity\Tool;
 use stdClass;
 
 class InitDbController extends AbstractController
-{   
+{
     /**
      * Create all Rooms nessescary for the Adventure Game
-     * 
+     *
      * @return Response
      */
     #[Route("/proj/about/database/initrooms", name:"init_rooms")]
     public function initAdventureRooms(EntityManagerInterface $entityManager): Response
     {
         $rooms = ["graveyard", "house", "apple", "dragon"];
-        $existingRooms = array_map(fn($room) => $room->getName(), $entityManager->getRepository(Room::class)->findAll());
+        $existingRooms = array_map(fn ($room) => $room->getName(), $entityManager->getRepository(Room::class)->findAll());
 
-        foreach($rooms as $room) {
+        foreach ($rooms as $room) {
             if (!in_array($room, $existingRooms)) {
                 $newRoom = new Room();
                 $newRoom->setName($room);
                 $newRoom->setBackground($room . ".png");
                 $entityManager->persist($newRoom);
-                $entityManager->flush($newRoom);
-            } 
+                $entityManager->flush();
+            }
         }
 
         $existingRoomObjects = $entityManager->getRepository(Room::class)->findAll();
@@ -46,7 +45,7 @@ class InitDbController extends AbstractController
 
     /**
      * Create all Weapons nessescary for the Adventure Game
-     * 
+     *
      * @return Response
      */
     #[Route("/proj/about/database/initweapons", name:"init_weapons")]
@@ -57,7 +56,7 @@ class InitDbController extends AbstractController
         $sword->setDmg(100);
         $sword->setIcon("Sword.png");
 
-        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName($sword->getName());
+        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName("Sword");
         if (!$result) {
             $entityManager->persist($sword);
             $entityManager->flush();
@@ -68,7 +67,7 @@ class InitDbController extends AbstractController
 
     /**
      * Create all Weapons nessescary for the Adventure Game
-     * 
+     *
      * @return Response
      */
     #[Route("/proj/about/database/initfoods", name:"init_foods")]
@@ -79,7 +78,7 @@ class InitDbController extends AbstractController
         $food->setHealingValue(100);
         $food->setIcon("Apple.png");
 
-        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName($food->getName());
+        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName("Apple");
         if (!$result) {
             $entityManager->persist($food);
             $entityManager->flush();
@@ -90,7 +89,7 @@ class InitDbController extends AbstractController
 
     /**
      * Create all Weapons nessescary for the Adventure Game
-     * 
+     *
      * @return Response
      */
     #[Route("/proj/about/database/inittools", name:"init_tools")]
@@ -98,7 +97,7 @@ class InitDbController extends AbstractController
     {
         $tools = ["shovel", "coin", "tooth"];
 
-        foreach($tools as $tool) {
+        foreach ($tools as $tool) {
             $result = $entityManager->getRepository(Tool::class)->findToolByName($tool);
             if (!$result) {
                 $newTool = new Tool();

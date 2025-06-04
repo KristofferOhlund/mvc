@@ -5,7 +5,7 @@ namespace App\Adventure;
 use PHPUnit\Framework\TestCase;
 
 class TestItem extends TestCase
-{   
+{
     /**
      * Assert Item instance
      */
@@ -17,7 +17,7 @@ class TestItem extends TestCase
 
     /**
      * Assert get Name returns name with first letter upper case
-     * 
+     *
      */
     public function testGetNameTitleCase()
     {
@@ -26,5 +26,5 @@ class TestItem extends TestCase
         $this->assertSame("Gold coin", $name);
     }
 
-    
+
 }

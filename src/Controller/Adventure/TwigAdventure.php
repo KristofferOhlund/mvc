@@ -11,26 +11,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Exception;
 // ADVENTURE
 use App\Adventure\Weapon;
 use App\Adventure\Food;
 use App\Adventure\Item;
-use App\Adventure\DialogHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TwigAdventure extends AbstractController
-{   
-    
+{
     /**
      * Some data variables are the same for each route
      * Use method to get basic data and extend data in route
      * Returns roomObjects stored in room
      * @param Session $session - current session
-     * @param string $roomName - the current room  
+     * @param string $roomName - the current room
      * @return array
      */
-    private function getDataByRoom(Session $session, string $roomName): array {
+    private function getDataByRoom(Session $session, string $roomName): array
+    {
         $roomHandler = $session->get("roomHandler");
         $dialogHandler = $session->get("dialogHandler");
         $human = $session->get("human");
@@ -40,7 +39,7 @@ class TwigAdventure extends AbstractController
         ];
 
         if (!in_array($roomName, $validRooms)) {
-            throw new \Exception("Room $roomName is not a valid room");
+            throw new Exception("Room $roomName is not a valid room");
         }
 
         $room = $roomHandler->getRoomByName($roomName);
@@ -48,7 +47,7 @@ class TwigAdventure extends AbstractController
             "msg" => $dialogHandler->getDialogByStatus(),
             "human" => $human,
             "dragon" => $dragon,
-            "backpack" => array_map(fn($item) => $item->getName(), $human->getItemsInBag()), // get all item names in bg
+            "backpack" => array_map(fn ($item) => $item->getName(), $human->getItemsInBag()), // get all item names in bg
             "img" => $room->getImg(),
             "room" => $room,
             "roomObjects" => $room->getItems(),
@@ -65,8 +64,9 @@ class TwigAdventure extends AbstractController
      * @return RedirectResponse
      */
     #[Route("/proj/init", name:"init_adventure")]
-    public function init(SessionHandler $sessionHandler): RedirectResponse {
-        
+    public function init(SessionHandler $sessionHandler): RedirectResponse
+    {
+
         // Get data for current room
         $sessionHandler->initAdventure();
         return $this->redirectToRoute("graveyard");
@@ -79,7 +79,7 @@ class TwigAdventure extends AbstractController
      */
     #[Route("/proj/graveyard", name:"graveyard")]
     public function graveyard(Session $session): Response
-    {    
+    {
         // Get data for current room
         $data = $this->getDataByRoom($session, "graveyard");
         return $this->render("adventure/graveyard.html.twig", $data);
@@ -139,7 +139,8 @@ class TwigAdventure extends AbstractController
      * @return Response
      */
     #[Route("/proj/lost", name:"lost")]
-    public function lost() {
+    public function lost()
+    {
         return $this->render("adventure/lost.html.twig");
     }
 
@@ -162,20 +163,20 @@ class TwigAdventure extends AbstractController
         }
 
         $icon = $item . ".png";
-        
+
         // add to humans backpack
         $session = $request->getSession();
         $human = $session->get("human") ?? "Human finns inte";
 
-        
-        if ($item === "Apple"){
+
+        if ($item === "Apple") {
             $human->addItemToBackPack(new Food($item, 50, $icon));
-        } else if ($item !== "Sword") {
+        } elseif ($item !== "Sword") {
             $human->addItemToBackPack(new Item($item, $icon));
         } if ($item === "Sword") {
             $human->addWeapon(new Weapon($item, 100, $icon));
         }
-        
+
         $this->addFlash("notice", "You equipped the $item");
 
         // rum i route
@@ -188,7 +189,6 @@ class TwigAdventure extends AbstractController
     /**
      * Route for using an item, aka action
      * Action could be using a Shovel to dig some secrets,
-     * or eating an apple.
      * Returns a rederict to the referer_route
      * @return RedirectResponse
      */
@@ -200,25 +200,25 @@ class TwigAdventure extends AbstractController
         $action = $posted["action"] ?? null;
 
         $session = $request->getSession();
-        
+
         if ($action === "dig") {
-            $ItemObj = new Item("key", "key.png");
-             // rum i route
+            $itemObj = new Item("key", "key.png");
+            // rum i route
             $dialogHandler = $session->get("dialogHandler");
             $dialogHandler->setCurrentRoom($route);
-            $dialogHandler->setCurrentItem($ItemObj->getName());
+            $dialogHandler->setCurrentItem($itemObj->getName());
 
         } if ($action === "unlock") {
-            $ItemObj = new Item("apple", "apple.png");
+            $itemObj = new Item("apple", "apple.png");
             $route = "apple";
             $dialogHandler = $session->get("dialogHandler");
             $dialogHandler->setCurrentRoom($route);
-            $dialogHandler->setCurrentItem($ItemObj->getName());
+            $dialogHandler->setCurrentItem($itemObj->getName());
         }
 
         $session = $request->getSession();
         $roomHandler = $session->get("roomHandler");
-        $roomHandler->addItemToRoom($route, $ItemObj);
+        $roomHandler->addItemToRoom($route, $itemObj);
         return $this->redirectToRoute($route);
     }
 
@@ -235,7 +235,7 @@ class TwigAdventure extends AbstractController
         $dmg = $human->attackWithWeapon();
 
         $this->addFlash("notice", "You strike the dragon with your weapon, dealing $dmg dmg");
-        
+
         $dragon = $session->get("dragon");
         $dragon->reduceHealth((int) $dmg);
 
@@ -250,7 +250,7 @@ class TwigAdventure extends AbstractController
 
         if ($human->getHealth() < 0) {
             return $this->redirectToRoute("lost");
-        } 
+        }
 
         return $this->redirectToRoute("dragon");
     }

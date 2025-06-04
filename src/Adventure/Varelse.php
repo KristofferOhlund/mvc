@@ -7,35 +7,34 @@ namespace App\Adventure;
  */
 class Varelse
 {
-
     /**
-     * @var string|null $name
+     * @var string $name
      */
     private string $name;
 
     /**
-     * @var int|null $health
+     * @var int $health
      */
     private int $health;
 
     /**
-     * @var int|null $attackPower
+     * @var int $attackPower
      */
     private int $attackPower;
 
 
-    public function __construct(string $name, int $health=100, int $attackPower=10)
-    {   
-        $this->name = $name; 
+    public function __construct(string $name, int $health = 100, int $attackPower = 10)
+    {
+        $this->name = $name;
         $this->health = $health;
-        $this->attackPower = $attackPower; 
+        $this->attackPower = $attackPower;
     }
 
     /**
      * Attack, cause dmg equal to attackPower
      * @return int|null
      */
-    public function attack(): ?int 
+    public function attack(): ?int
     {
         return $this->attackPower;
     }
@@ -43,42 +42,51 @@ class Varelse
     /**
      * Get attackPower
      */
-    public function getAttackPower():int {
+    public function getAttackPower(): int
+    {
         return $this->attackPower;
     }
 
 
     /**
      * Public function to get current health
-     * 
+     *
      * @return int|null
      */
-    public function getHealth(): ?int {
+    public function getHealth(): ?int
+    {
         return $this->health;
     }
 
 
     /**
      * Reduce current health by dmg amount
+     * 
+     * @return int
      */
-    public function reduceHealth(int $amount){
-        $this->health -= $amount;
+    public function reduceHealth(int $amount): int
+    {
+        return $this->health -= $amount;
     }
 
     /**
      * Add health by healing value
+     * 
+     * @return int
      */
-    public function increaseHealth(int $amount) {
-        $this->health += $amount;
+    public function increaseHealth(int $amount): int
+    {
+        return $this->health += $amount;
     }
 
 
     /**
      * Check if Varelse is dead
-     * 
+     *
      * @return bool
      */
-    public function isDead(): bool {
+    public function isDead(): bool
+    {
         if ($this->getHealth() <= 0) {
             return true;
         }
@@ -87,11 +95,11 @@ class Varelse
 
     /**
      * Return the name of the Varelse
-     * 
+     *
      * @return string|null
      */
-    public function getName(): ?string {
+    public function getName(): ?string
+    {
         return $this->name;
     }
 }
-

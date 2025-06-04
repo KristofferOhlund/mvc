@@ -11,14 +11,21 @@ use Exception;
 
 class DialogHandler
 {   
-
+    /**
+     * The name of the current room
+     * @var string $room
+     */
     private ?string $room;
+
+    /**
+     * The name of the currently looted item
+     * @var string $item
+     */
     private ?string $item;
 
     /**
-     * Each status has an object mapped
-     * Each mapp contains of a text, item and action to perform
-     * @var array<int|array> $statusObjects
+     * Each Room has items, each items is a key for a msg
+     * @var array<string, array<string, string>> $roomMsgByStatus
      */
     private array $roomMsgByStatus = [
         "graveyard" => [
@@ -50,32 +57,53 @@ class DialogHandler
      */
     public function getDialogByStatus(): string
     {
-        if ($this->room)
-        {
+        if ($this->room) {
             return $this->roomMsgByStatus[$this->room][$this->item];
         }
         return "";
     }
 
     /**
-     * Update statusId based on a performed action
+     * Set current room
+     * 
+     * @return string
      */
-    public function setCurrentRoom(string $room)
-    {   
+    public function setCurrentRoom(string $room): string
+    {
         $this->room = $room;
+        return $room;
     }
 
-    public function setCurrentItem(string $item)
+
+    /**
+     * Set currently looted item
+     * 
+     * @return string
+     */
+    public function setCurrentItem(string $item): string
     {
         $this->item = $item;
+        return $item;
     }
 
-    public function getCurrentRoom()
+
+    /**
+     * Get the current room
+     * 
+     * @return null|string
+     */
+    public function getCurrentRoom(): ?string
     {
         return $this->room;
     }
 
-    public function getCurrentItem()
+
+    /**
+     * Get the current item
+     * 
+     * @return null|string 
+     */
+    public function getCurrentItem(): ?string
     {
         return $this->item;
     }

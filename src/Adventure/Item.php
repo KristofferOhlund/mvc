@@ -15,7 +15,7 @@ class Item
 
     /**
      * Get the name of the item
-     * 
+     *
      * @return string
      */
     public function getName(): string
@@ -25,7 +25,7 @@ class Item
 
     /**
      * Get the icon as string
-     * 
+     *
      * @return string
      */
     public function getIcon(): string
