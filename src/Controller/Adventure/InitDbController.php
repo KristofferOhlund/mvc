@@ -96,7 +96,7 @@ class InitDbController extends AbstractController
     #[Route("/proj/about/database/inittools", name:"init_tools")]
     public function initAdventureTools(EntityManagerInterface $entityManager): Response
     {
-        $tools = ["shovel", "coin", "tooth", "skull", "key"];
+        $tools = ["shovel", "coin", "tooth"];
 
         foreach($tools as $tool) {
             $result = $entityManager->getRepository(Tool::class)->findToolByName($tool);
