@@ -7,8 +7,7 @@ use App\Adventure\Varelse;
 use App\Adventure\BackPack;
 
 class Human extends Varelse
-{   
-
+{
     /**
      * Weapon objekt
      * @var Weapon $weapon
@@ -41,7 +40,7 @@ class Human extends Varelse
     public function addItemToBackPack(Item $item): string
     {
         if ($this->backpack) {
-            return $this->backpack->addItem($item);  
+            return $this->backpack->addItem($item);
         }
         return "Can't equip item since there is no backpack equipped";
     }
@@ -106,7 +105,7 @@ class Human extends Varelse
     {
         $items = $this->getItemsInBag();
         if ($items) {
-            foreach($items as $item) {
+            foreach ($items as $item) {
                 if ($item->getName() === $name) {
                     return $item;
                 }

@@ -3,16 +3,17 @@
 /**
  * Module for Room Objects
 */
+
 namespace App\Adventure;
 
 use Exception;
 use App\Adventure\Room;
 
 class RoomHandler
-{   
+{
     /**
      * Current Rooms in array
-     * 
+     *
      * @var array<Room>
      */
     private array $rooms;
@@ -57,7 +58,7 @@ class RoomHandler
      * @return string
      */
     public function getPrev(string $current): string
-    {   
+    {
         $names = $this->getAllRoomNames();
 
         // Kontrollera att det verkligen är en array
@@ -66,10 +67,10 @@ class RoomHandler
         }
 
         $roomCount = count($names);
-        for($idx = 0; $idx < $roomCount +1; $idx++) {
+        for ($idx = 0; $idx < $roomCount + 1; $idx++) {
             if ($names[$idx] == $current && $idx > 0) {
-                return $this->rooms[$idx -1]->getName();
-            } 
+                return $this->rooms[$idx - 1]->getName();
+            }
             if ($names[$idx] == $current && $idx == 0) {
                 return $this->rooms[$idx]->getName();
             }
@@ -93,12 +94,12 @@ class RoomHandler
         }
 
         $roomCount = count($names);
-        for($idx = 0; $idx < $roomCount +1; $idx++) {
-            if ($names[$idx] == $current && $idx +1 !== count($names)) {
-                return $this->rooms[$idx +1]->getName();
+        for ($idx = 0; $idx < $roomCount + 1; $idx++) {
+            if ($names[$idx] == $current && $idx + 1 !== count($names)) {
+                return $this->rooms[$idx + 1]->getName();
             }
-            if ($names[$idx] == $current && $idx == $roomCount -1) {
-                return $this->rooms[$idx]->getName();    
+            if ($names[$idx] == $current && $idx == $roomCount - 1) {
+                return $this->rooms[$idx]->getName();
             }
         }
         return "There is no room with $current as";

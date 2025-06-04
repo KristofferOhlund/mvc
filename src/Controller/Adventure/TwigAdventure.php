@@ -26,7 +26,7 @@ class TwigAdventure extends AbstractController
      * Returns roomObjects stored in room
      * @param Session $session - current session
      * @param string $roomName - the current room
-     * @return array
+     * @return array<mixed>
      */
     private function getDataByRoom(Session $session, string $roomName): array
     {
@@ -200,6 +200,7 @@ class TwigAdventure extends AbstractController
         $action = $posted["action"] ?? null;
 
         $session = $request->getSession();
+        $roomHandler = $session->get("roomHandler");
 
         if ($action === "dig") {
             $itemObj = new Item("key", "key.png");
@@ -207,6 +208,7 @@ class TwigAdventure extends AbstractController
             $dialogHandler = $session->get("dialogHandler");
             $dialogHandler->setCurrentRoom($route);
             $dialogHandler->setCurrentItem($itemObj->getName());
+            $roomHandler->addItemToRoom($route, $itemObj);
 
         } if ($action === "unlock") {
             $itemObj = new Item("apple", "apple.png");
@@ -214,11 +216,9 @@ class TwigAdventure extends AbstractController
             $dialogHandler = $session->get("dialogHandler");
             $dialogHandler->setCurrentRoom($route);
             $dialogHandler->setCurrentItem($itemObj->getName());
+            $roomHandler->addItemToRoom($route, $itemObj);
         }
 
-        $session = $request->getSession();
-        $roomHandler = $session->get("roomHandler");
-        $roomHandler->addItemToRoom($route, $itemObj);
         return $this->redirectToRoute($route);
     }
 

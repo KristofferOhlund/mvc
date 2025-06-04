@@ -63,7 +63,7 @@ class SessionHandler
             $items = $this->createDbItems();
         }
         $this->initDbItems($items);
-        
+
         $this->initHuman($session);
         $this->initDragon($session);
         $this->initDialog($session);
@@ -75,9 +75,9 @@ class SessionHandler
      * @return array<int, dbRoom>
      */
     private function createDbRooms(): array
-    {   
+    {
         $create = ["graveyard", "house", "apple", "dragon"];
-        foreach($create as $room) {
+        foreach ($create as $room) {
             $newRoom = new dbRoom();
             $newRoom->setName($room);
             $newRoom->setBackground($room . ".png");
@@ -115,9 +115,9 @@ class SessionHandler
      * @return array<int, dbWeapon>
      */
     private function createDbWeapons(): array
-    {   
+    {
         $create = ["Sword"];
-        foreach($create as $weapon) {
+        foreach ($create as $weapon) {
             $newWeapon = new dbWeapon();
             $newWeapon->setName($weapon);
             $newWeapon->setIcon($weapon . ".png");
@@ -155,9 +155,9 @@ class SessionHandler
      * @return array<int, dbTool>
      */
     private function createDbItems(): array
-    {   
+    {
         $create = ["shovel", "coin", "tooth"];
-        foreach($create as $tool) {
+        foreach ($create as $tool) {
             $newItem = new dbTool();
             $newItem->setName($tool);
             $newItem->setIcon($tool . ".png");
@@ -222,7 +222,7 @@ class SessionHandler
 
     /**
      * Reset session variables
-     * 
+     *
      * @return void
      */
     public function resetSession(): void

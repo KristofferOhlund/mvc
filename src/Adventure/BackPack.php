@@ -6,7 +6,7 @@ use App\Adventure\Item;
 use Exception;
 
 class BackPack
-{   
+{
     /**
      * @var array<Item> $items
      */
@@ -14,7 +14,7 @@ class BackPack
 
     /**
      * Add a Item objekt to the backpack inventory
-     * 
+     *
      * @return string
      */
     public function addItem(Item $newItem): string
@@ -26,7 +26,7 @@ class BackPack
     /**
      * Drop Item item from backpack
      * @param Item $dropItem - item to be dropped
-     * 
+     *
      * @return string
      */
     public function dropItem(Item $dropItem): string

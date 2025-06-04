@@ -61,7 +61,7 @@ class Varelse
 
     /**
      * Reduce current health by dmg amount
-     * 
+     *
      * @return int
      */
     public function reduceHealth(int $amount): int
@@ -71,7 +71,7 @@ class Varelse
 
     /**
      * Add health by healing value
-     * 
+     *
      * @return int
      */
     public function increaseHealth(int $amount): int

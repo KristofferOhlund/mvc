@@ -10,7 +10,7 @@ namespace App\Adventure;
 use Exception;
 
 class DialogHandler
-{   
+{
     /**
      * The name of the current room
      * @var string $room
@@ -65,7 +65,7 @@ class DialogHandler
 
     /**
      * Set current room
-     * 
+     *
      * @return string
      */
     public function setCurrentRoom(string $room): string
@@ -77,7 +77,7 @@ class DialogHandler
 
     /**
      * Set currently looted item
-     * 
+     *
      * @return string
      */
     public function setCurrentItem(string $item): string
@@ -89,7 +89,7 @@ class DialogHandler
 
     /**
      * Get the current room
-     * 
+     *
      * @return null|string
      */
     public function getCurrentRoom(): ?string
@@ -100,8 +100,8 @@ class DialogHandler
 
     /**
      * Get the current item
-     * 
-     * @return null|string 
+     *
+     * @return null|string
      */
     public function getCurrentItem(): ?string
     {

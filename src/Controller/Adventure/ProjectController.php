@@ -14,10 +14,10 @@ use App\Entity\Room;
 use App\Entity\Weapon;
 
 class ProjectController extends AbstractController
-{   
+{
     /**
      * about page
-     * 
+     *
      * @return Response
      */
     #[Route("/proj/about", name:"about_adventure")]
@@ -28,7 +28,7 @@ class ProjectController extends AbstractController
 
     /**
      * Cheat pge
-     * 
+     *
      * @return Response
      */
     #[Route("/proj/cheat", name:"cheat_adventure")]

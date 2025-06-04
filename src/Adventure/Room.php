@@ -64,7 +64,7 @@ class Room
 
     /**
      * Add an item for the room
-     * 
+     *
      * @return string
      */
     public function addItem(Item $item): string
