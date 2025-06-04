@@ -36,7 +36,7 @@ class TestHuman extends TestCase
         $human = new Human("DragonSlayer");
         $human->equipBackPack($backpack);
 
-        $this->assertTrue($human->addItemToBackPack($item));
+        $this->assertSame("Skulladded to inventory", $human->addItemToBackPack($item));
     }
 
     /**
@@ -47,7 +47,7 @@ class TestHuman extends TestCase
         $item = new Item("skull", "skull.png");
         $human = new Human("DragonSlayer");
 
-        $this->assertFalse($human->addItemToBackPack($item));
+        $this->assertSame("Can't equip item since there is no backpack equipped", $human->addItemToBackPack($item));
     }
 
     /**
@@ -111,7 +111,7 @@ class TestHuman extends TestCase
         $backpack = new BackPack();
         $human->equipBackPack($backpack);
         $food = "mango";
-        $this->expectExceptionMessage("There is no food with name: $food");
+        $this->expectExceptionMessage("There is no item with name: $food");
         $human->getItemByName($food);
     }
 

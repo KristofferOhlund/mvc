@@ -193,7 +193,7 @@ class TestRoomHandler extends TestCase
 
         $status = $roomHandler->addItemToRoom($room->getName(), $item);
 
-        $this->assertTrue($status);
+        $this->assertSame("Key added to the room", $status);
     }
 
     /**
