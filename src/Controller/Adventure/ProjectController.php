@@ -14,16 +14,25 @@ use App\Entity\Room;
 use App\Entity\Weapon;
 
 class ProjectController extends AbstractController
-{
+{   
+    /**
+     * about page
+     * 
+     * @return Response
+     */
     #[Route("/proj/about", name:"about_adventure")]
-    public function about()
+    public function about(): Response
     {
         return $this->render("adventure/about.html.twig");
     }
 
-
+    /**
+     * Cheat pge
+     * 
+     * @return Response
+     */
     #[Route("/proj/cheat", name:"cheat_adventure")]
-    public function cheat()
+    public function cheat(): Response
     {
         return $this->render("adventure/cheat.html.twig");
     }
