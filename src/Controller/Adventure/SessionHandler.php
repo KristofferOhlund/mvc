@@ -72,7 +72,7 @@ class SessionHandler
 
     /**
      * Create rooms in db, return list of rooms
-     * @return array<int, object>
+     * @return array<int, dbRoom>
      */
     private function createDbRooms(): array
     {   
@@ -92,19 +92,18 @@ class SessionHandler
      * Create room objects based on rooms in database
      * If there are no rooms in database, create rooms.
      * Then create objects based on those rooms
-     * @param array<int, object> $rooms
+     * @param array<int, dbRoom> $rooms
      * @return string msg
      */
-    private function initDbRooms($rooms): string
+    private function initDbRooms(array $rooms): string
     {
         $session = $session = $this->requestStack->getSession();
-        // $rooms = $this->entityManager->getRepository(dbRoom::class)->findAll();
 
         $roomHandler = new RoomHandler();
 
         foreach ($rooms as $room) {
-            $newRoom = new Room($room->getName());
-            $newRoom->setImg($room->getBackground());
+            $newRoom = new Room($room->getName() ?? "db name missing");
+            $newRoom->setImg($room->getBackground() ?? "db background missing");
             $roomHandler->addRoom($newRoom);
         }
         $session->set("roomHandler", $roomHandler);
@@ -113,7 +112,7 @@ class SessionHandler
 
     /**
      * Create weapons in db, return list of rooms
-     * @return array<int, object>
+     * @return array<int, dbWeapon>
      */
     private function createDbWeapons(): array
     {   
@@ -134,16 +133,16 @@ class SessionHandler
     /**
      * Create weapon objects in Graveyard
      * @return string msg
-     *
+     * @param array<int, dbWeapon> $weapons
      */
-    private function initDbWeapons($weapons): string
+    private function initDbWeapons(array $weapons): string
     {
         $session = $session = $this->requestStack->getSession();
         $roomHandler = $session->get("roomHandler");
         $graveyard = $roomHandler->getRoombyName("graveyard");
 
         foreach ($weapons as $weapon) {
-            $newWeapon = new Weapon($weapon->getName(), $weapon->getDmg(), $weapon->getIcon());
+            $newWeapon = new Weapon($weapon->getName() ?? "db name missing", $weapon->getDmg() ?? 0, $weapon->getIcon() ?? "db icon missing");
             $graveyard->addItem($newWeapon);
         }
         $session->set("roomHandler", $roomHandler);
@@ -153,7 +152,7 @@ class SessionHandler
 
     /**
      * Create weapons in db, return list of rooms
-     * @return array<int, object>
+     * @return array<int, dbTool>
      */
     private function createDbItems(): array
     {   
@@ -165,23 +164,22 @@ class SessionHandler
             $this->entityManager->persist($newItem);
             $this->entityManager->flush();
         }
-
-        return $this->entityManager->getRepository(dbWeapon::class)->findAll();
+        return $this->entityManager->getRepository(dbTool::class)->findAll();
     }
 
     /**
      * Create item objects in rooms based on items and rooms in database
-     *
+     * @param array<int, dbTool> $items
      * @return string msg
      */
-    private function initDbItems($items): string
+    private function initDbItems(array $items): string
     {
         $session = $session = $this->requestStack->getSession();
         $roomHandler = $session->get("roomHandler");
         $graveyard = $roomHandler->getRoombyName("graveyard");
 
         foreach ($items as $item) {
-            $newItem = new Item($item->getName(), $item->getIcon());
+            $newItem = new Item($item->getName() ?? "db name missing", $item->getIcon() ?? "db icon missing");
             $graveyard->addItem($newItem);
         }
         $session->set("roomHandler", $roomHandler);
