@@ -65,7 +65,8 @@ class RoomHandler
             return "No rooms";
         }
 
-        for($idx = 0; $idx < count($names) +1; $idx++) {
+        $roomCount = count($names);
+        for($idx = 0; $idx < $roomCount +1; $idx++) {
             if ($names[$idx] == $current && $idx > 0) {
                 return $this->rooms[$idx -1]->getName();
             } 
@@ -91,11 +92,12 @@ class RoomHandler
             return "No rooms";
         }
 
-        for($idx = 0; $idx < count($names) +1; $idx++) {
+        $roomCount = count($names);
+        for($idx = 0; $idx < $roomCount +1; $idx++) {
             if ($names[$idx] == $current && $idx +1 !== count($names)) {
                 return $this->rooms[$idx +1]->getName();
             }
-            if ($names[$idx] == $current && $idx == count($names) -1) {
+            if ($names[$idx] == $current && $idx == $roomCount -1) {
                 return $this->rooms[$idx]->getName();    
             }
         }
