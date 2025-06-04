@@ -4,7 +4,6 @@ tools/*
 */tools/**/composer.lock
 .php-cs-fixer.cache
 .phpdoc/
-docs/*
 
 .DS_Store
 ###> symfony/framework-bundle ###
