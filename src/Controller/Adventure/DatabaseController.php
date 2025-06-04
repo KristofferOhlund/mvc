@@ -22,9 +22,21 @@ class DatabaseController extends AbstractController
      * @return Response
      */
     #[Route("/proj/about/database", name: "index_database")]
-    public function database(): Response
+    public function database(EntityManagerInterface $entityManager): Response
     {
-        return $this->render("adventure/database.html.twig");
+        $rooms = $entityManager->getRepository(Room::class)->findAll();
+        $weapons = $entityManager->getRepository(Weapon::class)->findAll();
+        $foods = $entityManager->getRepository(Food::class)->findAll();
+        $items = $entityManager->getRepository(Tool::class)->findAll();
+
+        $data = [
+            "rooms" => $rooms,
+            "weapons" => $weapons,
+            "foods" => $foods,
+            "items" => $items,
+        ];
+
+        return $this->render("adventure/database.html.twig", $data);
     }
 
 
@@ -35,7 +47,6 @@ class DatabaseController extends AbstractController
     #[Route("/proj/about/database/delete", name: "delete_database")]
     public function databaseDelete(EntityManagerInterface $entityManager): Response
     {
-
         $entities = [Room::class, Weapon::class, Food::class, Tool::class];
         foreach ($entities as $entity) {
             $objects = $entityManager->getRepository($entity)->findAll();
@@ -44,55 +55,6 @@ class DatabaseController extends AbstractController
                 $entityManager->flush();
             }
         }
-
-        return new Response("Database has been reset");
-    }
-
-
-    /**
-     * Show weapon objects in database
-     * @return Response
-     */
-    #[Route("/proj/about/database/weapons", name:"show_weapons")]
-    public function showWeapons(EntityManagerInterface $entityManager): Response
-    {
-        $weapons = $entityManager->getRepository(Weapon::class)->findAll();
-        return $this->render("adventure/weapons.html.twig", ["weapons" => $weapons]);
-    }
-
-
-    /**
-     * Show room objects in database
-     * @return Response
-     */
-    #[Route("/proj/about/database/rooms", name:"show_rooms")]
-    public function showRooms(EntityManagerInterface $entityManager): Response
-    {
-        $rooms = $entityManager->getRepository(Room::class)->findAll();
-        return $this->render("adventure/rooms.html.twig", ["rooms" => $rooms]);
-    }
-
-
-    /**
-     * Show food objects in database
-     * @return Response
-     */
-    #[Route("/proj/about/database/foods", name:"show_foods")]
-    public function showFoods(EntityManagerInterface $entityManager): Response
-    {
-        $foods = $entityManager->getRepository(Food::class)->findAll();
-        return $this->render("adventure/foods.html.twig", ["foods" => $foods]);
-    }
-
-
-    /**
-     * Show tool objects in database
-     * @return Response
-     */
-    #[Route("/proj/about/database/tools", name:"show_tools")]
-    public function showTools(EntityManagerInterface $entityManager): Response
-    {
-        $items = $entityManager->getRepository(Tool::class)->findAll();
-        return $this->render("adventure/items.html.twig", ["items" => $items]);
+        return $this->redirectToRoute("index_database");
     }
 }
