@@ -1,52 +1,73 @@
 {% extends 'base.html.twig' %}
+{% block title %} Adventure - Database {% endblock %}
 {% block body %}
-<h1>Database</h1>
 
-<div class="db-about">
-    <h2>ER-Diagram</h2>
+<div class="db about">
+    <h1>ER Diagram</h1>
+    <img class="img" src="{{ asset('build/images/adventure/er.png')}}" alt="er">
+    <p><strong>Weapon</strong> - representerar vapen och har attributen namn, skada och icon. Utifrån databasens vapen skapar jag tillgängliga vapen att plocka upp, detta i rummet kallat Graveyard vilket är det första rummet i spelet.</p><br>
+    <p><strong>Food</strong> - representerar vapen och har attributen namn, healingValue och icon. Utifrån dessa skapar jag tillgängliga mat objekt att plocka upp, detta i rummet kallat apple - vilket är det tredje rummet i spelet.</p><br>
+    <p><strong>Tool</strong> - representerar verktyg / vanliga items och har attributen namn och icon. Utifrån dessa skapar jag items som Shovel och Key. Detta går sedan att använda förutsatt att det finns i spelarens inventory.</p><br>
+    <p><strong>Room</strong> - representerar ett Rum i spelet. Ett rum har attributen name och background och utifrån dessa skapas rums objekt. Varje rum kan ha x antal vapen / food / items tillgängliga att plocka upp eller använda.</p><br>
+    <p><Strong>Sqlite</Strong> - för att hantera databasen använde jag SQLite</p>
 </div>
 
 
-<div class="db-init">
-    <h2>Initiera</h2>
+<div class="db init">
+    <h1>Initiera Databas</h1>
+    <p>För att spela spelet behöver objekten finnas i databasen. Initiera därför samtliga objekt via knapparna nedan.</p>
     <ul>
-        <li><a href="{{path('init_rooms')}}">Initiera Rum</a></li>
-        <li><a href="{{path('init_weapons')}}">Initiera Vapen</a></li>
-        <li><a href="{{path('init_foods')}}">Initiera Mat</a></li>
-        <li><a href="{{path('init_tools')}}">Initiera Items</a></li>
+        <li><a class="action-button" href="{{path('init_rooms')}}">Initiera Rum</a></li>
+        <li><a class="action-button" href="{{path('init_weapons')}}">Initiera Vapen</a></li>
+        <li><a class="action-button" href="{{path('init_foods')}}">Initiera Mat</a></li>
+        <li><a class="action-button" href="{{path('init_tools')}}">Initiera Items</a></li>
     </ul>
 </div>
 
 
-<div class="db-show">
-    <h2>Databas</h2>
-    <h2>Rum</h2>
+<div class="db show">
+    <h1>Rum</h1>
     <div class="db-rooms">
-        {% block rooms %}{% endblock rooms %}
+        {% for room in rooms %}
+        <div class="room-box">
+            <h3>{{room.name}}</h3>
+            <img class="" src="{{ asset('build/images/adventure/' ~ room.background) }}">
+        </div>
+        {% endfor %}
     </div>
-    <h2>Vapen</h2>
-    <div class="db-weapons">
-        {% block weapons %}{% endblock weapons %}
+    
+    <div class="db db-weapons">
+        <h1>Vapen</h1>
+        {% for weapon in weapons %}
+            <h3>Name: {{weapon.name}}</h3>
+            <h3>Dmg: {{weapon.dmg}}</h3>
+            <img class="icon" src="{{ asset('build/images/adventure/icons/' ~ weapon.icon) }}" 
+        {% endfor %}
     </div>
-    <h2>Mat</h2>
-    <div class="db-foods">
-        {% block foods %}{% endblock foods %}
+    
+    <div class="db db-foods">
+        <h1>Mat</h1>
+        {% for food in foods %}
+            <h3>{{food.name}}</h3>
+            <h3>Healing value: {{ food.healingValue }}</h3>
+            <img class="icon" src="{{ asset('build/images/adventure/icons/' ~ food.icon) }}" 
+        {% endfor %}
     </div>
-    <h2>Items</h2>
-    <div class="db-items">
-        {% block items %}{% endblock items %}
+    
+    <h1>Items</h1>
+    <div class="db db-items">
+        {% for item in items %}
+            <div class="item-box">
+                <h3>{{item.name}}</h3>
+                <img class="img" src="{{ asset('build/images/adventure/icons/' ~ item.icon|capitalize) }}">
+            </div>
+        {% endfor %}
     </div>
-<ul>
-    <li><a href="{{path('show_weapons')}}">Visa vapen objekt</a></li>
-    <li><a href="{{path('show_rooms')}}">Visa rums objekt</a></li>
-    <li><a href="{{path('show_foods')}}">Visa mat objekt</a></li>
-    <li><a href="{{path('show_tools')}}">Visa item objekt</a></li>
-</ul>
 </div>
 
-<div class="db-delete">
-    <h2>Radera Databas</h2>
-<a href="{{path('delete_database')}}">Radera databas</a>
+<div class="db db-delete">
+    <h1>Radera Databas</h1>
+<a class="action-button" href="{{path('delete_database')}}">Radera databas</a>
 </div>
 
 
