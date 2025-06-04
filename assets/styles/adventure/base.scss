@@ -33,6 +33,7 @@ body {
 main {
   max-width: 800px;
   margin: 0 auto;
+  min-height: 100vh;
   // border: 2px solid white;
 }
 
@@ -40,6 +41,9 @@ ul {
   list-style: none;
 }
 
+p {
+  font-size: 1.3rem;
+}
 
 footer {
   margin-top: 2rem;
