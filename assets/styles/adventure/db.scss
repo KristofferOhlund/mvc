@@ -1,0 +1,21 @@
+.db {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.init {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.db-rooms,
+.db-items {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.db .icon {
+  width: 20%;
+}
