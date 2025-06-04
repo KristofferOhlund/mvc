@@ -62,7 +62,7 @@ class RoomHandler
         $names = $this->getAllRoomNames();
 
         // Kontrollera att det verkligen är en array
-        if (!is_array($names)) {
+        if (!$names) {
             return "No rooms";
         }
 
@@ -89,7 +89,7 @@ class RoomHandler
     {
         $names = $this->getAllRoomNames();
         // Kontrollera att det verkligen är en array
-        if (!is_array($names)) {
+        if (!$names) {
             return "No rooms";
         }
 
