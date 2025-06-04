@@ -50,19 +50,18 @@ class JsonAdventure extends AbstractController
         ];
 
         $response = $this->json($data);
-        $response->setEncodingOptions($response->getEncodingOptions() || JSON_PRETTY_PRINT);
-
+        $response->setEncodingOptions($response->getEncodingOptions());
         return $response;
     }
 
     /**
      * Equip a sword
-     * @return Reponse
+     * @return Response
      */
     #[Route("/proj/json/equip", name:"json_equip", methods:["POST"])]
     public function equipSword(Request $request): Response
     {
-        $post = $request->request->get("item");
+        $post = (string)$request->request->get("item");
         $sword = new Weapon($post, 100, "sword.png");
         $session = $request->getSession();
         $human = $session->get("human");
@@ -73,18 +72,18 @@ class JsonAdventure extends AbstractController
             "weapon" => $sword
         ];
 
-        return $this->json($data)?->setEncodingOptions(JSON_PRETTY_PRINT);
+        return $this->json($data)->setEncodingOptions(JSON_PRETTY_PRINT);
     }
 
 
     /**
      * Eat an apple to increase the players health
-     * @return Reponse
+     * @return Response
      */
     #[Route("/proj/json/eat", name:"json_eat", methods:["POST"])]
     public function eatApple(Request $request): Response
     {
-        $post = $request->request->get("item");
+        $post = (string)$request->request->get("item");
         $food = new Food($post, 100, "apple.png");
         $session = $request->getSession();
         $human = $session->get("human");
@@ -98,13 +97,13 @@ class JsonAdventure extends AbstractController
             "food" => $food
         ];
 
-        return $this->json($data)?->setEncodingOptions(JSON_PRETTY_PRINT);
+        return $this->json($data)->setEncodingOptions(JSON_PRETTY_PRINT);
     }
 
 
     /**
      * Attack the dragon
-     * @return Reponse
+     * @return Response
      */
     #[Route("/proj/json/attack", name:"json_attack")]
     public function attack(Request $request): Response
@@ -132,7 +131,7 @@ class JsonAdventure extends AbstractController
             "dragon" => $dragon
         ];
 
-        return $this->json($data)?->setEncodingOptions(JSON_PRETTY_PRINT);
+        return $this->json($data)->setEncodingOptions(JSON_PRETTY_PRINT);
     }
 
 
