@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TwigAdventureTest extends WebTestCase
 {
-    public function testSomething(): void
+    public function testInit(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/proj/init');
 
-        $this->assertResponseIsSuccessful();
+        $this->assertResponseRedirects();
     }
 }

@@ -25,6 +25,42 @@ final class DiceHandTest extends TestCase
      * Add Dice to Hand
      * Verify values in hand
      */
+    public function testDiceRoll()
+    {
+        $hand = new DiceHand();
+        /** @var Dice&\PHPunit\Framework\MockObject\MockObject $dice */
+        $dice = $this->createMock(Dice::class);
+        $dice->method("roll")->willReturn(5);
+
+        $hand->add($dice);
+        $hand->roll();
+        $this->assertSame(1, $hand->getNumberDices());
+    }
+
+    /**
+     * Create New DiceHand
+     * Create Dice Instance
+     * Add Dice to Hand
+     * Verify values in hand
+     */
+    public function testgetstring()
+    {
+        $hand = new DiceHand();
+        /** @var Dice&\PHPunit\Framework\MockObject\MockObject $dice */
+        $dice = $this->createMock(Dice::class);
+        $dice->method("roll")->willReturn(5);
+
+        $hand->add($dice);
+        $hand->roll();
+        $this->assertIsArray($hand->getString());
+    }
+
+    /**
+     * Create New DiceHand
+     * Create Dice Instance
+     * Add Dice to Hand
+     * Verify values in hand
+     */
     public function testDiceHandValues()
     {
         $hand = new DiceHand();

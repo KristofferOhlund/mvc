@@ -3,9 +3,17 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/KristofferOhlund/mvc/build-status/main)
 
+# Innehåll
+Repot är en kurs från BTH som övar på objektorienterade webbteknologier. Till kursen har diverse övningar och uppgifters utförst för att öva på objektorienterad programmering. Det har även inkluderats kodkvalitet, statiska kodvalidatorer, linters, PHP unittester m.m
+
+Några av de uppgifter som gjorts visas nedan:
+
+![Adventure](public/img/adventure.png)
+![21](public/img/21.png)
+![library](public/img/library.png)
 ![webbplatsen](public/img/webbplats.png)
 
-# Kom igång 
+# Kom igång med report
 
 ## Följ installationsguiden nedan
 

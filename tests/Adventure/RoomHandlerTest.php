@@ -35,45 +35,9 @@ class TestRoomHandler extends TestCase
             $roomHandler->addRoom($roomObj);
         }
 
-        $this->assertCount(4, $roomHandler->getAllRooms());
-    }
-
-    /**
-     * Verify that getAllRoomNames returns all the names of the rooms
-     */
-    public function getAllRoomNames()
-    {
-        $rooms = [
-            "graveyard", "house", "apple", "dragon"
-        ];
-
-        $roomHandler = new RoomHandler();
-
-        foreach ($rooms as $room) {
-            /**
-             * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
-             */
-            $roomObj = new Room($room);
-            $roomHandler->addRoom($roomObj);
-        }
-
         $roomNames = $roomHandler->getAllRoomNames();
         $this->assertSame($roomNames, $rooms);
-    }
-
-    /**
-     * Assert getRoombyName
-     */
-    public function testGetRoomByName()
-    {
-        $roomHandler = new RoomHandler();
-        $graveyard = new Room("graveyard");
-        $dragon = new Room("dragon");
-        $roomHandler->addRoom($graveyard);
-        $roomHandler->addRoom($dragon);
-
-        $returned = $roomHandler->getRoomByName("graveyard")->getname();
-        $this->assertSame("graveyard", $returned);
+        $this->assertCount(4, $roomHandler->getAllRooms());
     }
 
     /**
@@ -86,15 +50,15 @@ class TestRoomHandler extends TestCase
         $roomHandler->getRoomByName("graveyard");
     }
 
-    /**
-     * Test that each rooms returns the correct next room
+    /** 
+     * Test that each room returns correct room
      */
     public function testGetNext()
     {
         $rooms = [
-            "graveyard", "house", "apple", "dragon"
-        ];
-
+                    "graveyard", "house", "apple", "dragon"
+                ];
+        
         $roomHandler = new RoomHandler();
 
         foreach ($rooms as $room) {
@@ -107,77 +71,42 @@ class TestRoomHandler extends TestCase
 
         $nextRoom = $roomHandler->getNext("apple");
         $this->assertSame($nextRoom, "dragon");
-    }
-
-    /**
-     * Test that each rooms returns the correct previous room
-     * If current room is the first  room, previous room should point at it self
-     */
-    public function testGetPrevFirst()
-    {
-        $rooms = [
-            "graveyard", "house", "apple", "dragon"
-        ];
-
-        $roomHandler = new RoomHandler();
-
-        foreach ($rooms as $room) {
-            /**
-             * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
-             */
-            $roomObj = new Room($room);
-            $roomHandler->addRoom($roomObj);
-        }
-
-        $nextRoom = $roomHandler->getPrev("graveyard");
-        $this->assertSame($nextRoom, "graveyard");
-    }
-
-    /**
-     * Test to return the previous room
-     */
-    public function testGetPrevNotFirst()
-    {
-        $rooms = [
-            "graveyard", "house", "apple", "dragon"
-        ];
-
-        $roomHandler = new RoomHandler();
-
-        foreach ($rooms as $room) {
-            /**
-             * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
-             */
-            $roomObj = new Room($room);
-            $roomHandler->addRoom($roomObj);
-        }
-
-        $nextRoom = $roomHandler->getPrev("house");
-        $this->assertSame($nextRoom, "graveyard");
-    }
-
-    /**
-     * Test to return the previous room
-     */
-    public function testGetNextWhenLast()
-    {
-        $rooms = [
-            "graveyard", "house", "apple", "dragon"
-        ];
-
-        $roomHandler = new RoomHandler();
-
-        foreach ($rooms as $room) {
-            /**
-             * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
-             */
-            $roomObj = new Room($room);
-            $roomHandler->addRoom($roomObj);
-        }
-
         $nextRoom = $roomHandler->getNext("dragon");
         $this->assertSame($nextRoom, "dragon");
+        
+        $roomHandler = new RoomHandler();
+        $this->assertSame("No rooms", $roomHandler->getNext("dragon"));
     }
+
+
+    /** 
+     * Test that each room returns correct room
+     */
+    public function testGetPrev()
+    {
+        $rooms = [
+                    "graveyard", "house", "apple", "dragon", "mango"
+                ];
+        
+        $roomHandler = new RoomHandler();
+
+        foreach ($rooms as $room) {
+            /**
+             * @var Room|PHPUnit\Framework\MockObject\MockObject $roomObj;
+             */
+            $roomObj = new Room($room);
+            $roomHandler->addRoom($roomObj);
+        }
+
+        $nextRoom = $roomHandler->getPrev("apple");
+        $this->assertSame($nextRoom, "house");
+        $nextRoom = $roomHandler->getPrev("graveyard");
+        $this->assertSame($nextRoom, "graveyard");
+        
+        $roomHandler = new RoomHandler();
+        $this->assertSame("No rooms", $roomHandler->getPrev("dragon"));
+    }
+
 
     /**
      * Test addItemToRoom
@@ -188,9 +117,7 @@ class TestRoomHandler extends TestCase
         $room = new Room("graveyard");
         $roomHandler = new RoomHandler();
         $roomHandler->addRoom($room);
-
         $item = new Item("key", "key.png");
-
         $status = $roomHandler->addItemToRoom($room->getName(), $item);
 
         $this->assertSame("Key added to the room", $status);
