@@ -4,6 +4,11 @@ namespace App\Adventure;
 
 use App\Adventure\Item;
 
+/**
+ * Class representing a Room object.
+ * The representation is an background image.
+ * Each Room can have an array of items
+ */
 class Room
 {
     /**

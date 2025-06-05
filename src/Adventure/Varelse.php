@@ -3,7 +3,8 @@
 namespace App\Adventure;
 
 /**
- * Module representating a Dragon in the Adventure Game
+ * Class representating a Creature in the Adventure Game
+ * Acts as parent to Dragon and Human class
  */
 class Varelse
 {

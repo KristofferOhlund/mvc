@@ -2,6 +2,9 @@
 
 namespace App\Adventure;
 
+/**
+ * Class representing an Item, acts as parent to Weapon and Food
+ */
 class Item
 {
     private string $name;

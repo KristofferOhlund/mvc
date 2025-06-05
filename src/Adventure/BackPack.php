@@ -5,6 +5,11 @@ namespace App\Adventure;
 use App\Adventure\Item;
 use Exception;
 
+/**
+ * Backpack acts as an Inventory, which allows adding items to its pockets
+ * Each item is dropped from the inventory after being interacted with
+ * If a player adds and apple and later eats it, the apple is removed from the backpack.
+ */
 class BackPack
 {
     /**

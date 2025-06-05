@@ -6,9 +6,6 @@ namespace App\Adventure;
  * Module for getting an events text msg
  * If an item is looted, adds a text msg saying something about that loot
  */
-
-use Exception;
-
 class DialogHandler
 {
     /**

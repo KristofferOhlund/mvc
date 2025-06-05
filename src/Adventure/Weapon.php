@@ -4,6 +4,10 @@ namespace App\Adventure;
 
 use App\Adventure\Item;
 
+/**
+ * Class representing as a weapon, extending Item
+ * The weapon can be equipped by a Human
+ */
 class Weapon extends Item
 {
     private int $dmg = 0;

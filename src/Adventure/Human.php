@@ -6,6 +6,11 @@ use Exception;
 use App\Adventure\Varelse;
 use App\Adventure\BackPack;
 
+/**
+ * Class representing a Human, extending Varelse / Creature
+ * A human can equip a backpack and a weapon.
+ * When backpack is equipped, the player can add items into it.
+ */
 class Human extends Varelse
 {
     /**

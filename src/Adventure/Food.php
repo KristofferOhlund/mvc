@@ -4,6 +4,10 @@ namespace App\Adventure;
 
 use App\Adventure\Item;
 
+/**
+ * Food is extending the Item class.
+ * Food also has a healingValue
+ */
 class Food extends Item
 {
     private int $healingValue = 0;

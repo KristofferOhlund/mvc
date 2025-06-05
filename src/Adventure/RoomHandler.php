@@ -9,6 +9,9 @@ namespace App\Adventure;
 use Exception;
 use App\Adventure\Room;
 
+/**
+ * Acts as a container for Room objects
+ */
 class RoomHandler
 {
     /**
