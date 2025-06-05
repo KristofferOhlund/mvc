@@ -133,7 +133,7 @@
             </p>
             <p>Min style är vad jag tycker representerar tidiga 90-tals spel, där text och styling är pixlad.</p>
             <p>För att få till själva spellogiken så fick jag fundera ett tag eftersom PHP körs på servern och inte i klienten likt Javascript, så att interagera eventlisteners för knappar och dyligt fick jag tänka bort. Efter att ha tittat på Mikaels video om projektalternativen så fastnade jag lite för att rummen kunde agera som objekt. Därifrån gick det ganska fort till att skapa klasser, jag fick däremot många gånger sätta stopp då jag ville skapa alldeles för många klasser och direkt göra spelet för avancerat. Tanken var att rummen kunde ha objekt som gick att interagera med, och en ryggsäck som spelaren kunde ha som inventory. Spelaren skulle sedan kunna använda sitt inventory för att klara spelet.</p>
-            <h3>Krav 4 - Json Api</h3>
+            <h2>Krav 4 - Json Api</h2>
             <p>
                 Jag hade redan skapat routes med json som svar, för att testa olika interaktioner för spelare, som att lägga till objekt i ryggsäcken osv. Så det var bara att utöka och uppdatera efter spelets uppdatering.
             </p>
@@ -142,9 +142,32 @@
             <p>
                 ORM i mitt fall blev lite omständigt, eftersom jag inte hade någon CRUD i mitt spel så kändes ORM överflödigt. Under spelets gång skapades ändå objekt som sparades i session, så att inkludera en databas blev lite överflödig.
             </p>
-            <p>Från början ville jag skapa kopplingstabeller och ha färdiga rum och items, men det rörde bara om min spellogik så jag nöjde mig med att skapa Entiter för alla objekt, och utifrån Entitetern kunna skapa objektinstanser. Skulle jag haft tiden hade jag velat implementera funktionalitet för att skapa entitesobjekt utifrån en Json fil eller liknande. Så att användaren i en Json kan lägga till rum och objekt, och utifrån den skapa Entitetsobjekt.</p>
+            <p>Från början ville jag skapa kopplingstabeller och ha färdiga rum och items, men det rörde bara om min spellogik så jag nöjde mig med att skapa Entiter för alla objekt, och utifrån Entitetern kunna skapa objektinstanser. Skulle jag haft tiden hade jag velat implementera funktionalitet för att skapa entitesobjekt utifrån en Json fil eller liknande. Så att användaren i en Json kan lägga till rum och objekt, och utifrån den skapa Entitetsobjekt. Jag hade även velat skapa olika actions kopplade till objekt, för att kunna spela mer dynamiskt. Nu får jag göra några mindre if kontroller i routerna /action och /item.</p>
             <p>
-                Slutresultatet är att jag har en databas för att visa vilka objekt som kommer användas under spelets gång. 
+                Slutresultatet är att jag har en databas med entiteter för Rum, Vapen, Mat och Tools / Items. Utifrån dessa skapar jag objekt och sparar i session. Tycker ändå att utfallet blev bra och spelet är absolut charmigt.
+            </p>
+            <h2>Krav 6</h2>
+            <p>
+                Jag har inte implementerat tester för mina Controllers då jag inte fick det att funka på Scrutinzer, jag frågade chatGpt och följde alla möjliga instruktioner men det funkade inte, så jag sket i det. Databasen har jag heller inte implementerat tester för, något som också skulle klassas som krav 6.
+            </p>
+            <p>
+                Där emot tycker jag att jag har gjort ett bra spel och att det är svårare att bygga ett spel fritt istället för att följa ett kortspel, speciellt när vi redan gjort ett kortspel och till stor del hade färdig kod för att fortsätta med en kortspel. Nu fick jag istället tänka om helt från början och skapa allting på nytt.
+            </p>
+            <p>
+                Jag anser att mitt Äventyrsspel visar på en svårare nivå då det är väldigt objekt orienterat och det går enkelt att skapa nya rum, vapen, mat objekt och annat. Logiken är inte hårdkodad utan bygger på de objekt som skapats vid initiering. Jag har även implementerat det så att användaren behöver interagera med vissa objekt för att i slutändan kunna döda draken, detta ger en roligare spelupplevelse, som exempel måste du först equippa en "Shovel" för att genom
+                den gräva vid skelettet i Graveyard, när du grävt visas ett nytt objekt som du sedan kan använda för att låsa upp nästa rum - och hitta det magiska äpplet.
+            </p>
+            <p>
+                Jag har även minimalt med spellogik i mina routes och hämtar istället data genom diverse klasser, de routes som innehåller någon form av spellogik är endast /action, /eat och /equip-item.
+                
+                Jag har även skapat en klass RoomHandler för att hantera alla rumsobjekt, och genom RoomHandler kan jag få fram
+                navigering för föregående samt nästa rum, istället för att i samtliga room-templates hårdskriva routes.
+                
+                Jag har även skapat en klass (DialogHandler) för att hantera dialoger, så att jag genom de interagerade items / objekten kunnat visa ett meddelande kopplat till interaktionen och detta medan jag fortfarande minimerat spellogiken i mina
+                templates och routes.
+            </p>
+            <p>
+                För att sammanfatta, jag har inte gjort tester för Controllers eller databas men jag tycker att jag gjort ett snyggt äventyrsspel med bra och effektiv kod, bra struktur och ett genomgående bra upplägg. 
             </p>
             
         </section>
