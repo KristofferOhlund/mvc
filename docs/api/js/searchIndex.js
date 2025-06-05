@@ -3,7 +3,7 @@ Search.appendIndex(
                 {
             "fqsen": "\\App\\Adventure\\BackPack",
             "name": "BackPack",
-            "summary": "",
+            "summary": "Backpack\u0020acts\u0020as\u0020an\u0020Inventory,\u0020which\u0020allows\u0020adding\u0020items\u0020to\u0020its\u0020pockets\nEach\u0020item\u0020is\u0020dropped\u0020from\u0020the\u0020inventory\u0020after\u0020being\u0020interacted\u0020with\nIf\u0020a\u0020player\u0020adds\u0020and\u0020apple\u0020and\u0020later\u0020eats\u0020it,\u0020the\u0020apple\u0020is\u0020removed\u0020from\u0020the\u0020backpack.",
             "url": "classes/App-Adventure-BackPack.html"
         },                {
             "fqsen": "\\App\\Adventure\\BackPack\u003A\u003AaddItem\u0028\u0029",
@@ -33,7 +33,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\DialogHandler",
             "name": "DialogHandler",
-            "summary": "",
+            "summary": "Module\u0020for\u0020getting\u0020an\u0020events\u0020text\u0020msg\nIf\u0020an\u0020item\u0020is\u0020looted,\u0020adds\u0020a\u0020text\u0020msg\u0020saying\u0020something\u0020about\u0020that\u0020loot",
             "url": "classes/App-Adventure-DialogHandler.html"
         },                {
             "fqsen": "\\App\\Adventure\\DialogHandler\u003A\u003A__construct\u0028\u0029",
@@ -83,7 +83,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Dragon",
             "name": "Dragon",
-            "summary": "Module\u0020representating\u0020a\u0020Dragon\u0020in\u0020the\u0020Adventure\u0020Game",
+            "summary": "Class\u0020representing\u0020a\u0020Dragon,\u0020extending\u0020the\u0020Varelse\u0020class.",
             "url": "classes/App-Adventure-Dragon.html"
         },                {
             "fqsen": "\\App\\Adventure\\Dragon\u003A\u003A__construct\u0028\u0029",
@@ -103,7 +103,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Food",
             "name": "Food",
-            "summary": "",
+            "summary": "Food\u0020is\u0020extending\u0020the\u0020Item\u0020class.",
             "url": "classes/App-Adventure-Food.html"
         },                {
             "fqsen": "\\App\\Adventure\\Food\u003A\u003A__construct\u0028\u0029",
@@ -123,7 +123,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Human",
             "name": "Human",
-            "summary": "Module\u0020representating\u0020a\u0020Dragon\u0020in\u0020the\u0020Adventure\u0020Game",
+            "summary": "Class\u0020representing\u0020a\u0020Human,\u0020extending\u0020Varelse\u0020\/\u0020Creature\nA\u0020human\u0020can\u0020equip\u0020a\u0020backpack\u0020and\u0020a\u0020weapon.",
             "url": "classes/App-Adventure-Human.html"
         },                {
             "fqsen": "\\App\\Adventure\\Human\u003A\u003A__construct\u0028\u0029",
@@ -183,7 +183,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Item",
             "name": "Item",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020an\u0020Item,\u0020acts\u0020as\u0020parent\u0020to\u0020Weapon\u0020and\u0020Food",
             "url": "classes/App-Adventure-Item.html"
         },                {
             "fqsen": "\\App\\Adventure\\Item\u003A\u003A__construct\u0028\u0029",
@@ -213,7 +213,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Room",
             "name": "Room",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020a\u0020Room\u0020object.",
             "url": "classes/App-Adventure-Room.html"
         },                {
             "fqsen": "\\App\\Adventure\\Room\u003A\u003A__construct\u0028\u0029",
@@ -263,7 +263,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\RoomHandler",
             "name": "RoomHandler",
-            "summary": "",
+            "summary": "Acts\u0020as\u0020a\u0020container\u0020for\u0020Room\u0020objects",
             "url": "classes/App-Adventure-RoomHandler.html"
         },                {
             "fqsen": "\\App\\Adventure\\RoomHandler\u003A\u003A__construct\u0028\u0029",
@@ -313,7 +313,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Varelse",
             "name": "Varelse",
-            "summary": "Module\u0020representating\u0020a\u0020Dragon\u0020in\u0020the\u0020Adventure\u0020Game",
+            "summary": "Class\u0020representating\u0020a\u0020Creature\u0020in\u0020the\u0020Adventure\u0020Game\nActs\u0020as\u0020parent\u0020to\u0020Dragon\u0020and\u0020Human\u0020class",
             "url": "classes/App-Adventure-Varelse.html"
         },                {
             "fqsen": "\\App\\Adventure\\Varelse\u003A\u003A__construct\u0028\u0029",
@@ -373,7 +373,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Adventure\\Weapon",
             "name": "Weapon",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020as\u0020a\u0020weapon,\u0020extending\u0020Item\nThe\u0020weapon\u0020can\u0020be\u0020equipped\u0020by\u0020a\u0020Human",
             "url": "classes/App-Adventure-Weapon.html"
         },                {
             "fqsen": "\\App\\Adventure\\Weapon\u003A\u003A__construct\u0028\u0029",
@@ -645,6 +645,11 @@ Search.appendIndex(
             "name": "attack",
             "summary": "Attack\u0020the\u0020dragon",
             "url": "classes/App-Controller-Adventure-JsonAdventure.html#method_attack"
+        },                {
+            "fqsen": "\\App\\Controller\\Adventure\\JsonAdventure\u003A\u003AshowStats\u0028\u0029",
+            "name": "showStats",
+            "summary": "Show\u0020human\u0020and\u0020dragon\u0020stats",
+            "url": "classes/App-Controller-Adventure-JsonAdventure.html#method_showStats"
         },                {
             "fqsen": "\\App\\Controller\\Adventure\\JsonAdventure\u003A\u003Areset\u0028\u0029",
             "name": "reset",
