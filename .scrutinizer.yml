@@ -13,7 +13,7 @@ build:
                 php:
                     version: 8.3.3
                 node:
-                    version: 18  # Lägg till Node.js
+                    version: 16  # Lägg till Node.js
 
             dependencies:
                 override:
