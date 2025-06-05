@@ -136,6 +136,23 @@ class JsonAdventure extends AbstractController
 
 
     /**
+     * Show human and dragon stats
+     */
+    #[Route("/proj/json/rooms", name:"json_stats")]
+    public function showStats(Request $request): Response
+    {   
+        $session = $request->getSession();
+        $roomHandler = $session->get("roomHandler");
+
+        $data = [
+            "rooms" => $roomHandler->getAllRooms()
+        ];
+
+        return $this->json($data);
+    }
+
+
+    /**
      * Reset current session by redirecting to json_init
      * @return RedirectResponse
      */

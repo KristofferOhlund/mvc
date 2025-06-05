@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1749116498">
-  <project timestamp="1749116498">
+<coverage generated="1749117584">
+  <project timestamp="1749117584">
     <file name="/Users/kristoffer/dbwebb-kurser/mvc/me/report/src/Adventure/BackPack.php">
       <class name="App\Adventure\BackPack" namespace="global">
         <metrics complexity="8" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="12" elements="18" coveredelements="15"/>
@@ -29,9 +29,9 @@
       <class name="App\Adventure\DialogHandler" namespace="global">
         <metrics complexity="7" methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="10" elements="17" coveredelements="15"/>
       </class>
-      <line num="47" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-      <line num="49" type="stmt" count="5"/>
-      <line num="50" type="stmt" count="5"/>
+      <line num="47" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="49" type="stmt" count="4"/>
+      <line num="50" type="stmt" count="4"/>
       <line num="58" type="method" name="getDialogByStatus" visibility="public" complexity="2" crap="2.15" count="1"/>
       <line num="60" type="stmt" count="1"/>
       <line num="61" type="stmt" count="1"/>
@@ -52,8 +52,8 @@
       <class name="App\Adventure\Dragon" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </class>
-      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="13" type="stmt" count="8"/>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="13" type="stmt" count="7"/>
       <line num="19" type="method" name="sprayFire" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <metrics loc="24" ncloc="21" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
@@ -73,12 +73,12 @@
       <class name="App\Adventure\Human" namespace="global">
         <metrics complexity="14" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="31" coveredelements="31"/>
       </class>
-      <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
-      <line num="25" type="stmt" count="10"/>
-      <line num="26" type="stmt" count="10"/>
-      <line num="29" type="method" name="equipBackPack" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="31" type="stmt" count="6"/>
-      <line num="32" type="stmt" count="6"/>
+      <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="25" type="stmt" count="9"/>
+      <line num="26" type="stmt" count="9"/>
+      <line num="29" type="method" name="equipBackPack" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="31" type="stmt" count="5"/>
+      <line num="32" type="stmt" count="5"/>
       <line num="40" type="method" name="addItemToBackPack" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="42" type="stmt" count="2"/>
       <line num="43" type="stmt" count="1"/>
@@ -110,11 +110,11 @@
       <class name="App\Adventure\Item" namespace="global">
         <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
       </class>
-      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="20"/>
-      <line num="12" type="stmt" count="20"/>
-      <line num="13" type="stmt" count="20"/>
-      <line num="21" type="method" name="getName" visibility="public" complexity="1" crap="1" count="11"/>
-      <line num="23" type="stmt" count="11"/>
+      <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="19"/>
+      <line num="12" type="stmt" count="19"/>
+      <line num="13" type="stmt" count="19"/>
+      <line num="21" type="method" name="getName" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="23" type="stmt" count="10"/>
       <line num="31" type="method" name="getIcon" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="33" type="stmt" count="1"/>
       <metrics loc="36" ncloc="26" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
@@ -123,19 +123,19 @@
       <class name="App\Adventure\Room" namespace="global">
         <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="15" coveredelements="15"/>
       </class>
-      <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
-      <line num="31" type="stmt" count="9"/>
-      <line num="32" type="stmt" count="9"/>
-      <line num="33" type="stmt" count="9"/>
-      <line num="39" type="method" name="getName" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="41" type="stmt" count="6"/>
-      <line num="49" type="method" name="setImg" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="51" type="stmt" count="2"/>
+      <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="31" type="stmt" count="8"/>
+      <line num="32" type="stmt" count="8"/>
+      <line num="33" type="stmt" count="8"/>
+      <line num="39" type="method" name="getName" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="41" type="stmt" count="5"/>
+      <line num="49" type="method" name="setImg" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="51" type="stmt" count="1"/>
       <line num="60" type="method" name="getImg" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="62" type="stmt" count="1"/>
-      <line num="70" type="method" name="addItem" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="72" type="stmt" count="3"/>
-      <line num="73" type="stmt" count="3"/>
+      <line num="70" type="method" name="addItem" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="72" type="stmt" count="2"/>
+      <line num="73" type="stmt" count="2"/>
       <line num="81" type="method" name="getItems" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="83" type="stmt" count="1"/>
       <metrics loc="86" ncloc="48" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="15" coveredelements="15"/>
@@ -144,10 +144,10 @@
       <class name="App\Adventure\RoomHandler" namespace="global">
         <metrics complexity="23" methods="8" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="29" elements="40" coveredelements="34"/>
       </class>
-      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="23" type="stmt" count="8"/>
-      <line num="30" type="method" name="addRoom" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="32" type="stmt" count="6"/>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="23" type="stmt" count="7"/>
+      <line num="30" type="method" name="addRoom" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="32" type="stmt" count="5"/>
       <line num="39" type="method" name="getAllRooms" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="41" type="stmt" count="3"/>
       <line num="49" type="method" name="getAllRoomNames" visibility="public" complexity="1" crap="1" count="3"/>
@@ -174,10 +174,10 @@
       <line num="101" type="stmt" count="1"/>
       <line num="102" type="stmt" count="1"/>
       <line num="105" type="stmt" count="0"/>
-      <line num="114" type="method" name="getRoomByName" visibility="public" complexity="3" crap="3" count="4"/>
-      <line num="116" type="stmt" count="4"/>
-      <line num="117" type="stmt" count="3"/>
-      <line num="118" type="stmt" count="2"/>
+      <line num="114" type="method" name="getRoomByName" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="116" type="stmt" count="3"/>
+      <line num="117" type="stmt" count="2"/>
+      <line num="118" type="stmt" count="1"/>
       <line num="120" type="stmt" count="2"/>
       <line num="129" type="method" name="addItemToRoom" visibility="public" complexity="2" crap="2.06" count="2"/>
       <line num="131" type="stmt" count="2"/>
@@ -190,10 +190,10 @@
       <class name="App\Adventure\Varelse" namespace="global">
         <metrics complexity="9" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="20" coveredelements="20"/>
       </class>
-      <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="17"/>
-      <line num="28" type="stmt" count="17"/>
-      <line num="29" type="stmt" count="17"/>
-      <line num="30" type="stmt" count="17"/>
+      <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="16"/>
+      <line num="28" type="stmt" count="16"/>
+      <line num="29" type="stmt" count="16"/>
+      <line num="30" type="stmt" count="16"/>
       <line num="37" type="method" name="attack" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="39" type="stmt" count="1"/>
       <line num="45" type="method" name="getAttackPower" visibility="public" complexity="1" crap="1" count="2"/>
@@ -216,9 +216,9 @@
       <class name="App\Adventure\Weapon" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </class>
-      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="13" type="stmt" count="6"/>
-      <line num="15" type="stmt" count="6"/>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="13" type="stmt" count="5"/>
+      <line num="15" type="stmt" count="5"/>
       <line num="23" type="method" name="getWeaponDmg" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="25" type="stmt" count="2"/>
       <metrics loc="28" ncloc="23" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
