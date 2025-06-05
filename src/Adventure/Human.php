@@ -104,7 +104,7 @@ class Human extends Varelse
     public function getItemByName(string $name): Item
     {
         $items = $this->getItemsInBag();
-        if ($items) {
+        if (!empty($items)) {
             foreach ($items as $item) {
                 if ($item->getName() === $name) {
                     return $item;
