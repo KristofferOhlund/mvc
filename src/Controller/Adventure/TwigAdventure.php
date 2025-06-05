@@ -71,6 +71,7 @@ class TwigAdventure extends AbstractController
     public function init(SessionHandler $sessionHandler): RedirectResponse
     {
         // Get data for current room
+        $sessionHandler->resetSession();
         $sessionHandler->initAdventure();
         return $this->redirectToRoute("graveyard");
     }
