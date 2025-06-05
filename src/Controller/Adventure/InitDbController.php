@@ -76,7 +76,7 @@ class InitDbController extends AbstractController
         $food->setHealingValue(100);
         $food->setIcon("Apple.png");
 
-        $result = $entityManager->getRepository(Weapon::class)->findWeaponByName("Apple");
+        $result = $entityManager->getRepository(Food::class)->findFoodByName("Apple");
         if (!$result) {
             $entityManager->persist($food);
             $entityManager->flush();
@@ -93,7 +93,7 @@ class InitDbController extends AbstractController
     #[Route("/proj/about/database/inittools", name:"init_tools")]
     public function initAdventureTools(EntityManagerInterface $entityManager): Response
     {
-        $tools = ["shovel", "coin", "tooth"];
+        $tools = ["Shovel", "Coin", "Tooth", "Key"];
 
         foreach ($tools as $tool) {
             $result = $entityManager->getRepository(Tool::class)->findToolByName($tool);
