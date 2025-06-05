@@ -98,7 +98,7 @@ class SessionHandler
      */
     private function initDbRooms(array $rooms): string
     {
-        $session = $session = $this->requestStack->getSession();
+        $session = $this->requestStack->getSession();
 
         $roomHandler = new RoomHandler();
 
@@ -138,7 +138,7 @@ class SessionHandler
      */
     private function initDbWeapons(array $weapons): string
     {
-        $session = $session = $this->requestStack->getSession();
+        $session = $this->requestStack->getSession();
         $roomHandler = $session->get("roomHandler");
         $graveyard = $roomHandler->getRoombyName("graveyard");
 
@@ -184,7 +184,7 @@ class SessionHandler
      */
     private function initDbItems(array $items): string
     {
-        $session = $session = $this->requestStack->getSession();
+        $session = $this->requestStack->getSession();
         $roomHandler = $session->get("roomHandler");
         $graveyard = $roomHandler->getRoombyName("graveyard");
 

@@ -70,7 +70,6 @@ class TwigAdventure extends AbstractController
     #[Route("/proj/init", name:"init_adventure")]
     public function init(SessionHandler $sessionHandler): RedirectResponse
     {
-
         // Get data for current room
         $sessionHandler->initAdventure();
         return $this->redirectToRoute("graveyard");
