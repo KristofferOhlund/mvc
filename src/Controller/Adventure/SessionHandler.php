@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Room as dbRoom;
 use App\Entity\Tool as dbTool;
 use App\Entity\Weapon as dbWeapon;
+use App\Entity\Food as dbFood;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionHandler
@@ -121,7 +122,7 @@ class SessionHandler
             $newWeapon = new dbWeapon();
             $newWeapon->setName($weapon);
             $newWeapon->setIcon($weapon . ".png");
-            $newWeapon->setDmg(100);
+            $newWeapon->setDmg(80);
             $this->entityManager->persist($newWeapon);
             $this->entityManager->flush();
         }
@@ -156,7 +157,7 @@ class SessionHandler
      */
     private function createDbItems(): array
     {
-        $create = ["shovel", "coin", "tooth"];
+        $create = ["Shovel", "Coin", "Tooth", "Key"];
         foreach ($create as $tool) {
             $newItem = new dbTool();
             $newItem->setName($tool);
@@ -164,6 +165,15 @@ class SessionHandler
             $this->entityManager->persist($newItem);
             $this->entityManager->flush();
         }
+
+        // Skapa ett äpple i databasen, men inkludera inte i något rum
+        $apple = new dbFood();
+        $apple->setname("Apple");
+        $apple->setIcon("Apple.png");
+        $apple->setHealingValue(100);
+        $this->entityManager->persist($apple);
+        $this->entityManager->flush();
+
         return $this->entityManager->getRepository(dbTool::class)->findAll();
     }
 
@@ -179,8 +189,10 @@ class SessionHandler
         $graveyard = $roomHandler->getRoombyName("graveyard");
 
         foreach ($items as $item) {
-            $newItem = new Item($item->getName() ?? "db name missing", $item->getIcon() ?? "db icon missing");
-            $graveyard->addItem($newItem);
+            if ($item->getName() !== "Key") {
+                $newItem = new Item($item->getName() ?? "db name missing", $item->getIcon() ?? "db icon missing");
+                $graveyard->addItem($newItem);
+            }
         }
         $session->set("roomHandler", $roomHandler);
         return "items from db initiated";
