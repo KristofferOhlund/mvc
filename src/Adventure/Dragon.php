@@ -10,11 +10,11 @@ use App\Adventure\Varelse;
  */
 class Dragon extends Varelse
 {
-    private int $fireDmg = 10;
+    private int $fireDmg = 30;
 
     public function __construct()
     {
-        parent::__construct("DeathWing", 150, 50);
+        parent::__construct("DeathWing", 220, 30);
     }
 
     /**
