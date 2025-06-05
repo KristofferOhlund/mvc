@@ -2,7 +2,7 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*, src/Card, src/Controller, src/Dice, src/Entity, src/Game, src/Repository]
+    excluded_paths: [vendor/*, test/*, src/Card, src/Controller, src/Dice, src/Entity, src/Game, src/Repository, migrations/*]
 
 build:
     image: default-bionic
@@ -12,18 +12,22 @@ build:
             environment:
                 php:
                     version: 8.3.3
-                    # version: 8.1.13
-                    # version: 8.1.17
-                    # version: 8.2.4
+                node:
+                    version: 18  # Lägg till Node.js
+
+            dependencies:
+                override:
+                    - npm install
+                    - npm run build
+
+            tests:
+                override:
+                    - command: "composer phpunit"
+                      coverage:
+                          file: "docs/coverage.clover"
+                          format: "php-clover"
+
         analysis:
             tests:
                 override:
                     - php-scrutinizer-run
-                    #- phpcs-run # Not used, missing config file
-    tests:
-        override:
-            -   command: "composer phpunit"
-                # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
-                coverage:
-                    file: "docs/coverage.clover"
-                    format: "php-clover"
