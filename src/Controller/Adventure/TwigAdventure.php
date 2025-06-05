@@ -16,6 +16,10 @@ use Exception;
 use App\Adventure\Weapon;
 use App\Adventure\Food;
 use App\Adventure\Item;
+use App\Entity\Food as dbFood;
+use App\Entity\Weapon as dbWeapon;
+use App\Entity\Tool as dbTool;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TwigAdventure extends AbstractController
@@ -150,7 +154,7 @@ class TwigAdventure extends AbstractController
      * @return RedirectResponse
      */
     #[Route("/proj/item", name:"equip_item", methods:["POST"])]
-    public function equipItem(Request $request): RedirectResponse
+    public function equipItem(Request $request, EntityManagerInterface $entitymanager): RedirectResponse
     {
         // fetch item
         $posted = $request->request->all();
@@ -170,11 +174,14 @@ class TwigAdventure extends AbstractController
 
 
         if ($item === "Apple") {
-            $human->addItemToBackPack(new Food($item, 50, $icon));
+            $apple = $entitymanager->getRepository(dbFood::class)->findFoodByName($item);
+            $human->addItemToBackPack(new Food($apple->getName(), $apple->getHealingValue(), $apple->getIcon()));
         } elseif ($item !== "Sword") {
-            $human->addItemToBackPack(new Item($item, $icon));
+            $tool = $entitymanager->getRepository(dbTool::class)->findToolByName($item);
+            $human->addItemToBackPack(new Item($tool->getName(), $tool->getIcon()));
         } if ($item === "Sword") {
-            $human->addWeapon(new Weapon($item, 100, $icon));
+            $sword = $entitymanager->getRepository(dbWeapon::class)->findWeaponByName($item);
+            $human->addWeapon(new Weapon($sword->getName(), $sword->getDmg(), $sword->getIcon()));
         }
 
         $this->addFlash("notice", "You equipped the $item");
@@ -193,7 +200,7 @@ class TwigAdventure extends AbstractController
      * @return RedirectResponse
      */
     #[Route("/proj/action", name:"use_item", methods:["POST"])]
-    public function useItem(Request $request): RedirectResponse
+    public function useItem(Request $request, EntityManagerInterface $entityManager): RedirectResponse
     {
         $posted = $request->request->all();
         $route = $posted["referer_route"];
@@ -203,7 +210,8 @@ class TwigAdventure extends AbstractController
         $roomHandler = $session->get("roomHandler");
 
         if ($action === "dig") {
-            $itemObj = new Item("key", "key.png");
+            $key = $entityManager->getRepository(dbTool::class)->findToolByName("Key");
+            $itemObj = new Item($key->getName(), $key->getIcon());
             // rum i route
             $dialogHandler = $session->get("dialogHandler");
             $dialogHandler->setCurrentRoom($route);
@@ -211,7 +219,8 @@ class TwigAdventure extends AbstractController
             $roomHandler->addItemToRoom($route, $itemObj);
 
         } if ($action === "unlock") {
-            $itemObj = new Item("apple", "apple.png");
+            $food = $entityManager->getRepository(dbFood::class)->findFoodByName("Apple");
+            $itemObj = new Item($food->getName(), $food->getIcon());
             $route = "apple";
             $dialogHandler = $session->get("dialogHandler");
             $dialogHandler->setCurrentRoom($route);
