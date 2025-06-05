@@ -124,6 +124,30 @@
                 Min TIL för detta moment är främst Scrutnizer, grymt verktyg som vad jag förstår även kan deploya automatiskt vid en push och validerade tester, något som möjliggör CI / CD Pipelines, vilket jag skulle vilja lära mig mer om.
             </p>
         </section>
+        <section>
+            <h1 id="kmom10">Kmom10</h1>
+            <h2>Krav 1-3</h2>
+            <p>Jag valde att implementera ett äventyrsspel. Detta då jag redan gjort ett kortspel och då jag själv aldrig spelat något av de övriga alternativen för kortspel så kändes det roligare att få ha en helt egen idé för kmom10.</p>
+            <p>
+                För att få in ett helt nytt utseende valde jag att använda mig av två olika stylesheets. Detta genom att lägga till en entry i webpack.config.js och sedan byta stylesheet beroende på vilken route som användes.
+            </p>
+            <p>Min style är vad jag tycker representerar tidiga 90-tals spel, där text och styling är pixlad.</p>
+            <p>För att få till själva spellogiken så fick jag fundera ett tag eftersom PHP körs på servern och inte i klienten likt Javascript, så att interagera eventlisteners för knappar och dyligt fick jag tänka bort. Efter att ha tittat på Mikaels video om projektalternativen så fastnade jag lite för att rummen kunde agera som objekt. Därifrån gick det ganska fort till att skapa klasser, jag fick däremot många gånger sätta stopp då jag ville skapa alldeles för många klasser och direkt göra spelet för avancerat. Tanken var att rummen kunde ha objekt som gick att interagera med, och en ryggsäck som spelaren kunde ha som inventory. Spelaren skulle sedan kunna använda sitt inventory för att klara spelet.</p>
+            <h3>Krav 4 - Json Api</h3>
+            <p>
+                Jag hade redan skapat routes med json som svar, för att testa olika interaktioner för spelare, som att lägga till objekt i ryggsäcken osv. Så det var bara att utöka och uppdatera efter spelets uppdatering.
+            </p>
+            <p>De router jag har kvar nu gör att spelet i princip går att spela men utan någon grafik eller bilder. De router med POST är /equip och /eat som låter användaren equippa ett vapen samt äta ett äpple för att återfå lite hälsa.</p>
+            <h2>Krav 5 - ORM</h2>
+            <p>
+                ORM i mitt fall blev lite omständigt, eftersom jag inte hade någon CRUD i mitt spel så kändes ORM överflödigt. Under spelets gång skapades ändå objekt som sparades i session, så att inkludera en databas blev lite överflödig.
+            </p>
+            <p>Från början ville jag skapa kopplingstabeller och ha färdiga rum och items, men det rörde bara om min spellogik så jag nöjde mig med att skapa Entiter för alla objekt, och utifrån Entitetern kunna skapa objektinstanser. Skulle jag haft tiden hade jag velat implementera funktionalitet för att skapa entitesobjekt utifrån en Json fil eller liknande. Så att användaren i en Json kan lägga till rum och objekt, och utifrån den skapa Entitetsobjekt.</p>
+            <p>
+                Slutresultatet är att jag har en databas för att visa vilka objekt som kommer användas under spelets gång. 
+            </p>
+            
+        </section>
     </div>
         <div class="box2">
             <h3>Förteckning</h3>
@@ -134,6 +158,7 @@
                 <li><a href="#kmom04">Kmom04</a></li>
                 <li><a href="#kmom05">Kmom05</a></li>
                 <li><a href="#kmom06">Kmom06</a></li>
+                <li><a href="#kmom10">Kmom10</a></li>
             </ul>
         </div>
 </div>
