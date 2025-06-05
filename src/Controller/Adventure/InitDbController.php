@@ -51,7 +51,7 @@ class InitDbController extends AbstractController
     {
         $sword = new Weapon();
         $sword->setName("Sword");
-        $sword->setDmg(100);
+        $sword->setDmg(80);
         $sword->setIcon("Sword.png");
 
         $result = $entityManager->getRepository(Weapon::class)->findWeaponByName("Sword");
