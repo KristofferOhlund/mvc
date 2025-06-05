@@ -51,4 +51,15 @@ class TestBackPack extends TestCase
 
         $this->assertNull($name, "Backpack har inget Apple");
     }
+
+    /**
+     * Test drop an item that doesn't exists
+     */
+    public function testDropItemNotExists()
+    {
+        $backpack = new BackPack();
+        $food = new Food("Apple", 100, "Apple.png");
+        $this->expectExceptionMessage("There is no item with name: Apple in inventory");
+        $backpack->dropItem($food);
+    }
 }

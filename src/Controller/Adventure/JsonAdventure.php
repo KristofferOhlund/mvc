@@ -140,7 +140,7 @@ class JsonAdventure extends AbstractController
      */
     #[Route("/proj/json/rooms", name:"json_stats")]
     public function showStats(Request $request): Response
-    {   
+    {
         $session = $request->getSession();
         $roomHandler = $session->get("roomHandler");
 

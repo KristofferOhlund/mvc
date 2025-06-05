@@ -50,7 +50,7 @@ class TestRoomHandler extends TestCase
         $roomHandler->getRoomByName("graveyard");
     }
 
-    /** 
+    /**
      * Test that each room returns correct room
      */
     public function testGetNext()
@@ -58,7 +58,7 @@ class TestRoomHandler extends TestCase
         $rooms = [
                     "graveyard", "house", "apple", "dragon"
                 ];
-        
+
         $roomHandler = new RoomHandler();
 
         foreach ($rooms as $room) {
@@ -73,13 +73,13 @@ class TestRoomHandler extends TestCase
         $this->assertSame($nextRoom, "dragon");
         $nextRoom = $roomHandler->getNext("dragon");
         $this->assertSame($nextRoom, "dragon");
-        
+
         $roomHandler = new RoomHandler();
         $this->assertSame("No rooms", $roomHandler->getNext("dragon"));
     }
 
 
-    /** 
+    /**
      * Test that each room returns correct room
      */
     public function testGetPrev()
@@ -87,7 +87,7 @@ class TestRoomHandler extends TestCase
         $rooms = [
                     "graveyard", "house", "apple", "dragon", "mango"
                 ];
-        
+
         $roomHandler = new RoomHandler();
 
         foreach ($rooms as $room) {
@@ -102,7 +102,7 @@ class TestRoomHandler extends TestCase
         $this->assertSame($nextRoom, "house");
         $nextRoom = $roomHandler->getPrev("graveyard");
         $this->assertSame($nextRoom, "graveyard");
-        
+
         $roomHandler = new RoomHandler();
         $this->assertSame("No rooms", $roomHandler->getPrev("dragon"));
     }

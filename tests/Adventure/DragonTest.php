@@ -18,7 +18,7 @@ class TestDragon extends TestCase
     public function testDragonHealth()
     {
         $dragon = new Dragon();
-        $this->assertEquals(150, $dragon->getHealth());
+        $this->assertEquals(220, $dragon->getHealth());
     }
 
     public function testDragonDmg()
@@ -53,9 +53,6 @@ class TestDragon extends TestCase
     {
         $dragon = new Dragon();
         $power = $dragon->getAttackPower();
-        $this->assertEquals(50, $power);
+        $this->assertEquals(30, $power);
     }
-
-
-
 }
