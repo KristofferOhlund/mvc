@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1749126476">
-  <project timestamp="1749126476">
+<coverage generated="1749130915">
+  <project timestamp="1749130915">
     <file name="/Users/kristoffer/dbwebb-kurser/mvc/me/report/src/Adventure/BackPack.php">
       <class name="App\Adventure\BackPack" namespace="global">
         <metrics complexity="8" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
