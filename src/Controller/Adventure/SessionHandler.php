@@ -238,7 +238,11 @@ class SessionHandler
      * @return void
      */
     public function resetSession(): void
-    {
-        $this->initAdventure();
+    {   
+        $session = $this->requestStack->getSession();
+        $session->remove("human");
+        $session->remove("dragon");
+        $session->remove("roomHandler");
+        $session->remove("dialogHandler");
     }
 }
