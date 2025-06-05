@@ -17,6 +17,7 @@ build:
 
             dependencies:
                 override:
+                    - composer install --no-interaction --no-progress
                     - npm install
                     - npm run build
 
